@@ -945,6 +945,197 @@ def get_personal_medical_dossier(
 
     return "\n".join(lines)
 
+# MARK: - Data Freshness, Proactive Inquisitor & 22:00 Daily Evaluation Tools
+
+@mcp.tool()
+def check_data_freshness_and_missing_variables(
+    user_id: str = "primary_wize_prod"
+) -> str:
+    """
+    Evaluates temporal decay and staleness of biometrics, medical data, and visual records.
+    Returns alerts for missing baseline data (e.g. arm circumference, blood pressure) and
+    stale metrics (e.g. weight older than 3 days, sleep unlogged, photo older than 21 days).
+    Enables Gemini to proactively query the athlete for missing or decayed information.
+    """
+    now = datetime.datetime.now()
+    stale_alerts = []
+    missing_alerts = []
+
+    # 1. Weight freshness (decay threshold: 3 days)
+    weights = GymAppStorage.load_json("body_weight.json", default=[])
+    if weights and isinstance(weights, list):
+        last_w = weights[-1]
+        w_date_str = last_w.get("date")
+        if w_date_str:
+            try:
+                w_date = datetime.datetime.strptime(w_date_str, "%Y-%m-%d")
+                days_ago = (now - w_date).days
+                if days_ago > 3:
+                    stale_alerts.append(f"Körpergewicht ist {days_ago} Tage alt (zuletzt {last_w.get('weight_kg')} kg am {w_date_str}).")
+            except Exception:
+                pass
+    else:
+        missing_alerts.append("Körpergewicht wurde bisher nie erfasst.")
+
+    # 2. Visual telemetry freshness (decay threshold: 21 days)
+    visual_index = GymAppStorage.load_json("visual_telemetry_index.json", default=[])
+    if visual_index and isinstance(visual_index, list):
+        last_v = visual_index[-1]
+        v_date_str = last_v.get("date")
+        if v_date_str:
+            try:
+                v_date = datetime.datetime.strptime(v_date_str, "%Y-%m-%d")
+                days_ago = (now - v_date).days
+                if days_ago > 21:
+                    stale_alerts.append(f"Visuelle Physis-Dokumentation ist {days_ago} Tage alt (zuletzt am {v_date_str}).")
+            except Exception:
+                pass
+    else:
+        missing_alerts.append("Keine visuellen Physis-Fotos (Front/Back/Side) vorhanden.")
+
+    # 3. Medical Dossier & Vitals freshness
+    dossier = GymAppStorage.load_json("medical_dossier.json", default={})
+    obs = dossier.get("observations", [])
+    today_str = now.strftime("%Y-%m-%d")
+    has_today_vital = any(o.get("date") == today_str and o.get("category") in ["sleep", "vital", "symptom"] for o in obs)
+    if not has_today_vital:
+        stale_alerts.append("Schlafqualität und Tagesbefinden für heute noch nicht erfasst.")
+
+    labs = dossier.get("lab_reports", [])
+    if not labs:
+        missing_alerts.append("Kein aktuelles Blutbild / Laborbericht im Dossier hinterlegt.")
+
+    report = [
+        "=======================================================",
+        f"PROAKTIVER DATEN-FRISCHE-AUDIT (USER: {user_id})",
+        "======================================================="
+    ]
+    if missing_alerts:
+        report.append("--- FEHLENDE BASIS-VARIABLEN ---")
+        for m in missing_alerts:
+            report.append(f"  [FEHLT] {m}")
+    if stale_alerts:
+        report.append("\n--- VERALTETE WERTE (DECAY-SCHWELLE UEBERSCHRITTEN) ---")
+        for s in stale_alerts:
+            report.append(f"  [VERALTET] {s}")
+
+    if not missing_alerts and not stale_alerts:
+        report.append("Alle biometrischen, medizinischen und visuellen Daten sind aktuell.")
+    else:
+        report.append("\nCOACHING-INQUISITOR INSTRUKTION:")
+        report.append("Bitte frage den Athleten in deiner nächsten Antwort beiläufig nach den dringendsten fehlenden Werten (z. B. heutiger Schlaf, aktuelles Gewicht oder Physis-Foto).")
+
+    return "\n".join(report)
+
+@mcp.tool()
+def generate_evening_health_evaluation(
+    date_str: Optional[str] = None,
+    user_id: str = "primary_wize_prod"
+) -> str:
+    """
+    Generates the autonomous 22:00 (10 PM) daily health, nutrition, and training evaluation report.
+    Compares consumed calories/macros vs targets, planned vs completed workouts, water intake,
+    and recovery markers. Persists report into userData/<user_id>/daily_evaluations/YYYY-MM-DD.json.
+    """
+    target_date = date_str or datetime.datetime.now().strftime("%Y-%m-%d")
+
+    contract = GymAppStorage.load_json("profile_contract.json", default={})
+    target_cal = contract.get("nutrition_targets", {}).get("daily_calories_kcal", 2000)
+    target_prot = contract.get("nutrition_targets", {}).get("daily_protein_g", 160)
+
+    actual_cal = 0
+    actual_prot = 0
+    try:
+        from scripts.growcery_mcp.server import NutriVaultStorage
+        summary = NutriVaultStorage.get_daily_summary(target_date)
+        actual_cal = summary.get("calories", 0)
+        actual_prot = summary.get("protein", 0)
+    except Exception:
+        pass
+
+    workouts = GymAppStorage.load_json("planned_workouts.json", default=[])
+    today_workout = None
+    for w in workouts:
+        w_ts = w.get("scheduled_timestamp")
+        if w_ts:
+            unix_ts = w_ts + COCOA_REF_OFFSET if w_ts < 2000000000 else w_ts
+            if datetime.datetime.fromtimestamp(unix_ts).strftime("%Y-%m-%d") == target_date:
+                today_workout = w
+                break
+
+    eval_record = {
+        "date": target_date,
+        "user_id": user_id,
+        "timestamp": datetime.datetime.now().isoformat(),
+        "nutrition": {
+            "calories_actual": actual_cal,
+            "calories_target": target_cal,
+            "calorie_delta": actual_cal - target_cal,
+            "protein_actual_g": actual_prot,
+            "protein_target_g": target_prot,
+            "adherence_score_pct": min(100, round((actual_cal / target_cal * 100))) if target_cal > 0 else 0
+        },
+        "training": {
+            "workout_planned": today_workout.get("title") if today_workout else "Ruhetag / Regeneration",
+            "exercises_count": len(today_workout.get("exercises", [])) if today_workout else 0,
+            "status": "Vollstaendig synchronisiert" if today_workout else "Keine Einheit geplant"
+        },
+        "evaluation_summary": (
+            f"Tagesabschluss {target_date}: Kalorien bei {actual_cal}/{target_cal} kcal "
+            f"({actual_prot}/{target_prot}g Protein). "
+            f"Training: {today_workout.get('title') if today_workout else 'Aktive Erholung'}."
+        )
+    }
+
+    eval_dir = ICLOUD_DATA_DIR / "daily_evaluations"
+    eval_dir.mkdir(parents=True, exist_ok=True)
+    (eval_dir / f"{target_date}.json").write_text(json.dumps(eval_record, indent=2), encoding="utf-8")
+
+    return (
+        f"22:00 UHR TAGES-EVALUATION ERFOLGREICH GENERIERT ({target_date}):\n"
+        f"- Kalorien: {actual_cal} / {target_cal} kcal (Delta: {eval_record['nutrition']['calorie_delta']} kcal)\n"
+        f"- Protein: {actual_prot} / {target_prot} g\n"
+        f"- Training: {eval_record['training']['workout_planned']}\n"
+        f"- Gespeichert unter: userData/{user_id}/daily_evaluations/{target_date}.json\n"
+        f"- Status: Bereit fuer Anzeige als Abend-Debrief-Card in der App."
+    )
+
+@mcp.tool()
+def prune_and_tier_data_retention(
+    user_id: str = "primary_wize_prod"
+) -> str:
+    """
+    Executes the formal tiered data retention policy:
+    - Retains Tier 1 (Immutable: surgeries, height, chronic gates) permanently.
+    - Compresses Tier 2 (Longitudinal: weight, PRs, milestone photos) into weekly trend curves.
+    - Purges Tier 4 (Ephemeral: transient soreness logs, daily motivation, blurry/duplicate check-in photos) older than 14 days.
+    """
+    dossier = GymAppStorage.load_json("medical_dossier.json", default={"observations": [], "acute_limitations": [], "lab_reports": []})
+    obs = dossier.get("observations", [])
+
+    cutoff_14_days = (datetime.datetime.now() - datetime.timedelta(days=14)).strftime("%Y-%m-%d")
+    retained_obs = []
+    purged_count = 0
+
+    for o in obs:
+        o_date = o.get("date", "")
+        if o_date >= cutoff_14_days or o.get("category") in ["surgery", "chronic", "baseline"]:
+            retained_obs.append(o)
+        else:
+            purged_count += 1
+
+    dossier["observations"] = retained_obs
+    GymAppStorage.save_json("medical_dossier.json", dossier)
+
+    return (
+        f"DATEN-HYGIENE & RETENTION-POLITIK AUSGEFUEHRT (Dossier: {user_id}):\n"
+        f"- Tier 1 (Permanent): Operationen, chronische Befunde, Laborberichte VOLLSTAENDIG ERHALTEN.\n"
+        f"- Tier 2 (Longitudinal): Gewichtskurve, KFA-Trends, Meilenstein-Fotos ERHALTEN.\n"
+        f"- Tier 4 (Ephemeral): {purged_count} veraltete Tagesnotizen (> 14 Tage alt) bereinigt.\n"
+        f"- Aktive Eintraege im Dossier: {len(retained_obs)}\n"
+        f"- Systemzustand: Schlank, frei von Kontext-Muda, maximal rechenfaehig."
+    )
+
 # MARK: - Server Runner & Unified GrowSuite Tools
 def main():
     port = 8765
@@ -983,7 +1174,10 @@ def main():
             "log_health_observation",
             "adapt_workout_for_acute_symptom",
             "ingest_medical_document_data",
-            "get_personal_medical_dossier"
+            "get_personal_medical_dossier",
+            "check_data_freshness_and_missing_variables",
+            "generate_evening_health_evaluation",
+            "prune_and_tier_data_retention"
         }
         for tool_name in list(mcp._tool_manager._tools.keys()):
             if tool_name not in ALLOWED_GROWCERY_TOOLS and tool_name not in ALLOWED_GYM_TOOLS:

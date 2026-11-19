@@ -35,6 +35,11 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
     public static let bodyCompositionServiceUUID = CBUUID(string: "181B")
     public static let heartRateServiceUUID = CBUUID(string: "180D")
 
+    // Renpho ES-26M-W / Qingniu (QN-Scale) Custom BLE Service & Characteristics
+    public static let renphoScaleServiceUUID = CBUUID(string: "FFE0")
+    public static let renphoNotifyCharUUID = CBUUID(string: "FFE1")
+    public static let renphoWriteCharUUID = CBUUID(string: "FFE3")
+
     // Characteristics
     public static let weightMeasurementCharUUID = CBUUID(string: "2A9D")
     public static let bodyCompositionCharUUID = CBUUID(string: "2A9C")
@@ -61,7 +66,8 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
             withServices: [
                 Self.weightScaleServiceUUID,
                 Self.bodyCompositionServiceUUID,
-                Self.heartRateServiceUUID
+                Self.heartRateServiceUUID,
+                Self.renphoScaleServiceUUID
             ],
             options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
         )
@@ -95,7 +101,8 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
         peripheral.discoverServices([
             Self.weightScaleServiceUUID,
             Self.bodyCompositionServiceUUID,
-            Self.heartRateServiceUUID
+            Self.heartRateServiceUUID,
+            Self.renphoScaleServiceUUID
         ])
     }
 
@@ -142,7 +149,50 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
             parseBodyComposition(data)
         } else if characteristic.uuid == Self.heartRateMeasurementCharUUID {
             parseHeartRate(data)
+        } else if characteristic.uuid == Self.renphoNotifyCharUUID {
+            parseRenphoQingniuPayload(data)
         }
+    }
+
+    // MARK: - Parsing Renpho QN-Scale (ES-26M-W) Custom BLE Encodings
+    private func parseRenphoQingniuPayload(_ data: Data) {
+        let bytes = [UInt8](data)
+        guard bytes.count >= 8 else { return }
+
+        // Byte 1 & 2: Weight in units of 10g (Big-Endian)
+        let rawWeight = (UInt16(bytes[1]) << 8) | UInt16(bytes[2])
+        let weightKg = Double(rawWeight) / 100.0
+
+        var impedance: Double? = nil
+        var bodyFatPct: Double? = nil
+        var muscleMassKg: Double? = nil
+
+        // Byte 3 & 4: Impedance in Ohms
+        if bytes.count >= 6 {
+            let rawImpedance = (UInt16(bytes[3]) << 8) | UInt16(bytes[4])
+            if rawImpedance > 200 && rawImpedance < 1500 {
+                impedance = Double(rawImpedance)
+                // Lukaski-Deurenberg Bioelectrical Impedance Analysis (BIA)
+                // Baseline: Male, 24y, 182cm (or pulled from UserProfileContract)
+                let heightCm = 182.0
+                let ffm = (0.396 * (heightCm * heightCm) / Double(rawImpedance)) + (0.49 * weightKg) + (0.158 * heightCm) - 10.5
+                let fatMass = max(0.0, weightKg - ffm)
+                let fatPct = (fatMass / weightKg) * 100.0
+                bodyFatPct = (fatPct * 10.0).rounded() / 10.0
+                muscleMassKg = (ffm * 10.0).rounded() / 10.0
+            }
+        }
+
+        guard weightKg > 30.0 && weightKg < 250.0 else { return }
+
+        let measurement = BLEBiometricMeasurement(
+            weightKg: (weightKg * 100.0).rounded() / 100.0,
+            bodyFatPct: bodyFatPct,
+            muscleMassKg: muscleMassKg,
+            impedanceOhms: impedance
+        )
+        persistMeasurement(measurement, source: "BLE_Renpho_ES26M_0xFFE0")
+        onMeasurementReceived?(measurement)
     }
 
     // MARK: - Parsing Standard Bluetooth GATT Encodings
