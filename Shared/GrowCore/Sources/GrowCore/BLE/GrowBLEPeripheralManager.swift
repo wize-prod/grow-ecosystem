@@ -34,8 +34,8 @@ public enum BLEScaleStatus: String, Sendable {
     case scanning = "Suche Renpho-Waage..."
     case connecting = "Verbinde..."
     case connected = "Renpho-Waage Verbunden"
-    case measuring = "Waegevorgang laeuft..."
-    case received = "Messung synchronisiert"
+    case measuring = "Pendelt ein (Bitte stillstehen)..."
+    case received = "Messung synchronisiert & fixiert"
 }
 
 public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate, @unchecked Sendable {
@@ -68,6 +68,11 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
     private var connectedPeripheral: CBPeripheral?
     private let db = GrowDatabase.shared
 
+    // MARK: - Settling & Stabilization Engine State
+    private var recentSamples: [Double] = []
+    private var firstSampleTime: Date? = nil
+    private var isMeasurementLocked: Bool = false
+
     public var onMeasurementReceived: ((BLEBiometricMeasurement) -> Void)?
 
     override private init() {
@@ -87,7 +92,15 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
             centralManager.cancelPeripheralConnection(p)
             connectedPeripheral = nil
         }
+        resetMeasurementState()
         startActiveScan()
+    }
+
+    private func resetMeasurementState() {
+        recentSamples.removeAll()
+        firstSampleTime = nil
+        isMeasurementLocked = false
+        liveWeightKg = nil
     }
 
     public func startActiveScan() {
@@ -105,6 +118,8 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
             return
         }
 
+        resetMeasurementState()
+
         DispatchQueue.main.async {
             self.status = .scanning
         }
@@ -112,7 +127,7 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
         print("[BLE] Starte aktiven Foreground-Scan nach Renpho-Waagen...")
         centralManager.scanForPeripherals(
             withServices: nil,
-            options: [CBCentralManagerScanOptionAllowDuplicatesKey: true]
+            options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
         )
     }
 
@@ -185,21 +200,18 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
         if let data = mfgData, data.count >= 2 {
             let b0 = data[0]
             let b1 = data[1]
-            if (b0 == 0x51 && b1 == 0x4E) || (b0 == 0x02 && b1 == 0x1B) || (b0 == 0x00 && b1 == 0xFF) {
+            // Yolanda / Qingniu Company ID 0x51 0x4E ('QN') or 0x02 0x1B
+            if (b0 == 0x51 && b1 == 0x4E) || (b0 == 0x02 && b1 == 0x1B) {
                 hasMfgSignature = true
             }
         }
 
-        // Live Advertisement broadcast weight decoding
-        if let data = mfgData, data.count >= 8 {
-            decodeAdvertisementWeight(data)
-        }
-
+        // Filter out unrelated Bluetooth devices strictly
         guard hasMatchingService || hasScaleName || hasMfgSignature else {
             return
         }
 
-        print("[BLE] Waage identifiziert: '\(rawName)' (RSSI: \(RSSI)). Verbinde...")
+        print("[BLE] Waage verifiziert: '\(rawName)' (RSSI: \(RSSI)). Baue GATT-Verbindung auf...")
         DispatchQueue.main.async {
             self.status = .connecting
             self.connectedDeviceName = rawName.isEmpty ? "Renpho ES-26M" : rawName
@@ -216,16 +228,16 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
     public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         let name = peripheral.name ?? "Renpho ES-26M-W"
         print("[BLE] Erfolgreich verbunden mit: \(name)")
+        resetMeasurementState()
         DispatchQueue.main.async {
             self.status = .connected
             self.connectedDeviceName = name
         }
-        // Entdecke alle Services der Waage
         peripheral.discoverServices(nil)
     }
 
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        print("[BLE] Verbindung zu Waage getrennt. Starte Scan erneut.")
+        print("[BLE] Verbindung zu Waage getrennt. Bereite naechste Session vor.")
         self.connectedPeripheral = nil
         DispatchQueue.main.async {
             self.status = .scanning
@@ -293,39 +305,81 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
         }
     }
 
-    // MARK: - Parsing Renpho QN-Scale (ES-26M-W) Custom BLE Encodings
+    // MARK: - Parsing Renpho QN-Scale with Settling & Hysteresis Filter
     private func parseRenphoQingniuPayload(_ data: Data) {
         let bytes = [UInt8](data)
         guard bytes.count >= 4 else { return }
 
-        // Adaptive Multi-Offset Extractor fuer Renpho / Yolanda Pakete
-        var detectedWeight: Double? = nil
-        var detectedImpedance: Double? = nil
+        let hexDump = bytes.map { String(format: "%02X", $0) }.joined(separator: " ")
+        print("[BLE RX FFE1] \(hexDump)")
 
-        // Kandidat 1: Byte 1..2 (Big-Endian / 100)
-        let w1 = Double((UInt16(bytes[1]) << 8) | UInt16(bytes[2])) / 100.0
-        // Kandidat 2: Byte 2..3 (Big-Endian / 100)
-        let w2 = (bytes.count >= 4) ? (Double((UInt16(bytes[2]) << 8) | UInt16(bytes[3])) / 100.0) : 0.0
-        // Kandidat 3: Byte 1..2 (Big-Endian / 10)
-        let w3 = Double((UInt16(bytes[1]) << 8) | UInt16(bytes[2])) / 10.0
+        let opcode = bytes[0]
+        let isOfficialStableFrame = (opcode == 0x11 || opcode == 0xB1 || (bytes.count >= 6 && (bytes[1] & 0x20 != 0)))
 
-        if w1 >= 40.0 && w1 <= 220.0 {
-            detectedWeight = w1
-        } else if w2 >= 40.0 && w2 <= 220.0 {
-            detectedWeight = w2
-        } else if w3 >= 40.0 && w3 <= 220.0 {
-            detectedWeight = w3
+        // Exakte QN-Scale Byte-Positionen:
+        // Byte 1 & 2: Gewicht in Big-Endian (/ 100 fuer kg)
+        // Alternativ Byte 2 & 3 bei vorangestelltem Command-Byte
+        var parsedKg: Double? = nil
+
+        let c1 = Double((UInt16(bytes[1]) << 8) | UInt16(bytes[2])) / 100.0
+        let c2 = (bytes.count >= 4) ? (Double((UInt16(bytes[2]) << 8) | UInt16(bytes[3])) / 100.0) : 0.0
+
+        if c1 >= 40.0 && c1 <= 220.0 {
+            parsedKg = c1
+        } else if c2 >= 40.0 && c2 <= 220.0 {
+            parsedKg = c2
         }
 
-        guard let weightKg = detectedWeight else { return }
+        guard let weightKg = parsedKg else { return }
 
-        // Live-Feedback sofort auf UI schalten
+        // Live-Anzeige aktualisieren waehrend des Einpendelns
         DispatchQueue.main.async {
             self.liveWeightKg = (weightKg * 100.0).rounded() / 100.0
-            self.status = .measuring
+            if !self.isMeasurementLocked {
+                self.status = .measuring
+            }
         }
 
+        if isMeasurementLocked {
+            return
+        }
+
+        // Settling-Filter: Aufzeichnung der Proben ueber Zeit
+        let now = Date()
+        if firstSampleTime == nil {
+            firstSampleTime = now
+        }
+        recentSamples.append(weightKg)
+        if recentSamples.count > 10 {
+            recentSamples.removeFirst()
+        }
+
+        let elapsedSeconds = now.timeIntervalSince(firstSampleTime ?? now)
+
+        // Stabilitaets-Kriterium:
+        // Entweder meldet die Waage explizit Frame 0x11/0xB1,
+        // ODER mindestens 4 Messwerte liegen vor, die seit mindestens 1.5 Sekunden um weniger als 0.1 kg schwanken.
+        var isPhysicallyStabilized = false
+        if isOfficialStableFrame {
+            isPhysicallyStabilized = true
+        } else if recentSamples.count >= 4 && elapsedSeconds >= 1.5 {
+            let minVal = recentSamples.suffix(4).min() ?? 0
+            let maxVal = recentSamples.suffix(4).max() ?? 0
+            if (maxVal - minVal) <= 0.15 {
+                isPhysicallyStabilized = true
+            }
+        }
+
+        guard isPhysicallyStabilized else {
+            return
+        }
+
+        // Messung fixieren
+        isMeasurementLocked = true
+        let finalWeight = (weightKg * 100.0).rounded() / 100.0
+
         // Impedanz suchen (typisch 250 - 1200 Ohm)
+        var detectedImpedance: Double? = nil
         if bytes.count >= 6 {
             let imp1 = Double((UInt16(bytes[3]) << 8) | UInt16(bytes[4]))
             let imp2 = (bytes.count >= 8) ? Double((UInt16(bytes[5]) << 8) | UInt16(bytes[6])) : 0.0
@@ -341,15 +395,14 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
 
         if let imp = detectedImpedance {
             let heightCm = 182.0
-            let ffm = (0.396 * (heightCm * heightCm) / imp) + (0.49 * weightKg) + (0.158 * heightCm) - 10.5
-            let fatMass = max(0.0, weightKg - ffm)
-            bodyFatPct = ((fatMass / weightKg) * 1000.0).rounded() / 10.0
+            let ffm = (0.396 * (heightCm * heightCm) / imp) + (0.49 * finalWeight) + (0.158 * heightCm) - 10.5
+            let fatMass = max(0.0, finalWeight - ffm)
+            bodyFatPct = ((fatMass / finalWeight) * 1000.0).rounded() / 10.0
             muscleMassKg = (ffm * 10.0).rounded() / 10.0
         }
 
-        // Stabile Endmessung registrieren
         let measurement = BLEBiometricMeasurement(
-            weightKg: (weightKg * 100.0).rounded() / 100.0,
+            weightKg: finalWeight,
             bodyFatPct: bodyFatPct,
             muscleMassKg: muscleMassKg,
             impedanceOhms: detectedImpedance
@@ -360,23 +413,11 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
             let summary = String(format: "%.2f kg%@", measurement.weightKg, measurement.bodyFatPct.map { String(format: " • %.1f %% KFA", $0) } ?? "")
             self.lastMeasurementSummary = summary
             self.lastMeasurementTimestamp = Date()
+            self.liveWeightKg = finalWeight
         }
 
         persistMeasurement(measurement, source: "BLE_Renpho_ES26M_0xFFE0")
         onMeasurementReceived?(measurement)
-    }
-
-    private func decodeAdvertisementWeight(_ data: Data) {
-        let bytes = [UInt8](data)
-        guard bytes.count >= 6 else { return }
-        // Pruefe Byte 2..3 oder 3..4
-        let w = Double((UInt16(bytes[2]) << 8) | UInt16(bytes[3])) / 100.0
-        if w >= 40.0 && w <= 220.0 {
-            DispatchQueue.main.async {
-                self.liveWeightKg = (w * 100.0).rounded() / 100.0
-                self.status = .measuring
-            }
-        }
     }
 
     // MARK: - Parsing Standard Bluetooth GATT Encodings

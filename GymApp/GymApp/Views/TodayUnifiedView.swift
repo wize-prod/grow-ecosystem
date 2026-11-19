@@ -317,6 +317,7 @@ public struct TodayUnifiedView: View {
         Button {
             HapticFeedback.light()
             bleManager.triggerManualScan()
+            healthService.fetchAllHealthData()
         } label: {
             HStack(spacing: 10) {
                 // Status Indicator Dot
@@ -336,15 +337,15 @@ public struct TodayUnifiedView: View {
                     }
 
                     if let live = bleManager.liveWeightKg, bleManager.status == .measuring {
-                        Text(String(format: "Live-Gewicht: %.2f kg (Wiegevorgang laeuft...)", live))
+                        Text(String(format: "Live-Gewicht: %.2f kg (Pendelt ein, bitte stillstehen...)", live))
                             .font(.system(size: 11.5, weight: .bold, design: .monospaced))
                             .foregroundColor(Color.orange)
                     } else if let summary = bleManager.lastMeasurementSummary {
-                        Text("Letzte Messung: \(summary)")
+                        Text("Fixierte Messung: \(summary)")
                             .font(.system(size: 11, weight: .medium, design: .monospaced))
                             .foregroundColor(GymTheme.sageGreen)
                     } else {
-                        Text("Tippen fuer Scan / Auto-Kopplung bei Betreten der Waage")
+                        Text("Tippen fuer Scan & Apple Health Abgleich")
                             .font(.system(size: 10, weight: .regular))
                             .foregroundColor(GymTheme.textMuted)
                     }
