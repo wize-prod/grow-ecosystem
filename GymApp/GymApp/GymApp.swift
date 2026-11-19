@@ -33,22 +33,11 @@ struct GymApp: App {
                     calService.fetchUpcomingWorkouts()
                     healthService.fetchAllHealthData()
                     growceryService.refreshData()
-
-                    GrowBLEPeripheralManager.shared.onMeasurementReceived = { m in
-                        Task { @MainActor in
-                            GymStore.shared.addMeasurement(type: .weight, value: m.weightKg, note: "Renpho BLE Direkt")
-                            if let fat = m.bodyFatPct {
-                                GymStore.shared.addMeasurement(type: .bodyFat, value: fat, note: "Renpho BLE Direkt")
-                            }
-                        }
-                    }
-                    GrowBLEPeripheralManager.shared.startActiveScan()
                 }
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
                         growceryService.refreshData()
                         healthService.fetchAllHealthData()
-                        GrowBLEPeripheralManager.shared.startActiveScan()
                     }
                 }
                 .onOpenURL { url in

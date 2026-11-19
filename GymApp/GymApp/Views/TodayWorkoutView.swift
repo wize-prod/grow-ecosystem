@@ -18,7 +18,6 @@ public struct TodayWorkoutView: View {
     @State private var showingMeasurements = false
     @State private var showingDeepMuscleReport = false
     @State private var showingAthleticStandardGraph = false
-    @State private var showingWaageScanner = false
     @State private var workoutToDelete: UnifiedDayWorkoutItem? = nil
     @State private var showingDeleteWorkoutDialog = false
 
@@ -117,10 +116,6 @@ public struct TodayWorkoutView: View {
             }
             .sheet(isPresented: $showingAthleticStandardGraph) {
                 AthleticStandardGraphView()
-                    .environmentObject(store)
-            }
-            .sheet(isPresented: $showingWaageScanner) {
-                WaageScannerSheet(targetDate: selectedDate)
                     .environmentObject(store)
             }
             .confirmationDialog(
@@ -309,25 +304,6 @@ public struct TodayWorkoutView: View {
             }
 
             Spacer()
-
-            Button {
-                showingWaageScanner = true
-                HapticFeedback.light()
-            } label: {
-                HStack(spacing: 5) {
-                    Image(systemName: "camera.fill")
-                        .font(.system(size: 11, weight: .bold))
-                    Text("Waage scannen")
-                        .font(.system(size: 10.5, weight: .bold))
-                }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(GymTheme.surfaceElevated)
-                .foregroundColor(GymTheme.cyanAccent)
-                .cornerRadius(8)
-                .overlay(RoundedRectangle(cornerRadius: 8).stroke(GymTheme.cyanAccent.opacity(0.35), lineWidth: 1))
-            }
-            .buttonStyle(.plain)
         }
     }
 

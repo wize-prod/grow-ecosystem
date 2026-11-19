@@ -7,7 +7,6 @@ public struct TodayUnifiedView: View {
     @ObservedObject private var localStore = LocalStore.shared
     @ObservedObject private var healthService = HealthKitService.shared
     @ObservedObject private var userAccount = UserAccountService.shared
-    @ObservedObject private var bleManager = GrowBLEPeripheralManager.shared
 
     @State private var selectedDate: Date = Date()
     @State private var isBalanceExpanded: Bool = true
@@ -104,9 +103,6 @@ public struct TodayUnifiedView: View {
                     VStack(spacing: 16) {
                         // 1. Date Header & Fast Navigation
                         headerDateBar
-
-                        // 1b. Renpho BLE Scale Status & Live Telemetry
-                        bleScaleStatusBar
 
                         // 2. Active Workout Session Banner (if running)
                         if gymStore.activeSession != nil {
@@ -309,102 +305,6 @@ public struct TodayUnifiedView: View {
                     .background(Circle().fill(GymTheme.surfaceElevated))
             }
             .buttonStyle(.plain)
-        }
-    }
-
-    // MARK: - 1b. Renpho BLE Scale Telemetry Bar
-    private var bleScaleStatusBar: some View {
-        Button {
-            HapticFeedback.light()
-            bleManager.triggerManualScan()
-            healthService.fetchAllHealthData()
-        } label: {
-            HStack(spacing: 10) {
-                // Status Indicator Dot
-                Circle()
-                    .fill(statusIndicatorColor)
-                    .frame(width: 8, height: 8)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 6) {
-                        Text(bleManager.connectedDeviceName.uppercased())
-                            .font(.system(size: 11, weight: .bold, design: .monospaced))
-                            .foregroundColor(GymTheme.textPrimary)
-
-                        Text("• \(bleManager.status.rawValue)")
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundColor(GymTheme.textSecondary)
-                    }
-
-                    if let live = bleManager.liveWeightKg, bleManager.status == .measuring {
-                        Text(String(format: "Live-Gewicht: %.2f kg (Pendelt ein, bitte stillstehen...)", live))
-                            .font(.system(size: 11.5, weight: .bold, design: .monospaced))
-                            .foregroundColor(Color.orange)
-                    } else if let summary = bleManager.lastMeasurementSummary {
-                        Text("Fixierte Messung: \(summary)")
-                            .font(.system(size: 11, weight: .medium, design: .monospaced))
-                            .foregroundColor(GymTheme.sageGreen)
-                    } else if let w = gymStore.latestMeasurement(for: .weight) {
-                        let fat = gymStore.latestMeasurement(for: .bodyFat)
-                        Text(String(format: "Aktuell: %.2f kg%@", w.value, fat.map { String(format: " • %.1f %% KFA", $0.value) } ?? ""))
-                            .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                            .foregroundColor(GymTheme.textPrimary)
-                    } else {
-                        Text("Tippen fuer Scan & Apple Health Abgleich")
-                            .font(.system(size: 10, weight: .regular))
-                            .foregroundColor(GymTheme.textMuted)
-                    }
-                }
-
-                Spacer()
-
-                if bleManager.status == .scanning || bleManager.status == .measuring || bleManager.status == .connecting {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: GymTheme.textSecondary))
-                        .scaleEffect(0.7)
-                } else {
-                    Image(systemName: "arrow.clockwise")
-                        .font(.system(size: 11, weight: .bold))
-                        .foregroundColor(GymTheme.textSecondary)
-                }
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 8)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(GymTheme.surfaceElevated)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(borderColorForStatus, lineWidth: 1)
-                    )
-            )
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var statusIndicatorColor: Color {
-        switch bleManager.status {
-        case .connected:
-            return GymTheme.sageGreen
-        case .measuring:
-            return Color.orange
-        case .received:
-            return GymTheme.sageGreen
-        case .scanning, .connecting:
-            return Color.orange
-        case .bluetoothOff, .unauthorized:
-            return GymTheme.terracotta
-        }
-    }
-
-    private var borderColorForStatus: Color {
-        switch bleManager.status {
-        case .connected, .measuring:
-            return Color.orange.opacity(0.4)
-        case .received:
-            return GymTheme.sageGreen.opacity(0.4)
-        default:
-            return GymTheme.border
         }
     }
 
