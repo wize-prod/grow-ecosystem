@@ -60,7 +60,15 @@
 				<string>gym</string>
 				<string>grow</string>
 			</array>
-			<key>NSLocalNetworkUsageDescription</key>
+			<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Grow verbindet sich mit Ihrer Renpho Koerperanalysewaage zur automatischen Erfassung von Gewicht und Bioimpedanz.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Grow verbindet sich mit Ihrer Renpho Koerperanalysewaage zur automatischen Erfassung von Gewicht und Bioimpedanz.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+	</array>
+	<key>NSLocalNetworkUsageDescription</key>
 	<string>Synchronisiert Trainingsplaene, Mahlzeiten, Aufgaben und Finanzen automatisch zwischen Mac und iPhone im lokalen Netzwerk.</string>
 	<key>NSBonjourServices</key>
 	<array>
@@ -85,6 +93,14 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Grow verbindet sich mit Ihrer Renpho Koerperanalysewaage zur automatischen Erfassung von Gewicht und Bioimpedanz.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Grow verbindet sich mit Ihrer Renpho Koerperanalysewaage zur automatischen Erfassung von Gewicht und Bioimpedanz.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
 	</array>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Synchronisiert Trainingsplaene, Mahlzeiten, Aufgaben und Finanzen automatisch zwischen Mac und iPhone im lokalen Netzwerk.</string>

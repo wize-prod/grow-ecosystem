@@ -60,8 +60,16 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
         )
     }
 
+    public func startActiveScan() {
+        guard centralManager != nil, centralManager.state == .poweredOn else { return }
+        centralManager.scanForPeripherals(
+            withServices: nil,
+            options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
+        )
+    }
+
     public func startBackgroundScan() {
-        guard centralManager.state == .poweredOn else { return }
+        guard centralManager != nil, centralManager.state == .poweredOn else { return }
         centralManager.scanForPeripherals(
             withServices: [
                 Self.weightScaleServiceUUID,
@@ -74,13 +82,13 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
     }
 
     public func stopScan() {
-        centralManager.stopScan()
+        centralManager?.stopScan()
     }
 
     // MARK: - CBCentralManagerDelegate
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == .poweredOn {
-            startBackgroundScan()
+            startActiveScan()
         }
     }
 
@@ -90,7 +98,18 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
         advertisementData: [String: Any],
         rssi RSSI: NSNumber
     ) {
-        // Automatically connect to standard health peripherals in range
+        let name = (peripheral.name ?? (advertisementData[CBAdvertisementDataLocalNameKey] as? String) ?? "").lowercased()
+        let serviceUUIDs = advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
+        let isKnownService = serviceUUIDs.contains(where: {
+            $0 == Self.weightScaleServiceUUID ||
+            $0 == Self.bodyCompositionServiceUUID ||
+            $0 == Self.heartRateServiceUUID ||
+            $0 == Self.renphoScaleServiceUUID
+        })
+        let isScaleDevice = name.contains("scale") || name.contains("renpho") || name.contains("qn-") || name.contains("chipsea") || name.contains("es-26")
+
+        guard isKnownService || isScaleDevice else { return }
+
         self.connectedPeripheral = peripheral
         peripheral.delegate = self
         centralManager.stopScan()

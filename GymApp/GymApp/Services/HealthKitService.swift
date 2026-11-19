@@ -81,6 +81,9 @@ public final class HealthKitService: ObservableObject {
         if let t = HKQuantityType.quantityType(forIdentifier: .dietaryEnergyConsumed) { readTypes.insert(t) }
         if let t = HKQuantityType.quantityType(forIdentifier: .dietaryCarbohydrates) { readTypes.insert(t) }
         if let t = HKQuantityType.quantityType(forIdentifier: .dietaryFatTotal) { readTypes.insert(t) }
+        if let t = HKQuantityType.quantityType(forIdentifier: .bodyMass) { readTypes.insert(t) }
+        if let t = HKQuantityType.quantityType(forIdentifier: .bodyFatPercentage) { readTypes.insert(t) }
+        if let t = HKQuantityType.quantityType(forIdentifier: .leanBodyMass) { readTypes.insert(t) }
 
         var shareTypes = Set<HKSampleType>()
         shareTypes.insert(HKObjectType.workoutType())
@@ -176,6 +179,33 @@ public final class HealthKitService: ObservableObject {
         // 9. Workouts der letzten 14 Tage
         group.enter()
         fetchRecentWorkoutsInternal {
+            group.leave()
+        }
+
+        // 10. Koerpergewicht (Renpho / Apple Health)
+        group.enter()
+        fetchMostRecent(typeIdentifier: .bodyMass, unit: .gramUnit(with: .kilo)) { [weak self] val, date in
+            if let v = val, v > 30.0 {
+                let roundedWeight = (v * 100.0).rounded() / 100.0
+                Task { @MainActor in
+                    self?.bodyWeightKg = roundedWeight
+                    self?.lastWeightDate = date
+                    GymStore.shared.addMeasurement(type: .weight, value: roundedWeight, date: date ?? Date(), note: "Apple Health (Renpho)")
+                }
+            }
+            group.leave()
+        }
+
+        // 11. Koerperfettanteil (Renpho / Apple Health)
+        group.enter()
+        fetchMostRecent(typeIdentifier: .bodyFatPercentage, unit: .percent()) { [weak self] val, date in
+            if let v = val, v > 0 {
+                let pct = (v * 100.0 * 10.0).rounded() / 10.0
+                Task { @MainActor in
+                    self?.bodyFatPercentage = pct
+                    GymStore.shared.addMeasurement(type: .bodyFat, value: pct, date: date ?? Date(), note: "Apple Health (Renpho)")
+                }
+            }
             group.leave()
         }
 
