@@ -1,0 +1,935 @@
+{"duration_ms":"12856836","share_with_app_devs":1,"roots_installed":0,"bug_type":"145","os_version":"iPhone OS 27.2 (24B115)","slice_uuid":"DDBEB229-6F66-3C86-ABA2-C0640A5269D2","is_first_party":1,"incident_id":"A552A915-E412-461E-B474-37EA93E967D8","timestamp":"2026-11-01 17:05:35.00 +0100","app_name":"securityd","name":"securityd"}
+Date/Time:        2026-11-01 13:31:14.585 +0100
+End time:         2026-11-01 17:05:31.420 +0100
+OS Version:       iPhone OS 27.2 (Build 24B115)
+Architecture:     arm64e
+Report Version:   73
+Incident Identifier: A552A915-E412-461E-B474-37EA93E967D8
+Share With Devs:  Yes
+
+Data Source:      Microstackshots
+Shared Cache:     377B53F3-0E5D-399A-A031-41CAF2ECA8D6 slid base address 0x186c14000
+
+Command:          securityd
+Path:             /usr/libexec/securityd
+Resource Coalition: "com.apple.securityd"(175)
+On Behalf Of:     26092 samples NutriVaultApp (Growcery) [6524, 6546, 6616, 6702, 6743, 6749, 6775] (26092 samples originated by NutriVaultApp (Growcery) [6524, 6546, 6616, 6702, 6743, 6749, 6775]), 4 samples UNKNOWN [6401] (4 samples originated by UNKNOWN [6401]), 2 samples securityd [118] (2 samples originated by securityd [118])
+Architecture:     arm64e
+Parent:           launchd [1]
+PID:              118
+
+Event:            disk writes
+Action taken:     none
+Writes:           274.88 GB of file backed memory dirtied over 12857 seconds (21.38 MB per second average), exceeding limit of 3181.46 KB per second over 86400 seconds
+Writes limit:     274.88 GB
+Limit duration:   86400s
+Writes caused:    274.88 GB
+Writes duration:  12857s
+Duration:         12856.84s
+Duration Sampled: 12856.15s (event starts 0.62s before samples)
+Steps:            33595 (10.49 MB/step)
+
+Hardware model:   iPad16,1
+Active cpus:      6
+Memory size:      7.72 GB
+HW page size:     16384
+VM page size:     16384
+Shared cache residency: 10.42% (731.83 MB / 7023.48 MB)
+
+Time Since Boot:  325297s
+Time Awake Since Boot: 214844s
+Time Since Wake:  9136s
+
+Total CPU Time:   16012.314s
+Advisory levels:  Battery -> 3, User -> 3, ThermalPressure -> 20, Combined -> 2
+Free disk space:  23.52 GB/118.84 GB, low space threshold 150 MB
+Vnodes Available: 64.76% (23312/36000, 18000 allocated, 18000 soft limit)
+Model:            com.apple.fm.language.instruct_3b.tokenizer
+  Loaded:         1700s - 2700s, requested by token-generation-inference
+  Loaded:         4100s - 5100s, requested by token-generation-inference
+  Loaded:         6900s - 7800s, requested by token-generation-inference
+  Loaded:         8000s - 9800s, requested by token-generation-inference
+  Loaded:         11000s - N/A, requested by token-generation-inference
+Model:            com.apple.photos.spatialphotosrelive.fov.main
+  Loaded:         1700s - 1700s, requested by alchemist-inference-provider
+Model:            com.apple.photos.spatialphotosrelive.main
+  Loaded:         1700s - 1700s, requested by alchemist-inference-provider
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+  Executing:      1700s - 1700s, requested by [6591] use case spatialPhotos.relive.main
+Model:            com.apple.fm.language.instruct_3b.urgency_classification?language=en
+  Executing:      1700s - 1700s, requested by [256] use case classification.classifyMailMessage
+  Executing:      1700s - 1700s, requested by [256] use case classification.classifyUserNotification
+  Executing:      1700s - 1700s, requested by [256] use case classification.classifyUserNotification
+  Executing:      1700s - 1700s, requested by [256] use case classification.classifyMailMessage
+  Executing:      1700s - 1700s, requested by [256] use case classification.classifyUserNotification
+  Executing:      1700s - 1700s, requested by [256] use case classification.classifyUserNotification
+  Executing:      1700s - 1700s, requested by [256] use case classification.classifyUserNotification
+  Executing:      1700s - 1700s, requested by [256] use case classification.classifyUserNotification
+  Executing:      4100s - 4100s, requested by [256] use case classification.classifyUserNotification
+  Executing:      4100s - 4100s, requested by [256] use case classification.classifyMailMessage
+  Executing:      4100s - 4100s, requested by [256] use case classification.classifyMailMessage
+  Executing:      4100s - 4100s, requested by [256] use case classification.classifyUserNotification
+  Executing:      4100s - 4100s, requested by [256] use case classification.classifyUserNotification
+  Executing:      4100s - 4100s, requested by [256] use case classification.classifyUserNotification
+  Executing:      4100s - 4100s, requested by [256] use case classification.classifyUserNotification
+  Executing:      4100s - 4100s, requested by [256] use case classification.classifyUserNotification
+  Executing:      6900s - 6900s, requested by [256] use case classification.classifyMailMessage
+  Executing:      6900s - 6900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      6900s - 6900s, requested by [256] use case classification.classifyMailMessage
+  Executing:      6900s - 6900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      6900s - 6900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      6900s - 6900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      6900s - 6900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      6900s - 6900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8000s - 8000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      8000s - 8000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8000s - 8000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      8000s - 8000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8000s - 8000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8000s - 8000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8000s - 8000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8000s - 8000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8200s - 8200s, requested by [256] use case classification.classifyMailMessage
+  Executing:      8200s - 8200s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8200s - 8200s, requested by [256] use case classification.classifyMailMessage
+  Executing:      8200s - 8200s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8200s - 8200s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8200s - 8200s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8200s - 8200s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8200s - 8200s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyMailMessage
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyMailMessage
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyMailMessage
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyMailMessage
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      8900s - 8900s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      11000s - 11000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      12000s - 12000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyMailMessage
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+  Executing:      13000s - 13000s, requested by [256] use case classification.classifyUserNotification
+Model:            com.apple.fm.language.instruct_3b.base
+  Loaded:         1700s - 1800s, requested by token-generation-inference
+  Loaded:         4100s - 4200s, requested by token-generation-inference
+  Loaded:         6900s - 6900s, requested by token-generation-inference
+  Loaded:         8000s - 8000s, requested by token-generation-inference
+  Loaded:         8200s - 8200s, requested by token-generation-inference
+  Loaded:         8900s - 9000s, requested by token-generation-inference
+  Loaded:         11000s - 11000s, requested by token-generation-inference
+  Loaded:         12000s - 12000s, requested by token-generation-inference
+  Loaded:         12000s - 12000s, requested by token-generation-inference
+  Loaded:         13000s - 13000s, requested by token-generation-inference
+Model:            com.apple.fm.language.instruct_3b.urgency_classification
+  Loaded:         1700s - 1800s, requested by token-generation-inference
+  Loaded:         4100s - 4200s, requested by token-generation-inference
+  Loaded:         6900s - 6900s, requested by token-generation-inference
+  Loaded:         8000s - 8000s, requested by token-generation-inference
+  Loaded:         8200s - 8200s, requested by token-generation-inference
+  Loaded:         8900s - 9000s, requested by token-generation-inference
+  Loaded:         11000s - 11000s, requested by token-generation-inference
+  Loaded:         12000s - 12000s, requested by token-generation-inference
+  Loaded:         12000s - 12000s, requested by token-generation-inference
+  Loaded:         13000s - 13000s, requested by token-generation-inference
+Model:            com.apple.defaultoverrides
+  Executing:      1700s - 1700s, requested by [3985] use case textUnderstanding.TextPersonExtraction
+  Executing:      1800s - 1800s, requested by [3985] use case textUnderstanding.TextPersonExtraction
+  Executing:      3000s - 3000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      3000s - 3000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      3000s - 3000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      3000s - 3000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      3000s - 3000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      3000s - 3000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      3000s - 3000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      11000s - 11000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      11000s - 11000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      11000s - 11000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      11000s - 11000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      11000s - 11000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      11000s - 11000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+  Executing:      11000s - 11000s, requested by [85] use case Genmoji.EmojiKeywordExtraction
+Model:            com.apple.gm.overrides.model_config.all
+  Loaded:         1700s - 1800s, requested by generative-experiences-safety-inference-provider
+  Loaded:         3000s - 3000s, requested by generative-experiences-safety-inference-provider
+  Loaded:         11000s - 11000s, requested by generative-experiences-safety-inference-provider
+Model:            com.apple.fm.language.instruct_3b.text_person_extraction?language=en
+  Executing:      1700s - 1800s, requested by [3985] use case textUnderstanding.TextPersonExtraction
+Model:            com.apple.fm.language.instruct_3b.image_encoder
+  Loaded:         1700s - 1800s, requested by token-generation-inference
+Model:            com.apple.fm.language.instruct_3b.text_person_extraction.draft
+  Loaded:         1700s - 1800s, requested by token-generation-inference
+Model:            com.apple.fm.language.instruct_3b.text_person_extraction
+  Loaded:         1700s - 1800s, requested by token-generation-inference
+
+Preferred User Language: de-DE, en-DE
+Country Code:     DE
+Keyboards:        de_DE QWERTZ-German;ml=1, de_DE QWERTZ-German;ml=2
+HW Keyboard:      Yes
+OS Cryptex File Extents: 1
+
+Heaviest stack for the target process:
+  26099  ??? (libsystem_pthread.dylib + 2320) [0x18714f910]
+  26098  ??? (libsystem_pthread.dylib + 4664) [0x187150238]
+  26098  ??? (libdispatch.dylib + 87728) [0x1b5b996b0]
+  26098  ??? (libdispatch.dylib + 89228) [0x1b5b99c8c]
+  26098  ??? (libdispatch.dylib + 130340) [0x1b5ba3d24]
+  26098  ??? (libdispatch.dylib + 42768) [0x1b5b8e710]
+  26098  ??? (libdispatch.dylib + 126088) [0x1b5ba2c88]
+  26098  ??? (libdispatch.dylib + 114684) [0x1b5b9fffc]
+  26098  ??? (libxpc.dylib + 118588) [0x1871caf3c]
+  26098  ??? (libxpc.dylib + 109204) [0x1871c8a94]
+  13370  ??? (securityd + 17788) [0x1043e457c]
+  13370  ??? (securityd + 94892) [0x1043f72ac]
+  13370  ??? (securityd + 35880) [0x1043e8c28]
+  13370  ??? (securityd + 86356) [0x1043f5154]
+  13370  ??? (securityd + 95312) [0x1043f7450]
+  13370  ??? (securityd + 95852) [0x1043f766c]
+  13370  ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+  13370  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+  13370  ??? (securityd + 83640) [0x1043f46b8]
+  13370  ??? (securityd + 96084) [0x1043f7754]
+  13370  ??? (securityd + 100088) [0x1043f86f8]
+  12619  ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+  12619  ??? (libsqlite3.dylib + 235504) [0x1a50517f0]
+  12619  ??? (libsqlite3.dylib + 93984) [0x1a502ef20]
+  12619  ??? (libsqlite3.dylib + 261988) [0x1a5057f64]
+  12619  ??? (libsqlite3.dylib + 263088) [0x1a50583b0]
+  12619  ??? (libsqlite3.dylib + 331400) [0x1a5068e88]
+  12506  ??? (libsqlite3.dylib + 721256) [0x1a50c8168]
+  12506  ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+  12506  ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+
+
+Powerstats for:   securityd [118]
+UUID:             DDBEB229-6F66-3C86-ABA2-C0640A5269D2
+Path:             /usr/libexec/securityd
+Resource Coalition: 26099 samples "com.apple.securityd"(175)
+On Behalf Of:     26092 samples NutriVaultApp (Growcery) [6524, 6546, 6616, 6702, 6743, 6749, 6775] (26092 samples originated by NutriVaultApp (Growcery) [6524, 6546, 6616, 6702, 6743, 6749, 6775]), 4 samples UNKNOWN [6401] (4 samples originated by UNKNOWN [6401]), 2 samples securityd [118] (2 samples originated by securityd [118])
+Architecture:     arm64e
+Parent:           launchd [1]
+UID:              64
+Sudden Term:      Tracked (allows idle exit)
+Footprint:        9472 KB -> 9552 KB (+80 KB) (max 11.67 MB )
+Pageins:          208 pages
+Start time:       2026-11-01 13:31:16.083 +0100
+End time:         2026-11-01 17:05:31.358 +0100
+Num samples:      26099 (78%)
+Energy:           693.36 mWh
+Num threads:      1561
+Primary state:    26099 samples Non-Frontmost App, Non-Suppressed, Kernel mode, Effective Thread QoS User Initiated, Requested Thread QoS User Initiated, Override Thread QoS Unspecified, p-core
+User Activity:    6 samples Idle, 26093 samples Active
+Power Source:     8042 samples on Battery, 18057 samples on AC
+  26099  ??? (libsystem_pthread.dylib + 2320) [0x18714f910]
+    26098  ??? (libsystem_pthread.dylib + 4664) [0x187150238]
+      26098  ??? (libdispatch.dylib + 87728) [0x1b5b996b0]
+        26098  ??? (libdispatch.dylib + 89228) [0x1b5b99c8c]
+          26098  ??? (libdispatch.dylib + 130340) [0x1b5ba3d24]
+            26098  ??? (libdispatch.dylib + 42768) [0x1b5b8e710]
+              26098  ??? (libdispatch.dylib + 126088) [0x1b5ba2c88]
+                26098  ??? (libdispatch.dylib + 114684) [0x1b5b9fffc]
+                  26098  ??? (libxpc.dylib + 118588) [0x1871caf3c]
+                    26098  ??? (libxpc.dylib + 109204) [0x1871c8a94]
+                      13370  ??? (securityd + 17788) [0x1043e457c]
+                        13370  ??? (securityd + 94892) [0x1043f72ac]
+                          13370  ??? (securityd + 35880) [0x1043e8c28]
+                            13370  ??? (securityd + 86356) [0x1043f5154]
+                              13370  ??? (securityd + 95312) [0x1043f7450]
+                                13370  ??? (securityd + 95852) [0x1043f766c]
+                                  13370  ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                                    13370  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                      13370  ??? (securityd + 83640) [0x1043f46b8]
+                                        13370  ??? (securityd + 96084) [0x1043f7754]
+                                          13370  ??? (securityd + 100088) [0x1043f86f8]
+                                            12619  ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                                              12619  ??? (libsqlite3.dylib + 235504) [0x1a50517f0]
+                                                12619  ??? (libsqlite3.dylib + 93984) [0x1a502ef20]
+                                                  12619  ??? (libsqlite3.dylib + 261988) [0x1a5057f64]
+                                                    12619  ??? (libsqlite3.dylib + 263088) [0x1a50583b0]
+                                                      12619  ??? (libsqlite3.dylib + 331400) [0x1a5068e88]
+                                                        12506  ??? (libsqlite3.dylib + 721256) [0x1a50c8168]
+                                                          12506  ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                            12506  ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                              9523   <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                              1284   <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                                              766    <on behalf of NutriVaultApp (Growcery) [6749] (originated by NutriVaultApp (Growcery) [6749])>
+                                                              577    <on behalf of NutriVaultApp (Growcery) [6546] (originated by NutriVaultApp (Growcery) [6546])>
+                                                              275    <on behalf of NutriVaultApp (Growcery) [6524] (originated by NutriVaultApp (Growcery) [6524])>
+                                                              52     <on behalf of NutriVaultApp (Growcery) [6743] (originated by NutriVaultApp (Growcery) [6743])>
+                                                              14     <on behalf of NutriVaultApp (Growcery) [6616] (originated by NutriVaultApp (Growcery) [6616])>
+                                                              12     <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775]), e-core>
+                                                              1      <on behalf of UNKNOWN [6401] (originated by UNKNOWN [6401])>
+                                                              1      <on behalf of NutriVaultApp (Growcery) [6546] (originated by NutriVaultApp (Growcery) [6546]), e-core>
+                                                              1      <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702]), e-core>
+                                                        92     ??? (libsqlite3.dylib + 723048) [0x1a50c8868]
+                                                          92     ??? (libsqlite3.dylib + 725260) [0x1a50c910c]
+                                                            92     ??? (libsystem_kernel.dylib + 33628) [0x242eeb35c]
+                                                              68     <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                              15     <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                                              6      <on behalf of NutriVaultApp (Growcery) [6546] (originated by NutriVaultApp (Growcery) [6546])>
+                                                              2      <on behalf of NutriVaultApp (Growcery) [6524] (originated by NutriVaultApp (Growcery) [6524])>
+                                                              1      <on behalf of NutriVaultApp (Growcery) [6616] (originated by NutriVaultApp (Growcery) [6616])>
+                                                        21     ??? (libsqlite3.dylib + 722372) [0x1a50c85c4]
+                                                          21     ??? (libsqlite3.dylib + 332716) [0x1a50693ac]
+                                                            21     ??? (libsystem_kernel.dylib + 23944) [0x242ee8d88]
+                                                              17     <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                              2      <on behalf of NutriVaultApp (Growcery) [6546] (originated by NutriVaultApp (Growcery) [6546])>
+                                                              2      <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                            751    ??? (libsqlite3.dylib + 191272) [0x1a5046b28]
+                                              751    ??? (libsqlite3.dylib + 333324) [0x1a506960c]
+                                                751    ??? (libsqlite3.dylib + 572652) [0x1a50a3cec]
+                                                  751    ??? (libsqlite3.dylib + 1234092) [0x1a51454ac]
+                                                    702    ??? (libsqlite3.dylib + 412936) [0x1a507cd08]
+                                                      702    ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                        702    ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                          569    <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                          92     <on behalf of NutriVaultApp (Growcery) [6749] (originated by NutriVaultApp (Growcery) [6749])>
+                                                          38     <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                                          2      <on behalf of UNKNOWN [6401] (originated by UNKNOWN [6401])>
+                                                          1      <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775]), e-core>
+                                                    28     ??? (libsqlite3.dylib + 413064) [0x1a507cd88]
+                                                      28     ??? (libsystem_kernel.dylib + 33628) [0x242eeb35c]
+                                                        25     <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                        2      <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                                        1      <on behalf of NutriVaultApp (Growcery) [6749] (originated by NutriVaultApp (Growcery) [6749])>
+                                                    21     ??? (libsqlite3.dylib + 412408) [0x1a507caf8]
+                                                      21     ??? (libsqlite3.dylib + 332716) [0x1a50693ac]
+                                                        21     ??? (libsystem_kernel.dylib + 23944) [0x242ee8d88]
+                                                          12     <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                          6      <on behalf of NutriVaultApp (Growcery) [6749] (originated by NutriVaultApp (Growcery) [6749])>
+                                                          3      <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                      12726  ??? (securityd + 22084) [0x1043e5644]
+                        12726  ??? (securityd + 115956) [0x1043fc4f4]
+                          12726  ??? (securityd + 35880) [0x1043e8c28]
+                            12726  ??? (securityd + 116180) [0x1043fc5d4]
+                              12726  ??? (securityd + 95312) [0x1043f7450]
+                                12726  ??? (securityd + 95852) [0x1043f766c]
+                                  12726  ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                                    12726  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                      12726  ??? (securityd + 83640) [0x1043f46b8]
+                                        12726  ??? (securityd + 96084) [0x1043f7754]
+                                          12726  ??? (securityd + 100088) [0x1043f86f8]
+                                            12069  ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                                              12069  ??? (libsqlite3.dylib + 235504) [0x1a50517f0]
+                                                12069  ??? (libsqlite3.dylib + 93984) [0x1a502ef20]
+                                                  12069  ??? (libsqlite3.dylib + 261988) [0x1a5057f64]
+                                                    12069  ??? (libsqlite3.dylib + 263088) [0x1a50583b0]
+                                                      12069  ??? (libsqlite3.dylib + 331400) [0x1a5068e88]
+                                                        11916  ??? (libsqlite3.dylib + 721256) [0x1a50c8168]
+                                                          11916  ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                            11916  ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                              8973   <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                              1274   <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                                              740    <on behalf of NutriVaultApp (Growcery) [6749] (originated by NutriVaultApp (Growcery) [6749])>
+                                                              581    <on behalf of NutriVaultApp (Growcery) [6546] (originated by NutriVaultApp (Growcery) [6546])>
+                                                              272    <on behalf of NutriVaultApp (Growcery) [6524] (originated by NutriVaultApp (Growcery) [6524])>
+                                                              43     <on behalf of NutriVaultApp (Growcery) [6743] (originated by NutriVaultApp (Growcery) [6743])>
+                                                              21     <on behalf of NutriVaultApp (Growcery) [6616] (originated by NutriVaultApp (Growcery) [6616])>
+                                                              9      <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775]), e-core>
+                                                              1      <on behalf of UNKNOWN [6401] (originated by UNKNOWN [6401])>
+                                                              1      <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702]), e-core>
+                                                              1      <on behalf of NutriVaultApp (Growcery) [6749] (originated by NutriVaultApp (Growcery) [6749]), e-core>
+                                                        123    ??? (libsqlite3.dylib + 723048) [0x1a50c8868]
+                                                          123    ??? (libsqlite3.dylib + 725260) [0x1a50c910c]
+                                                            123    ??? (libsystem_kernel.dylib + 33628) [0x242eeb35c]
+                                                              100    <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                              15     <on behalf of NutriVaultApp (Growcery) [6749] (originated by NutriVaultApp (Growcery) [6749])>
+                                                              8      <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                                        30     ??? (libsqlite3.dylib + 722372) [0x1a50c85c4]
+                                                          30     ??? (libsqlite3.dylib + 332716) [0x1a50693ac]
+                                                            30     ??? (libsystem_kernel.dylib + 23944) [0x242ee8d88]
+                                                              27     <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                              2      <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                                              1      <on behalf of NutriVaultApp (Growcery) [6749] (originated by NutriVaultApp (Growcery) [6749])>
+                                            657    ??? (libsqlite3.dylib + 191272) [0x1a5046b28]
+                                              657    ??? (libsqlite3.dylib + 333324) [0x1a506960c]
+                                                657    ??? (libsqlite3.dylib + 572652) [0x1a50a3cec]
+                                                  657    ??? (libsqlite3.dylib + 1234092) [0x1a51454ac]
+                                                    604    ??? (libsqlite3.dylib + 412936) [0x1a507cd08]
+                                                      604    ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                        604    ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                          401    <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                          98     <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                                          65     <on behalf of NutriVaultApp (Growcery) [6546] (originated by NutriVaultApp (Growcery) [6546])>
+                                                          30     <on behalf of NutriVaultApp (Growcery) [6524] (originated by NutriVaultApp (Growcery) [6524])>
+                                                          6      <on behalf of NutriVaultApp (Growcery) [6743] (originated by NutriVaultApp (Growcery) [6743])>
+                                                          3      <on behalf of NutriVaultApp (Growcery) [6749] (originated by NutriVaultApp (Growcery) [6749])>
+                                                          1      <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775]), e-core>
+                                                    33     ??? (libsqlite3.dylib + 413064) [0x1a507cd88]
+                                                      33     ??? (libsystem_kernel.dylib + 33628) [0x242eeb35c]
+                                                        24     <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                        5      <on behalf of NutriVaultApp (Growcery) [6546] (originated by NutriVaultApp (Growcery) [6546])>
+                                                        2      <on behalf of NutriVaultApp (Growcery) [6524] (originated by NutriVaultApp (Growcery) [6524])>
+                                                        2      <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                                                    20     ??? (libsqlite3.dylib + 412408) [0x1a507caf8]
+                                                      20     ??? (libsqlite3.dylib + 332716) [0x1a50693ac]
+                                                        20     ??? (libsystem_kernel.dylib + 23944) [0x242ee8d88]
+                                                          11     <on behalf of NutriVaultApp (Growcery) [6775] (originated by NutriVaultApp (Growcery) [6775])>
+                                                          8      <on behalf of NutriVaultApp (Growcery) [6546] (originated by NutriVaultApp (Growcery) [6546])>
+                                                          1      <on behalf of NutriVaultApp (Growcery) [6702] (originated by NutriVaultApp (Growcery) [6702])>
+                      2      ??? (securityd + 15464) [0x1043e3c68]
+                        2      ??? (securityd + 91932) [0x1043f671c]
+                          2      ??? (securityd + 35880) [0x1043e8c28]
+                            2      ??? (securityd + 140760) [0x1044025d8]
+                              2      ??? (securityd + 95312) [0x1043f7450]
+                                2      ??? (securityd + 95852) [0x1043f766c]
+                                  2      ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                                    2      ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                      2      ??? (securityd + 83640) [0x1043f46b8]
+                                        2      ??? (securityd + 96084) [0x1043f7754]
+                                          2      ??? (securityd + 100088) [0x1043f86f8]
+                                            2      ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                                              2      ??? (libsqlite3.dylib + 235504) [0x1a50517f0]
+                                                2      ??? (libsqlite3.dylib + 93984) [0x1a502ef20]
+                                                  2      ??? (libsqlite3.dylib + 261988) [0x1a5057f64]
+                                                    2      ??? (libsqlite3.dylib + 263088) [0x1a50583b0]
+                                                      2      ??? (libsqlite3.dylib + 331400) [0x1a5068e88]
+                                                        2      ??? (libsqlite3.dylib + 721256) [0x1a50c8168]
+                                                          2      ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                            2      ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                              2      <on behalf of securityd [118] (originated by securityd [118]), e-core>
+    1      ??? (libsystem_pthread.dylib + 4604) [0x1871501fc]
+      1      ??? (libdispatch.dylib + 86244) [0x1b5b990e4]
+        1      ??? (libdispatch.dylib + 84472) [0x1b5b989f8]
+          1      ??? (libdispatch.dylib + 23996) [0x1b5b89dbc]
+            1      ??? (libdispatch.dylib + 26368) [0x1b5b8a700]
+              1      ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                1      ??? (libdispatch.dylib + 72912) [0x1b5b95cd0]
+                  1      ??? (Foundation + 488700) [0x18776c4fc]
+                    1      ??? (Foundation + 488528) [0x18776c450]
+                      1      ??? (securityd + 187108) [0x10440dae4]
+                        1      ??? (Foundation + 489960) [0x18776c9e8]
+                          1      ??? (Foundation + 490672) [0x18776ccb0]
+                            1      ??? (securityd + 980340) [0x1044cf574]
+                              1      ??? (securityd + 1732844) [0x1045870ec]
+                                1      ??? (Security + 306624) [0x190161dc0]
+                                  1      ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                                    1      ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                      1      ??? (Security + 257144) [0x190155c78]
+                                        1      ??? (Security + 302808) [0x190160ed8]
+                                          1      ??? (libsqlite3.dylib + 33000) [0x1a50200e8]
+                                            1      ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                                              1      ??? (libsqlite3.dylib + 235504) [0x1a50517f0]
+                                                1      ??? (libsqlite3.dylib + 93984) [0x1a502ef20]
+                                                  1      ??? (libsqlite3.dylib + 261988) [0x1a5057f64]
+                                                    1      ??? (libsqlite3.dylib + 263088) [0x1a50583b0]
+                                                      1      ??? (libsqlite3.dylib + 331400) [0x1a5068e88]
+                                                        1      ??? (libsqlite3.dylib + 721256) [0x1a50c8168]
+                                                          1      ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                            1      ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                              1      <e-core>
+
+  Binary Images:
+           0x1043e0000 -                ???  securityd               <DDBEB229-6F66-3C86-ABA2-C0640A5269D2>  /usr/libexec/securityd
+           0x18714f000 -        0x18715b1e7  libsystem_pthread.dylib <32E28303-2AAD-3166-9D11-70E8BCF8E076>  /usr/lib/system/libsystem_pthread.dylib
+           0x1871ae000 -        0x18720f4af  libxpc.dylib            <9BA91DF0-39A5-3C28-B96E-BE2463C5C793>  /usr/lib/system/libxpc.dylib
+           0x1876f5000 -        0x1887f7a23  Foundation              <E623EEBD-082F-32AF-BFC7-F1DC83AE62DD>  /System/Library/Frameworks/Foundation.framework/Foundation
+           0x190117000 -        0x1902f6833  Security                <A0E86458-F696-329C-B0C8-DBFDE6C5DE7E>  /System/Library/Frameworks/Security.framework/Security
+           0x1a5018000 -        0x1a51d074f  libsqlite3.dylib        <6145839A-8C5B-3186-8AF6-CEE4C1AFDBC8>  /usr/lib/libsqlite3.dylib
+           0x1b5b84000 -        0x1b5bcadd7  libdispatch.dylib       <84B7E81D-B830-384F-A103-96323C6F5189>  /usr/lib/system/libdispatch.dylib
+           0x242ee3000 -        0x242f202db  libsystem_kernel.dylib  <26FFA906-5ACA-39BF-8F7C-94FE9AB8C657>  /usr/lib/system/libsystem_kernel.dylib
+
+
+Powerstats for:   NutriVaultApp (Growcery)
+UUID:             0A6E1928-C6E0-3568-95EB-7A4A550EF67A
+Path:             /private/var/containers/Bundle/Application/DE854442-6967-479D-B0AD-4A44BCE15AE7/NutriVaultApp.app/NutriVaultApp
+Identifier:       com.nkembi.nutrivault
+Version:          1.0 (1)
+Is First Party:   No
+Beta Identifier:  36B3C9B6-66D2-457A-9A1B-E6EC429635C0
+Resource Coalition: 5872 samples "com.nkembi.nutrivault"(2530)
+On Behalf Of:     1 sample SpringBoard [36] (1 sample originated by NutriVaultApp (Growcery) [6546])
+Architecture:     arm64
+Pageins:          8631 pages
+Start time:       2026-11-01 13:31:15.204 +0100
+End time:         2026-11-01 17:05:29.855 +0100
+Num samples:      5872 (17%)
+Energy:           3435.27 mWh
+Primary state:    2949 samples Frontmost App, Non-Suppressed, Kernel mode, Effective Thread QoS Utility, Requested Thread QoS Utility, Override Thread QoS Unspecified, p-core
+User Activity:    0 samples Idle, 5872 samples Active
+Power Source:     1757 samples on Battery, 4115 samples on AC
+  2967  ??? (libsystem_pthread.dylib + 2320) [0x18714f910]
+    2967  ??? (libsystem_pthread.dylib + 4664) [0x187150238]
+      2967  ??? (libdispatch.dylib + 87728) [0x1b5b996b0]
+        2967  ??? (libdispatch.dylib + 89228) [0x1b5b99c8c]
+          2967  ??? (libdispatch.dylib + 46192) [0x1b5b8f470]
+            2967  ??? (libdispatch.dylib + 43132) [0x1b5b8e87c]
+              2967  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                2965  ??? (libdispatch.dylib + 7372) [0x1b5b85ccc]
+                  2221  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 663468) [0x105bd9fac]
+                    2221  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 662468) [0x105bd9bc4]
+                      2221  ??? (Foundation + 2111512) [0x1878f8818]
+                        2002  ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                          1948  <e-core>
+                          13    <Non-Frontmost App, e-core>
+                          1     <Non-Frontmost App, Effective Thread QoS Background, e-core>
+                        101   ??? (Foundation + 7243360) [0x187ddd660]
+                          101   ??? (libsystem_kernel.dylib + 36844) [0x242eebfec]
+                            89    <e-core>
+                        79    ??? (Foundation + 7238064) [0x187ddc1b0]
+                          65    ??? (Foundation + 7216824) [0x187dd6eb8]
+                            65    ??? (Foundation + 561352) [0x18777e0c8]
+                              65    ??? (Foundation + 561928) [0x18777e308]
+                                65    ??? (Foundation + 542536) [0x187779748]
+                                  65    ??? (Foundation + 543376) [0x187779a90]
+                                    65    ??? (libsystem_kernel.dylib + 25664) [0x242ee9440]
+                                      45    <e-core>
+                          14    ??? (Foundation + 7217564) [0x187dd719c]
+                            14    ??? (Foundation + 4489324) [0x187b3d06c]
+                              14    ??? (libsystem_kernel.dylib + 26788) [0x242ee98a4]
+                                8     <e-core>
+                        39    ??? (Foundation + 7248932) [0x187ddec24]
+                          39    ??? (Foundation + 3551408) [0x187a580b0]
+                            39    ??? (libsystem_kernel.dylib + 23380) [0x242ee8b54]
+                              35    <e-core>
+                              1     <Non-Frontmost App, e-core>
+                  320   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 646344) [0x105491cc8]
+                    320   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 645344) [0x1054918e0]
+                      320   ??? (Foundation + 2111512) [0x1878f8818]
+                        289   ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                          285   <e-core>
+                        15    ??? (Foundation + 7243360) [0x187ddd660]
+                          15    ??? (libsystem_kernel.dylib + 36844) [0x242eebfec]
+                            13    <e-core>
+                        12    ??? (Foundation + 7238064) [0x187ddc1b0]
+                          11    ??? (Foundation + 7216824) [0x187dd6eb8]
+                            11    ??? (Foundation + 561352) [0x18777e0c8]
+                              11    ??? (Foundation + 561928) [0x18777e308]
+                                11    ??? (Foundation + 542536) [0x187779748]
+                                  11    ??? (Foundation + 543376) [0x187779a90]
+                                    11    ??? (libsystem_kernel.dylib + 25664) [0x242ee9440]
+                                      6     <e-core>
+                          1     ??? (Foundation + 7217564) [0x187dd719c]
+                            1     ??? (Foundation + 4489324) [0x187b3d06c]
+                              1     ??? (libsystem_kernel.dylib + 26788) [0x242ee98a4]
+                                1     <e-core>
+                        4     ??? (Foundation + 7248932) [0x187ddec24]
+                          4     ??? (Foundation + 3551408) [0x187a580b0]
+                            4     ??? (libsystem_kernel.dylib + 23380) [0x242ee8b54]
+                              4     <e-core>
+                  172   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 662836) [0x104d49d34]
+                    172   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 661836) [0x104d4994c]
+                      172   ??? (Foundation + 2111512) [0x1878f8818]
+                        162   ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                          152   <e-core>
+                        4     ??? (Foundation + 7243360) [0x187ddd660]
+                          4     ??? (libsystem_kernel.dylib + 36844) [0x242eebfec]
+                            4     <e-core>
+                        3     ??? (Foundation + 7248932) [0x187ddec24]
+                          3     ??? (Foundation + 3551408) [0x187a580b0]
+                            3     ??? (libsystem_kernel.dylib + 23380) [0x242ee8b54]
+                              3     <e-core>
+                        3     ??? (Foundation + 7238064) [0x187ddc1b0]
+                          3     ??? (Foundation + 7216824) [0x187dd6eb8]
+                            3     ??? (Foundation + 561352) [0x18777e0c8]
+                              3     ??? (Foundation + 561928) [0x18777e308]
+                                3     ??? (Foundation + 542536) [0x187779748]
+                                  3     ??? (Foundation + 543376) [0x187779a90]
+                                    3     ??? (libsystem_kernel.dylib + 25664) [0x242ee9440]
+                                      3     <e-core>
+                  159   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 651248) [0x103672ff0]
+                    159   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 650248) [0x103672c08]
+                      159   ??? (Foundation + 2111512) [0x1878f8818]
+                        137   ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                          131   <e-core>
+                        9     ??? (Foundation + 7248932) [0x187ddec24]
+                          9     ??? (Foundation + 3551408) [0x187a580b0]
+                            9     ??? (libsystem_kernel.dylib + 23380) [0x242ee8b54]
+                              9     <e-core>
+                        9     ??? (Foundation + 7238064) [0x187ddc1b0]
+                          7     ??? (Foundation + 7216824) [0x187dd6eb8]
+                            7     ??? (Foundation + 561352) [0x18777e0c8]
+                              7     ??? (Foundation + 561928) [0x18777e308]
+                                7     ??? (Foundation + 542536) [0x187779748]
+                                  7     ??? (Foundation + 543376) [0x187779a90]
+                                    7     ??? (libsystem_kernel.dylib + 25664) [0x242ee9440]
+                                      2     <e-core>
+                          2     ??? (Foundation + 7217564) [0x187dd719c]
+                            2     ??? (Foundation + 4489324) [0x187b3d06c]
+                              2     ??? (libsystem_kernel.dylib + 26788) [0x242ee98a4]
+                                1     <e-core>
+                        4     ??? (Foundation + 7243360) [0x187ddd660]
+                          4     ??? (libsystem_kernel.dylib + 36844) [0x242eebfec]
+                            3     <e-core>
+                  87    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 648976) [0x10762e710]
+                    87    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 647976) [0x10762e328]
+                      87    ??? (Foundation + 2111512) [0x1878f8818]
+                        76    ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                          73    <e-core>
+                        7     ??? (Foundation + 7238064) [0x187ddc1b0]
+                          6     ??? (Foundation + 7216824) [0x187dd6eb8]
+                            6     ??? (Foundation + 561352) [0x18777e0c8]
+                              6     ??? (Foundation + 561928) [0x18777e308]
+                                6     ??? (Foundation + 542536) [0x187779748]
+                                  6     ??? (Foundation + 543376) [0x187779a90]
+                                    6     ??? (libsystem_kernel.dylib + 25664) [0x242ee9440]
+                                      2     <e-core>
+                          1     ??? (Foundation + 7217564) [0x187dd719c]
+                            1     ??? (Foundation + 4489324) [0x187b3d06c]
+                              1     ??? (libsystem_kernel.dylib + 26788) [0x242ee98a4]
+                        2     ??? (Foundation + 7248932) [0x187ddec24]
+                          2     ??? (Foundation + 3551408) [0x187a580b0]
+                            2     ??? (libsystem_kernel.dylib + 23380) [0x242ee8b54]
+                              2     <e-core>
+                        2     ??? (Foundation + 7243360) [0x187ddd660]
+                          2     ??? (libsystem_kernel.dylib + 36844) [0x242eebfec]
+                            2     <e-core>
+                  6     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 651248) [0x103e0aff0]
+                    6     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 650248) [0x103e0ac08]
+                      6     ??? (Foundation + 2111512) [0x1878f8818]
+                        5     ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                          4     <e-core>
+                        1     ??? (Foundation + 7248932) [0x187ddec24]
+                          1     ??? (Foundation + 3551408) [0x187a580b0]
+                            1     ??? (libsystem_kernel.dylib + 23380) [0x242ee8b54]
+                              1     <Non-Frontmost App, e-core>
+                2     ??? (libdispatch.dylib + 72912) [0x1b5b95cd0]
+                  1     ??? (Metal + 120536) [0x1ac29d6d8]
+                    1     ??? (libdispatch.dylib + 27956) [0x1b5b8ad34]
+                      1     ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                        1     ??? (Metal + 78404) [0x1ac293244]
+                          1     ??? (Metal + 76040) [0x1ac292908]
+                            1     ??? (Metal + 96348) [0x1ac29785c]
+                              1     ??? (Metal + 116124) [0x1ac29c59c]
+                                1     ??? (Metal + 116392) [0x1ac29c6a8]
+                                  1     ??? (Metal + 110624) [0x1ac29b020]
+                                    1     ??? (libCoreFSCache.dylib + 3352) [0x2559bbd18]
+                                      1     ??? (libCoreFSCache.dylib + 4784) [0x2559bc2b0]
+                                        1     ??? (libsystem_c.dylib + 56272) [0x18ea97bd0]
+                                          1     ??? (libsystem_c.dylib + 34636) [0x18ea9274c]
+                                            1     ??? (libsystem_c.dylib + 56076) [0x18ea97b0c]
+                                              1     ??? (libsystem_kernel.dylib + 29624) [0x242eea3b8]
+                                                1     <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive, e-core>
+                  1     ??? (CFNetwork + 116476) [0x1939ff6fc]
+                    1     ??? (CFNetwork + 36380) [0x1939ebe1c]
+                      1     ??? (CFNetwork + 105116) [0x1939fca9c]
+                        1     ??? (CFNetwork + 58320) [0x1939f13d0]
+                          1     ??? (CFNetwork + 113424) [0x1939feb10]
+                            1     ??? (CFNetwork + 113088) [0x1939fe9c0]
+                              1     ??? (CFNetwork + 109748) [0x1939fdcb4]
+                                1     ??? (CFNetwork + 84888) [0x1939f7b98]
+                                  1     ??? (CFNetwork + 83940) [0x1939f77e4]
+                                    1     ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                                      1     ??? (libsqlite3.dylib + 205784) [0x1a504a3d8]
+                                        1     ??? (libsqlite3.dylib + 703920) [0x1a50c3db0]
+                                          1     ??? (libsqlite3.dylib + 95940) [0x1a502f6c4]
+                                            1     ??? (libsqlite3.dylib + 100172) [0x1a503074c]
+                                              1     ??? (libsqlite3.dylib + 102692) [0x1a5031124]
+                                                1     ??? (libsqlite3.dylib + 709728) [0x1a50c5460]
+                                                  1     ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                    1     <on behalf of SpringBoard [36] (originated by NutriVaultApp (Growcery) [6546]), Effective Thread QoS Background, Requested Thread QoS Background>
+  2904  ??? (libswift_Concurrency.dylib + 30852) [0x1887ff884]
+    2200  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 841340) [0x105c0567c]
+      2200  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 835804) [0x105c040dc]
+        2200  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 840804) [0x105c05464]
+          2200  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 755832) [0x105bf0878]
+            2200  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 756368) [0x105bf0a90]
+              2200  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 680140) [0x105bde0cc]
+                2200  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 7668592) [0x106288370]
+                  2200  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 7662536) [0x106286bc8]
+                    2200  ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 7626180) [0x10627ddc4]
+                      2200  ??? (Foundation + 2111224) [0x1878f86f8]
+                        2200  ??? (Foundation + 966352) [0x1877e0ed0]
+                          2200  ??? (Foundation + 966040) [0x1877e0d98]
+                            2200  ??? (Foundation + 2468592) [0x18794faf0]
+                              2200  ??? (Foundation + 7333128) [0x187df3508]
+                                1886  ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                                  1876  <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                  4     <Non-Frontmost App, Effective Thread QoS Default, Requested Thread QoS User Interactive>
+                                  2     <Non-Frontmost App, Effective Thread QoS Background, Requested Thread QoS User Interactive, e-core>
+                                  2     <Non-Frontmost App, Requested Thread QoS User Interactive, e-core>
+                                  1     <Non-Frontmost App, Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                  1     <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive, e-core>
+                                196   ??? (Foundation + 1996400) [0x1878dc670]
+                                  196   ??? (Foundation + 543888) [0x187779c90]
+                                    196   ??? (libsystem_kernel.dylib + 26516) [0x242ee9794]
+                                      194   <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                      1     <Non-Frontmost App, Effective Thread QoS Default, Requested Thread QoS User Interactive>
+                                      1     <Non-Frontmost App, Effective Thread QoS Background, Requested Thread QoS User Interactive, e-core>
+                                118   ??? (libsystem_kernel.dylib + 33388) [0x242eeb26c]
+                                  117   <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                  1     <Non-Frontmost App, Effective Thread QoS Default, Requested Thread QoS User Interactive>
+    309   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 823256) [0x1054bcfd8]
+      309   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 817720) [0x1054bba38]
+        309   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 822720) [0x1054bcdc0]
+          309   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 738708) [0x1054a8594]
+            309   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 739244) [0x1054a87ac]
+              309   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 663016) [0x105495de8]
+                309   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 7618196) [0x105b37e94]
+                  309   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 7612140) [0x105b366ec]
+                    309   ??? (<2C9C544B-0779-35CD-8ADA-E0168FBA529A> + 7575784) [0x105b2d8e8]
+                      309   ??? (Foundation + 2111224) [0x1878f86f8]
+                        309   ??? (Foundation + 966352) [0x1877e0ed0]
+                          309   ??? (Foundation + 966040) [0x1877e0d98]
+                            309   ??? (Foundation + 2468592) [0x18794faf0]
+                              309   ??? (Foundation + 7333128) [0x187df3508]
+                                252   ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                                  252   <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                31    ??? (Foundation + 1996400) [0x1878dc670]
+                                  31    ??? (Foundation + 543888) [0x187779c90]
+                                    31    ??? (libsystem_kernel.dylib + 26516) [0x242ee9794]
+                                      31    <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                26    ??? (libsystem_kernel.dylib + 33388) [0x242eeb26c]
+                                  26    <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+    170   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 840708) [0x104d75404]
+      170   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 835172) [0x104d73e64]
+        170   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 840172) [0x104d751ec]
+          170   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 755200) [0x104d60600]
+            170   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 755736) [0x104d60818]
+              170   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 679508) [0x104d4de54]
+                170   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 7645972) [0x1053f2b14]
+                  170   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 7639916) [0x1053f136c]
+                    170   ??? (<708C4989-C12C-36F9-A678-239A22C0CC47> + 7603560) [0x1053e8568]
+                      170   ??? (Foundation + 2111224) [0x1878f86f8]
+                        170   ??? (Foundation + 966352) [0x1877e0ed0]
+                          170   ??? (Foundation + 966040) [0x1877e0d98]
+                            170   ??? (Foundation + 2468592) [0x18794faf0]
+                              170   ??? (Foundation + 7333128) [0x187df3508]
+                                150   ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                                  150   <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                15    ??? (Foundation + 1996400) [0x1878dc670]
+                                  15    ??? (Foundation + 543888) [0x187779c90]
+                                    15    ??? (libsystem_kernel.dylib + 26516) [0x242ee9794]
+                                      15    <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                5     ??? (libsystem_kernel.dylib + 33388) [0x242eeb26c]
+                                  5     <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+    142   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 828160) [0x10369e300]
+      142   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 822624) [0x10369cd60]
+        142   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 827624) [0x10369e0e8]
+          142   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 743612) [0x1036898bc]
+            142   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 744148) [0x103689ad4]
+              142   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 667920) [0x103677110]
+                142   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 7951836) [0x103d695dc]
+                  142   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 7945780) [0x103d67e34]
+                    142   ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 7909424) [0x103d5f030]
+                      142   ??? (Foundation + 2111224) [0x1878f86f8]
+                        142   ??? (Foundation + 966352) [0x1877e0ed0]
+                          142   ??? (Foundation + 966040) [0x1877e0d98]
+                            142   ??? (Foundation + 2468592) [0x18794faf0]
+                              142   ??? (Foundation + 7333128) [0x187df3508]
+                                115   ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                                  114   <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                  1     <Non-Frontmost App, Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                14    ??? (Foundation + 1996400) [0x1878dc670]
+                                  14    ??? (Foundation + 543888) [0x187779c90]
+                                    14    ??? (libsystem_kernel.dylib + 26516) [0x242ee9794]
+                                      14    <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                13    ??? (libsystem_kernel.dylib + 33388) [0x242eeb26c]
+                                  13    <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+    75    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 825320) [0x1076597e8]
+      75    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 819784) [0x107658248]
+        75    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 824784) [0x1076595d0]
+          75    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 741048) [0x107644eb8]
+            75    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 741584) [0x1076450d0]
+              75    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 665648) [0x107632830]
+                75    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 7892548) [0x107d16e44]
+                  75    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 7886492) [0x107d1569c]
+                    75    ??? (<185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A> + 7850136) [0x107d0c898]
+                      75    ??? (Foundation + 2111224) [0x1878f86f8]
+                        75    ??? (Foundation + 966352) [0x1877e0ed0]
+                          75    ??? (Foundation + 966040) [0x1877e0d98]
+                            75    ??? (Foundation + 2468592) [0x18794faf0]
+                              75    ??? (Foundation + 7333128) [0x187df3508]
+                                65    ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                                  65    <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                6     ??? (Foundation + 1996400) [0x1878dc670]
+                                  6     ??? (Foundation + 543888) [0x187779c90]
+                                    6     ??? (libsystem_kernel.dylib + 26516) [0x242ee9794]
+                                      6     <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+                                4     ??? (libsystem_kernel.dylib + 33388) [0x242eeb26c]
+                                  4     <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+    7     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 828160) [0x103e36300]
+      7     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 822624) [0x103e34d60]
+        7     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 827624) [0x103e360e8]
+          7     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 743612) [0x103e218bc]
+            7     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 744148) [0x103e21ad4]
+              7     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 667920) [0x103e0f110]
+                7     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 7945332) [0x1044ffc74]
+                  7     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 7939276) [0x1044fe4cc]
+                    7     ??? (<9E9EBE99-7002-366C-AC6F-87909E3FC100> + 7902920) [0x1044f56c8]
+                      7     ??? (Foundation + 2111224) [0x1878f86f8]
+                        7     ??? (Foundation + 966352) [0x1877e0ed0]
+                          7     ??? (Foundation + 966040) [0x1877e0d98]
+                            7     ??? (Foundation + 2468592) [0x18794faf0]
+                              7     ??? (Foundation + 7333128) [0x187df3508]
+                                7     ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                                  7     <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+    1     ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 829448) [0x10369e808]
+      1     ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 822624) [0x10369cd60]
+        1     ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 637152) [0x10366f8e0]
+          1     ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 505964) [0x10364f86c]
+            1     ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 529108) [0x1036552d4]
+              1     ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 829884) [0x10369e9bc]
+                1     ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 506508) [0x10364fa8c]
+                  1     ??? (<5BFB92FA-231D-3786-91C3-79C752A6E72D> + 527860) [0x103654df4]
+                    1     ??? (Foundation + 3098592) [0x1879e97e0]
+                      1     ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                        1     <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+  1     ??? (dyld + 21796) [0x18709c524]
+    1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 73044) [0x105b49d54]
+      1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 30824) [0x105b3f868]
+        1     ??? (SwiftUI + 266556) [0x1914fc13c]
+          1     ??? (SwiftUI + 266876) [0x1914fc27c]
+            1     ??? (SwiftUI + 293604) [0x191502ae4]
+              1     ??? (UIKitCore + 764580) [0x18b420aa4]
+                1     ??? (GraphicsServices + 3876) [0x2338eaf24]
+                  1     ??? (CoreFoundation + 243684) [0x18724b7e4]
+                    1     ??? (CoreFoundation + 239568) [0x18724a7d0]
+                      1     ??? (CoreFoundation + 300228) [0x1872594c4]
+                        1     ??? (CoreFoundation + 366448) [0x187269770]
+                          1     ??? (SwiftUICore + 14832) [0x18f01b9f0]
+                            1     ??? (SwiftUICore + 15216) [0x18f01bb70]
+                              1     ??? (SwiftUICore + 721104) [0x18f0c80d0]
+                                1     ??? (SwiftUI + 196364) [0x1914eaf0c]
+                                  1     ??? (SwiftUICore + 192608) [0x18f047060]
+                                    1     ??? (SwiftUICore + 155184) [0x18f03de30]
+                                      1     ??? (SwiftUICore + 192836) [0x18f047144]
+                                        1     ??? (SwiftUI + 196412) [0x1914eaf3c]
+                                          1     ??? (SwiftUICore + 74528) [0x18f02a320]
+                                            1     ??? (AttributeGraph + 45668) [0x191480264]
+                                              1     ??? (AttributeGraph + 43352) [0x19147f958]
+                                                1     ??? (SwiftUICore + 81784) [0x18f02bf78]
+                                                  1     ??? (SwiftUICore + 83508) [0x18f02c634]
+                                                    1     ??? (SwiftUICore + 121460) [0x18f035a74]
+                                                      1     ??? (SwiftUICore + 254688) [0x18f0562e0]
+                                                        1     ??? (SwiftUICore + 297852) [0x18f060b7c]
+                                                          1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 4181424) [0x105f34db0]
+                                                            1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 3858916) [0x105ee61e4]
+                                                              1     ??? (SwiftUI + 2236588) [0x1916dd0ac]
+                                                                1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 3861300) [0x105ee6b34]
+                                                                  1     ??? (SwiftUICore + 2301556) [0x18f249e74]
+                                                                    1     ??? (SwiftUICore + 402588) [0x18f07a49c]
+                                                                      1     ??? (SwiftUICore + 961716) [0x18f102cb4]
+                                                                        1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 3870680) [0x105ee8fd8]
+                                                                          1     ??? (SwiftUI + 1268036) [0x1915f0944]
+                                                                            1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 3872544) [0x105ee9720]
+                                                                              1     ??? (SwiftUICore + 964424) [0x18f103748]
+                                                                                1     ??? (SwiftUICore + 402588) [0x18f07a49c]
+                                                                                  1     ??? (SwiftUICore + 961716) [0x18f102cb4]
+                                                                                    1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 3875268) [0x105eea1c4]
+                                                                                      1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 3881708) [0x105eebaec]
+                                                                                        1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 679224) [0x105bddd38]
+                                                                                          1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 7666784) [0x106287c60]
+                                                                                            1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 7662536) [0x106286bc8]
+                                                                                              1     ??? (<EF18C03F-57C4-3BE3-8F87-6DAB06BFF808> + 7626180) [0x10627ddc4]
+                                                                                                1     ??? (Foundation + 2111224) [0x1878f86f8]
+                                                                                                  1     ??? (Foundation + 966352) [0x1877e0ed0]
+                                                                                                    1     ??? (Foundation + 966040) [0x1877e0d98]
+                                                                                                      1     ??? (Foundation + 2468592) [0x18794faf0]
+                                                                                                        1     ??? (Foundation + 7333128) [0x187df3508]
+                                                                                                          1     ??? (Foundation + 1996400) [0x1878dc670]
+                                                                                                            1     ??? (Foundation + 543888) [0x187779c90]
+                                                                                                              1     ??? (libsystem_kernel.dylib + 26516) [0x242ee9794]
+                                                                                                                1     <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive>
+
+  Binary Images:
+           0x10097c000 -                ???  com.nkembi.nutrivault 1.0 (1) <0A6E1928-C6E0-3568-95EB-7A4A550EF67A>  /private/var/containers/Bundle/Application/DE854442-6967-479D-B0AD-4A44BCE15AE7/NutriVaultApp.app/NutriVaultApp
+           0x1035d4000 -                ???  ???                           <5BFB92FA-231D-3786-91C3-79C752A6E72D>
+           0x103d6c000 -                ???  ???                           <9E9EBE99-7002-366C-AC6F-87909E3FC100>
+           0x104ca8000 -                ???  ???                           <708C4989-C12C-36F9-A678-239A22C0CC47>
+           0x1053f4000 -                ???  ???                           <2C9C544B-0779-35CD-8ADA-E0168FBA529A>
+           0x105b38000 -                ???  ???                           <EF18C03F-57C4-3BE3-8F87-6DAB06BFF808>
+           0x107590000 -                ???  ???                           <185D46A8-FAEA-3A14-9AA9-B5147CCE3D6A>
+           0x187097000 -        0x18714e8d7  dyld                          <17F02809-E0E1-32F4-862E-FACDE862B8DE>  /usr/lib/dyld
+           0x18714f000 -        0x18715b1e7  libsystem_pthread.dylib       <32E28303-2AAD-3166-9D11-70E8BCF8E076>  /usr/lib/system/libsystem_pthread.dylib
+           0x187210000 -        0x1876f4327  CoreFoundation                <D79F14D9-F948-3CD8-B0D1-EB66B9B8CF94>  /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+           0x1876f5000 -        0x1887f7a23  Foundation                    <E623EEBD-082F-32AF-BFC7-F1DC83AE62DD>  /System/Library/Frameworks/Foundation.framework/Foundation
+           0x1887f8000 -        0x1888843df  libswift_Concurrency.dylib    <C1F170C0-B349-32B9-8F2D-079D53B04C77>  /usr/lib/swift/libswift_Concurrency.dylib
+           0x18b366000 -        0x18d3b4ed3  UIKitCore                     <58942358-B42D-383B-9032-48516012FB92>  /System/Library/PrivateFrameworks/UIKitCore.framework/UIKitCore
+           0x18ea8a000 -        0x18eb0b01b  libsystem_c.dylib             <6EFE8434-AD50-3DC1-959E-AC218E55EA11>  /usr/lib/system/libsystem_c.dylib
+           0x18f018000 -        0x19011679b  SwiftUICore                   <33FBB202-40B0-302A-AEA5-FA0832A18B0B>  /System/Library/Frameworks/SwiftUICore.framework/SwiftUICore
+           0x191475000 -        0x1914ba4ef  AttributeGraph                <44B92719-CDED-32EE-8843-4AB5F016C733>  /System/Library/PrivateFrameworks/AttributeGraph.framework/AttributeGraph
+           0x1914bb000 -        0x1927be7b3  SwiftUI                       <E32A9A5B-F8CE-3AA8-8AD9-53E25D621B08>  /System/Library/Frameworks/SwiftUI.framework/SwiftUI
+           0x1939e3000 -        0x193d59b17  CFNetwork                     <03F6F4FF-3FAF-3D89-B3FC-9A98C15993C6>  /System/Library/Frameworks/CFNetwork.framework/CFNetwork
+           0x1a5018000 -        0x1a51d074f  libsqlite3.dylib              <6145839A-8C5B-3186-8AF6-CEE4C1AFDBC8>  /usr/lib/libsqlite3.dylib
+           0x1ac280000 -        0x1ac4f1fdf  Metal                         <03B3F748-CFED-3B08-8B42-9C17C3457891>  /System/Library/Frameworks/Metal.framework/Metal
+           0x1b5b84000 -        0x1b5bcadd7  libdispatch.dylib             <84B7E81D-B830-384F-A103-96323C6F5189>  /usr/lib/system/libdispatch.dylib
+           0x2338ea000 -        0x2338f1ea3  GraphicsServices              <94D8382E-73C7-3BC4-8357-A25A79687D11>  /System/Library/PrivateFrameworks/GraphicsServices.framework/GraphicsServices
+           0x242ee3000 -        0x242f202db  libsystem_kernel.dylib        <26FFA906-5ACA-39BF-8F7C-94FE9AB8C657>  /usr/lib/system/libsystem_kernel.dylib
+           0x2559bb000 -        0x2559c253b  libCoreFSCache.dylib          <7A6F5DDE-3EE9-31F0-AF70-1860D68EA3CC>  /System/Library/Frameworks/OpenGLES.framework/libCoreFSCache.dylib

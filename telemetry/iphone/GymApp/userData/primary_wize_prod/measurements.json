@@ -1,0 +1,58 @@
+[
+  {
+    "date": 812315860.295955,
+    "id": "CDDA124C-2C35-4848-AD0F-D4FF85404CE3",
+    "note": "Sync aus GrowSuite",
+    "type": "Wasserzufuhr",
+    "value": 1299
+  },
+  {
+    "date": 812114751.839482,
+    "id": "066D2CE1-AC7A-4338-BBCD-09C60588B118",
+    "note": "Sync aus GrowSuite",
+    "type": "Wasserzufuhr",
+    "value": 866
+  },
+  {
+    "date": 812066265.134256,
+    "id": "B069D695-A68F-44F8-B81E-A84EB7F4BC74",
+    "note": "Sync aus GrowSuite",
+    "type": "Wasserzufuhr",
+    "value": 1299
+  },
+  {
+    "date": 811968563.771171,
+    "id": "7A69CDF3-CF20-450C-B358-32B341CF7FEF",
+    "note": "Sync aus GrowSuite",
+    "type": "Wasserzufuhr",
+    "value": 866
+  },
+  {
+    "date": 811594311.210827,
+    "id": "68A4F369-2370-408B-A466-C9B708332213",
+    "note": "Reset 0 ml (Grow)",
+    "type": "Wasserzufuhr",
+    "value": 2165
+  },
+  {
+    "date": 811501943.201396,
+    "id": "4D377FC6-D134-4A78-81D3-ADF6D44653B4",
+    "note": "Sync aus GrowSuite",
+    "type": "Wasserzufuhr",
+    "value": 1299
+  },
+  {
+    "date": 811375682.764948,
+    "id": "E4412DDD-132A-4239-A18A-BDBC2CBD7B57",
+    "note": "Sync aus Growcery",
+    "type": "Wasserzufuhr",
+    "value": 689
+  },
+  {
+    "date": 811364869.5446,
+    "id": "7FC0793E-ADC1-4960-86AA-D49F855A9AA7",
+    "note": "Sync aus Growcery",
+    "type": "Wasserzufuhr",
+    "value": 689
+  }
+]

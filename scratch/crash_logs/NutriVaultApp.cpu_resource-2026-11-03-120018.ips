@@ -1,0 +1,522 @@
+{"app_name":"NutriVaultApp","timestamp":"2026-11-03 12:00:18.00 +0100","app_version":"1.0","slice_uuid":"0A6E1928-C6E0-3568-95EB-7A4A550EF67A","build_version":"1","bundleID":"com.nkembi.nutrivault","duration_ms":"107644","share_with_app_devs":1,"is_first_party":0,"bug_type":"202","os_version":"iPhone OS 27.2 (24B115)","roots_installed":0,"name":"NutriVaultApp","incident_id":"6EF9F15F-7C0B-4EE0-82B6-26813B9A5F8C"}
+Date/Time:        2026-11-03 11:58:28.789 +0100
+End time:         2026-11-03 12:00:16.433 +0100
+OS Version:       iPhone OS 27.2 (Build 24B115)
+Architecture:     arm64e
+Report Version:   73
+Incident Identifier: 6EF9F15F-7C0B-4EE0-82B6-26813B9A5F8C
+Share With Devs:  Yes
+
+Data Source:      Microstackshots
+Shared Cache:     377B53F3-0E5D-399A-A031-41CAF2ECA8D6 slid base address 0x188124000
+
+Command:          NutriVaultApp
+Path:             /private/var/containers/Bundle/Application/FD783AF6-A07C-4F8B-8DAD-176D1A50FDD4/NutriVaultApp.app/NutriVaultApp
+Identifier:       com.nkembi.nutrivault
+Version:          1.0 (1)
+Is First Party:   No
+Beta Identifier:  36B3C9B6-66D2-457A-9A1B-E6EC429635C0
+Resource Coalition: "com.nkembi.nutrivault"(932)
+Architecture:     arm64
+Parent:           UNKNOWN [1]
+PID:              716
+
+Event:            cpu usage
+Action taken:     none
+CPU:              90 seconds cpu time over 108 seconds (84% cpu average), exceeding limit of 50% cpu over 180 seconds
+CPU limit:        90s
+Limit duration:   180s
+CPU used:         90s
+CPU duration:     108s
+Duration:         107.64s
+Duration Sampled: 99.92s (event starts 3.80s before samples, event ends 3.93s after samples)
+Steps:            31 (10 gigacycles/step, 30 samples lost)
+
+Hardware model:   iPad16,1
+Active cpus:      6
+Memory size:      7.72 GB
+HW page size:     16384
+VM page size:     16384
+Shared cache residency: 11.88% (834.52 MB / 7023.48 MB)
+
+Time Since Boot:  19498s
+Time Awake Since Boot: 15580s
+Time Since Wake:  667s
+
+Total CPU Time:   86.245s
+Advisory levels:  Battery -> 1, User -> 3, ThermalPressure -> 0, Combined -> 1
+Free disk space:  21.52 GB/118.84 GB, low space threshold 150 MB
+Vnodes Available: 74.50% (26821/36000, 18000 allocated, 18000 soft limit)
+Model:            com.apple.fm.language.instruct_3b.tokenizer
+  Loaded:         ??? - N/A, requested by UNKNOWN
+Model:            com.apple.fm.language.instruct_3b.urgency_classification
+  Loaded:         91s - N/A, requested by token-generation-inference
+Model:            com.apple.fm.language.instruct_3b.base
+  Loaded:         91s - N/A, requested by token-generation-inference
+Model:            com.apple.fm.language.instruct_3b.urgency_classification?language=en
+  Executing:      91s - 92s, requested by [247] use case classification.classifyMailMessage
+  Executing:      91s - 92s, requested by [247] use case classification.classifyUserNotification
+  Executing:      92s - 92s, requested by [247] use case classification.classifyMailMessage
+  Executing:      92s - 92s, requested by [247] use case classification.classifyUserNotification
+  Executing:      92s - 92s, requested by [247] use case classification.classifyUserNotification
+  Executing:      92s - 92s, requested by [247] use case classification.classifyUserNotification
+  Executing:      92s - 92s, requested by [247] use case classification.classifyUserNotification
+  Executing:      92s - 93s, requested by [247] use case classification.classifyUserNotification
+
+Preferred User Language: de-DE, en-DE
+Country Code:     DE
+Keyboards:        de_DE QWERTZ-German;ml=2, de_DE QWERTZ-German;ml=1
+OS Cryptex File Extents: 1
+
+Heaviest stack for the target process:
+  25  ??? (dyld + 21796) [0x1885ac524]
+  25  ??? (NutriVaultApp.debug.dylib + 79836) [0x1075637dc]
+  25  ??? (NutriVaultApp.debug.dylib + 33624) [0x107558358]
+  25  ??? (SwiftUI + 266556) [0x192a0c13c]
+  25  ??? (SwiftUI + 266876) [0x192a0c27c]
+  25  ??? (SwiftUI + 293604) [0x192a12ae4]
+  25  ??? (UIKitCore + 764580) [0x18c930aa4]
+  25  ??? (GraphicsServices + 3876) [0x234dfaf24]
+  25  ??? (CoreFoundation + 243684) [0x18875b7e4]
+  13  ??? (CoreFoundation + 239568) [0x18875a7d0]
+  13  ??? (CoreFoundation + 300228) [0x1887694c4]
+  13  ??? (CoreFoundation + 366448) [0x188779770]
+  13  ??? (SwiftUICore + 14832) [0x19052b9f0]
+  12  ??? (SwiftUICore + 15216) [0x19052bb70]
+  12  ??? (SwiftUICore + 721104) [0x1905d80d0]
+  12  ??? (SwiftUI + 196364) [0x1929faf0c]
+  12  ??? (SwiftUICore + 192608) [0x190557060]
+  12  ??? (SwiftUICore + 155184) [0x19054de30]
+  12  ??? (SwiftUICore + 192836) [0x190557144]
+  12  ??? (SwiftUI + 196412) [0x1929faf3c]
+  12  ??? (SwiftUICore + 74528) [0x19053a320]
+  12  ??? (AttributeGraph + 45668) [0x192990264]
+  12  ??? (AttributeGraph + 43352) [0x19298f958]
+  7   ??? (SwiftUICore + 81784) [0x19053bf78]
+  7   ??? (SwiftUICore + 83508) [0x19053c634]
+  6   ??? (SwiftUICore + 121460) [0x190545a74]
+  6   ??? (SwiftUICore + 254688) [0x1905662e0]
+  6   ??? (SwiftUICore + 297852) [0x190570b7c]
+  6   ??? (NutriVaultApp.debug.dylib + 4590216) [0x1079b0a88]
+  4   ??? (NutriVaultApp.debug.dylib + 4567704) [0x1079ab298]
+  4   ??? (SwiftUICore + 964424) [0x190613748]
+  4   ??? (SwiftUICore + 402588) [0x19058a49c]
+  4   ??? (SwiftUICore + 961716) [0x190612cb4]
+  4   ??? (NutriVaultApp.debug.dylib + 4571208) [0x1079ac048]
+  3   ??? (NutriVaultApp.debug.dylib + 844868) [0x10761e444]
+  3   ??? (NutriVaultApp.debug.dylib + 165796) [0x1075787a4]
+  3   ??? (NutriVaultApp.debug.dylib + 3616148) [0x1078c2d94]
+  3   ??? (libswiftCore.dylib + 749008) [0x189e4bdd0]
+  3   ??? (NutriVaultApp.debug.dylib + 3630136) [0x1078c6438]
+  3   ??? (NutriVaultApp.debug.dylib + 3630036) [0x1078c63d4]
+  2   ??? (libswiftCore.dylib + 243580) [0x189dd077c]
+  2   ??? (NutriVaultApp.debug.dylib + 3646248) [0x1078ca328]
+  2   ??? (NutriVaultApp.debug.dylib + 3630672) [0x1078c6650]
+  2   ??? (Foundation + 1266332) [0x188d3a29c]
+  2   ??? (Foundation + 1264040) [0x188d399a8]
+  2   ??? (Foundation + 975108) [0x188cf3104]
+  1   ??? (libswiftCore.dylib + 36652) [0x189d9df2c]
+
+
+Powerstats for:   NutriVaultApp (Growcery) [716]
+UUID:             0A6E1928-C6E0-3568-95EB-7A4A550EF67A
+Path:             /private/var/containers/Bundle/Application/FD783AF6-A07C-4F8B-8DAD-176D1A50FDD4/NutriVaultApp.app/NutriVaultApp
+Identifier:       com.nkembi.nutrivault
+Version:          1.0 (1)
+Is First Party:   No
+Beta Identifier:  36B3C9B6-66D2-457A-9A1B-E6EC429635C0
+Resource Coalition: 31 samples "com.nkembi.nutrivault"(932)
+Architecture:     arm64
+Parent:           UNKNOWN [1]
+UID:              501
+Footprint:        48.28 MB -> 41.50 MB (-6944 KB)
+Pageins:          33 pages
+Start time:       2026-11-03 11:58:32.585 +0100
+End time:         2026-11-03 12:00:12.505 +0100
+Num samples:      31 (100%)
+Energy:           80.02 mWh
+Num threads:      3
+Primary state:    27 samples Frontmost App, Non-Suppressed, User mode, Effective Thread QoS User Interactive, Requested Thread QoS User Interactive, Override Thread QoS Unspecified, p-core
+User Activity:    0 samples Idle, 31 samples Active
+Power Source:     31 samples on Battery, 0 samples on AC
+  25  ??? (dyld + 21796) [0x1885ac524]
+    25  ??? (NutriVaultApp.debug.dylib + 79836) [0x1075637dc]
+      25  ??? (NutriVaultApp.debug.dylib + 33624) [0x107558358]
+        25  ??? (SwiftUI + 266556) [0x192a0c13c]
+          25  ??? (SwiftUI + 266876) [0x192a0c27c]
+            25  ??? (SwiftUI + 293604) [0x192a12ae4]
+              25  ??? (UIKitCore + 764580) [0x18c930aa4]
+                25  ??? (GraphicsServices + 3876) [0x234dfaf24]
+                  25  ??? (CoreFoundation + 243684) [0x18875b7e4]
+                    13  ??? (CoreFoundation + 239568) [0x18875a7d0]
+                      13  ??? (CoreFoundation + 300228) [0x1887694c4]
+                        13  ??? (CoreFoundation + 366448) [0x188779770]
+                          13  ??? (SwiftUICore + 14832) [0x19052b9f0]
+                            12  ??? (SwiftUICore + 15216) [0x19052bb70]
+                              12  ??? (SwiftUICore + 721104) [0x1905d80d0]
+                                12  ??? (SwiftUI + 196364) [0x1929faf0c]
+                                  12  ??? (SwiftUICore + 192608) [0x190557060]
+                                    12  ??? (SwiftUICore + 155184) [0x19054de30]
+                                      12  ??? (SwiftUICore + 192836) [0x190557144]
+                                        12  ??? (SwiftUI + 196412) [0x1929faf3c]
+                                          12  ??? (SwiftUICore + 74528) [0x19053a320]
+                                            12  ??? (AttributeGraph + 45668) [0x192990264]
+                                              12  ??? (AttributeGraph + 43352) [0x19298f958]
+                                                7   ??? (SwiftUICore + 81784) [0x19053bf78]
+                                                  7   ??? (SwiftUICore + 83508) [0x19053c634]
+                                                    6   ??? (SwiftUICore + 121460) [0x190545a74]
+                                                      6   ??? (SwiftUICore + 254688) [0x1905662e0]
+                                                        6   ??? (SwiftUICore + 297852) [0x190570b7c]
+                                                          6   ??? (NutriVaultApp.debug.dylib + 4590216) [0x1079b0a88]
+                                                            4   ??? (NutriVaultApp.debug.dylib + 4567704) [0x1079ab298]
+                                                              4   ??? (SwiftUICore + 964424) [0x190613748]
+                                                                4   ??? (SwiftUICore + 402588) [0x19058a49c]
+                                                                  4   ??? (SwiftUICore + 961716) [0x190612cb4]
+                                                                    4   ??? (NutriVaultApp.debug.dylib + 4571208) [0x1079ac048]
+                                                                      3   ??? (NutriVaultApp.debug.dylib + 844868) [0x10761e444]
+                                                                        3   ??? (NutriVaultApp.debug.dylib + 165796) [0x1075787a4]
+                                                                          3   ??? (NutriVaultApp.debug.dylib + 3616148) [0x1078c2d94]
+                                                                            3   ??? (libswiftCore.dylib + 749008) [0x189e4bdd0]
+                                                                              3   ??? (NutriVaultApp.debug.dylib + 3630136) [0x1078c6438]
+                                                                                3   ??? (NutriVaultApp.debug.dylib + 3630036) [0x1078c63d4]
+                                                                                  2   ??? (libswiftCore.dylib + 243580) [0x189dd077c]
+                                                                                    2   ??? (NutriVaultApp.debug.dylib + 3646248) [0x1078ca328]
+                                                                                      2   ??? (NutriVaultApp.debug.dylib + 3630672) [0x1078c6650]
+                                                                                        2   ??? (Foundation + 1266332) [0x188d3a29c]
+                                                                                          2   ??? (Foundation + 1264040) [0x188d399a8]
+                                                                                            2   ??? (Foundation + 975108) [0x188cf3104]
+                                                                                              1   ??? (libswiftCore.dylib + 36652) [0x189d9df2c]
+                                                                                              1   ??? (Foundation + 974628) [0x188cf2f24]
+                                                                                                1   ??? (libswiftCore.dylib + 235648) [0x189dce880]
+                                                                                  1   ??? (libswiftCore.dylib + 243480) [0x189dd0718]
+                                                                                    1   ??? (libsystem_malloc.dylib + 241128) [0x1886a6de8]
+                                                                      1   ??? (NutriVaultApp.debug.dylib + 844824) [0x10761e418]
+                                                                        1   ??? (NutriVaultApp.debug.dylib + 826068) [0x107619ad4]
+                                                                          1   ??? (NutriVaultApp.debug.dylib + 158192) [0x1075769f0]
+                                                                            1   ??? (Foundation + 1266332) [0x188d3a29c]
+                                                                              1   ??? (Foundation + 1264040) [0x188d399a8]
+                                                                                1   ??? (Foundation + 975108) [0x188cf3104]
+                                                                                  1   ??? (Foundation + 974644) [0x188cf2f34]
+                                                            2   ??? (NutriVaultApp.debug.dylib + 4567528) [0x1079ab1e8]
+                                                              2   ??? (NutriVaultApp.debug.dylib + 4569528) [0x1079ab9b8]
+                                                                2   ??? (libswiftCore.dylib + 749008) [0x189e4bdd0]
+                                                                  2   ??? (NutriVaultApp.debug.dylib + 4674696) [0x1079c5488]
+                                                                    1   ??? (libswiftCore.dylib + 36620) [0x189d9df0c]
+                                                                    1   ??? (NutriVaultApp.debug.dylib + 4570144) [0x1079abc20]
+                                                                      1   ??? (libswiftCore.dylib + 217708) [0x189dca26c]
+                                                                        1   ??? (libsystem_platform.dylib + 4452) [0x1944c2164]
+                                                    1   ??? (SwiftUICore + 120984) [0x190545898]
+                                                      1   ??? (libswiftCore.dylib + 11332) [0x189d97c44]
+                                                3   ??? (SwiftUICore + 1159140) [0x190642fe4]
+                                                  2   ??? (SwiftUICore + 1142552) [0x19063ef18]
+                                                    1   ??? (SwiftUICore + 418340) [0x19058e224]
+                                                      1   ??? (SwiftUICore + 418144) [0x19058e160]
+                                                        1   ??? (SwiftUICore + 1080268) [0x19062fbcc]
+                                                          1   ??? (SwiftUICore + 1080532) [0x19062fcd4]
+                                                            1   ??? (SwiftUICore + 2378480) [0x19076caf0]
+                                                              1   ??? (SwiftUICore + 1250244) [0x1906593c4]
+                                                                1   ??? (SwiftUICore + 14357484) [0x1912d93ec]
+                                                    1   ??? (SwiftUICore + 418324) [0x19058e214]
+                                                      1   ??? (SwiftUICore + 418144) [0x19058e160]
+                                                        1   ??? (SwiftUICore + 1020472) [0x190621238]
+                                                          1   ??? (SwiftUICore + 129580) [0x190547a2c]
+                                                            1   ??? (SwiftUICore + 1080716) [0x19062fd8c]
+                                                              1   ??? (Foundation + 1672356) [0x188d9d4a4]
+                                                                1   ??? (Foundation + 300832) [0x188c4e720]
+                                                                  1   ??? (libobjc.A.dylib + 7652) [0x188529de4]
+                                                  1   ??? (SwiftUICore + 1142180) [0x19063eda4]
+                                                2   ??? (SwiftUI + 296720) [0x192a13710]
+                                                  1   ??? (SwiftUI + 1329800) [0x192b0fa88]
+                                                    1   ??? (AttributeGraph + 41852) [0x19298f37c]
+                                                      1   ??? (AttributeGraph + 17948) [0x19298961c]
+                                                        1   ??? (AttributeGraph + 21896) [0x19298a588]
+                                                          1   ??? (AttributeGraph + 72684) [0x192996bec]
+                                                            1   ??? (AttributeGraph + 19056) [0x192989a70]
+                                                              1   ??? (AttributeGraph + 27376) [0x19298baf0]
+                                                  1   ??? (SwiftUI + 654556) [0x192a6acdc]
+                                                    1   ??? (SwiftUICore + 914796) [0x19060756c]
+                                                      1   ??? (Combine + 300192) [0x197e734a0]
+                                                        1   ??? (Combine + 307848) [0x197e75288]
+                                                          1   ??? (Combine + 309104) [0x197e75770]
+                                                            1   ??? (Combine + 183240) [0x197e56bc8]
+                                                              1   ??? (libswiftCore.dylib + 251252) [0x189dd2574]
+                                                                1   ??? (libswiftCore.dylib + 44156) [0x189d9fc7c]
+                                                                  1   ??? (libswiftCore.dylib + 30828) [0x189d9c86c]
+                            1   ??? (SwiftUICore + 14960) [0x19052ba70]
+                              1   ??? (SwiftUICore + 44940) [0x190532f8c]
+                                1   ??? (SwiftUICore + 44172) [0x190532c8c]
+                                  1   ??? (SwiftUICore + 240724) [0x190562c54]
+                                    1   ??? (SwiftUICore + 240148) [0x190562a14]
+                                      1   ??? (SwiftUI + 12240028) [0x19357749c]
+                                        1   ??? (SwiftUI + 12217120) [0x193571b20]
+                                          1   ??? (UIKitCore + 3856448) [0x18cc23840]
+                                            1   ??? (UIKitCore + 2450536) [0x18cacc468]
+                                              1   ??? (UIKitCore + 3856892) [0x18cc239fc]
+                                                1   ??? (UIKitCore + 149160) [0x18c89a6a8]
+                                                  1   ??? (UIKitCore + 16134284) [0x18d7d908c]
+                                                    1   ??? (UIKitCore + 2450068) [0x18cacc294]
+                                                      1   ??? (UIKitCore + 23559620) [0x18deeddc4]
+                                                        1   ??? (UIKitCore + 23538316) [0x18dee8a8c]
+                                                          1   ??? (UIKitCore + 23539548) [0x18dee8f5c]
+                                                            1   ??? (UIKitCore + 23564060) [0x18deeef1c]
+                                                              1   ??? (libobjc.A.dylib + 4928) [0x188529340]
+                    10  ??? (CoreFoundation + 238452) [0x18875a374]
+                      10  ??? (CoreFoundation + 242264) [0x18875b258]
+                        10  ??? (CoreFoundation + 367912) [0x188779d28]
+                          10  ??? (CoreFoundation + 368052) [0x188779db4]
+                            10  ??? (UpdateCycle + 3060) [0x2c2540bf4]
+                              10  ??? (UIKitCore + 434956) [0x18c8e030c]
+                                10  ??? (UIKitCore + 435564) [0x18c8e056c]
+                                  10  ??? (UIKitCore + 520328) [0x18c8f5088]
+                                    10  ??? (UIKitCore + 517964) [0x18c8f474c]
+                                      10  ??? (SwiftUICore + 1462732) [0x19068d1cc]
+                                        9   ??? (SwiftUICore + 93028) [0x19053eb64]
+                                          9   ??? (UIKitCore + 198480) [0x18c8a6750]
+                                            9   ??? (UIKitCore + 1963060) [0x18ca55434]
+                                              9   ??? (UIKitCore + 202020) [0x18c8a7524]
+                                                9   ??? (SwiftUI + 196364) [0x1929faf0c]
+                                                  9   ??? (SwiftUICore + 192608) [0x190557060]
+                                                    9   ??? (SwiftUICore + 155184) [0x19054de30]
+                                                      9   ??? (SwiftUICore + 192836) [0x190557144]
+                                                        9   ??? (SwiftUI + 196412) [0x1929faf3c]
+                                                          9   ??? (SwiftUICore + 74528) [0x19053a320]
+                                                            9   ??? (AttributeGraph + 45668) [0x192990264]
+                                                              9   ??? (AttributeGraph + 43352) [0x19298f958]
+                                                                9   ??? (SwiftUICore + 81784) [0x19053bf78]
+                                                                  5   ??? (SwiftUICore + 83508) [0x19053c634]
+                                                                    4   ??? (SwiftUICore + 121460) [0x190545a74]
+                                                                      3   ??? (SwiftUICore + 254688) [0x1905662e0]
+                                                                        3   ??? (SwiftUICore + 297852) [0x190570b7c]
+                                                                          3   ??? (NutriVaultApp.debug.dylib + 4590216) [0x1079b0a88]
+                                                                            2   ??? (NutriVaultApp.debug.dylib + 4567528) [0x1079ab1e8]
+                                                                              2   ??? (NutriVaultApp.debug.dylib + 4569528) [0x1079ab9b8]
+                                                                                2   ??? (libswiftCore.dylib + 749008) [0x189e4bdd0]
+                                                                                  2   ??? (NutriVaultApp.debug.dylib + 4674696) [0x1079c5488]
+                                                                                    1   ??? (libswiftCore.dylib + 30472) [0x189d9c708]
+                                                                                    1   ??? (NutriVaultApp.debug.dylib + 4570144) [0x1079abc20]
+                                                                                      1   ??? (libswiftCore.dylib + 217596) [0x189dca1fc]
+                                                                            1   ??? (NutriVaultApp.debug.dylib + 4567704) [0x1079ab298]
+                                                                              1   ??? (SwiftUICore + 964424) [0x190613748]
+                                                                                1   ??? (SwiftUICore + 402588) [0x19058a49c]
+                                                                                  1   ??? (SwiftUICore + 961716) [0x190612cb4]
+                                                                                    1   ??? (NutriVaultApp.debug.dylib + 4571208) [0x1079ac048]
+                                                                                      1   ??? (NutriVaultApp.debug.dylib + 844868) [0x10761e444]
+                                                                                        1   ??? (NutriVaultApp.debug.dylib + 165796) [0x1075787a4]
+                                                                                          1   ??? (NutriVaultApp.debug.dylib + 3616148) [0x1078c2d94]
+                                                                                            1   ??? (libswiftCore.dylib + 749008) [0x189e4bdd0]
+                                                                                              1   ??? (NutriVaultApp.debug.dylib + 3630136) [0x1078c6438]
+                                                                                                1   ??? (NutriVaultApp.debug.dylib + 3630036) [0x1078c63d4]
+                                                                                                  1   ??? (libswiftCore.dylib + 243580) [0x189dd077c]
+                                                                                                    1   ??? (NutriVaultApp.debug.dylib + 3646248) [0x1078ca328]
+                                                                                                      1   ??? (NutriVaultApp.debug.dylib + 3630672) [0x1078c6650]
+                                                                                                        1   ??? (Foundation + 1266332) [0x188d3a29c]
+                                                                                                          1   ??? (libswiftCore.dylib + 30420) [0x189d9c6d4]
+                                                                      1   ??? (SwiftUICore + 254652) [0x1905662bc]
+                                                                        1   ??? [0x1981e8ef0]
+                                                                    1   ??? (SwiftUICore + 120888) [0x190545838]
+                                                                      1   ??? (SwiftUICore + 124148) [0x1905464f4]
+                                                                        1   ??? (SwiftUICore + 123364) [0x1905461e4]
+                                                                  3   ??? (SwiftUICore + 588028) [0x1905b78fc]
+                                                                    3   ??? (SwiftUICore + 589856) [0x1905b8020]
+                                                                      2   ??? (NutriVaultApp.debug.dylib + 3452900) [0x10789afe4]
+                                                                        1   ??? (NutriVaultApp.debug.dylib + 3454396) [0x10789b5bc]
+                                                                          1   ??? (SwiftUI + 121336) [0x1929e89f8]
+                                                                            1   ??? (NutriVaultApp.debug.dylib + 3462516) [0x10789d574]
+                                                                              1   ??? (SwiftUICore + 964424) [0x190613748]
+                                                                                1   ??? (SwiftUICore + 402588) [0x19058a49c]
+                                                                                  1   ??? (SwiftUICore + 961716) [0x190612cb4]
+                                                                                    1   ??? (NutriVaultApp.debug.dylib + 3463752) [0x10789da48]
+                                                                                      1   ??? (NutriVaultApp.debug.dylib + 3465552) [0x10789e150]
+                                                                                        1   ??? (Foundation + 1676560) [0x188d9e510]
+                                                                                          1   ??? (libswiftCore.dylib + 46712) [0x189da0678]
+                                                                                            1   ??? (Foundation + 44672) [0x188c0fe80]
+                                                                                              1   ??? (Foundation + 54128) [0x188c12370]
+                                                                                                1   ??? (Foundation + 44608) [0x188c0fe40]
+                                                                                                  1   ??? (Foundation + 5331704) [0x18911aaf8]
+                                                                                                    1   ??? (Foundation + 5329584) [0x18911a2b0]
+                                                                                                      1   ??? [0x19025f440]
+                                                                        1   ??? (NutriVaultApp.debug.dylib + 3453720) [0x10789b318]
+                                                                          1   ??? (NutriVaultApp.debug.dylib + 787088) [0x107610290]
+                                                                            1   ??? (NutriVaultApp.debug.dylib + 785308) [0x10760fb9c]
+                                                                              1   ??? (NutriVaultApp.debug.dylib + 660476) [0x1075f13fc]
+                                                                                1   ??? (Foundation + 257120) [0x188c43c60]
+                                                                                  1   ??? (CoreFoundation + 573916) [0x1887ac1dc]
+                                                                                    1   ??? (libicucore.A.dylib + 46048) [0x1976a43e0]
+                                                                                      1   ??? (libicucore.A.dylib + 46644) [0x1976a4634]
+                                                                                        1   ??? (libicucore.A.dylib + 56796) [0x1976a6ddc]
+                                                                                          1   ??? (libicucore.A.dylib + 57404) [0x1976a703c]
+                                                                                            1   ??? (libicucore.A.dylib + 51920) [0x1976a5ad0]
+                                                                                              1   ??? (libicucore.A.dylib + 55724) [0x1976a69ac]
+                                                                                                1   ??? (libicucore.A.dylib + 63660) [0x1976a88ac]
+                                                                                                  1   ??? (libicucore.A.dylib + 63492) [0x1976a8804]
+                                                                                                    1   ??? (libicucore.A.dylib + 62004) [0x1976a8234]
+                                                                                                      1   ??? (libicucore.A.dylib + 63740) [0x1976a88fc]
+                                                                      1   ??? (NutriVaultApp.debug.dylib + 4288764) [0x1079670fc]
+                                                                        1   ??? (SwiftUI + 121336) [0x1929e89f8]
+                                                                          1   ??? (NutriVaultApp.debug.dylib + 4290516) [0x1079677d4]
+                                                                            1   ??? (NutriVaultApp.debug.dylib + 12500352) [0x10813bd80]
+                                                                  1   ??? (SwiftUICore + 1496112) [0x190695430]
+                                                                    1   ??? (SwiftUICore + 84468) [0x19053c9f4]
+                                                                      1   ??? (SwiftUICore + 84468) [0x19053c9f4]
+                                                                        1   ??? (SwiftUICore + 84468) [0x19053c9f4]
+                                                                          1   ??? (libswiftCore.dylib + 72420) [0x189da6ae4]
+                                                                            1   ??? (libswiftCore.dylib + 72420) [0x189da6ae4]
+                                                                              1   ??? (SwiftUICore + 84468) [0x19053c9f4]
+                                        1   ??? (SwiftUICore + 93052) [0x19053eb7c]
+                                          1   ??? (SwiftUICore + 44940) [0x190532f8c]
+                                            1   ??? (SwiftUICore + 44172) [0x190532c8c]
+                                              1   ??? (SwiftUICore + 240724) [0x190562c54]
+                                                1   ??? (SwiftUICore + 240148) [0x190562a14]
+                                                  1   ??? (SwiftUI + 12240028) [0x19357749c]
+                                                    1   ??? (SwiftUI + 12217120) [0x193571b20]
+                                                      1   ??? (UIKitCore + 3856448) [0x18cc23840]
+                                                        1   ??? (UIKitCore + 2450536) [0x18cacc468]
+                                                          1   ??? (UIKitCore + 3856892) [0x18cc239fc]
+                                                            1   ??? (UIKitCore + 149160) [0x18c89a6a8]
+                                                              1   ??? (UIKitCore + 16134196) [0x18d7d9034]
+                                                                1   ??? (UIKitCore + 3857436) [0x18cc23c1c]
+                                                                  1   ??? (UIKitCore + 2454240) [0x18cacd2e0]
+                                                                    1   ??? (UIKitCore + 11825504) [0x18d3bd160]
+                                                                      1   ??? (CoreFoundation + 358728) [0x188777948]
+                    2   ??? (CoreFoundation + 239140) [0x18875a624]
+                      2   ??? (CoreFoundation + 303824) [0x18876a2d0]
+                        2   ??? (CoreFoundation + 303296) [0x18876a0c0]
+                          2   ??? (CoreFoundation + 157628) [0x1887467bc]
+                            2   ??? (UpdateCycle + 3060) [0x2c2540bf4]
+                              2   ??? (UIKitCore + 434956) [0x18c8e030c]
+                                2   ??? (UIKitCore + 435564) [0x18c8e056c]
+                                  2   ??? (UIKitCore + 407640) [0x18c8d9858]
+                                    2   ??? (UIKitCore + 410084) [0x18c8da1e4]
+                                      2   ??? (QuartzCore + 114956) [0x18c41410c]
+                                        2   ??? (QuartzCore + 117416) [0x18c414aa8]
+                                          2   ??? (QuartzCore + 115628) [0x18c4143ac]
+                                            2   ??? (QuartzCore + 118412) [0x18c414e8c]
+                                              2   ??? (QuartzCore + 135668) [0x18c4191f4]
+                                                2   ??? (QuartzCore + 59460) [0x18c406844]
+                                                  2   ??? (QuartzCore + 60556) [0x18c406c8c]
+                                                    2   ??? (QuartzCore + 63088) [0x18c407670]
+                                                      2   ??? (UIKitCore + 38712) [0x18c87f738]
+                                                        2   ??? (UIKitCore + 44584) [0x18c880e28]
+                                                          2   ??? (UIKitCore + 46580) [0x18c8815f4]
+                                                            2   ??? (SwiftUI + 118072) [0x1929e7d38]
+                                                              2   ??? (SwiftUI + 118236) [0x1929e7ddc]
+                                                                2   ??? (UIKitCore + 1126024) [0x18c988e88]
+                                                                  2   ??? (SwiftUICore + 158032) [0x19054e950]
+                                                                    1   ??? (SwiftUICore + 78752) [0x19053b3a0]
+                                                                      1   ??? (SwiftUICore + 155848) [0x19054e0c8]
+                                                                        1   ??? (SwiftUICore + 156412) [0x19054e2fc]
+                                                                          1   ??? (AttributeGraph + 45668) [0x192990264]
+                                                                            1   ??? (AttributeGraph + 43352) [0x19298f958]
+                                                                              1   ??? (SwiftUICore + 1159140) [0x190642fe4]
+                                                                                1   ??? (SwiftUICore + 1142552) [0x19063ef18]
+                                                                                  1   ??? (SwiftUICore + 418324) [0x19058e214]
+                                                                                    1   ??? (SwiftUICore + 418144) [0x19058e160]
+                                                                                      1   ??? (SwiftUICore + 1079796) [0x19062f9f4]
+                                                                                        1   ??? (SwiftUICore + 11268) [0x19052ac04]
+                                                                    1   ??? (SwiftUICore + 78300) [0x19053b1dc]
+                                                                      1   ??? (SwiftUICore + 155848) [0x19054e0c8]
+                                                                        1   ??? (SwiftUICore + 156412) [0x19054e2fc]
+                                                                          1   ??? (AttributeGraph + 45668) [0x192990264]
+                                                                            1   ??? (AttributeGraph + 42956) [0x19298f7cc]
+  3   ??? (libswift_Concurrency.dylib + 30852) [0x189d0f884]
+    3   ??? (NutriVaultApp.debug.dylib + 974164) [0x10763dd54]
+      3   ??? (NutriVaultApp.debug.dylib + 968680) [0x10763c7e8]
+        3   ??? (NutriVaultApp.debug.dylib + 973720) [0x10763db98]
+          3   ??? (NutriVaultApp.debug.dylib + 888620) [0x107628f2c]
+            2   ??? (NutriVaultApp.debug.dylib + 889156) [0x107629144]
+              1   ??? (NutriVaultApp.debug.dylib + 810820) [0x107615f44]
+                1   ??? (NutriVaultApp.debug.dylib + 7974688) [0x107ceaf20]
+                  1   ??? (NutriVaultApp.debug.dylib + 7968684) [0x107ce97ac]
+                    1   ??? (NutriVaultApp.debug.dylib + 7932668) [0x107ce0afc]
+                      1   ??? (UIKitCore + 18632172) [0x18da3adec]
+                        1   ??? (UIKitCore + 18628108) [0x18da39e0c]
+                          1   ??? (UIKitCore + 18626788) [0x18da398e4]
+                            1   ??? (Pasteboard + 100664) [0x2a6226938]
+                              1   ??? (libdispatch.dylib + 74032) [0x1b70a6130]
+                                1   ??? (libdispatch.dylib + 114612) [0x1b70affb4]
+                                  1   ??? (Pasteboard + 101312) [0x2a6226bc0]
+                                    1   ??? (Pasteboard + 148900) [0x2a62325a4]
+                                      1   ??? (libdispatch.dylib + 74032) [0x1b70a6130]
+                                        1   ??? (libdispatch.dylib + 114612) [0x1b70affb4]
+                                          1   ??? (Pasteboard + 149036) [0x2a623262c]
+                                            1   ??? (Pasteboard + 148368) [0x2a6232390]
+                                              1   ??? (CoreFoundation + 534104) [0x1887a2658]
+                                                1   ??? (CoreFoundation + 185616) [0x18874d510]
+                                                  1   ??? (CoreFoundation + 165164) [0x18874852c]
+                                                    1   ??? (CoreFoundation + 19372) [0x188724bac]
+              1   ??? (NutriVaultApp.debug.dylib + 810388) [0x107615d94]
+                1   ??? (NutriVaultApp.debug.dylib + 553328) [0x1075d7170]
+                  1   ??? (Foundation + 1063048) [0x188d08888]
+                    1   ??? (Foundation + 1066648) [0x188d09698]
+                      1   ??? (libsystem_kernel.dylib + 26148) [0x2443f9624]
+                        1   <Kernel mode>
+            1   ??? (NutriVaultApp.debug.dylib + 888984) [0x107629098]
+              1   ??? (NutriVaultApp.debug.dylib + 7972696) [0x107cea758]
+                1   ??? (Foundation + 299852) [0x188c4e34c]
+                  1   ??? (Foundation + 1180428) [0x188d2530c]
+                    1   ??? (CoreFoundation + 17260) [0x18872436c]
+                      1   ??? (CoreFoundation + 577360) [0x1887acf50]
+                        1   ??? (libicucore.A.dylib + 146516) [0x1976bcc54]
+  2   ??? (libsystem_pthread.dylib + 2320) [0x18865f910]
+    2   ??? (libsystem_pthread.dylib + 4664) [0x188660238]
+      2   ??? (libdispatch.dylib + 87728) [0x1b70a96b0]
+        2   ??? (libdispatch.dylib + 89228) [0x1b70a9c8c]
+          1   ??? (libdispatch.dylib + 50980) [0x1b70a0724]
+            1   ??? (libdispatch.dylib + 151308) [0x1b70b8f0c]
+              1   ??? (libdispatch.dylib + 151944) [0x1b70b9188]
+                1   ??? (libsystem_kernel.dylib + 2644) [0x2443f3a54]
+                  1   <Kernel mode, Effective Thread QoS Utility, Requested Thread QoS Utility, e-core>
+          1   ??? (libdispatch.dylib + 46192) [0x1b709f470]
+            1   ??? (libdispatch.dylib + 43132) [0x1b709e87c]
+              1   ??? (libdispatch.dylib + 114612) [0x1b70affb4]
+                1   ??? (libdispatch.dylib + 7372) [0x1b7095ccc]
+                  1   ??? (Pasteboard + 60452) [0x2a621cc24]
+                    1   ??? (Pasteboard + 101592) [0x2a6226cd8]
+                      1   ??? (Pasteboard + 150584) [0x2a6232c38]
+                        1   ??? (libdispatch.dylib + 74032) [0x1b70a6130]
+                          1   ??? (libdispatch.dylib + 114612) [0x1b70affb4]
+                            1   ??? (Pasteboard + 150948) [0x2a6232da4]
+                              1   ??? (Pasteboard + 33024) [0x2a6216100]
+                                1   ??? (CoreServices + 323616) [0x18ee51020]
+                                  1   ??? (CoreServices + 358104) [0x18ee596d8]
+                                    1   ??? (Foundation + 441740) [0x188c70d8c]
+                                      1   ??? (Foundation + 455824) [0x188c74490]
+                                        1   ??? (Foundation + 117220) [0x188c219e4]
+                                          1   ??? (Foundation + 228916) [0x188c3ce34]
+                                            1   ??? (libxpc.dylib + 105184) [0x1886d7ae0]
+                                              1   ??? (libdispatch.dylib + 122088) [0x1b70b1ce8]
+                                                1   ??? (libdispatch.dylib + 120756) [0x1b70b17b4]
+                                                  1   ??? (libdispatch.dylib + 120032) [0x1b70b14e0]
+                                                    1   ??? (libdispatch.dylib + 134484) [0x1b70b4d54]
+                                                      1   ??? (libdispatch.dylib + 136076) [0x1b70b538c]
+                                                        1   ??? (libsystem_kernel.dylib + 3284) [0x2443f3cd4]
+                                                          1   <Kernel mode, Effective Thread QoS User Initiated, Requested Thread QoS User Initiated>
+  1   ??? (libsystem_pthread.dylib + 2312) [0x18865f908]
+    1   <Effective Thread QoS User Initiated, Requested Thread QoS User Initiated, e-core>
+
+  Binary Images:
+           0x104a00000 -        0x104a13fff  com.nkembi.nutrivault 1.0 (1) <0A6E1928-C6E0-3568-95EB-7A4A550EF67A>  /private/var/containers/Bundle/Application/FD783AF6-A07C-4F8B-8DAD-176D1A50FDD4/NutriVaultApp.app/NutriVaultApp
+           0x107550000 -        0x108373fff  NutriVaultApp.debug.dylib     <0301B318-6347-3B55-8E54-025397D0E2A1>  /private/var/containers/Bundle/Application/FD783AF6-A07C-4F8B-8DAD-176D1A50FDD4/NutriVaultApp.app/NutriVaultApp.debug.dylib
+           0x188528000 -        0x188575a77  libobjc.A.dylib               <377F9F28-1C74-3AED-8DD8-71B4361F3E39>  /usr/lib/libobjc.A.dylib
+           0x1885a7000 -        0x18865e8d7  dyld                          <17F02809-E0E1-32F4-862E-FACDE862B8DE>  /usr/lib/dyld
+           0x18865f000 -        0x18866b1e7  libsystem_pthread.dylib       <32E28303-2AAD-3166-9D11-70E8BCF8E076>  /usr/lib/system/libsystem_pthread.dylib
+           0x18866c000 -        0x1886bdac7  libsystem_malloc.dylib        <B2C94CD8-C539-303B-B510-65F6CA56A6E2>  /usr/lib/system/libsystem_malloc.dylib
+           0x1886be000 -        0x18871f4af  libxpc.dylib                  <9BA91DF0-39A5-3C28-B96E-BE2463C5C793>  /usr/lib/system/libxpc.dylib
+           0x188720000 -        0x188c04327  CoreFoundation                <D79F14D9-F948-3CD8-B0D1-EB66B9B8CF94>  /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+           0x188c05000 -        0x189d07a23  Foundation                    <E623EEBD-082F-32AF-BFC7-F1DC83AE62DD>  /System/Library/Frameworks/Foundation.framework/Foundation
+           0x189d08000 -        0x189d943df  libswift_Concurrency.dylib    <C1F170C0-B349-32B9-8F2D-079D53B04C77>  /usr/lib/swift/libswift_Concurrency.dylib
+           0x189d95000 -        0x18a3499b7  libswiftCore.dylib            <59EA1982-04E7-34F5-B851-DBF8DB5EDEBD>  /usr/lib/swift/libswiftCore.dylib
+           0x18c3f8000 -        0x18c875a67  QuartzCore                    <1FBACB38-CBCD-39CD-8D9A-D064392654F7>  /System/Library/Frameworks/QuartzCore.framework/QuartzCore
+           0x18c876000 -        0x18e8c4ed3  UIKitCore                     <58942358-B42D-383B-9032-48516012FB92>  /System/Library/PrivateFrameworks/UIKitCore.framework/UIKitCore
+           0x18ee02000 -        0x18f057347  CoreServices                  <7561E768-4278-3C54-8EFE-5DD7D6B1AE6D>  /System/Library/Frameworks/CoreServices.framework/CoreServices
+           0x190528000 -        0x19162679b  SwiftUICore                   <33FBB202-40B0-302A-AEA5-FA0832A18B0B>  /System/Library/Frameworks/SwiftUICore.framework/SwiftUICore
+           0x192985000 -        0x1929ca4ef  AttributeGraph                <44B92719-CDED-32EE-8843-4AB5F016C733>  /System/Library/PrivateFrameworks/AttributeGraph.framework/AttributeGraph
+           0x1929cb000 -        0x193cce7b3  SwiftUI                       <E32A9A5B-F8CE-3AA8-8AD9-53E25D621B08>  /System/Library/Frameworks/SwiftUI.framework/SwiftUI
+           0x1944c1000 -        0x1944c967f  libsystem_platform.dylib      <BE97AAD8-FA2C-35F4-9EA7-E2C41DB756AB>  /usr/lib/system/libsystem_platform.dylib
+           0x197699000 -        0x19797ce31  libicucore.A.dylib            <537859E4-B81F-3C77-B72B-1810B7BF31AA>  /usr/lib/libicucore.A.dylib
+           0x197e2a000 -        0x197f158cf  Combine                       <A3B9E087-EE5A-3A64-815B-905307E029A3>  /System/Library/Frameworks/Combine.framework/Combine
+           0x1b7094000 -        0x1b70dadd7  libdispatch.dylib             <84B7E81D-B830-384F-A103-96323C6F5189>  /usr/lib/system/libdispatch.dylib
+           0x234dfa000 -        0x234e01ea3  GraphicsServices              <94D8382E-73C7-3BC4-8357-A25A79687D11>  /System/Library/PrivateFrameworks/GraphicsServices.framework/GraphicsServices
+           0x2443f3000 -        0x2444302db  libsystem_kernel.dylib        <26FFA906-5ACA-39BF-8F7C-94FE9AB8C657>  /usr/lib/system/libsystem_kernel.dylib
+           0x2a620e000 -        0x2a623e5eb  Pasteboard                    <9C11FB42-DAC9-3025-A093-CBBE1AE73AC3>  /System/Library/PrivateFrameworks/Pasteboard.framework/Pasteboard
+           0x2c2540000 -        0x2c2541e25  UpdateCycle                   <759FB4EE-EAA3-3D3A-B271-056E9B437DFD>  /System/Library/PrivateFrameworks/UpdateCycle.framework/UpdateCycle

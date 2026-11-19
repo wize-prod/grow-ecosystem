@@ -1,0 +1,318 @@
+{"roots_installed":0,"app_name":"YouTube","timestamp":"2026-10-30 07:12:52.00 +0100","app_version":"21.42.4","slice_uuid":"182C0AA3-C162-3331-BE8D-8375A2696145","adam_id":"544007664","build_version":"21.42.4","bundleID":"com.google.ios.youtube","duration_ms":"1334963","is_first_party":0,"share_with_app_devs":1,"bug_type":"145","os_version":"iPhone OS 27.2 (24B115)","distributor_id":"com.apple.AppStore","name":"YouTube","incident_id":"45DA8EA5-BCB0-4C04-B41C-35427C07ECA2"}
+Date/Time:        2026-10-30 06:50:34.554 +0100
+End time:         2026-10-30 07:12:49.517 +0100
+OS Version:       iPhone OS 27.2 (Build 24B115)
+Architecture:     arm64e
+Report Version:   73
+Incident Identifier: 45DA8EA5-BCB0-4C04-B41C-35427C07ECA2
+Share With Devs:  Yes
+
+Data Source:      Microstackshots
+Shared Cache:     377B53F3-0E5D-399A-A031-41CAF2ECA8D6 slid base address 0x186c14000
+
+Command:          YouTube
+Path:             /private/var/containers/Bundle/Application/81D428AB-AC04-4792-A2B7-B2422252D0F8/YouTube.app/YouTube
+Identifier:       com.google.ios.youtube
+Version:          21.42.4 (21.42.4)
+Adam ID:          544007664
+Is First Party:   No
+Beta Identifier:  D162D6FA-9DA5-4C56-B371-50368A512C50
+Resource Coalition: 1527
+On Behalf Of:     255 samples UNKNOWN [36, 239] (237 samples originated by UNKNOWN [239], 18 samples originated by YouTube [2190])
+Architecture:     arm64
+PID:              2190
+
+Event:            disk writes
+Action taken:     none
+Writes:           4294.97 MB of file backed memory dirtied over 1335 seconds (3217.29 KB per second average), exceeding limit of 49.71 KB per second over 86400 seconds
+Writes limit:     4294.97 MB
+Limit duration:   86400s
+Writes caused:    4294.97 MB
+Writes duration:  1335s
+Duration:         1334.96s
+Steps:            403 (674 samples lost, 10.49 MB/step)
+
+Hardware model:   iPad16,1
+Active cpus:      6
+Memory size:      7.72 GB
+HW page size:     16384
+VM page size:     16384
+
+Models:           UNKNOWN
+
+OS Cryptex File Extents: 1
+
+Heaviest stack for the target process:
+  403  ??? (libsystem_pthread.dylib + 2320) [0x18714f910]
+  403  ??? (libsystem_pthread.dylib + 4664) [0x187150238]
+  403  ??? (libdispatch.dylib + 87728) [0x1b5b996b0]
+  403  ??? (libdispatch.dylib + 89228) [0x1b5b99c8c]
+  403  ??? (libdispatch.dylib + 46192) [0x1b5b8f470]
+  403  ??? (libdispatch.dylib + 43132) [0x1b5b8e87c]
+  403  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+  395  ??? (CoreData + 6968) [0x1902f8b38]
+  383  ??? (YouTube + 3569956) [0x1010ff924]
+  383  ??? (CoreData + 8244) [0x1902f9034]
+  383  ??? (CoreData + 943676) [0x1903dd63c]
+  383  ??? (CoreData + 19064) [0x1902fba78]
+  383  ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+  383  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+  383  ??? (CoreData + 946672) [0x1903de1f0]
+  383  ??? (CoreData + 945356) [0x1903ddccc]
+  383  ??? (CoreData + 8244) [0x1902f9034]
+  383  ??? (CoreData + 12936) [0x1902fa288]
+  383  ??? (CoreData + 18516) [0x1902fb854]
+  383  ??? (CoreData + 19332) [0x1902fbb84]
+  371  ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+  371  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+  371  ??? (CoreData + 17364) [0x1902fb3d4]
+  371  ??? (CoreData + 32788) [0x1902ff014]
+  371  ??? (CoreData + 2136980) [0x190500b94]
+  371  ??? (CoreData + 25716) [0x1902fd474]
+  371  ??? (CoreData + 31492) [0x1902feb04]
+  371  ??? (CoreData + 38804) [0x190300794]
+  371  ??? (CoreData + 38284) [0x19030058c]
+  371  ??? (CoreData + 51000) [0x190303738]
+  371  ??? (CoreData + 60868) [0x190305dc4]
+  371  ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+  371  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+  371  ??? (CoreData + 61176) [0x190305ef8]
+  371  ??? (CoreData + 50300) [0x19030347c]
+  371  ??? (CoreData + 49332) [0x1903030b4]
+  371  ??? (CoreData + 116780) [0x19031382c]
+  371  ??? (CoreData + 116236) [0x19031360c]
+  370  ??? (CoreData + 99428) [0x19030f464]
+  370  ??? (CoreData + 95312) [0x19030e450]
+  370  ??? (CoreData + 96372) [0x19030e874]
+  370  ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+  370  ??? (libsqlite3.dylib + 209500) [0x1a504b25c]
+  368  ??? (libsqlite3.dylib + 327948) [0x1a506810c]
+  368  ??? (libsqlite3.dylib + 356940) [0x1a506f24c]
+  368  ??? (libsqlite3.dylib + 708376) [0x1a50c4f18]
+  368  ??? (libsqlite3.dylib + 778084) [0x1a50d5f64]
+  368  ??? (libsqlite3.dylib + 374116) [0x1a5073564]
+  368  ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+  368  ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+
+
+Powerstats for:   YouTube [2190]
+UUID:             182C0AA3-C162-3331-BE8D-8375A2696145
+Path:             /private/var/containers/Bundle/Application/81D428AB-AC04-4792-A2B7-B2422252D0F8/YouTube.app/YouTube
+Identifier:       com.google.ios.youtube
+Version:          21.42.4 (21.42.4)
+Adam ID:          544007664
+Is First Party:   No
+Beta Identifier:  D162D6FA-9DA5-4C56-B371-50368A512C50
+Resource Coalition: 403 samples 1527
+On Behalf Of:     255 samples UNKNOWN [36, 239] (237 samples originated by UNKNOWN [239], 18 samples originated by YouTube [2190])
+Architecture:     arm64
+Footprint:        398.48 MB -> 370.44 MB (-28.05 MB) (max 437.98 MB )
+Pageins:          310 pages
+Start time:       2026-10-30 06:50:34.562 +0100
+End time:         2026-10-30 07:12:49.508 +0100
+Num samples:      403 (100%)
+Energy:           127.39 mWh
+Num threads:      59
+Primary state:    254 samples Frontmost App, Non-Suppressed, Kernel mode, Effective Thread QoS User Initiated, Requested Thread QoS User Initiated, Override Thread QoS Unspecified, p-core
+User Activity:    0 samples Idle, 403 samples Active
+Power Source:     403 samples on Battery, 0 samples on AC
+  403  ??? (libsystem_pthread.dylib + 2320) [0x18714f910]
+    403  ??? (libsystem_pthread.dylib + 4664) [0x187150238]
+      403  ??? (libdispatch.dylib + 87728) [0x1b5b996b0]
+        403  ??? (libdispatch.dylib + 89228) [0x1b5b99c8c]
+          403  ??? (libdispatch.dylib + 46192) [0x1b5b8f470]
+            403  ??? (libdispatch.dylib + 43132) [0x1b5b8e87c]
+              403  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                395  ??? (CoreData + 6968) [0x1902f8b38]
+                  383  ??? (YouTube + 3569956) [0x1010ff924]
+                    383  ??? (CoreData + 8244) [0x1902f9034]
+                      383  ??? (CoreData + 943676) [0x1903dd63c]
+                        383  ??? (CoreData + 19064) [0x1902fba78]
+                          383  ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                            383  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                              383  ??? (CoreData + 946672) [0x1903de1f0]
+                                383  ??? (CoreData + 945356) [0x1903ddccc]
+                                  383  ??? (CoreData + 8244) [0x1902f9034]
+                                    383  ??? (CoreData + 12936) [0x1902fa288]
+                                      383  ??? (CoreData + 18516) [0x1902fb854]
+                                        383  ??? (CoreData + 19332) [0x1902fbb84]
+                                          371  ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                                            371  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                              371  ??? (CoreData + 17364) [0x1902fb3d4]
+                                                371  ??? (CoreData + 32788) [0x1902ff014]
+                                                  371  ??? (CoreData + 2136980) [0x190500b94]
+                                                    371  ??? (CoreData + 25716) [0x1902fd474]
+                                                      371  ??? (CoreData + 31492) [0x1902feb04]
+                                                        371  ??? (CoreData + 38804) [0x190300794]
+                                                          371  ??? (CoreData + 38284) [0x19030058c]
+                                                            371  ??? (CoreData + 51000) [0x190303738]
+                                                              371  ??? (CoreData + 60868) [0x190305dc4]
+                                                                371  ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                                                                  371  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                                                    371  ??? (CoreData + 61176) [0x190305ef8]
+                                                                      371  ??? (CoreData + 50300) [0x19030347c]
+                                                                        371  ??? (CoreData + 49332) [0x1903030b4]
+                                                                          371  ??? (CoreData + 116780) [0x19031382c]
+                                                                            371  ??? (CoreData + 116236) [0x19031360c]
+                                                                              370  ??? (CoreData + 99428) [0x19030f464]
+                                                                                370  ??? (CoreData + 95312) [0x19030e450]
+                                                                                  370  ??? (CoreData + 96372) [0x19030e874]
+                                                                                    370  ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                                                                                      370  ??? (libsqlite3.dylib + 209500) [0x1a504b25c]
+                                                                                        368  ??? (libsqlite3.dylib + 327948) [0x1a506810c]
+                                                                                          368  ??? (libsqlite3.dylib + 356940) [0x1a506f24c]
+                                                                                            368  ??? (libsqlite3.dylib + 708376) [0x1a50c4f18]
+                                                                                              368  ??? (libsqlite3.dylib + 778084) [0x1a50d5f64]
+                                                                                                368  ??? (libsqlite3.dylib + 374116) [0x1a5073564]
+                                                                                                  368  ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                                                                    368  ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                                                                      80   <on behalf of UNKNOWN [239] (originated by UNKNOWN [239])>
+                                                                                                      77   <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), Non-Frontmost App, Effective Thread QoS Default>
+                                                                                                      60   <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), Non-Frontmost App, Effective Thread QoS Default, e-core>
+                                                                                                      7    <on behalf of UNKNOWN [36] (originated by YouTube [2190])>
+                                                                                                      4    <e-core>
+                                                                                                      3    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), e-core>
+                                                                                        2    ??? (libsqlite3.dylib + 328776) [0x1a5068448]
+                                                                                          2    ??? (libsqlite3.dylib + 322900) [0x1a5066d54]
+                                                                                            2    ??? (libsqlite3.dylib + 356940) [0x1a506f24c]
+                                                                                              2    ??? (libsqlite3.dylib + 708376) [0x1a50c4f18]
+                                                                                                2    ??? (libsqlite3.dylib + 778084) [0x1a50d5f64]
+                                                                                                  2    ??? (libsqlite3.dylib + 374116) [0x1a5073564]
+                                                                                                    2    ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                                                                      2    ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                                                                        1    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), Non-Frontmost App, Effective Thread QoS Default>
+                                                                              1    ??? (CoreData + 99692) [0x19030f56c]
+                                                                                1    ??? (CoreData + 73860) [0x190309084]
+                                                                                  1    ??? (CoreData + 96372) [0x19030e874]
+                                                                                    1    ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                                                                                      1    ??? (libsqlite3.dylib + 235444) [0x1a50517b4]
+                                                                                        1    ??? (libsqlite3.dylib + 92988) [0x1a502eb3c]
+                                                                                          1    ??? (libsqlite3.dylib + 735380) [0x1a50cb894]
+                                                                                            1    ??? (libsqlite3.dylib + 357808) [0x1a506f5b0]
+                                                                                              1    ??? (libsqlite3.dylib + 359556) [0x1a506fc84]
+                                                                                                1    ??? (libsystem_kernel.dylib + 34032) [0x242eeb4f0]
+                                                                                                  1    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), Non-Frontmost App, Effective Thread QoS Default>
+                                          12   ??? (libdispatch.dylib + 73704) [0x1b5b95fe8]
+                                            12   ??? (libdispatch.dylib + 75264) [0x1b5b96600]
+                                              12   ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                                12   ??? (CoreData + 17364) [0x1902fb3d4]
+                                                  12   ??? (CoreData + 32788) [0x1902ff014]
+                                                    12   ??? (CoreData + 2136980) [0x190500b94]
+                                                      12   ??? (CoreData + 25716) [0x1902fd474]
+                                                        12   ??? (CoreData + 31492) [0x1902feb04]
+                                                          12   ??? (CoreData + 38804) [0x190300794]
+                                                            12   ??? (CoreData + 38284) [0x19030058c]
+                                                              12   ??? (CoreData + 51000) [0x190303738]
+                                                                12   ??? (CoreData + 60868) [0x190305dc4]
+                                                                  12   ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                                                                    12   ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                                                      12   ??? (CoreData + 61176) [0x190305ef8]
+                                                                        12   ??? (CoreData + 50300) [0x19030347c]
+                                                                          12   ??? (CoreData + 49332) [0x1903030b4]
+                                                                            12   ??? (CoreData + 116780) [0x19031382c]
+                                                                              12   ??? (CoreData + 116236) [0x19031360c]
+                                                                                12   ??? (CoreData + 99428) [0x19030f464]
+                                                                                  12   ??? (CoreData + 95312) [0x19030e450]
+                                                                                    12   ??? (CoreData + 96372) [0x19030e874]
+                                                                                      12   ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                                                                                        12   ??? (libsqlite3.dylib + 209500) [0x1a504b25c]
+                                                                                          12   ??? (libsqlite3.dylib + 327948) [0x1a506810c]
+                                                                                            12   ??? (libsqlite3.dylib + 356940) [0x1a506f24c]
+                                                                                              12   ??? (libsqlite3.dylib + 708376) [0x1a50c4f18]
+                                                                                                12   ??? (libsqlite3.dylib + 778084) [0x1a50d5f64]
+                                                                                                  12   ??? (libsqlite3.dylib + 374116) [0x1a5073564]
+                                                                                                    12   ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                                                                      12   ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                                                                        7    <on behalf of UNKNOWN [36] (originated by YouTube [2190])>
+                                                                                                        2    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239])>
+                                                                                                        2    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), Non-Frontmost App, Effective Thread QoS Default, e-core>
+                                                                                                        1    <on behalf of UNKNOWN [36] (originated by YouTube [2190]), e-core>
+                  12   ??? (YouTube + 71750876) [0x1052054dc]
+                    12   ??? (CoreData + 193232) [0x1903262d0]
+                      12   ??? (CoreData + 12936) [0x1902fa288]
+                        12   ??? (CoreData + 18516) [0x1902fb854]
+                          12   ??? (CoreData + 19332) [0x1902fbb84]
+                            12   ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                              12   ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                12   ??? (CoreData + 17364) [0x1902fb3d4]
+                                  12   ??? (CoreData + 32788) [0x1902ff014]
+                                    12   ??? (CoreData + 2141524) [0x190501d54]
+                                      12   ??? (CoreData + 24108) [0x1902fce2c]
+                                        12   ??? (CoreData + 31492) [0x1902feb04]
+                                          12   ??? (CoreData + 38804) [0x190300794]
+                                            12   ??? (CoreData + 38284) [0x19030058c]
+                                              12   ??? (CoreData + 51000) [0x190303738]
+                                                12   ??? (CoreData + 60868) [0x190305dc4]
+                                                  12   ??? (libdispatch.dylib + 74032) [0x1b5b96130]
+                                                    12   ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                                                      12   ??? (CoreData + 61176) [0x190305ef8]
+                                                        12   ??? (CoreData + 50300) [0x19030347c]
+                                                          12   ??? (CoreData + 49332) [0x1903030b4]
+                                                            12   ??? (CoreData + 335352) [0x190348df8]
+                                                              12   ??? (CoreData + 319344) [0x190344f70]
+                                                                12   ??? (CoreData + 303324) [0x1903410dc]
+                                                                  12   ??? (CoreData + 96372) [0x19030e874]
+                                                                    8    ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                                                                      8    ??? (libsqlite3.dylib + 235504) [0x1a50517f0]
+                                                                        8    ??? (libsqlite3.dylib + 93984) [0x1a502ef20]
+                                                                          8    ??? (libsqlite3.dylib + 261988) [0x1a5057f64]
+                                                                            8    ??? (libsqlite3.dylib + 263088) [0x1a50583b0]
+                                                                              8    ??? (libsqlite3.dylib + 331400) [0x1a5068e88]
+                                                                                8    ??? (libsqlite3.dylib + 721256) [0x1a50c8168]
+                                                                                  8    ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                                                    8    ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                                                      4    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), Non-Frontmost App, Effective Thread QoS Default, e-core>
+                                                                                      1    <on behalf of UNKNOWN [36] (originated by YouTube [2190])>
+                                                                                      1    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239])>
+                                                                                      1    <on behalf of UNKNOWN [36] (originated by YouTube [2190]), e-core>
+                                                                                      1    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), e-core>
+                                                                    4    ??? (libsqlite3.dylib + 191272) [0x1a5046b28]
+                                                                      4    ??? (CoreData + 297264) [0x19033f930]
+                                                                        4    ??? (CoreData + 1095684) [0x190402804]
+                                                                          4    ??? (libsqlite3.dylib + 572652) [0x1a50a3cec]
+                                                                            4    ??? (libsqlite3.dylib + 1234092) [0x1a51454ac]
+                                                                              4    ??? (libsqlite3.dylib + 412936) [0x1a507cd08]
+                                                                                4    ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                                                                  4    ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                                                                    3    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), Non-Frontmost App, Effective Thread QoS Default, e-core>
+                                                                                    1    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239])>
+                8    ??? (libdispatch.dylib + 7372) [0x1b5b85ccc]
+                  5    ??? (YouTube + 2490412) [0x100ff802c]
+                    5    ??? (YouTube + 2292232) [0x100fc7a08]
+                      5    ??? (YouTube + 2288708) [0x100fc6c44]
+                        5    ??? (YouTube + 2289956) [0x100fc7124]
+                          5    ??? (libsqlite3.dylib + 190500) [0x1a5046824]
+                            5    ??? (libsqlite3.dylib + 235504) [0x1a50517f0]
+                              5    ??? (libsqlite3.dylib + 93984) [0x1a502ef20]
+                                5    ??? (libsqlite3.dylib + 261988) [0x1a5057f64]
+                                  5    ??? (libsqlite3.dylib + 263088) [0x1a50583b0]
+                                    5    ??? (libsqlite3.dylib + 331400) [0x1a5068e88]
+                                      5    ??? (libsqlite3.dylib + 721256) [0x1a50c8168]
+                                        5    ??? (libsqlite3.dylib + 332304) [0x1a5069210]
+                                          5    ??? (libsystem_kernel.dylib + 27740) [0x242ee9c5c]
+                                            1    <on behalf of UNKNOWN [36] (originated by YouTube [2190])>
+                                            1    <on behalf of UNKNOWN [239] (originated by UNKNOWN [239]), Non-Frontmost App, Effective Thread QoS Default, e-core>
+                                            1    <e-core>
+                  2    ??? (YouTube + 2208680) [0x100fb33a8]
+                    2    ??? (YouTube + 5807424) [0x101321d40]
+                      2    ??? (YouTube + 5807788) [0x101321eac]
+                        2    ??? (Foundation + 541032) [0x187779168]
+                          2    ??? (Foundation + 556440) [0x18777cd98]
+                            2    ??? (Foundation + 7227712) [0x187dd9940]
+                              2    ??? (Foundation + 7268640) [0x187de3920]
+                                2    ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+                  1    ??? (YouTube + 62075696) [0x1048cb330]
+                    1    ??? (Foundation + 541032) [0x187779168]
+                      1    ??? (Foundation + 556440) [0x18777cd98]
+                        1    ??? (Foundation + 7227712) [0x187dd9940]
+                          1    ??? (Foundation + 7268640) [0x187de3920]
+                            1    ??? (libsystem_kernel.dylib + 20528) [0x242ee8030]
+
+  Binary Images:
+           0x100d98000 -                ???  com.google.ios.youtube 21.42.4 (21.42.4) <182C0AA3-C162-3331-BE8D-8375A2696145>  /private/var/containers/Bundle/Application/81D428AB-AC04-4792-A2B7-B2422252D0F8/YouTube.app/YouTube
+           0x18714f000 -        0x18715b1e7  libsystem_pthread.dylib                  <32E28303-2AAD-3166-9D11-70E8BCF8E076>  /usr/lib/system/libsystem_pthread.dylib
+           0x1876f5000 -        0x1887f7a23  Foundation                               <E623EEBD-082F-32AF-BFC7-F1DC83AE62DD>  /System/Library/Frameworks/Foundation.framework/Foundation
+           0x1902f7000 -        0x1906d6707  CoreData                                 <FF5B7239-3C52-3940-B7C1-9568484BDEE3>  /System/Library/Frameworks/CoreData.framework/CoreData
+           0x1a5018000 -        0x1a51d074f  libsqlite3.dylib                         <6145839A-8C5B-3186-8AF6-CEE4C1AFDBC8>  /usr/lib/libsqlite3.dylib
+           0x1b5b84000 -        0x1b5bcadd7  libdispatch.dylib                        <84B7E81D-B830-384F-A103-96323C6F5189>  /usr/lib/system/libdispatch.dylib
+           0x242ee3000 -        0x242f202db  libsystem_kernel.dylib                   <26FFA906-5ACA-39BF-8F7C-94FE9AB8C657>  /usr/lib/system/libsystem_kernel.dylib

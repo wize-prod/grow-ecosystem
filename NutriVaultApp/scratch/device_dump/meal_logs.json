@@ -1,0 +1,17 @@
+[
+  {
+    "brand" : "Luis",
+    "carbs" : 100,
+    "cost" : 0.2,
+    "fat" : 0,
+    "fiber" : 0,
+    "foodName" : "Zucker Raffinade",
+    "id" : "8598B0CB-6C5F-4EC6-8073-F7AA43B4CD59",
+    "kcal" : 400,
+    "mealType" : "Mahlzeit",
+    "pantryItemId" : "food_4006544205006_1789218524",
+    "protein" : 0,
+    "timestamp" : "2026-09-12T13:08:55Z",
+    "weightGrams" : 100
+  }
+]

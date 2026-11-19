@@ -1,0 +1,119 @@
+{
+  "divergenceHistory" : [
+    {
+      "adaptationAppliedSummary" : "Spontane Wahl: Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete) (Brust, Funktioneller Rumpf (Reha), Arme (Bizeps & Trizeps))",
+      "banisterTSBAtStart" : 0,
+      "chosenExerciseNames" : [
+        "Einarmige Liegestuetze",
+        "Diamant-Liegestuetze (Calisthenics)",
+        "Stuhl-Dips (Stuben-Trizeps)",
+        "Unterarmstuetz \/ Plank",
+        "Deadbug mit Druck gegen die Knie",
+        "McGill Modifizierter Curl-Up (Haende unter LWS)",
+        "McGill Side Plank (Knie oder Fuesse)"
+      ],
+      "chosenTemplateName" : "Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete)",
+      "id" : "6E22C708-0BF5-4C8B-B54D-41FD53CF47C3",
+      "primaryTargetMuscles" : [
+        "Brust",
+        "Funktioneller Rumpf (Reha)",
+        "Arme (Bizeps & Trizeps)"
+      ],
+      "recommendedFocus" : "Regeneration & Anaboler Refill",
+      "systemicReadinessAtStart" : 0.72,
+      "timestamp" : 816028840.596594
+    },
+    {
+      "adaptationAppliedSummary" : "Spontane Wahl: Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete) (Brust, Gluteus & Ischios, Arme (Bizeps & Trizeps), Funktioneller Rumpf (Reha))",
+      "banisterTSBAtStart" : 0,
+      "chosenExerciseNames" : [
+        "Liegestuetze (BWK-konform kontrolliert)",
+        "Diamant-Liegestuetze (Calisthenics)",
+        "Unterarmstuetz \/ Plank",
+        "Deadbug mit Druck gegen die Knie",
+        "McGill Modifizierter Curl-Up (Haende unter LWS)",
+        "McGill Side Plank (Knie oder Fuesse)",
+        "Glute Bridge am Boden (Beckenheben)"
+      ],
+      "chosenTemplateName" : "Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete)",
+      "id" : "4AFEFF8B-62CE-4CAC-BF4B-85F5FE1F24CD",
+      "primaryTargetMuscles" : [
+        "Brust",
+        "Gluteus & Ischios",
+        "Arme (Bizeps & Trizeps)",
+        "Funktioneller Rumpf (Reha)"
+      ],
+      "recommendedFocus" : "Regeneration & Anaboler Refill",
+      "systemicReadinessAtStart" : 0.72,
+      "timestamp" : 816027445.812909
+    },
+    {
+      "adaptationAppliedSummary" : "Spontane Wahl: Stuben- & Zimmer-Workout (Minimal-Raum) (Ruecken \/ Latissimus, Quadrizeps & Waden, Arme (Bizeps & Trizeps), Funktioneller Rumpf (Reha), Brust)",
+      "banisterTSBAtStart" : 0,
+      "chosenExerciseNames" : [
+        "Stuben Liegestuetze am Schreibtisch \/ Bett",
+        "Tuerrahmen Isometrisches Rudern",
+        "Bettkanten Bulgarian Split Squats",
+        "Stuhl-Dips (Stuben-Trizeps)",
+        "Handtuch-Isometrie Bizepszug",
+        "Wandsitz Isometrisch (Wall Sit)",
+        "Teppich Unterarmstuetz (Plank)"
+      ],
+      "chosenTemplateName" : "Stuben- & Zimmer-Workout (Minimal-Raum)",
+      "id" : "D83734D8-66A4-4F14-A821-014657BECABB",
+      "primaryTargetMuscles" : [
+        "Ruecken \/ Latissimus",
+        "Quadrizeps & Waden",
+        "Arme (Bizeps & Trizeps)",
+        "Funktioneller Rumpf (Reha)",
+        "Brust"
+      ],
+      "recommendedFocus" : "Oberkoerper Kraft & Hypertrophie",
+      "systemicReadinessAtStart" : 0.72,
+      "timestamp" : 815336482.577703
+    }
+  ],
+  "exerciseSelectionFrequencies" : {
+    "Bettkanten Bulgarian Split Squats" : 4,
+    "Crunches \/ Sit-ups auf Roemischer Bank" : 3,
+    "Deadbug mit Druck gegen die Knie" : 6,
+    "Diamant-Liegestuetze (Calisthenics)" : 9,
+    "Einarmige Liegestuetze" : 4,
+    "Glute Bridge am Boden (Beckenheben)" : 1,
+    "Handtuch-Isometrie Bizepszug" : 1,
+    "Klimmzuege Obergriff (Pull-ups)" : 4,
+    "Klimmzuege Untergriff (Chin-ups)" : 3,
+    "Liegestuetze (BWK-konform kontrolliert)" : 5,
+    "McGill Modifizierter Curl-Up (Haende unter LWS)" : 6,
+    "McGill Side Plank (Knie oder Fuesse)" : 4,
+    "Stuben Liegestuetze am Schreibtisch \/ Bett" : 4,
+    "Stuhl-Dips (Stuben-Trizeps)" : 8,
+    "Teppich Unterarmstuetz (Plank)" : 1,
+    "Tuerrahmen Isometrisches Rudern" : 5,
+    "Unterarmstuetz \/ Plank" : 4,
+    "Wandsitz Isometrisch (Wall Sit)" : 1
+  },
+  "muscleDistressDampers" : {
+    "Arme (Bizeps & Trizeps)" : 0.5,
+    "Brust" : 0.5,
+    "Funktioneller Rumpf (Reha)" : 0.5,
+    "Gluteus & Ischios" : 0.5
+  },
+  "muscleDistressTimestamps" : {
+    "Arme (Bizeps & Trizeps)" : 816027670.573618,
+    "Brust" : 816027670.573618,
+    "Funktioneller Rumpf (Reha)" : 816027670.573618,
+    "Gluteus & Ischios" : 816027670.573618
+  },
+  "muscleGroupAffinities" : {
+    "Arme (Bizeps & Trizeps)" : 0.7500000000000002,
+    "Brust" : 0.7100000000000002,
+    "Funktioneller Rumpf (Reha)" : 0.7700000000000002,
+    "Gluteus & Ischios" : 0.55,
+    "Quadrizeps & Waden" : 0.5700000000000001,
+    "Ruecken \/ Latissimus" : 0.5900000000000001
+  },
+  "preferredEquipmentStyle" : "Bodyweight \/ Calisthenics",
+  "totalDeviationsCount" : 3,
+  "totalSessionsCount" : 7
+}

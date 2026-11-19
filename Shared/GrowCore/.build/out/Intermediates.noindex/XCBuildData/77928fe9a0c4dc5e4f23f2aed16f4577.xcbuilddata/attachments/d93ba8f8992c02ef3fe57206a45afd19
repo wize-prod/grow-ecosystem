@@ -1,0 +1,4 @@
+module GrowCoreCPP {
+umbrella "/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCoreCPP/include"
+export *
+}

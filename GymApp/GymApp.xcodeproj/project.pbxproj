@@ -1,0 +1,1185 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CC0000000000000000000003 /* GrowCore in Frameworks */ = {isa = PBXBuildFile; productRef = CC0000000000000000000002 /* GrowCore */; };
+		BB0000000000000000000000 /* GymApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000000 /* GymApp.swift */; };
+		BB0000000000000000000001 /* AthleticStandardTier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000001 /* AthleticStandardTier.swift */; };
+		BB0000000000000000000002 /* BodyMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000002 /* BodyMeasurement.swift */; };
+		BB0000000000000000000003 /* CalisthenicGodArchetypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000003 /* CalisthenicGodArchetypes.swift */; };
+		BB0000000000000000000004 /* CoachTuningMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000004 /* CoachTuningMatrix.swift */; };
+		BB0000000000000000000005 /* CrossProgramBenchmarkRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000005 /* CrossProgramBenchmarkRegistry.swift */; };
+		BB0000000000000000000006 /* CustomRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000006 /* CustomRecurrenceRule.swift */; };
+		BB0000000000000000000007 /* DeepMuscleIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000007 /* DeepMuscleIndex.swift */; };
+		BB0000000000000000000008 /* DetailedAnatomyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000008 /* DetailedAnatomyModels.swift */; };
+		BB0000000000000000000009 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000009 /* Exercise.swift */; };
+		BB000000000000000000000A /* ExternalWorkoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000A /* ExternalWorkoutItem.swift */; };
+		BB000000000000000000000B /* GrowcerySyncState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000B /* GrowcerySyncState.swift */; };
+		BB000000000000000000000C /* CircadianSupplementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000C /* CircadianSupplementModel.swift */; };
+		BB000000000000000000000D /* CuisineTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000D /* CuisineTaxonomy.swift */; };
+		BB000000000000000000000E /* EquipmentTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000E /* EquipmentTaxonomy.swift */; };
+		BB000000000000000000000F /* MealLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000F /* MealLogEntry.swift */; };
+		BB0000000000000000000010 /* MealTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000010 /* MealTemplate.swift */; };
+		BB0000000000000000000011 /* NutritionalProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000011 /* NutritionalProfile.swift */; };
+		BB0000000000000000000012 /* PantryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000012 /* PantryItem.swift */; };
+		BB0000000000000000000013 /* ReceiptRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000013 /* ReceiptRecord.swift */; };
+		BB0000000000000000000014 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000014 /* ShoppingItem.swift */; };
+		BB0000000000000000000015 /* ProgramCatalogSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000015 /* ProgramCatalogSeed.swift */; };
+		BB0000000000000000000016 /* TrainingProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000016 /* TrainingProgram.swift */; };
+		BB0000000000000000000017 /* UnifiedDayWorkoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000017 /* UnifiedDayWorkoutItem.swift */; };
+		BB0000000000000000000018 /* WorkoutDebriefRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000018 /* WorkoutDebriefRecord.swift */; };
+		BB0000000000000000000019 /* WorkoutSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000019 /* WorkoutSession.swift */; };
+		BB000000000000000000001A /* WorkoutTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001A /* WorkoutTemplate.swift */; };
+		BB000000000000000000001B /* PathBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001B /* PathBuilder.swift */; };
+		BB000000000000000000001C /* SVGPathCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001C /* SVGPathCommand.swift */; };
+		BB000000000000000000001D /* SVGPathParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001D /* SVGPathParser.swift */; };
+		BB000000000000000000001E /* BodyPathData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001E /* BodyPathData.swift */; };
+		BB000000000000000000001F /* FemaleBackPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001F /* FemaleBackPaths.swift */; };
+		BB0000000000000000000020 /* FemaleFrontPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000020 /* FemaleFrontPaths.swift */; };
+		BB0000000000000000000021 /* MaleBackPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000021 /* MaleBackPaths.swift */; };
+		BB0000000000000000000022 /* MaleFrontPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000022 /* MaleFrontPaths.swift */; };
+		BB0000000000000000000023 /* Muscle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000023 /* Muscle.swift */; };
+		BB0000000000000000000024 /* MuscleSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000024 /* MuscleSelection.swift */; };
+		BB0000000000000000000025 /* MuscleSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000025 /* MuscleSide.swift */; };
+		BB0000000000000000000026 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000026 /* Color+Extensions.swift */; };
+		BB0000000000000000000027 /* ColorInterpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000027 /* ColorInterpolation.swift */; };
+		BB0000000000000000000028 /* HeatmapColorScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000028 /* HeatmapColorScale.swift */; };
+		BB0000000000000000000029 /* HeatmapConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000029 /* HeatmapConfiguration.swift */; };
+		BB000000000000000000002A /* MuscleFill.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002A /* MuscleFill.swift */; };
+		BB000000000000000000002B /* MuscleIntensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002B /* MuscleIntensity.swift */; };
+		BB000000000000000000002C /* BodyRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002C /* BodyRenderer.swift */; };
+		BB000000000000000000002D /* PathCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002D /* PathCache.swift */; };
+		BB000000000000000000002E /* AnimatedBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002E /* AnimatedBodyView.swift */; };
+		BB000000000000000000002F /* BodyAccessibilityOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002F /* BodyAccessibilityOverlay.swift */; };
+		BB0000000000000000000030 /* BodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000030 /* BodyView.swift */; };
+		BB0000000000000000000031 /* BodyViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000031 /* BodyViewStyle.swift */; };
+		BB0000000000000000000032 /* HeatmapLegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000032 /* HeatmapLegendView.swift */; };
+		BB0000000000000000000033 /* InteractiveBodyOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000033 /* InteractiveBodyOverlay.swift */; };
+		BB0000000000000000000034 /* MuscleTooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000034 /* MuscleTooltip.swift */; };
+		BB0000000000000000000035 /* SelectionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000035 /* SelectionHistory.swift */; };
+		BB0000000000000000000036 /* ZoomableBodyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000036 /* ZoomableBodyContainer.swift */; };
+		BB0000000000000000000038 /* AutoProgressionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000038 /* AutoProgressionEngine.swift */; };
+		BB0000000000000000000039 /* CalendarSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000039 /* CalendarSyncService.swift */; };
+		BB000000000000000000003A /* DeepMuscleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003A /* DeepMuscleEngine.swift */; };
+		BB000000000000000000003B /* DynamicFitnessEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003B /* DynamicFitnessEngine.swift */; };
+		BB000000000000000000003C /* ExerciseCatalogSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003C /* ExerciseCatalogSeed.swift */; };
+		BB000000000000000000003D /* ExerciseIllustrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003D /* ExerciseIllustrationService.swift */; };
+		BB000000000000000000003E /* ExerciseSearchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003E /* ExerciseSearchEngine.swift */; };
+		BB000000000000000000003F /* FlowStateEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003F /* FlowStateEngine.swift */; };
+		BB0000000000000000000040 /* GoogleHealthSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000040 /* GoogleHealthSyncService.swift */; };
+		BB0000000000000000000041 /* GoogleTasksSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000041 /* GoogleTasksSyncService.swift */; };
+		BB0000000000000000000042 /* GrowEcosystemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000042 /* GrowEcosystemRouter.swift */; };
+		BB0000000000000000000043 /* GrowcerySyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000043 /* GrowcerySyncService.swift */; };
+		BB0000000000000000000044 /* GymStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000044 /* GymStore.swift */; };
+		BB0000000000000000000045 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000045 /* HealthKitService.swift */; };
+		BB0000000000000000000046 /* MuscleStimulusEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000046 /* MuscleStimulusEngine.swift */; };
+		BB0000000000000000000047 /* CommodityReferenceCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000047 /* CommodityReferenceCatalog.swift */; };
+		BB0000000000000000000048 /* GenerativeCulinaryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000048 /* GenerativeCulinaryEngine.swift */; };
+		BB0000000000000000000049 /* HapticFeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000049 /* HapticFeedbackService.swift */; };
+		BB000000000000000000004A /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004A /* LocalStore.swift */; };
+		BB000000000000000000004B /* MasterDataSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004B /* MasterDataSeed.swift */; };
+		BB000000000000000000004C /* NutritionLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004C /* NutritionLogService.swift */; };
+		BB000000000000000000004D /* NutritionalScoringEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004D /* NutritionalScoringEngine.swift */; };
+		BB000000000000000000004E /* OpenFoodFactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004E /* OpenFoodFactsService.swift */; };
+		BB000000000000000000004F /* PantryMatchingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004F /* PantryMatchingEngine.swift */; };
+		BB0000000000000000000050 /* PantryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000050 /* PantryRepository.swift */; };
+		BB0000000000000000000051 /* ReceiptMatchingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000051 /* ReceiptMatchingEngine.swift */; };
+		BB0000000000000000000052 /* ReceiptOCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000052 /* ReceiptOCRService.swift */; };
+		BB0000000000000000000053 /* ReceiptRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000053 /* ReceiptRepository.swift */; };
+		BB0000000000000000000054 /* ShoppingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000054 /* ShoppingService.swift */; };
+		BB0000000000000000000055 /* StoreCanonicalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000055 /* StoreCanonicalizer.swift */; };
+		BB0000000000000000000056 /* SupplementNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000056 /* SupplementNotificationService.swift */; };
+		BB0000000000000000000057 /* WaterNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000057 /* WaterNotificationService.swift */; };
+		BB0000000000000000000058 /* OlympicCoachEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000058 /* OlympicCoachEngine.swift */; };
+		BB0000000000000000000059 /* PlateCalculatorEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000059 /* PlateCalculatorEngine.swift */; };
+		BB000000000000000000005A /* SharedMacrosBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005A /* SharedMacrosBridge.swift */; };
+		BB00000000000000000000E5 /* GrowPeerSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E5 /* GrowPeerSyncService.swift */; };
+		BB000000000000000000005B /* StravaSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005B /* StravaSyncService.swift */; };
+		BB000000000000000000005C /* UserAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005C /* UserAccountService.swift */; };
+		BB000000000000000000005D /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005D /* WeatherService.swift */; };
+		BB000000000000000000005E /* WorkoutExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005E /* WorkoutExportService.swift */; };
+		BB000000000000000000005F /* YouTubeExerciseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005F /* YouTubeExerciseService.swift */; };
+		BB0000000000000000000060 /* GymTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000060 /* GymTheme.swift */; };
+		BB0000000000000000000061 /* ActiveWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000061 /* ActiveWorkoutView.swift */; };
+		BB0000000000000000000062 /* AnatomicalMuscleMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000062 /* AnatomicalMuscleMapView.swift */; };
+		BB0000000000000000000063 /* AnimatedExerciseGIFPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000063 /* AnimatedExerciseGIFPlayer.swift */; };
+		BB0000000000000000000064 /* AthleticStandardGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000064 /* AthleticStandardGraphView.swift */; };
+		BB0000000000000000000065 /* CollapsibleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000065 /* CollapsibleSection.swift */; };
+		BB0000000000000000000066 /* CompletedWorkoutDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000066 /* CompletedWorkoutDetailSheet.swift */; };
+		BB0000000000000000000067 /* ConcentricNutritionRingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000067 /* ConcentricNutritionRingsView.swift */; };
+		BB0000000000000000000068 /* DeepMuscleReportSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000068 /* DeepMuscleReportSheet.swift */; };
+		BB0000000000000000000069 /* EditExerciseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000069 /* EditExerciseSheet.swift */; };
+		BB000000000000000000006A /* EditWorkoutTemplateSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000006A /* EditWorkoutTemplateSheet.swift */; };
+		BB000000000000000000006B /* ExerciseCatalogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000006B /* ExerciseCatalogView.swift */; };
+		BB000000000000000000006C /* ExercisesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000006C /* ExercisesView.swift */; };
+		BB000000000000000000006D /* FlowCheckInSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000006D /* FlowCheckInSheet.swift */; };
+		BB000000000000000000006E /* GymAccountLoginSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000006E /* GymAccountLoginSheet.swift */; };
+		BB000000000000000000006F /* GymCalendarStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000006F /* GymCalendarStripView.swift */; };
+		BB0000000000000000000070 /* GymCircularProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000070 /* GymCircularProfileButton.swift */; };
+		BB0000000000000000000071 /* InfoExplanationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000071 /* InfoExplanationSheet.swift */; };
+		BB0000000000000000000072 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000072 /* MainTabView.swift */; };
+		BB0000000000000000000073 /* MeasurementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000073 /* MeasurementsView.swift */; };
+		BB0000000000000000000074 /* MuscleDetailExplanationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000074 /* MuscleDetailExplanationSheet.swift */; };
+		BB0000000000000000000075 /* AccountLoginSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000075 /* AccountLoginSheet.swift */; };
+		BB0000000000000000000076 /* AddPastMealSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000076 /* AddPastMealSheet.swift */; };
+		BB0000000000000000000077 /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000077 /* BarcodeScannerView.swift */; };
+		BB0000000000000000000078 /* CircadianSupplementsManagementSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000078 /* CircadianSupplementsManagementSheet.swift */; };
+		BB0000000000000000000079 /* CustomizeRecipeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000079 /* CustomizeRecipeSheet.swift */; };
+		BB000000000000000000007A /* EditMealLogSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007A /* EditMealLogSheet.swift */; };
+		BB000000000000000000007B /* EditRecipeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007B /* EditRecipeSheet.swift */; };
+		BB000000000000000000007C /* EditStockSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007C /* EditStockSheet.swift */; };
+		BB000000000000000000007D /* InventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007D /* InventoryView.swift */; };
+		BB000000000000000000007E /* LogConsumptionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007E /* LogConsumptionSheet.swift */; };
+		BB000000000000000000007F /* NutriCircularWaterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007F /* NutriCircularWaterButton.swift */; };
+		BB0000000000000000000080 /* NutritionDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000080 /* NutritionDetailSheet.swift */; };
+		BB0000000000000000000081 /* NutritionalScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000081 /* NutritionalScoresView.swift */; };
+		BB0000000000000000000082 /* ProductComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000082 /* ProductComparisonView.swift */; };
+		BB0000000000000000000083 /* QuickAddMealSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000083 /* QuickAddMealSheet.swift */; };
+		BB0000000000000000000084 /* ReceiptDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000084 /* ReceiptDetailSheet.swift */; };
+		BB0000000000000000000085 /* ReceiptItemDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000085 /* ReceiptItemDetailSheet.swift */; };
+		BB0000000000000000000086 /* ReceiptScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000086 /* ReceiptScannerView.swift */; };
+		BB0000000000000000000087 /* RecipeDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000087 /* RecipeDetailSheet.swift */; };
+		BB0000000000000000000088 /* RecipeFilterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000088 /* RecipeFilterSheet.swift */; };
+		BB0000000000000000000089 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000089 /* RecipesView.swift */; };
+		BB000000000000000000008A /* ScannedProductInspectorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008A /* ScannedProductInspectorSheet.swift */; };
+		BB000000000000000000008B /* ShoppingHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008B /* ShoppingHubView.swift */; };
+		BB000000000000000000008C /* StoreScouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008C /* StoreScouterView.swift */; };
+		BB000000000000000000008D /* ZoomableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008D /* ZoomableImageView.swift */; };
+		BB000000000000000000008E /* OlympicCoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008E /* OlympicCoachView.swift */; };
+		BB000000000000000000008F /* PlanWorkoutSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008F /* PlanWorkoutSheet.swift */; };
+		BB0000000000000000000090 /* PlateCalculatorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000090 /* PlateCalculatorSheet.swift */; };
+		BB0000000000000000000091 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000091 /* ProfileView.swift */; };
+		BB0000000000000000000092 /* StartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000092 /* StartWorkoutView.swift */; };
+		BB0000000000000000000093 /* TimedExerciseCountdownSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000093 /* TimedExerciseCountdownSheet.swift */; };
+		BB0000000000000000000094 /* TodayUnifiedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000094 /* TodayUnifiedView.swift */; };
+		BB0000000000000000000095 /* TodayWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000095 /* TodayWorkoutView.swift */; };
+		BB0000000000000000000096 /* WaageScannerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000096 /* WaageScannerSheet.swift */; };
+		BB0000000000000000000097 /* WorkoutExitScalarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000097 /* WorkoutExitScalarSheet.swift */; };
+		BB0000000000000000000098 /* WorkoutPreviewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000098 /* WorkoutPreviewSheet.swift */; };
+		BB000000000000000000009B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009B /* Assets.xcassets */; };
+		BB000000000000000000009C /* direct_gif_map.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009C /* direct_gif_map.json */; };
+		BB000000000000000000009D /* hasan_matches.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009D /* hasan_matches.json */; };
+		BB000000000000000000009E /* hasaneyldrm_exercises_catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009E /* hasaneyldrm_exercises_catalog.json */; };
+		BB000000000000000000009F /* penny_recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009F /* penny_recipes.json */; };
+		BB00000000000000000000A0 /* barbell_row.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A0 /* barbell_row.gif */; };
+		BB00000000000000000000A1 /* bench_dip.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A1 /* bench_dip.gif */; };
+		BB00000000000000000000A2 /* bench_press.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A2 /* bench_press.gif */; };
+		BB00000000000000000000A3 /* dead_bug.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A3 /* dead_bug.gif */; };
+		BB00000000000000000000A4 /* glute_bridge.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A4 /* glute_bridge.gif */; };
+		BB00000000000000000000A5 /* goblet_squat.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A5 /* goblet_squat.gif */; };
+		BB00000000000000000000A6 /* hasan_0009.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A6 /* hasan_0009.gif */; };
+		BB00000000000000000000A7 /* hasan_0015.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A7 /* hasan_0015.gif */; };
+		BB00000000000000000000A8 /* hasan_0017.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A8 /* hasan_0017.gif */; };
+		BB00000000000000000000A9 /* hasan_0025.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A9 /* hasan_0025.gif */; };
+		BB00000000000000000000AA /* hasan_0030.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AA /* hasan_0030.gif */; };
+		BB00000000000000000000AB /* hasan_0031.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AB /* hasan_0031.gif */; };
+		BB00000000000000000000AC /* hasan_0032.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AC /* hasan_0032.gif */; };
+		BB00000000000000000000AD /* hasan_0043.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AD /* hasan_0043.gif */; };
+		BB00000000000000000000AE /* hasan_0047.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AE /* hasan_0047.gif */; };
+		BB00000000000000000000AF /* hasan_0085.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AF /* hasan_0085.gif */; };
+		BB00000000000000000000B0 /* hasan_0095.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B0 /* hasan_0095.gif */; };
+		BB00000000000000000000B1 /* hasan_0129.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B1 /* hasan_0129.gif */; };
+		BB00000000000000000000B2 /* hasan_0192.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B2 /* hasan_0192.gif */; };
+		BB00000000000000000000B3 /* hasan_0196.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B3 /* hasan_0196.gif */; };
+		BB00000000000000000000B4 /* hasan_0201.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B4 /* hasan_0201.gif */; };
+		BB00000000000000000000B5 /* hasan_0238.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B5 /* hasan_0238.gif */; };
+		BB00000000000000000000B6 /* hasan_0242.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B6 /* hasan_0242.gif */; };
+		BB00000000000000000000B7 /* hasan_0276.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B7 /* hasan_0276.gif */; };
+		BB00000000000000000000B8 /* hasan_0289.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B8 /* hasan_0289.gif */; };
+		BB00000000000000000000B9 /* hasan_0313.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B9 /* hasan_0313.gif */; };
+		BB00000000000000000000BA /* hasan_0314.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BA /* hasan_0314.gif */; };
+		BB00000000000000000000BB /* hasan_0334.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BB /* hasan_0334.gif */; };
+		BB00000000000000000000BC /* hasan_0336.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BC /* hasan_0336.gif */; };
+		BB00000000000000000000BD /* hasan_0372.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BD /* hasan_0372.gif */; };
+		BB00000000000000000000BE /* hasan_0405.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BE /* hasan_0405.gif */; };
+		BB00000000000000000000BF /* hasan_0410.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BF /* hasan_0410.gif */; };
+		BB00000000000000000000C0 /* hasan_0464.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C0 /* hasan_0464.gif */; };
+		BB00000000000000000000C1 /* hasan_0472.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C1 /* hasan_0472.gif */; };
+		BB00000000000000000000C2 /* hasan_0493.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C2 /* hasan_0493.gif */; };
+		BB00000000000000000000C3 /* hasan_0576.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C3 /* hasan_0576.gif */; };
+		BB00000000000000000000C4 /* hasan_0585.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C4 /* hasan_0585.gif */; };
+		BB00000000000000000000C5 /* hasan_0586.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C5 /* hasan_0586.gif */; };
+		BB00000000000000000000C6 /* hasan_0594.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C6 /* hasan_0594.gif */; };
+		BB00000000000000000000C7 /* hasan_0596.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C7 /* hasan_0596.gif */; };
+		BB00000000000000000000C8 /* hasan_0597.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C8 /* hasan_0597.gif */; };
+		BB00000000000000000000C9 /* hasan_0598.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C9 /* hasan_0598.gif */; };
+		BB00000000000000000000CA /* hasan_0601.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CA /* hasan_0601.gif */; };
+		BB00000000000000000000CB /* hasan_0603.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CB /* hasan_0603.gif */; };
+		BB00000000000000000000CC /* hasan_0662.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CC /* hasan_0662.gif */; };
+		BB00000000000000000000CD /* hasan_0725.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CD /* hasan_0725.gif */; };
+		BB00000000000000000000CE /* hasan_0766.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CE /* hasan_0766.gif */; };
+		BB00000000000000000000CF /* hasan_0861.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CF /* hasan_0861.gif */; };
+		BB00000000000000000000D0 /* hasan_0868.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D0 /* hasan_0868.gif */; };
+		BB00000000000000000000D1 /* hasan_0972.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D1 /* hasan_0972.gif */; };
+		BB00000000000000000000D2 /* hasan_0975.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D2 /* hasan_0975.gif */; };
+		BB00000000000000000000D3 /* hasan_1012.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D3 /* hasan_1012.gif */; };
+		BB00000000000000000000D4 /* hasan_1372.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D4 /* hasan_1372.gif */; };
+		BB00000000000000000000D5 /* hasan_1425.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D5 /* hasan_1425.gif */; };
+		BB00000000000000000000D6 /* hasan_1431.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D6 /* hasan_1431.gif */; };
+		BB00000000000000000000D7 /* hasan_1463.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D7 /* hasan_1463.gif */; };
+		BB00000000000000000000D8 /* hasan_1651.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D8 /* hasan_1651.gif */; };
+		BB00000000000000000000D9 /* hasan_1760.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D9 /* hasan_1760.gif */; };
+		BB00000000000000000000DA /* hasan_2330.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DA /* hasan_2330.gif */; };
+		BB00000000000000000000DB /* hasan_3013.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DB /* hasan_3013.gif */; };
+		BB00000000000000000000DC /* hasan_3156.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DC /* hasan_3156.gif */; };
+		BB00000000000000000000DD /* hasan_3281.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DD /* hasan_3281.gif */; };
+		BB00000000000000000000DE /* hasan_3544.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DE /* hasan_3544.gif */; };
+		BB00000000000000000000DF /* incline_bench_press.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DF /* incline_bench_press.gif */; };
+		BB00000000000000000000E0 /* pull_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E0 /* pull_up.gif */; };
+		BB00000000000000000000E1 /* push_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E1 /* push_up.gif */; };
+		BB00000000000000000000E2 /* romanian_deadlift.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E2 /* romanian_deadlift.gif */; };
+		BB00000000000000000000E3 /* seated_shoulder_press.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E3 /* seated_shoulder_press.gif */; };
+		BB00000000000000000000E4 /* single_arm_push_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E4 /* single_arm_push_up.gif */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		111111111111111111111111 /* GymApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000000 /* GymApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GymApp.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000001 /* AthleticStandardTier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/AthleticStandardTier.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000002 /* BodyMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/BodyMeasurement.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000003 /* CalisthenicGodArchetypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/CalisthenicGodArchetypes.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000004 /* CoachTuningMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/CoachTuningMatrix.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000005 /* CrossProgramBenchmarkRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/CrossProgramBenchmarkRegistry.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000006 /* CustomRecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/CustomRecurrenceRule.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000007 /* DeepMuscleIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/DeepMuscleIndex.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000008 /* DetailedAnatomyModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/DetailedAnatomyModels.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000009 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Exercise.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000A /* ExternalWorkoutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/ExternalWorkoutItem.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000B /* GrowcerySyncState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/GrowcerySyncState.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000C /* CircadianSupplementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Nutrition/CircadianSupplementModel.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000D /* CuisineTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Nutrition/CuisineTaxonomy.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000E /* EquipmentTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Nutrition/EquipmentTaxonomy.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000F /* MealLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Nutrition/MealLogEntry.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000010 /* MealTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Nutrition/MealTemplate.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000011 /* NutritionalProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Nutrition/NutritionalProfile.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000012 /* PantryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Nutrition/PantryItem.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000013 /* ReceiptRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Nutrition/ReceiptRecord.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000014 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/Nutrition/ShoppingItem.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000015 /* ProgramCatalogSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/ProgramCatalogSeed.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000016 /* TrainingProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/TrainingProgram.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000017 /* UnifiedDayWorkoutItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/UnifiedDayWorkoutItem.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000018 /* WorkoutDebriefRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/WorkoutDebriefRecord.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000019 /* WorkoutSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/WorkoutSession.swift"; sourceTree = "<group>"; };
+		AA000000000000000000001A /* WorkoutTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/WorkoutTemplate.swift"; sourceTree = "<group>"; };
+		AA000000000000000000001B /* PathBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Core/PathBuilder.swift"; sourceTree = "<group>"; };
+		AA000000000000000000001C /* SVGPathCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Core/SVGPathCommand.swift"; sourceTree = "<group>"; };
+		AA000000000000000000001D /* SVGPathParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Core/SVGPathParser.swift"; sourceTree = "<group>"; };
+		AA000000000000000000001E /* BodyPathData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Data/BodyPathData.swift"; sourceTree = "<group>"; };
+		AA000000000000000000001F /* FemaleBackPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Data/FemaleBackPaths.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000020 /* FemaleFrontPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Data/FemaleFrontPaths.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000021 /* MaleBackPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Data/MaleBackPaths.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000022 /* MaleFrontPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Data/MaleFrontPaths.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000023 /* Muscle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Data/Muscle.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000024 /* MuscleSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Data/MuscleSelection.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000025 /* MuscleSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Data/MuscleSide.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000026 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Extensions/Color+Extensions.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000027 /* ColorInterpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Heatmap/ColorInterpolation.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000028 /* HeatmapColorScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Heatmap/HeatmapColorScale.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000029 /* HeatmapConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Heatmap/HeatmapConfiguration.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002A /* MuscleFill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Heatmap/MuscleFill.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002B /* MuscleIntensity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Heatmap/MuscleIntensity.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002C /* BodyRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Rendering/BodyRenderer.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002D /* PathCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Rendering/PathCache.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002E /* AnimatedBodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Views/AnimatedBodyView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002F /* BodyAccessibilityOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Views/BodyAccessibilityOverlay.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000030 /* BodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Views/BodyView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000031 /* BodyViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Views/BodyViewStyle.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000032 /* HeatmapLegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Views/HeatmapLegendView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000033 /* InteractiveBodyOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Views/InteractiveBodyOverlay.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000034 /* MuscleTooltip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Views/MuscleTooltip.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000035 /* SelectionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Views/SelectionHistory.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000036 /* ZoomableBodyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MuscleMap/Views/ZoomableBodyContainer.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000038 /* AutoProgressionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/AutoProgressionEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000039 /* CalendarSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/CalendarSyncService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000003A /* DeepMuscleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/DeepMuscleEngine.swift"; sourceTree = "<group>"; };
+		AA000000000000000000003B /* DynamicFitnessEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/DynamicFitnessEngine.swift"; sourceTree = "<group>"; };
+		AA000000000000000000003C /* ExerciseCatalogSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/ExerciseCatalogSeed.swift"; sourceTree = "<group>"; };
+		AA000000000000000000003D /* ExerciseIllustrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/ExerciseIllustrationService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000003E /* ExerciseSearchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/ExerciseSearchEngine.swift"; sourceTree = "<group>"; };
+		AA000000000000000000003F /* FlowStateEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/FlowStateEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000040 /* GoogleHealthSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GoogleHealthSyncService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000041 /* GoogleTasksSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GoogleTasksSyncService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000042 /* GrowEcosystemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GrowEcosystemRouter.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000043 /* GrowcerySyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GrowcerySyncService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000044 /* GymStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GymStore.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000045 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/HealthKitService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000046 /* MuscleStimulusEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/MuscleStimulusEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000047 /* CommodityReferenceCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/CommodityReferenceCatalog.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000048 /* GenerativeCulinaryEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/GenerativeCulinaryEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000049 /* HapticFeedbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/HapticFeedbackService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004A /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/LocalStore.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004B /* MasterDataSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/MasterDataSeed.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004C /* NutritionLogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/NutritionLogService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004D /* NutritionalScoringEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/NutritionalScoringEngine.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004E /* OpenFoodFactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/OpenFoodFactsService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004F /* PantryMatchingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/PantryMatchingEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000050 /* PantryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/PantryRepository.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000051 /* ReceiptMatchingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/ReceiptMatchingEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000052 /* ReceiptOCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/ReceiptOCRService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000053 /* ReceiptRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/ReceiptRepository.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000054 /* ShoppingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/ShoppingService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000055 /* StoreCanonicalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/StoreCanonicalizer.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000056 /* SupplementNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/SupplementNotificationService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000057 /* WaterNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/WaterNotificationService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000058 /* OlympicCoachEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/OlympicCoachEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000059 /* PlateCalculatorEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/PlateCalculatorEngine.swift"; sourceTree = "<group>"; };
+		AA000000000000000000005A /* SharedMacrosBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/SharedMacrosBridge.swift"; sourceTree = "<group>"; };
+		AA00000000000000000000E5 /* GrowPeerSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GrowPeerSyncService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000005B /* StravaSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/StravaSyncService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000005C /* UserAccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/UserAccountService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000005D /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/WeatherService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000005E /* WorkoutExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/WorkoutExportService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000005F /* YouTubeExerciseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/YouTubeExerciseService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000060 /* GymTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme/GymTheme.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000061 /* ActiveWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ActiveWorkoutView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000062 /* AnatomicalMuscleMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/AnatomicalMuscleMapView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000063 /* AnimatedExerciseGIFPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/AnimatedExerciseGIFPlayer.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000064 /* AthleticStandardGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/AthleticStandardGraphView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000065 /* CollapsibleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CollapsibleSection.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000066 /* CompletedWorkoutDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CompletedWorkoutDetailSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000067 /* ConcentricNutritionRingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ConcentricNutritionRingsView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000068 /* DeepMuscleReportSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/DeepMuscleReportSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000069 /* EditExerciseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/EditExerciseSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000006A /* EditWorkoutTemplateSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/EditWorkoutTemplateSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000006B /* ExerciseCatalogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ExerciseCatalogView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000006C /* ExercisesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ExercisesView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000006D /* FlowCheckInSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/FlowCheckInSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000006E /* GymAccountLoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/GymAccountLoginSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000006F /* GymCalendarStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/GymCalendarStripView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000070 /* GymCircularProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/GymCircularProfileButton.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000071 /* InfoExplanationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/InfoExplanationSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000072 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/MainTabView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000073 /* MeasurementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/MeasurementsView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000074 /* MuscleDetailExplanationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/MuscleDetailExplanationSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000075 /* AccountLoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/AccountLoginSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000076 /* AddPastMealSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/AddPastMealSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000077 /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/BarcodeScannerView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000078 /* CircadianSupplementsManagementSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/CircadianSupplementsManagementSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000079 /* CustomizeRecipeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/CustomizeRecipeSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000007A /* EditMealLogSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/EditMealLogSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000007B /* EditRecipeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/EditRecipeSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000007C /* EditStockSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/EditStockSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000007D /* InventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/InventoryView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000007E /* LogConsumptionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/LogConsumptionSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000007F /* NutriCircularWaterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/NutriCircularWaterButton.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000080 /* NutritionDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/NutritionDetailSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000081 /* NutritionalScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/NutritionalScoresView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000082 /* ProductComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/ProductComparisonView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000083 /* QuickAddMealSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/QuickAddMealSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000084 /* ReceiptDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/ReceiptDetailSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000085 /* ReceiptItemDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/ReceiptItemDetailSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000086 /* ReceiptScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/ReceiptScannerView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000087 /* RecipeDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/RecipeDetailSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000088 /* RecipeFilterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/RecipeFilterSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000089 /* RecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/RecipesView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000008A /* ScannedProductInspectorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/ScannedProductInspectorSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000008B /* ShoppingHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/ShoppingHubView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000008C /* StoreScouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/StoreScouterView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000008D /* ZoomableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/Nutrition/ZoomableImageView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000008E /* OlympicCoachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/OlympicCoachView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000008F /* PlanWorkoutSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/PlanWorkoutSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000090 /* PlateCalculatorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/PlateCalculatorSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000091 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ProfileView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000092 /* StartWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StartWorkoutView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000093 /* TimedExerciseCountdownSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TimedExerciseCountdownSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000094 /* TodayUnifiedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TodayUnifiedView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000095 /* TodayWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TodayWorkoutView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000096 /* WaageScannerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/WaageScannerSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000097 /* WorkoutExitScalarSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/WorkoutExitScalarSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000098 /* WorkoutPreviewSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/WorkoutPreviewSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		AA000000000000000000009A /* GymApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GymApp.entitlements"; sourceTree = "<group>"; };
+		AA000000000000000000009B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
+		AA000000000000000000009C /* direct_gif_map.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Resources/direct_gif_map.json"; sourceTree = "<group>"; };
+		AA000000000000000000009D /* hasan_matches.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Resources/hasan_matches.json"; sourceTree = "<group>"; };
+		AA000000000000000000009E /* hasaneyldrm_exercises_catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Resources/hasaneyldrm_exercises_catalog.json"; sourceTree = "<group>"; };
+		AA000000000000000000009F /* penny_recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Resources/penny_recipes.json"; sourceTree = "<group>"; };
+		AA00000000000000000000A0 /* barbell_row.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/barbell_row.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000A1 /* bench_dip.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/bench_dip.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000A2 /* bench_press.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/bench_press.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000A3 /* dead_bug.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/dead_bug.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000A4 /* glute_bridge.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/glute_bridge.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000A5 /* goblet_squat.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/goblet_squat.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000A6 /* hasan_0009.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0009.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000A7 /* hasan_0015.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0015.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000A8 /* hasan_0017.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0017.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000A9 /* hasan_0025.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0025.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000AA /* hasan_0030.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0030.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000AB /* hasan_0031.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0031.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000AC /* hasan_0032.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0032.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000AD /* hasan_0043.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0043.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000AE /* hasan_0047.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0047.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000AF /* hasan_0085.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0085.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B0 /* hasan_0095.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0095.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B1 /* hasan_0129.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0129.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B2 /* hasan_0192.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0192.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B3 /* hasan_0196.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0196.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B4 /* hasan_0201.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0201.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B5 /* hasan_0238.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0238.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B6 /* hasan_0242.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0242.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B7 /* hasan_0276.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0276.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B8 /* hasan_0289.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0289.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000B9 /* hasan_0313.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0313.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000BA /* hasan_0314.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0314.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000BB /* hasan_0334.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0334.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000BC /* hasan_0336.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0336.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000BD /* hasan_0372.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0372.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000BE /* hasan_0405.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0405.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000BF /* hasan_0410.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0410.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C0 /* hasan_0464.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0464.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C1 /* hasan_0472.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0472.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C2 /* hasan_0493.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0493.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C3 /* hasan_0576.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0576.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C4 /* hasan_0585.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0585.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C5 /* hasan_0586.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0586.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C6 /* hasan_0594.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0594.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C7 /* hasan_0596.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0596.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C8 /* hasan_0597.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0597.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000C9 /* hasan_0598.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0598.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000CA /* hasan_0601.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0601.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000CB /* hasan_0603.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0603.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000CC /* hasan_0662.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0662.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000CD /* hasan_0725.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0725.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000CE /* hasan_0766.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0766.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000CF /* hasan_0861.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0861.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D0 /* hasan_0868.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0868.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D1 /* hasan_0972.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0972.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D2 /* hasan_0975.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0975.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D3 /* hasan_1012.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1012.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D4 /* hasan_1372.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1372.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D5 /* hasan_1425.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1425.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D6 /* hasan_1431.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1431.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D7 /* hasan_1463.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1463.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D8 /* hasan_1651.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1651.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000D9 /* hasan_1760.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1760.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000DA /* hasan_2330.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_2330.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000DB /* hasan_3013.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_3013.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000DC /* hasan_3156.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_3156.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000DD /* hasan_3281.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_3281.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000DE /* hasan_3544.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_3544.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000DF /* incline_bench_press.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/incline_bench_press.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000E0 /* pull_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/pull_up.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000E1 /* push_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/push_up.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000E2 /* romanian_deadlift.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/romanian_deadlift.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000E3 /* seated_shoulder_press.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/seated_shoulder_press.gif"; sourceTree = "<group>"; };
+		AA00000000000000000000E4 /* single_arm_push_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/single_arm_push_up.gif"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		222222222222222222222221 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CC0000000000000000000003 /* GrowCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		333333333333333333333331 /* GymApp */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000000 /* GymApp.swift */,
+				AA0000000000000000000001 /* AthleticStandardTier.swift */,
+				AA0000000000000000000002 /* BodyMeasurement.swift */,
+				AA0000000000000000000003 /* CalisthenicGodArchetypes.swift */,
+				AA0000000000000000000004 /* CoachTuningMatrix.swift */,
+				AA0000000000000000000005 /* CrossProgramBenchmarkRegistry.swift */,
+				AA0000000000000000000006 /* CustomRecurrenceRule.swift */,
+				AA0000000000000000000007 /* DeepMuscleIndex.swift */,
+				AA0000000000000000000008 /* DetailedAnatomyModels.swift */,
+				AA0000000000000000000009 /* Exercise.swift */,
+				AA000000000000000000000A /* ExternalWorkoutItem.swift */,
+				AA000000000000000000000B /* GrowcerySyncState.swift */,
+				AA000000000000000000000C /* CircadianSupplementModel.swift */,
+				AA000000000000000000000D /* CuisineTaxonomy.swift */,
+				AA000000000000000000000E /* EquipmentTaxonomy.swift */,
+				AA000000000000000000000F /* MealLogEntry.swift */,
+				AA0000000000000000000010 /* MealTemplate.swift */,
+				AA0000000000000000000011 /* NutritionalProfile.swift */,
+				AA0000000000000000000012 /* PantryItem.swift */,
+				AA0000000000000000000013 /* ReceiptRecord.swift */,
+				AA0000000000000000000014 /* ShoppingItem.swift */,
+				AA0000000000000000000015 /* ProgramCatalogSeed.swift */,
+				AA0000000000000000000016 /* TrainingProgram.swift */,
+				AA0000000000000000000017 /* UnifiedDayWorkoutItem.swift */,
+				AA0000000000000000000018 /* WorkoutDebriefRecord.swift */,
+				AA0000000000000000000019 /* WorkoutSession.swift */,
+				AA000000000000000000001A /* WorkoutTemplate.swift */,
+				AA000000000000000000001B /* PathBuilder.swift */,
+				AA000000000000000000001C /* SVGPathCommand.swift */,
+				AA000000000000000000001D /* SVGPathParser.swift */,
+				AA000000000000000000001E /* BodyPathData.swift */,
+				AA000000000000000000001F /* FemaleBackPaths.swift */,
+				AA0000000000000000000020 /* FemaleFrontPaths.swift */,
+				AA0000000000000000000021 /* MaleBackPaths.swift */,
+				AA0000000000000000000022 /* MaleFrontPaths.swift */,
+				AA0000000000000000000023 /* Muscle.swift */,
+				AA0000000000000000000024 /* MuscleSelection.swift */,
+				AA0000000000000000000025 /* MuscleSide.swift */,
+				AA0000000000000000000026 /* Color+Extensions.swift */,
+				AA0000000000000000000027 /* ColorInterpolation.swift */,
+				AA0000000000000000000028 /* HeatmapColorScale.swift */,
+				AA0000000000000000000029 /* HeatmapConfiguration.swift */,
+				AA000000000000000000002A /* MuscleFill.swift */,
+				AA000000000000000000002B /* MuscleIntensity.swift */,
+				AA000000000000000000002C /* BodyRenderer.swift */,
+				AA000000000000000000002D /* PathCache.swift */,
+				AA000000000000000000002E /* AnimatedBodyView.swift */,
+				AA000000000000000000002F /* BodyAccessibilityOverlay.swift */,
+				AA0000000000000000000030 /* BodyView.swift */,
+				AA0000000000000000000031 /* BodyViewStyle.swift */,
+				AA0000000000000000000032 /* HeatmapLegendView.swift */,
+				AA0000000000000000000033 /* InteractiveBodyOverlay.swift */,
+				AA0000000000000000000034 /* MuscleTooltip.swift */,
+				AA0000000000000000000035 /* SelectionHistory.swift */,
+				AA0000000000000000000036 /* ZoomableBodyContainer.swift */,
+				AA0000000000000000000038 /* AutoProgressionEngine.swift */,
+				AA0000000000000000000039 /* CalendarSyncService.swift */,
+				AA000000000000000000003A /* DeepMuscleEngine.swift */,
+				AA000000000000000000003B /* DynamicFitnessEngine.swift */,
+				AA000000000000000000003C /* ExerciseCatalogSeed.swift */,
+				AA000000000000000000003D /* ExerciseIllustrationService.swift */,
+				AA000000000000000000003E /* ExerciseSearchEngine.swift */,
+				AA000000000000000000003F /* FlowStateEngine.swift */,
+				AA0000000000000000000040 /* GoogleHealthSyncService.swift */,
+				AA0000000000000000000041 /* GoogleTasksSyncService.swift */,
+				AA0000000000000000000042 /* GrowEcosystemRouter.swift */,
+				AA0000000000000000000043 /* GrowcerySyncService.swift */,
+				AA0000000000000000000044 /* GymStore.swift */,
+				AA0000000000000000000045 /* HealthKitService.swift */,
+				AA0000000000000000000046 /* MuscleStimulusEngine.swift */,
+				AA0000000000000000000047 /* CommodityReferenceCatalog.swift */,
+				AA0000000000000000000048 /* GenerativeCulinaryEngine.swift */,
+				AA0000000000000000000049 /* HapticFeedbackService.swift */,
+				AA000000000000000000004A /* LocalStore.swift */,
+				AA000000000000000000004B /* MasterDataSeed.swift */,
+				AA000000000000000000004C /* NutritionLogService.swift */,
+				AA000000000000000000004D /* NutritionalScoringEngine.swift */,
+				AA000000000000000000004E /* OpenFoodFactsService.swift */,
+				AA000000000000000000004F /* PantryMatchingEngine.swift */,
+				AA0000000000000000000050 /* PantryRepository.swift */,
+				AA0000000000000000000051 /* ReceiptMatchingEngine.swift */,
+				AA0000000000000000000052 /* ReceiptOCRService.swift */,
+				AA0000000000000000000053 /* ReceiptRepository.swift */,
+				AA0000000000000000000054 /* ShoppingService.swift */,
+				AA0000000000000000000055 /* StoreCanonicalizer.swift */,
+				AA0000000000000000000056 /* SupplementNotificationService.swift */,
+				AA0000000000000000000057 /* WaterNotificationService.swift */,
+				AA0000000000000000000058 /* OlympicCoachEngine.swift */,
+				AA0000000000000000000059 /* PlateCalculatorEngine.swift */,
+				AA000000000000000000005A /* SharedMacrosBridge.swift */,
+				AA00000000000000000000E5 /* GrowPeerSyncService.swift */,
+
+				AA000000000000000000005B /* StravaSyncService.swift */,
+				AA000000000000000000005C /* UserAccountService.swift */,
+				AA000000000000000000005D /* WeatherService.swift */,
+				AA000000000000000000005E /* WorkoutExportService.swift */,
+				AA000000000000000000005F /* YouTubeExerciseService.swift */,
+				AA0000000000000000000060 /* GymTheme.swift */,
+				AA0000000000000000000061 /* ActiveWorkoutView.swift */,
+				AA0000000000000000000062 /* AnatomicalMuscleMapView.swift */,
+				AA0000000000000000000063 /* AnimatedExerciseGIFPlayer.swift */,
+				AA0000000000000000000064 /* AthleticStandardGraphView.swift */,
+				AA0000000000000000000065 /* CollapsibleSection.swift */,
+				AA0000000000000000000066 /* CompletedWorkoutDetailSheet.swift */,
+				AA0000000000000000000067 /* ConcentricNutritionRingsView.swift */,
+				AA0000000000000000000068 /* DeepMuscleReportSheet.swift */,
+				AA0000000000000000000069 /* EditExerciseSheet.swift */,
+				AA000000000000000000006A /* EditWorkoutTemplateSheet.swift */,
+				AA000000000000000000006B /* ExerciseCatalogView.swift */,
+				AA000000000000000000006C /* ExercisesView.swift */,
+				AA000000000000000000006D /* FlowCheckInSheet.swift */,
+				AA000000000000000000006E /* GymAccountLoginSheet.swift */,
+				AA000000000000000000006F /* GymCalendarStripView.swift */,
+				AA0000000000000000000070 /* GymCircularProfileButton.swift */,
+				AA0000000000000000000071 /* InfoExplanationSheet.swift */,
+				AA0000000000000000000072 /* MainTabView.swift */,
+				AA0000000000000000000073 /* MeasurementsView.swift */,
+				AA0000000000000000000074 /* MuscleDetailExplanationSheet.swift */,
+				AA0000000000000000000075 /* AccountLoginSheet.swift */,
+				AA0000000000000000000076 /* AddPastMealSheet.swift */,
+				AA0000000000000000000077 /* BarcodeScannerView.swift */,
+				AA0000000000000000000078 /* CircadianSupplementsManagementSheet.swift */,
+				AA0000000000000000000079 /* CustomizeRecipeSheet.swift */,
+				AA000000000000000000007A /* EditMealLogSheet.swift */,
+				AA000000000000000000007B /* EditRecipeSheet.swift */,
+				AA000000000000000000007C /* EditStockSheet.swift */,
+				AA000000000000000000007D /* InventoryView.swift */,
+				AA000000000000000000007E /* LogConsumptionSheet.swift */,
+				AA000000000000000000007F /* NutriCircularWaterButton.swift */,
+				AA0000000000000000000080 /* NutritionDetailSheet.swift */,
+				AA0000000000000000000081 /* NutritionalScoresView.swift */,
+				AA0000000000000000000082 /* ProductComparisonView.swift */,
+				AA0000000000000000000083 /* QuickAddMealSheet.swift */,
+				AA0000000000000000000084 /* ReceiptDetailSheet.swift */,
+				AA0000000000000000000085 /* ReceiptItemDetailSheet.swift */,
+				AA0000000000000000000086 /* ReceiptScannerView.swift */,
+				AA0000000000000000000087 /* RecipeDetailSheet.swift */,
+				AA0000000000000000000088 /* RecipeFilterSheet.swift */,
+				AA0000000000000000000089 /* RecipesView.swift */,
+				AA000000000000000000008A /* ScannedProductInspectorSheet.swift */,
+				AA000000000000000000008B /* ShoppingHubView.swift */,
+				AA000000000000000000008C /* StoreScouterView.swift */,
+				AA000000000000000000008D /* ZoomableImageView.swift */,
+				AA000000000000000000008E /* OlympicCoachView.swift */,
+				AA000000000000000000008F /* PlanWorkoutSheet.swift */,
+				AA0000000000000000000090 /* PlateCalculatorSheet.swift */,
+				AA0000000000000000000091 /* ProfileView.swift */,
+				AA0000000000000000000092 /* StartWorkoutView.swift */,
+				AA0000000000000000000093 /* TimedExerciseCountdownSheet.swift */,
+				AA0000000000000000000094 /* TodayUnifiedView.swift */,
+				AA0000000000000000000095 /* TodayWorkoutView.swift */,
+				AA0000000000000000000096 /* WaageScannerSheet.swift */,
+				AA0000000000000000000097 /* WorkoutExitScalarSheet.swift */,
+				AA0000000000000000000098 /* WorkoutPreviewSheet.swift */,
+				AA0000000000000000000099 /* Info.plist */,
+				AA000000000000000000009A /* GymApp.entitlements */,
+				AA000000000000000000009B /* Assets.xcassets */,
+				AA000000000000000000009C /* direct_gif_map.json */,
+				AA000000000000000000009D /* hasan_matches.json */,
+				AA000000000000000000009E /* hasaneyldrm_exercises_catalog.json */,
+				AA000000000000000000009F /* penny_recipes.json */,
+				AA00000000000000000000A0 /* barbell_row.gif */,
+				AA00000000000000000000A1 /* bench_dip.gif */,
+				AA00000000000000000000A2 /* bench_press.gif */,
+				AA00000000000000000000A3 /* dead_bug.gif */,
+				AA00000000000000000000A4 /* glute_bridge.gif */,
+				AA00000000000000000000A5 /* goblet_squat.gif */,
+				AA00000000000000000000A6 /* hasan_0009.gif */,
+				AA00000000000000000000A7 /* hasan_0015.gif */,
+				AA00000000000000000000A8 /* hasan_0017.gif */,
+				AA00000000000000000000A9 /* hasan_0025.gif */,
+				AA00000000000000000000AA /* hasan_0030.gif */,
+				AA00000000000000000000AB /* hasan_0031.gif */,
+				AA00000000000000000000AC /* hasan_0032.gif */,
+				AA00000000000000000000AD /* hasan_0043.gif */,
+				AA00000000000000000000AE /* hasan_0047.gif */,
+				AA00000000000000000000AF /* hasan_0085.gif */,
+				AA00000000000000000000B0 /* hasan_0095.gif */,
+				AA00000000000000000000B1 /* hasan_0129.gif */,
+				AA00000000000000000000B2 /* hasan_0192.gif */,
+				AA00000000000000000000B3 /* hasan_0196.gif */,
+				AA00000000000000000000B4 /* hasan_0201.gif */,
+				AA00000000000000000000B5 /* hasan_0238.gif */,
+				AA00000000000000000000B6 /* hasan_0242.gif */,
+				AA00000000000000000000B7 /* hasan_0276.gif */,
+				AA00000000000000000000B8 /* hasan_0289.gif */,
+				AA00000000000000000000B9 /* hasan_0313.gif */,
+				AA00000000000000000000BA /* hasan_0314.gif */,
+				AA00000000000000000000BB /* hasan_0334.gif */,
+				AA00000000000000000000BC /* hasan_0336.gif */,
+				AA00000000000000000000BD /* hasan_0372.gif */,
+				AA00000000000000000000BE /* hasan_0405.gif */,
+				AA00000000000000000000BF /* hasan_0410.gif */,
+				AA00000000000000000000C0 /* hasan_0464.gif */,
+				AA00000000000000000000C1 /* hasan_0472.gif */,
+				AA00000000000000000000C2 /* hasan_0493.gif */,
+				AA00000000000000000000C3 /* hasan_0576.gif */,
+				AA00000000000000000000C4 /* hasan_0585.gif */,
+				AA00000000000000000000C5 /* hasan_0586.gif */,
+				AA00000000000000000000C6 /* hasan_0594.gif */,
+				AA00000000000000000000C7 /* hasan_0596.gif */,
+				AA00000000000000000000C8 /* hasan_0597.gif */,
+				AA00000000000000000000C9 /* hasan_0598.gif */,
+				AA00000000000000000000CA /* hasan_0601.gif */,
+				AA00000000000000000000CB /* hasan_0603.gif */,
+				AA00000000000000000000CC /* hasan_0662.gif */,
+				AA00000000000000000000CD /* hasan_0725.gif */,
+				AA00000000000000000000CE /* hasan_0766.gif */,
+				AA00000000000000000000CF /* hasan_0861.gif */,
+				AA00000000000000000000D0 /* hasan_0868.gif */,
+				AA00000000000000000000D1 /* hasan_0972.gif */,
+				AA00000000000000000000D2 /* hasan_0975.gif */,
+				AA00000000000000000000D3 /* hasan_1012.gif */,
+				AA00000000000000000000D4 /* hasan_1372.gif */,
+				AA00000000000000000000D5 /* hasan_1425.gif */,
+				AA00000000000000000000D6 /* hasan_1431.gif */,
+				AA00000000000000000000D7 /* hasan_1463.gif */,
+				AA00000000000000000000D8 /* hasan_1651.gif */,
+				AA00000000000000000000D9 /* hasan_1760.gif */,
+				AA00000000000000000000DA /* hasan_2330.gif */,
+				AA00000000000000000000DB /* hasan_3013.gif */,
+				AA00000000000000000000DC /* hasan_3156.gif */,
+				AA00000000000000000000DD /* hasan_3281.gif */,
+				AA00000000000000000000DE /* hasan_3544.gif */,
+				AA00000000000000000000DF /* incline_bench_press.gif */,
+				AA00000000000000000000E0 /* pull_up.gif */,
+				AA00000000000000000000E1 /* push_up.gif */,
+				AA00000000000000000000E2 /* romanian_deadlift.gif */,
+				AA00000000000000000000E3 /* seated_shoulder_press.gif */,
+				AA00000000000000000000E4 /* single_arm_push_up.gif */,
+			);
+			path = GymApp;
+			sourceTree = "<group>";
+		};
+		333333333333333333333332 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				111111111111111111111111 /* GymApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		333333333333333333333333 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				333333333333333333333331 /* GymApp */,
+				333333333333333333333332 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		444444444444444444444441 /* GymApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 555555555555555555555551 /* Build configuration list for PBXNativeTarget "GymApp" */;
+			buildPhases = (
+				666666666666666666666661 /* Sources */,
+				222222222222222222222221 /* Frameworks */,
+				777777777777777777777771 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GymApp;
+			productName = GymApp;
+			productReference = 111111111111111111111111 /* GymApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		888888888888888888888888 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					444444444444444444444441 = {
+						CreatedOnToolsVersion = 15.0;
+						DevelopmentTeam = X83D9W2G74;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 555555555555555555555552 /* Build configuration list for PBXProject "GymApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+				Base,
+			);
+			mainGroup = 333333333333333333333333 /* Main */;
+			productRefGroup = 333333333333333333333332 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				444444444444444444444441 /* GymApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		777777777777777777777771 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB000000000000000000009B /* Assets.xcassets in Resources */,
+				BB000000000000000000009C /* direct_gif_map.json in Resources */,
+				BB000000000000000000009D /* hasan_matches.json in Resources */,
+				BB000000000000000000009E /* hasaneyldrm_exercises_catalog.json in Resources */,
+				BB000000000000000000009F /* penny_recipes.json in Resources */,
+				BB00000000000000000000A0 /* barbell_row.gif in Resources */,
+				BB00000000000000000000A1 /* bench_dip.gif in Resources */,
+				BB00000000000000000000A2 /* bench_press.gif in Resources */,
+				BB00000000000000000000A3 /* dead_bug.gif in Resources */,
+				BB00000000000000000000A4 /* glute_bridge.gif in Resources */,
+				BB00000000000000000000A5 /* goblet_squat.gif in Resources */,
+				BB00000000000000000000A6 /* hasan_0009.gif in Resources */,
+				BB00000000000000000000A7 /* hasan_0015.gif in Resources */,
+				BB00000000000000000000A8 /* hasan_0017.gif in Resources */,
+				BB00000000000000000000A9 /* hasan_0025.gif in Resources */,
+				BB00000000000000000000AA /* hasan_0030.gif in Resources */,
+				BB00000000000000000000AB /* hasan_0031.gif in Resources */,
+				BB00000000000000000000AC /* hasan_0032.gif in Resources */,
+				BB00000000000000000000AD /* hasan_0043.gif in Resources */,
+				BB00000000000000000000AE /* hasan_0047.gif in Resources */,
+				BB00000000000000000000AF /* hasan_0085.gif in Resources */,
+				BB00000000000000000000B0 /* hasan_0095.gif in Resources */,
+				BB00000000000000000000B1 /* hasan_0129.gif in Resources */,
+				BB00000000000000000000B2 /* hasan_0192.gif in Resources */,
+				BB00000000000000000000B3 /* hasan_0196.gif in Resources */,
+				BB00000000000000000000B4 /* hasan_0201.gif in Resources */,
+				BB00000000000000000000B5 /* hasan_0238.gif in Resources */,
+				BB00000000000000000000B6 /* hasan_0242.gif in Resources */,
+				BB00000000000000000000B7 /* hasan_0276.gif in Resources */,
+				BB00000000000000000000B8 /* hasan_0289.gif in Resources */,
+				BB00000000000000000000B9 /* hasan_0313.gif in Resources */,
+				BB00000000000000000000BA /* hasan_0314.gif in Resources */,
+				BB00000000000000000000BB /* hasan_0334.gif in Resources */,
+				BB00000000000000000000BC /* hasan_0336.gif in Resources */,
+				BB00000000000000000000BD /* hasan_0372.gif in Resources */,
+				BB00000000000000000000BE /* hasan_0405.gif in Resources */,
+				BB00000000000000000000BF /* hasan_0410.gif in Resources */,
+				BB00000000000000000000C0 /* hasan_0464.gif in Resources */,
+				BB00000000000000000000C1 /* hasan_0472.gif in Resources */,
+				BB00000000000000000000C2 /* hasan_0493.gif in Resources */,
+				BB00000000000000000000C3 /* hasan_0576.gif in Resources */,
+				BB00000000000000000000C4 /* hasan_0585.gif in Resources */,
+				BB00000000000000000000C5 /* hasan_0586.gif in Resources */,
+				BB00000000000000000000C6 /* hasan_0594.gif in Resources */,
+				BB00000000000000000000C7 /* hasan_0596.gif in Resources */,
+				BB00000000000000000000C8 /* hasan_0597.gif in Resources */,
+				BB00000000000000000000C9 /* hasan_0598.gif in Resources */,
+				BB00000000000000000000CA /* hasan_0601.gif in Resources */,
+				BB00000000000000000000CB /* hasan_0603.gif in Resources */,
+				BB00000000000000000000CC /* hasan_0662.gif in Resources */,
+				BB00000000000000000000CD /* hasan_0725.gif in Resources */,
+				BB00000000000000000000CE /* hasan_0766.gif in Resources */,
+				BB00000000000000000000CF /* hasan_0861.gif in Resources */,
+				BB00000000000000000000D0 /* hasan_0868.gif in Resources */,
+				BB00000000000000000000D1 /* hasan_0972.gif in Resources */,
+				BB00000000000000000000D2 /* hasan_0975.gif in Resources */,
+				BB00000000000000000000D3 /* hasan_1012.gif in Resources */,
+				BB00000000000000000000D4 /* hasan_1372.gif in Resources */,
+				BB00000000000000000000D5 /* hasan_1425.gif in Resources */,
+				BB00000000000000000000D6 /* hasan_1431.gif in Resources */,
+				BB00000000000000000000D7 /* hasan_1463.gif in Resources */,
+				BB00000000000000000000D8 /* hasan_1651.gif in Resources */,
+				BB00000000000000000000D9 /* hasan_1760.gif in Resources */,
+				BB00000000000000000000DA /* hasan_2330.gif in Resources */,
+				BB00000000000000000000DB /* hasan_3013.gif in Resources */,
+				BB00000000000000000000DC /* hasan_3156.gif in Resources */,
+				BB00000000000000000000DD /* hasan_3281.gif in Resources */,
+				BB00000000000000000000DE /* hasan_3544.gif in Resources */,
+				BB00000000000000000000DF /* incline_bench_press.gif in Resources */,
+				BB00000000000000000000E0 /* pull_up.gif in Resources */,
+				BB00000000000000000000E1 /* push_up.gif in Resources */,
+				BB00000000000000000000E2 /* romanian_deadlift.gif in Resources */,
+				BB00000000000000000000E3 /* seated_shoulder_press.gif in Resources */,
+				BB00000000000000000000E4 /* single_arm_push_up.gif in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		666666666666666666666661 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000000 /* GymApp.swift in Sources */,
+				BB0000000000000000000001 /* AthleticStandardTier.swift in Sources */,
+				BB0000000000000000000002 /* BodyMeasurement.swift in Sources */,
+				BB0000000000000000000003 /* CalisthenicGodArchetypes.swift in Sources */,
+				BB0000000000000000000004 /* CoachTuningMatrix.swift in Sources */,
+				BB0000000000000000000005 /* CrossProgramBenchmarkRegistry.swift in Sources */,
+				BB0000000000000000000006 /* CustomRecurrenceRule.swift in Sources */,
+				BB0000000000000000000007 /* DeepMuscleIndex.swift in Sources */,
+				BB0000000000000000000008 /* DetailedAnatomyModels.swift in Sources */,
+				BB0000000000000000000009 /* Exercise.swift in Sources */,
+				BB000000000000000000000A /* ExternalWorkoutItem.swift in Sources */,
+				BB000000000000000000000B /* GrowcerySyncState.swift in Sources */,
+				BB000000000000000000000C /* CircadianSupplementModel.swift in Sources */,
+				BB000000000000000000000D /* CuisineTaxonomy.swift in Sources */,
+				BB000000000000000000000E /* EquipmentTaxonomy.swift in Sources */,
+				BB000000000000000000000F /* MealLogEntry.swift in Sources */,
+				BB0000000000000000000010 /* MealTemplate.swift in Sources */,
+				BB0000000000000000000011 /* NutritionalProfile.swift in Sources */,
+				BB0000000000000000000012 /* PantryItem.swift in Sources */,
+				BB0000000000000000000013 /* ReceiptRecord.swift in Sources */,
+				BB0000000000000000000014 /* ShoppingItem.swift in Sources */,
+				BB0000000000000000000015 /* ProgramCatalogSeed.swift in Sources */,
+				BB0000000000000000000016 /* TrainingProgram.swift in Sources */,
+				BB0000000000000000000017 /* UnifiedDayWorkoutItem.swift in Sources */,
+				BB0000000000000000000018 /* WorkoutDebriefRecord.swift in Sources */,
+				BB0000000000000000000019 /* WorkoutSession.swift in Sources */,
+				BB000000000000000000001A /* WorkoutTemplate.swift in Sources */,
+				BB000000000000000000001B /* PathBuilder.swift in Sources */,
+				BB000000000000000000001C /* SVGPathCommand.swift in Sources */,
+				BB000000000000000000001D /* SVGPathParser.swift in Sources */,
+				BB000000000000000000001E /* BodyPathData.swift in Sources */,
+				BB000000000000000000001F /* FemaleBackPaths.swift in Sources */,
+				BB0000000000000000000020 /* FemaleFrontPaths.swift in Sources */,
+				BB0000000000000000000021 /* MaleBackPaths.swift in Sources */,
+				BB0000000000000000000022 /* MaleFrontPaths.swift in Sources */,
+				BB0000000000000000000023 /* Muscle.swift in Sources */,
+				BB0000000000000000000024 /* MuscleSelection.swift in Sources */,
+				BB0000000000000000000025 /* MuscleSide.swift in Sources */,
+				BB0000000000000000000026 /* Color+Extensions.swift in Sources */,
+				BB0000000000000000000027 /* ColorInterpolation.swift in Sources */,
+				BB0000000000000000000028 /* HeatmapColorScale.swift in Sources */,
+				BB0000000000000000000029 /* HeatmapConfiguration.swift in Sources */,
+				BB000000000000000000002A /* MuscleFill.swift in Sources */,
+				BB000000000000000000002B /* MuscleIntensity.swift in Sources */,
+				BB000000000000000000002C /* BodyRenderer.swift in Sources */,
+				BB000000000000000000002D /* PathCache.swift in Sources */,
+				BB000000000000000000002E /* AnimatedBodyView.swift in Sources */,
+				BB000000000000000000002F /* BodyAccessibilityOverlay.swift in Sources */,
+				BB0000000000000000000030 /* BodyView.swift in Sources */,
+				BB0000000000000000000031 /* BodyViewStyle.swift in Sources */,
+				BB0000000000000000000032 /* HeatmapLegendView.swift in Sources */,
+				BB0000000000000000000033 /* InteractiveBodyOverlay.swift in Sources */,
+				BB0000000000000000000034 /* MuscleTooltip.swift in Sources */,
+				BB0000000000000000000035 /* SelectionHistory.swift in Sources */,
+				BB0000000000000000000036 /* ZoomableBodyContainer.swift in Sources */,
+				BB0000000000000000000038 /* AutoProgressionEngine.swift in Sources */,
+				BB0000000000000000000039 /* CalendarSyncService.swift in Sources */,
+				BB000000000000000000003A /* DeepMuscleEngine.swift in Sources */,
+				BB000000000000000000003B /* DynamicFitnessEngine.swift in Sources */,
+				BB000000000000000000003C /* ExerciseCatalogSeed.swift in Sources */,
+				BB000000000000000000003D /* ExerciseIllustrationService.swift in Sources */,
+				BB000000000000000000003E /* ExerciseSearchEngine.swift in Sources */,
+				BB000000000000000000003F /* FlowStateEngine.swift in Sources */,
+				BB0000000000000000000040 /* GoogleHealthSyncService.swift in Sources */,
+				BB0000000000000000000041 /* GoogleTasksSyncService.swift in Sources */,
+				BB0000000000000000000042 /* GrowEcosystemRouter.swift in Sources */,
+				BB0000000000000000000043 /* GrowcerySyncService.swift in Sources */,
+				BB0000000000000000000044 /* GymStore.swift in Sources */,
+				BB0000000000000000000045 /* HealthKitService.swift in Sources */,
+				BB0000000000000000000046 /* MuscleStimulusEngine.swift in Sources */,
+				BB0000000000000000000047 /* CommodityReferenceCatalog.swift in Sources */,
+				BB0000000000000000000048 /* GenerativeCulinaryEngine.swift in Sources */,
+				BB0000000000000000000049 /* HapticFeedbackService.swift in Sources */,
+				BB000000000000000000004A /* LocalStore.swift in Sources */,
+				BB000000000000000000004B /* MasterDataSeed.swift in Sources */,
+				BB000000000000000000004C /* NutritionLogService.swift in Sources */,
+				BB000000000000000000004D /* NutritionalScoringEngine.swift in Sources */,
+				BB000000000000000000004E /* OpenFoodFactsService.swift in Sources */,
+				BB000000000000000000004F /* PantryMatchingEngine.swift in Sources */,
+				BB0000000000000000000050 /* PantryRepository.swift in Sources */,
+				BB0000000000000000000051 /* ReceiptMatchingEngine.swift in Sources */,
+				BB0000000000000000000052 /* ReceiptOCRService.swift in Sources */,
+				BB0000000000000000000053 /* ReceiptRepository.swift in Sources */,
+				BB0000000000000000000054 /* ShoppingService.swift in Sources */,
+				BB0000000000000000000055 /* StoreCanonicalizer.swift in Sources */,
+				BB0000000000000000000056 /* SupplementNotificationService.swift in Sources */,
+				BB0000000000000000000057 /* WaterNotificationService.swift in Sources */,
+				BB0000000000000000000058 /* OlympicCoachEngine.swift in Sources */,
+				BB0000000000000000000059 /* PlateCalculatorEngine.swift in Sources */,
+				BB000000000000000000005A /* SharedMacrosBridge.swift in Sources */,
+				BB00000000000000000000E5 /* GrowPeerSyncService.swift in Sources */,
+
+				BB000000000000000000005B /* StravaSyncService.swift in Sources */,
+				BB000000000000000000005C /* UserAccountService.swift in Sources */,
+				BB000000000000000000005D /* WeatherService.swift in Sources */,
+				BB000000000000000000005E /* WorkoutExportService.swift in Sources */,
+				BB000000000000000000005F /* YouTubeExerciseService.swift in Sources */,
+				BB0000000000000000000060 /* GymTheme.swift in Sources */,
+				BB0000000000000000000061 /* ActiveWorkoutView.swift in Sources */,
+				BB0000000000000000000062 /* AnatomicalMuscleMapView.swift in Sources */,
+				BB0000000000000000000063 /* AnimatedExerciseGIFPlayer.swift in Sources */,
+				BB0000000000000000000064 /* AthleticStandardGraphView.swift in Sources */,
+				BB0000000000000000000065 /* CollapsibleSection.swift in Sources */,
+				BB0000000000000000000066 /* CompletedWorkoutDetailSheet.swift in Sources */,
+				BB0000000000000000000067 /* ConcentricNutritionRingsView.swift in Sources */,
+				BB0000000000000000000068 /* DeepMuscleReportSheet.swift in Sources */,
+				BB0000000000000000000069 /* EditExerciseSheet.swift in Sources */,
+				BB000000000000000000006A /* EditWorkoutTemplateSheet.swift in Sources */,
+				BB000000000000000000006B /* ExerciseCatalogView.swift in Sources */,
+				BB000000000000000000006C /* ExercisesView.swift in Sources */,
+				BB000000000000000000006D /* FlowCheckInSheet.swift in Sources */,
+				BB000000000000000000006E /* GymAccountLoginSheet.swift in Sources */,
+				BB000000000000000000006F /* GymCalendarStripView.swift in Sources */,
+				BB0000000000000000000070 /* GymCircularProfileButton.swift in Sources */,
+				BB0000000000000000000071 /* InfoExplanationSheet.swift in Sources */,
+				BB0000000000000000000072 /* MainTabView.swift in Sources */,
+				BB0000000000000000000073 /* MeasurementsView.swift in Sources */,
+				BB0000000000000000000074 /* MuscleDetailExplanationSheet.swift in Sources */,
+				BB0000000000000000000075 /* AccountLoginSheet.swift in Sources */,
+				BB0000000000000000000076 /* AddPastMealSheet.swift in Sources */,
+				BB0000000000000000000077 /* BarcodeScannerView.swift in Sources */,
+				BB0000000000000000000078 /* CircadianSupplementsManagementSheet.swift in Sources */,
+				BB0000000000000000000079 /* CustomizeRecipeSheet.swift in Sources */,
+				BB000000000000000000007A /* EditMealLogSheet.swift in Sources */,
+				BB000000000000000000007B /* EditRecipeSheet.swift in Sources */,
+				BB000000000000000000007C /* EditStockSheet.swift in Sources */,
+				BB000000000000000000007D /* InventoryView.swift in Sources */,
+				BB000000000000000000007E /* LogConsumptionSheet.swift in Sources */,
+				BB000000000000000000007F /* NutriCircularWaterButton.swift in Sources */,
+				BB0000000000000000000080 /* NutritionDetailSheet.swift in Sources */,
+				BB0000000000000000000081 /* NutritionalScoresView.swift in Sources */,
+				BB0000000000000000000082 /* ProductComparisonView.swift in Sources */,
+				BB0000000000000000000083 /* QuickAddMealSheet.swift in Sources */,
+				BB0000000000000000000084 /* ReceiptDetailSheet.swift in Sources */,
+				BB0000000000000000000085 /* ReceiptItemDetailSheet.swift in Sources */,
+				BB0000000000000000000086 /* ReceiptScannerView.swift in Sources */,
+				BB0000000000000000000087 /* RecipeDetailSheet.swift in Sources */,
+				BB0000000000000000000088 /* RecipeFilterSheet.swift in Sources */,
+				BB0000000000000000000089 /* RecipesView.swift in Sources */,
+				BB000000000000000000008A /* ScannedProductInspectorSheet.swift in Sources */,
+				BB000000000000000000008B /* ShoppingHubView.swift in Sources */,
+				BB000000000000000000008C /* StoreScouterView.swift in Sources */,
+				BB000000000000000000008D /* ZoomableImageView.swift in Sources */,
+				BB000000000000000000008E /* OlympicCoachView.swift in Sources */,
+				BB000000000000000000008F /* PlanWorkoutSheet.swift in Sources */,
+				BB0000000000000000000090 /* PlateCalculatorSheet.swift in Sources */,
+				BB0000000000000000000091 /* ProfileView.swift in Sources */,
+				BB0000000000000000000092 /* StartWorkoutView.swift in Sources */,
+				BB0000000000000000000093 /* TimedExerciseCountdownSheet.swift in Sources */,
+				BB0000000000000000000094 /* TodayUnifiedView.swift in Sources */,
+				BB0000000000000000000095 /* TodayWorkoutView.swift in Sources */,
+				BB0000000000000000000096 /* WaageScannerSheet.swift in Sources */,
+				BB0000000000000000000097 /* WorkoutExitScalarSheet.swift in Sources */,
+				BB0000000000000000000098 /* WorkoutPreviewSheet.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		999999999999999999999991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		999999999999999999999992 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		999999999999999999999993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = GymApp/GymApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GymApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.somagym;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTS_MACCATALYST = NO;
+			};
+			name = Debug;
+		};
+		999999999999999999999994 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = GymApp/GymApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GymApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.somagym;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				SUPPORTS_MACCATALYST = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		555555555555555555555551 /* Build configuration list for PBXNativeTarget "GymApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				999999999999999999999993 /* Debug */,
+				999999999999999999999994 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		555555555555555555555552 /* Build configuration list for PBXProject "GymApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				999999999999999999999991 /* Debug */,
+				999999999999999999999992 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		CC0000000000000000000001 /* XCLocalSwiftPackageReference "../Shared/GrowCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../Shared/GrowCore";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CC0000000000000000000002 /* GrowCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CC0000000000000000000001 /* XCLocalSwiftPackageReference "../Shared/GrowCore" */;
+			productName = GrowCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+	};
+	rootObject = 888888888888888888888888 /* Project object */;
+}
+

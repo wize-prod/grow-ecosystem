@@ -1,0 +1,184 @@
+{
+  "divergenceHistory": [
+    {
+      "adaptationAppliedSummary": "Spontane Wahl: Stuben-Workout: Core & Lumbale Tiefenstabilität (Gluteus & Ischios, Unterer Ruecken, Funktioneller Rumpf (Reha))",
+      "banisterTSBAtStart": 0,
+      "chosenExerciseNames": [
+        "McGill Modifizierter Curl-Up (Haende unter LWS)",
+        "Deadbug mit Rueckendruck gegen Boden",
+        "McGill Side Plank (Knie oder Fuesse)",
+        "Unterarmstuetz / Plank",
+        "Glute Bridge am Boden (Beckenheben)",
+        "Kindeshaltung / Prayer Stretch (LWS Dekompression)"
+      ],
+      "chosenTemplateName": "Stuben-Workout: Core & Lumbale Tiefenstabilität",
+      "id": "1DD7512F-E3FD-47B7-9FDE-BD9D724E6448",
+      "primaryTargetMuscles": [
+        "Gluteus & Ischios",
+        "Unterer Ruecken",
+        "Funktioneller Rumpf (Reha)"
+      ],
+      "recommendedFocus": "Parasympathische Rumpf- & Mobilitaets-Dekompression",
+      "systemicReadinessAtStart": 0.72,
+      "timestamp": 816204634.448592
+    },
+    {
+      "adaptationAppliedSummary": "Spontane Wahl: Aerobe Grundlagenausdauer (7-20 km Dauerlauf) (Kardiovaskulaer & Vagus, Unterer Ruecken)",
+      "banisterTSBAtStart": 0,
+      "chosenExerciseNames": [
+        "MAF-180 Herzfrequenz-Lauf",
+        "Kindeshaltung / Prayer Stretch (LWS Dekompression)"
+      ],
+      "chosenTemplateName": "Aerobe Grundlagenausdauer (7-20 km Dauerlauf)",
+      "id": "17A39226-5518-4C74-B714-05C8D1031382",
+      "primaryTargetMuscles": [
+        "Kardiovaskulaer & Vagus",
+        "Unterer Ruecken"
+      ],
+      "recommendedFocus": "Unterkoerper & Posterior Chain",
+      "systemicReadinessAtStart": 0.72,
+      "timestamp": 816085440.807811
+    },
+    {
+      "adaptationAppliedSummary": "Spontane Wahl: Aerobe Grundlagenausdauer (7-20 km Dauerlauf) (Unterer Ruecken, Kardiovaskulaer & Vagus)",
+      "banisterTSBAtStart": 0,
+      "chosenExerciseNames": [
+        "MAF-180 Herzfrequenz-Lauf",
+        "Kindeshaltung / Prayer Stretch (LWS Dekompression)"
+      ],
+      "chosenTemplateName": "Aerobe Grundlagenausdauer (7-20 km Dauerlauf)",
+      "id": "49BD3C93-0424-45CB-B4F0-F11474F53E42",
+      "primaryTargetMuscles": [
+        "Unterer Ruecken",
+        "Kardiovaskulaer & Vagus"
+      ],
+      "recommendedFocus": "Unterkoerper & Posterior Chain",
+      "systemicReadinessAtStart": 0.72,
+      "timestamp": 816085404.552173
+    },
+    {
+      "adaptationAppliedSummary": "Spontane Wahl: Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete) (Brust, Funktioneller Rumpf (Reha), Arme (Bizeps & Trizeps))",
+      "banisterTSBAtStart": 0,
+      "chosenExerciseNames": [
+        "Einarmige Liegestuetze",
+        "Diamant-Liegestuetze (Calisthenics)",
+        "Stuhl-Dips (Stuben-Trizeps)",
+        "Unterarmstuetz / Plank",
+        "Deadbug mit Druck gegen die Knie",
+        "McGill Modifizierter Curl-Up (Haende unter LWS)",
+        "McGill Side Plank (Knie oder Fuesse)"
+      ],
+      "chosenTemplateName": "Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete)",
+      "id": "6E22C708-0BF5-4C8B-B54D-41FD53CF47C3",
+      "primaryTargetMuscles": [
+        "Brust",
+        "Funktioneller Rumpf (Reha)",
+        "Arme (Bizeps & Trizeps)"
+      ],
+      "recommendedFocus": "Regeneration & Anaboler Refill",
+      "systemicReadinessAtStart": 0.72,
+      "timestamp": 816028840.596594
+    },
+    {
+      "adaptationAppliedSummary": "Spontane Wahl: Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete) (Brust, Gluteus & Ischios, Arme (Bizeps & Trizeps), Funktioneller Rumpf (Reha))",
+      "banisterTSBAtStart": 0,
+      "chosenExerciseNames": [
+        "Liegestuetze (BWK-konform kontrolliert)",
+        "Diamant-Liegestuetze (Calisthenics)",
+        "Unterarmstuetz / Plank",
+        "Deadbug mit Druck gegen die Knie",
+        "McGill Modifizierter Curl-Up (Haende unter LWS)",
+        "McGill Side Plank (Knie oder Fuesse)",
+        "Glute Bridge am Boden (Beckenheben)"
+      ],
+      "chosenTemplateName": "Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete)",
+      "id": "4AFEFF8B-62CE-4CAC-BF4B-85F5FE1F24CD",
+      "primaryTargetMuscles": [
+        "Brust",
+        "Gluteus & Ischios",
+        "Arme (Bizeps & Trizeps)",
+        "Funktioneller Rumpf (Reha)"
+      ],
+      "recommendedFocus": "Regeneration & Anaboler Refill",
+      "systemicReadinessAtStart": 0.72,
+      "timestamp": 816027445.812909
+    },
+    {
+      "adaptationAppliedSummary": "Spontane Wahl: Stuben- & Zimmer-Workout (Minimal-Raum) (Ruecken / Latissimus, Quadrizeps & Waden, Arme (Bizeps & Trizeps), Funktioneller Rumpf (Reha), Brust)",
+      "banisterTSBAtStart": 0,
+      "chosenExerciseNames": [
+        "Stuben Liegestuetze am Schreibtisch / Bett",
+        "Tuerrahmen Isometrisches Rudern",
+        "Bettkanten Bulgarian Split Squats",
+        "Stuhl-Dips (Stuben-Trizeps)",
+        "Handtuch-Isometrie Bizepszug",
+        "Wandsitz Isometrisch (Wall Sit)",
+        "Teppich Unterarmstuetz (Plank)"
+      ],
+      "chosenTemplateName": "Stuben- & Zimmer-Workout (Minimal-Raum)",
+      "id": "D83734D8-66A4-4F14-A821-014657BECABB",
+      "primaryTargetMuscles": [
+        "Ruecken / Latissimus",
+        "Quadrizeps & Waden",
+        "Arme (Bizeps & Trizeps)",
+        "Funktioneller Rumpf (Reha)",
+        "Brust"
+      ],
+      "recommendedFocus": "Oberkoerper Kraft & Hypertrophie",
+      "systemicReadinessAtStart": 0.72,
+      "timestamp": 815336482.577703
+    }
+  ],
+  "exerciseSelectionFrequencies": {
+    "Bettkanten Bulgarian Split Squats": 4,
+    "Crunches / Sit-ups auf Roemischer Bank": 3,
+    "Deadbug mit Druck gegen die Knie": 6,
+    "Deadbug mit Rueckendruck gegen Boden": 5,
+    "Diamant-Liegestuetze (Calisthenics)": 9,
+    "Einarmige Liegestuetze": 4,
+    "Glute Bridge am Boden (Beckenheben)": 5,
+    "Handtuch-Isometrie Bizepszug": 1,
+    "Kindeshaltung / Prayer Stretch (LWS Dekompression)": 6,
+    "Klimmzuege Obergriff (Pull-ups)": 4,
+    "Klimmzuege Untergriff (Chin-ups)": 3,
+    "Liegestuetze (BWK-konform kontrolliert)": 5,
+    "MAF-180 Herzfrequenz-Lauf": 2,
+    "McGill Modifizierter Curl-Up (Haende unter LWS)": 11,
+    "McGill Side Plank (Knie oder Fuesse)": 8,
+    "Stuben Liegestuetze am Schreibtisch / Bett": 4,
+    "Stuhl-Dips (Stuben-Trizeps)": 8,
+    "Teppich Unterarmstuetz (Plank)": 1,
+    "Tuerrahmen Isometrisches Rudern": 5,
+    "Unterarmstuetz / Plank": 8,
+    "Wandsitz Isometrisch (Wall Sit)": 1
+  },
+  "muscleDistressDampers": {
+    "Arme (Bizeps & Trizeps)": 0.5,
+    "Brust": 0.5,
+    "Funktioneller Rumpf (Reha)": 0.5,
+    "Gluteus & Ischios": 0.5,
+    "Kardiovaskulaer & Vagus": 0.5,
+    "Unterer Ruecken": 0.5
+  },
+  "muscleDistressTimestamps": {
+    "Arme (Bizeps & Trizeps)": 816027670.573618,
+    "Brust": 816027670.573618,
+    "Funktioneller Rumpf (Reha)": 816027670.573618,
+    "Gluteus & Ischios": 816085449.256567,
+    "Kardiovaskulaer & Vagus": 816085449.256567,
+    "Unterer Ruecken": 816085449.256567
+  },
+  "muscleGroupAffinities": {
+    "Arme (Bizeps & Trizeps)": 0.7500000000000002,
+    "Brust": 0.7100000000000002,
+    "Funktioneller Rumpf (Reha)": 0.9000000000000004,
+    "Gluteus & Ischios": 0.6200000000000001,
+    "Kardiovaskulaer & Vagus": 0.6000000000000001,
+    "Quadrizeps & Waden": 0.5700000000000001,
+    "Ruecken / Latissimus": 0.5900000000000001,
+    "Unterer Ruecken": 0.6700000000000002
+  },
+  "preferredEquipmentStyle": "Hybrid",
+  "totalDeviationsCount": 6,
+  "totalSessionsCount": 10
+}

@@ -1,0 +1,425 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC0000000000000000000003 /* GrowCore in Frameworks */ = {isa = PBXBuildFile; productRef = FC0000000000000000000002 /* GrowCore */; };
+		FB0000000000000000000000 /* GrowFinanceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000000 /* GrowFinanceApp.swift */; };
+		FB0000000000000000000001 /* FinanceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000001 /* FinanceTheme.swift */; };
+		FB0000000000000000000002 /* FinanceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000002 /* FinanceModels.swift */; };
+		FB0000000000000000000003 /* HaushaltsbuchCSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000003 /* HaushaltsbuchCSVParser.swift */; };
+		FB0000000000000000000004 /* AutonomousFinanceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000004 /* AutonomousFinanceEngine.swift */; };
+		FB0000000000000000000005 /* SmartFinanceEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000005 /* SmartFinanceEngine.swift */; };
+		FB0000000000000000000006 /* FinanceNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000006 /* FinanceNotificationService.swift */; };
+		FB0000000000000000000007 /* FinanceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000007 /* FinanceStore.swift */; };
+		FB0000000000000000000008 /* SharedMacrosBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000008 /* SharedMacrosBridge.swift */; };
+		FB0000000000000000000026 /* GrowPeerSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000026 /* GrowPeerSyncService.swift */; };
+		FB0000000000000000000009 /* TargobankScreenshotOCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000009 /* TargobankScreenshotOCRService.swift */; };
+		FB000000000000000000000A /* FinanceCircularWaterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000A /* FinanceCircularWaterButton.swift */; };
+		FB000000000000000000000B /* FinanceDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000B /* FinanceDashboardView.swift */; };
+		FB000000000000000000000C /* TransactionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000C /* TransactionsListView.swift */; };
+		FB000000000000000000000D /* FiveGateSimulatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000D /* FiveGateSimulatorView.swift */; };
+		FB000000000000000000000E /* FinanceInfoExplanationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000E /* FinanceInfoExplanationSheet.swift */; };
+		FB000000000000000000000F /* TargobankScanSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000F /* TargobankScanSheet.swift */; };
+		FB0000000000000000000010 /* TargobankBelegeGalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000010 /* TargobankBelegeGalleryView.swift */; };
+		FB0000000000000000000011 /* ShoppingRegistryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000011 /* ShoppingRegistryView.swift */; };
+		FB0000000000000000000012 /* CustomRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000012 /* CustomRecurrenceRule.swift */; };
+		FB0000000000000000000013 /* CustomRecurrenceSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000013 /* CustomRecurrenceSheet.swift */; };
+		FB0000000000000000000014 /* CalendarSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000014 /* CalendarSyncService.swift */; };
+		FB0000000000000000000015 /* TransactionDeduplicationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000015 /* TransactionDeduplicationEngine.swift */; };
+		FB0000000000000000000016 /* UniversalReceiptAndTransactionScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000016 /* UniversalReceiptAndTransactionScanner.swift */; };
+		FB0000000000000000000017 /* TransferReconciliationEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000017 /* TransferReconciliationEngine.swift */; };
+		FB0000000000000000000018 /* CadencePatternScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000018 /* CadencePatternScanner.swift */; };
+		FB0000000000000000000019 /* EnvelopeRolloverEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000019 /* EnvelopeRolloverEngine.swift */; };
+		FB000000000000000000001A /* FinanceCalendarStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000001A /* FinanceCalendarStripView.swift */; };
+		FB000000000000000000001B /* FinanceEcosystemProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000001B /* FinanceEcosystemProfileSheet.swift */; };
+		FB000000000000000000001C /* BudgetsDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000001C /* BudgetsDashboardView.swift */; };
+		FB000000000000000000001D /* FinanceReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000001D /* FinanceReportsView.swift */; };
+		FB000000000000000000001E /* AccountsAndProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000001E /* AccountsAndProfileView.swift */; };
+		FB000000000000000000001F /* LoanAccountDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000001F /* LoanAccountDetailSheet.swift */; };
+		FB0000000000000000000020 /* AccountDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000020 /* AccountDetailSheet.swift */; };
+		FB0000000000000000000021 /* UniversalScanSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000021 /* UniversalScanSheet.swift */; };
+		FB0000000000000000000022 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000022 /* MainTabView.swift */; };
+		FB0000000000000000000025 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000025 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		555555555555555555555555 /* GrowFinance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrowFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA0000000000000000000000 /* GrowFinanceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GrowFinanceApp.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000001 /* FinanceTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme/FinanceTheme.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000002 /* FinanceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/FinanceModels.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000003 /* HaushaltsbuchCSVParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/HaushaltsbuchCSVParser.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000004 /* AutonomousFinanceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/AutonomousFinanceEngine.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000005 /* SmartFinanceEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/SmartFinanceEngine.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000006 /* FinanceNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/FinanceNotificationService.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000007 /* FinanceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/FinanceStore.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000008 /* SharedMacrosBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/SharedMacrosBridge.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000026 /* GrowPeerSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GrowPeerSyncService.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000009 /* TargobankScreenshotOCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/TargobankScreenshotOCRService.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000A /* FinanceCircularWaterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/FinanceCircularWaterButton.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000B /* FinanceDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/FinanceDashboardView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000C /* TransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TransactionsListView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000D /* FiveGateSimulatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/FiveGateSimulatorView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000E /* FinanceInfoExplanationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/FinanceInfoExplanationSheet.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000F /* TargobankScanSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TargobankScanSheet.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000010 /* TargobankBelegeGalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TargobankBelegeGalleryView.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000011 /* ShoppingRegistryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ShoppingRegistryView.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000012 /* CustomRecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/CustomRecurrenceRule.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000013 /* CustomRecurrenceSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CustomRecurrenceSheet.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000014 /* CalendarSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/CalendarSyncService.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000015 /* TransactionDeduplicationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/TransactionDeduplicationEngine.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000016 /* UniversalReceiptAndTransactionScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/UniversalReceiptAndTransactionScanner.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000017 /* TransferReconciliationEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/TransferReconciliationEngine.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000018 /* CadencePatternScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/CadencePatternScanner.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000019 /* EnvelopeRolloverEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/EnvelopeRolloverEngine.swift"; sourceTree = "<group>"; };
+		FA000000000000000000001A /* FinanceCalendarStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/FinanceCalendarStripView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000001B /* FinanceEcosystemProfileSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/FinanceEcosystemProfileSheet.swift"; sourceTree = "<group>"; };
+		FA000000000000000000001C /* BudgetsDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/BudgetsDashboardView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000001D /* FinanceReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/FinanceReportsView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000001E /* AccountsAndProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/AccountsAndProfileView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000001F /* LoanAccountDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/LoanAccountDetailSheet.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000020 /* AccountDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/AccountDetailSheet.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000021 /* UniversalScanSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/UniversalScanSheet.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000022 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/MainTabView.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000023 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		FA0000000000000000000024 /* GrowFinance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GrowFinance.entitlements"; sourceTree = "<group>"; };
+		FA0000000000000000000025 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F22222222222222222222221 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC0000000000000000000003 /* GrowCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F33333333333333333333331 /* GrowFinance */ = {
+			isa = PBXGroup;
+			children = (
+				FA0000000000000000000000 /* GrowFinanceApp.swift */,
+				FA0000000000000000000001 /* FinanceTheme.swift */,
+				FA0000000000000000000002 /* FinanceModels.swift */,
+				FA0000000000000000000003 /* HaushaltsbuchCSVParser.swift */,
+				FA0000000000000000000004 /* AutonomousFinanceEngine.swift */,
+				FA0000000000000000000005 /* SmartFinanceEngine.swift */,
+				FA0000000000000000000006 /* FinanceNotificationService.swift */,
+				FA0000000000000000000007 /* FinanceStore.swift */,
+				FA0000000000000000000008 /* SharedMacrosBridge.swift */,
+				FA0000000000000000000026 /* GrowPeerSyncService.swift */,
+
+				FA0000000000000000000009 /* TargobankScreenshotOCRService.swift */,
+				FA000000000000000000000A /* FinanceCircularWaterButton.swift */,
+				FA000000000000000000000B /* FinanceDashboardView.swift */,
+				FA000000000000000000000C /* TransactionsListView.swift */,
+				FA000000000000000000000D /* FiveGateSimulatorView.swift */,
+				FA000000000000000000000E /* FinanceInfoExplanationSheet.swift */,
+				FA000000000000000000000F /* TargobankScanSheet.swift */,
+				FA0000000000000000000010 /* TargobankBelegeGalleryView.swift */,
+				FA0000000000000000000011 /* ShoppingRegistryView.swift */,
+				FA0000000000000000000012 /* CustomRecurrenceRule.swift */,
+				FA0000000000000000000013 /* CustomRecurrenceSheet.swift */,
+				FA0000000000000000000014 /* CalendarSyncService.swift */,
+				FA0000000000000000000015 /* TransactionDeduplicationEngine.swift */,
+				FA0000000000000000000016 /* UniversalReceiptAndTransactionScanner.swift */,
+				FA0000000000000000000017 /* TransferReconciliationEngine.swift */,
+				FA0000000000000000000018 /* CadencePatternScanner.swift */,
+				FA0000000000000000000019 /* EnvelopeRolloverEngine.swift */,
+				FA000000000000000000001A /* FinanceCalendarStripView.swift */,
+				FA000000000000000000001B /* FinanceEcosystemProfileSheet.swift */,
+				FA000000000000000000001C /* BudgetsDashboardView.swift */,
+				FA000000000000000000001D /* FinanceReportsView.swift */,
+				FA000000000000000000001E /* AccountsAndProfileView.swift */,
+				FA000000000000000000001F /* LoanAccountDetailSheet.swift */,
+				FA0000000000000000000020 /* AccountDetailSheet.swift */,
+				FA0000000000000000000021 /* UniversalScanSheet.swift */,
+				FA0000000000000000000022 /* MainTabView.swift */,
+				FA0000000000000000000023 /* Info.plist */,
+				FA0000000000000000000024 /* GrowFinance.entitlements */,
+				FA0000000000000000000025 /* Assets.xcassets */,
+			);
+			path = GrowFinance;
+			sourceTree = "<group>";
+		};
+		F33333333333333333333332 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				555555555555555555555555 /* GrowFinance.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F33333333333333333333333 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F33333333333333333333331 /* GrowFinance */,
+				F33333333333333333333332 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F44444444444444444444441 /* GrowFinance */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F55555555555555555555551 /* Build configuration list for PBXNativeTarget "GrowFinance" */;
+			buildPhases = (
+				F66666666666666666666661 /* Sources */,
+				F22222222222222222222221 /* Frameworks */,
+				F77777777777777777777771 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GrowFinance;
+			productName = GrowFinance;
+			productReference = 555555555555555555555555 /* GrowFinance.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F88888888888888888888888 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					F44444444444444444444441 = {
+						CreatedOnToolsVersion = 15.0;
+						DevelopmentTeam = X83D9W2G74;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = F55555555555555555555552 /* Build configuration list for PBXProject "GrowFinance" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+				Base,
+			);
+			mainGroup = F33333333333333333333333 /* Main */;
+			productRefGroup = F33333333333333333333332 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F44444444444444444444441 /* GrowFinance */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F77777777777777777777771 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB0000000000000000000025 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F66666666666666666666661 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FB0000000000000000000000 /* GrowFinanceApp.swift in Sources */,
+				FB0000000000000000000001 /* FinanceTheme.swift in Sources */,
+				FB0000000000000000000002 /* FinanceModels.swift in Sources */,
+				FB0000000000000000000003 /* HaushaltsbuchCSVParser.swift in Sources */,
+				FB0000000000000000000004 /* AutonomousFinanceEngine.swift in Sources */,
+				FB0000000000000000000005 /* SmartFinanceEngine.swift in Sources */,
+				FB0000000000000000000006 /* FinanceNotificationService.swift in Sources */,
+				FB0000000000000000000007 /* FinanceStore.swift in Sources */,
+				FB0000000000000000000008 /* SharedMacrosBridge.swift in Sources */,
+				FB0000000000000000000026 /* GrowPeerSyncService.swift in Sources */,
+
+				FB0000000000000000000009 /* TargobankScreenshotOCRService.swift in Sources */,
+				FB000000000000000000000A /* FinanceCircularWaterButton.swift in Sources */,
+				FB000000000000000000000B /* FinanceDashboardView.swift in Sources */,
+				FB000000000000000000000C /* TransactionsListView.swift in Sources */,
+				FB000000000000000000000D /* FiveGateSimulatorView.swift in Sources */,
+				FB000000000000000000000E /* FinanceInfoExplanationSheet.swift in Sources */,
+				FB000000000000000000000F /* TargobankScanSheet.swift in Sources */,
+				FB0000000000000000000010 /* TargobankBelegeGalleryView.swift in Sources */,
+				FB0000000000000000000011 /* ShoppingRegistryView.swift in Sources */,
+				FB0000000000000000000012 /* CustomRecurrenceRule.swift in Sources */,
+				FB0000000000000000000013 /* CustomRecurrenceSheet.swift in Sources */,
+				FB0000000000000000000014 /* CalendarSyncService.swift in Sources */,
+				FB0000000000000000000015 /* TransactionDeduplicationEngine.swift in Sources */,
+				FB0000000000000000000016 /* UniversalReceiptAndTransactionScanner.swift in Sources */,
+				FB0000000000000000000017 /* TransferReconciliationEngine.swift in Sources */,
+				FB0000000000000000000018 /* CadencePatternScanner.swift in Sources */,
+				FB0000000000000000000019 /* EnvelopeRolloverEngine.swift in Sources */,
+				FB000000000000000000001A /* FinanceCalendarStripView.swift in Sources */,
+				FB000000000000000000001B /* FinanceEcosystemProfileSheet.swift in Sources */,
+				FB000000000000000000001C /* BudgetsDashboardView.swift in Sources */,
+				FB000000000000000000001D /* FinanceReportsView.swift in Sources */,
+				FB000000000000000000001E /* AccountsAndProfileView.swift in Sources */,
+				FB000000000000000000001F /* LoanAccountDetailSheet.swift in Sources */,
+				FB0000000000000000000020 /* AccountDetailSheet.swift in Sources */,
+				FB0000000000000000000021 /* UniversalScanSheet.swift in Sources */,
+				FB0000000000000000000022 /* MainTabView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		F99999999999999999999991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F99999999999999999999992 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F99999999999999999999993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = GrowFinance/GrowFinance.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GrowFinance/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.growfinance;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
+				SUPPORTS_MACCATALYST = YES;
+			};
+			name = Debug;
+		};
+		F99999999999999999999994 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = GrowFinance/GrowFinance.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GrowFinance/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.growfinance;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
+				SUPPORTS_MACCATALYST = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F55555555555555555555551 /* Build configuration list for PBXNativeTarget "GrowFinance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F99999999999999999999993 /* Debug */,
+				F99999999999999999999994 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F55555555555555555555552 /* Build configuration list for PBXProject "GrowFinance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F99999999999999999999991 /* Debug */,
+				F99999999999999999999992 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+
+/* Begin XCLocalSwiftPackageReference section */
+		FC0000000000000000000001 /* XCLocalSwiftPackageReference "../Shared/GrowCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../Shared/GrowCore";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FC0000000000000000000002 /* GrowCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FC0000000000000000000001 /* XCLocalSwiftPackageReference "../Shared/GrowCore" */;
+			productName = GrowCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+	};
+	rootObject = F88888888888888888888888 /* Project object */;
+}

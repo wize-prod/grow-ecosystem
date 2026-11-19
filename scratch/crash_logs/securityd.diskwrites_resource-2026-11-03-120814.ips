@@ -1,0 +1,333 @@
+{"duration_ms":"486768","share_with_app_devs":1,"roots_installed":0,"bug_type":"145","os_version":"iPhone OS 27.2 (24B115)","slice_uuid":"DDBEB229-6F66-3C86-ABA2-C0640A5269D2","is_first_party":1,"incident_id":"4336FF8C-77B1-439E-AE1C-F6314A17D45F","timestamp":"2026-11-03 12:08:14.00 +0100","app_name":"securityd","name":"securityd"}
+Date/Time:        2026-11-03 12:00:07.536 +0100
+End time:         2026-11-03 12:08:14.304 +0100
+OS Version:       iPhone OS 27.2 (Build 24B115)
+Architecture:     arm64e
+Report Version:   73
+Incident Identifier: 4336FF8C-77B1-439E-AE1C-F6314A17D45F
+Share With Devs:  Yes
+
+Data Source:      Microstackshots
+Shared Cache:     377B53F3-0E5D-399A-A031-41CAF2ECA8D6 slid base address 0x188124000
+
+Command:          securityd
+Path:             /usr/libexec/securityd
+Resource Coalition: 199
+On Behalf Of:     418 samples NutriVaultApp (Growcery) [716] (418 samples originated by NutriVaultApp (Growcery) [716])
+Architecture:     arm64
+PID:              130
+
+Event:            disk writes
+Action taken:     none
+Writes:           4294.98 MB of file backed memory dirtied over 487 seconds (8823.46 KB per second average), exceeding limit of 49.71 KB per second over 86400 seconds
+Writes limit:     4294.97 MB
+Limit duration:   86400s
+Writes caused:    4294.98 MB
+Writes duration:  487s
+Duration:         486.77s
+Duration Sampled: 486.04s (event ends 0.67s after samples)
+Steps:            599 (10.49 MB/step)
+
+Hardware model:   iPad16,1
+Active cpus:      6
+Memory size:      7.72 GB
+HW page size:     16384
+VM page size:     16384
+
+Models:           UNKNOWN
+
+OS Cryptex File Extents: 1
+
+Heaviest stack for the target process:
+  418  ??? (libsystem_pthread.dylib + 2320) [0x18865f910]
+  418  ??? (libsystem_pthread.dylib + 4664) [0x188660238]
+  418  ??? (libdispatch.dylib + 87728) [0x1b70a96b0]
+  418  ??? (libdispatch.dylib + 89228) [0x1b70a9c8c]
+  418  ??? (libdispatch.dylib + 130340) [0x1b70b3d24]
+  418  ??? (libdispatch.dylib + 42768) [0x1b709e710]
+  418  ??? (libdispatch.dylib + 126088) [0x1b70b2c88]
+  418  ??? (libdispatch.dylib + 114684) [0x1b70afffc]
+  418  ??? (libxpc.dylib + 118588) [0x1886daf3c]
+  418  ??? (libxpc.dylib + 109204) [0x1886d8a94]
+  230  ??? (securityd + 17788) [0x1048dc57c]
+  230  ??? (securityd + 94892) [0x1048ef2ac]
+  230  ??? (securityd + 35880) [0x1048e0c28]
+  230  ??? (securityd + 86356) [0x1048ed154]
+  230  ??? (securityd + 95312) [0x1048ef450]
+  230  ??? (securityd + 95852) [0x1048ef66c]
+  230  ??? (libdispatch.dylib + 74032) [0x1b70a6130]
+  230  ??? (libdispatch.dylib + 114612) [0x1b70affb4]
+  230  ??? (securityd + 83640) [0x1048ec6b8]
+  230  ??? (securityd + 96084) [0x1048ef754]
+  230  ??? (securityd + 100088) [0x1048f06f8]
+  205  ??? (libsqlite3.dylib + 190500) [0x1a6556824]
+  205  ??? (libsqlite3.dylib + 235504) [0x1a65617f0]
+  205  ??? (libsqlite3.dylib + 93984) [0x1a653ef20]
+  205  ??? (libsqlite3.dylib + 261988) [0x1a6567f64]
+  205  ??? (libsqlite3.dylib + 263088) [0x1a65683b0]
+  205  ??? (libsqlite3.dylib + 331400) [0x1a6578e88]
+  205  ??? (libsqlite3.dylib + 721256) [0x1a65d8168]
+  205  ??? (libsqlite3.dylib + 332304) [0x1a6579210]
+  205  ??? (libsystem_kernel.dylib + 27740) [0x2443f9c5c]
+
+
+Powerstats for:   securityd [130]
+UUID:             DDBEB229-6F66-3C86-ABA2-C0640A5269D2
+Path:             /usr/libexec/securityd
+Resource Coalition: 418 samples 199
+On Behalf Of:     418 samples NutriVaultApp (Growcery) [716] (418 samples originated by NutriVaultApp (Growcery) [716])
+Architecture:     arm64
+Sudden Term:      Tracked (allows idle exit)
+Footprint:        9008 KB
+Start time:       2026-11-03 12:00:07.587 +0100
+End time:         2026-11-03 12:08:13.630 +0100
+Num samples:      418 (70%)
+Energy:           14.22 mWh
+Num threads:      77
+Primary state:    418 samples Non-Frontmost App, Non-Suppressed, Kernel mode, Effective Thread QoS User Initiated, Requested Thread QoS User Initiated, Override Thread QoS Unspecified, p-core
+User Activity:    0 samples Idle, 418 samples Active
+Power Source:     418 samples on Battery, 0 samples on AC
+  418  ??? (libsystem_pthread.dylib + 2320) [0x18865f910]
+    418  ??? (libsystem_pthread.dylib + 4664) [0x188660238]
+      418  ??? (libdispatch.dylib + 87728) [0x1b70a96b0]
+        418  ??? (libdispatch.dylib + 89228) [0x1b70a9c8c]
+          418  ??? (libdispatch.dylib + 130340) [0x1b70b3d24]
+            418  ??? (libdispatch.dylib + 42768) [0x1b709e710]
+              418  ??? (libdispatch.dylib + 126088) [0x1b70b2c88]
+                418  ??? (libdispatch.dylib + 114684) [0x1b70afffc]
+                  418  ??? (libxpc.dylib + 118588) [0x1886daf3c]
+                    418  ??? (libxpc.dylib + 109204) [0x1886d8a94]
+                      230  ??? (securityd + 17788) [0x1048dc57c]
+                        230  ??? (securityd + 94892) [0x1048ef2ac]
+                          230  ??? (securityd + 35880) [0x1048e0c28]
+                            230  ??? (securityd + 86356) [0x1048ed154]
+                              230  ??? (securityd + 95312) [0x1048ef450]
+                                230  ??? (securityd + 95852) [0x1048ef66c]
+                                  230  ??? (libdispatch.dylib + 74032) [0x1b70a6130]
+                                    230  ??? (libdispatch.dylib + 114612) [0x1b70affb4]
+                                      230  ??? (securityd + 83640) [0x1048ec6b8]
+                                        230  ??? (securityd + 96084) [0x1048ef754]
+                                          230  ??? (securityd + 100088) [0x1048f06f8]
+                                            205  ??? (libsqlite3.dylib + 190500) [0x1a6556824]
+                                              205  ??? (libsqlite3.dylib + 235504) [0x1a65617f0]
+                                                205  ??? (libsqlite3.dylib + 93984) [0x1a653ef20]
+                                                  205  ??? (libsqlite3.dylib + 261988) [0x1a6567f64]
+                                                    205  ??? (libsqlite3.dylib + 263088) [0x1a65683b0]
+                                                      205  ??? (libsqlite3.dylib + 331400) [0x1a6578e88]
+                                                        205  ??? (libsqlite3.dylib + 721256) [0x1a65d8168]
+                                                          205  ??? (libsqlite3.dylib + 332304) [0x1a6579210]
+                                                            205  ??? (libsystem_kernel.dylib + 27740) [0x2443f9c5c]
+                                                              205  <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716])>
+                                            25   ??? (libsqlite3.dylib + 191272) [0x1a6556b28]
+                                              25   ??? (libsqlite3.dylib + 333324) [0x1a657960c]
+                                                25   ??? (libsqlite3.dylib + 572652) [0x1a65b3cec]
+                                                  25   ??? (libsqlite3.dylib + 1234092) [0x1a66554ac]
+                                                    24   ??? (libsqlite3.dylib + 412936) [0x1a658cd08]
+                                                      24   ??? (libsqlite3.dylib + 332304) [0x1a6579210]
+                                                        24   ??? (libsystem_kernel.dylib + 27740) [0x2443f9c5c]
+                                                          24   <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716])>
+                                                    1    ??? (libsqlite3.dylib + 413064) [0x1a658cd88]
+                                                      1    ??? (libsystem_kernel.dylib + 33628) [0x2443fb35c]
+                                                        1    <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716])>
+                      188  ??? (securityd + 22084) [0x1048dd644]
+                        188  ??? (securityd + 115956) [0x1048f44f4]
+                          188  ??? (securityd + 35880) [0x1048e0c28]
+                            188  ??? (securityd + 116180) [0x1048f45d4]
+                              188  ??? (securityd + 95312) [0x1048ef450]
+                                188  ??? (securityd + 95852) [0x1048ef66c]
+                                  188  ??? (libdispatch.dylib + 74032) [0x1b70a6130]
+                                    188  ??? (libdispatch.dylib + 114612) [0x1b70affb4]
+                                      188  ??? (securityd + 83640) [0x1048ec6b8]
+                                        188  ??? (securityd + 96084) [0x1048ef754]
+                                          188  ??? (securityd + 100088) [0x1048f06f8]
+                                            188  ??? (libsqlite3.dylib + 190500) [0x1a6556824]
+                                              188  ??? (libsqlite3.dylib + 235504) [0x1a65617f0]
+                                                188  ??? (libsqlite3.dylib + 93984) [0x1a653ef20]
+                                                  188  ??? (libsqlite3.dylib + 261988) [0x1a6567f64]
+                                                    188  ??? (libsqlite3.dylib + 263088) [0x1a65683b0]
+                                                      188  ??? (libsqlite3.dylib + 331400) [0x1a6578e88]
+                                                        182  ??? (libsqlite3.dylib + 721256) [0x1a65d8168]
+                                                          182  ??? (libsqlite3.dylib + 332304) [0x1a6579210]
+                                                            182  ??? (libsystem_kernel.dylib + 27740) [0x2443f9c5c]
+                                                              182  <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716])>
+                                                        6    ??? (libsqlite3.dylib + 723048) [0x1a65d8868]
+                                                          6    ??? (libsqlite3.dylib + 725260) [0x1a65d910c]
+                                                            6    ??? (libsystem_kernel.dylib + 33628) [0x2443fb35c]
+                                                              6    <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716])>
+
+  Binary Images:
+           0x1048d8000 -                ???  securityd               <DDBEB229-6F66-3C86-ABA2-C0640A5269D2>  /usr/libexec/securityd
+           0x18865f000 -        0x18866b1e7  libsystem_pthread.dylib <32E28303-2AAD-3166-9D11-70E8BCF8E076>  /usr/lib/system/libsystem_pthread.dylib
+           0x1886be000 -        0x18871f4af  libxpc.dylib            <9BA91DF0-39A5-3C28-B96E-BE2463C5C793>  /usr/lib/system/libxpc.dylib
+           0x1a6528000 -        0x1a66e074f  libsqlite3.dylib        <6145839A-8C5B-3186-8AF6-CEE4C1AFDBC8>  /usr/lib/libsqlite3.dylib
+           0x1b7094000 -        0x1b70dadd7  libdispatch.dylib       <84B7E81D-B830-384F-A103-96323C6F5189>  /usr/lib/system/libdispatch.dylib
+           0x2443f3000 -        0x2444302db  libsystem_kernel.dylib  <26FFA906-5ACA-39BF-8F7C-94FE9AB8C657>  /usr/lib/system/libsystem_kernel.dylib
+
+
+Powerstats for:   NutriVaultApp (Growcery)
+UUID:             0A6E1928-C6E0-3568-95EB-7A4A550EF67A
+Path:             /private/var/containers/Bundle/Application/FD783AF6-A07C-4F8B-8DAD-176D1A50FDD4/NutriVaultApp.app/NutriVaultApp
+Identifier:       com.nkembi.nutrivault
+Version:          1.0 (1)
+Is First Party:   No
+Beta Identifier:  36B3C9B6-66D2-457A-9A1B-E6EC429635C0
+Resource Coalition: 87 samples 932
+Architecture:     arm64
+Pageins:          2 pages
+Start time:       2026-11-03 12:00:08.351 +0100
+End time:         2026-11-03 12:08:12.833 +0100
+Num samples:      87 (15%)
+Energy:           279.73 mWh
+Primary state:    45 samples Frontmost App, Non-Suppressed, Kernel mode, Effective Thread QoS Utility, Requested Thread QoS Utility, Override Thread QoS Unspecified, e-core
+User Activity:    0 samples Idle, 87 samples Active
+Power Source:     87 samples on Battery, 0 samples on AC
+  45  ??? (libsystem_pthread.dylib + 2320) [0x18865f910]
+    45  ??? (libsystem_pthread.dylib + 4664) [0x188660238]
+      45  ??? (libdispatch.dylib + 87728) [0x1b70a96b0]
+        45  ??? (libdispatch.dylib + 89228) [0x1b70a9c8c]
+          45  ??? (libdispatch.dylib + 46192) [0x1b709f470]
+            45  ??? (libdispatch.dylib + 43132) [0x1b709e87c]
+              45  ??? (libdispatch.dylib + 114612) [0x1b70affb4]
+                45  ??? (libdispatch.dylib + 7372) [0x1b7095ccc]
+                  45  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 794148) [0x107611e24]
+                    45  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 793148) [0x107611a3c]
+                      45  ??? (Foundation + 2111512) [0x188e08818]
+                        42  ??? (libsystem_kernel.dylib + 20528) [0x2443f8030]
+                        2   ??? (Foundation + 7238064) [0x1892ec1b0]
+                          2   ??? (Foundation + 7216824) [0x1892e6eb8]
+                            2   ??? (Foundation + 561352) [0x188c8e0c8]
+                              2   ??? (Foundation + 561928) [0x188c8e308]
+                                2   ??? (Foundation + 542536) [0x188c89748]
+                                  2   ??? (Foundation + 543376) [0x188c89a90]
+                                    2   ??? (libsystem_kernel.dylib + 25664) [0x2443f9440]
+                        1   ??? (Foundation + 7248932) [0x1892eec24]
+                          1   ??? (Foundation + 3551408) [0x188f680b0]
+                            1   ??? (libsystem_kernel.dylib + 23380) [0x2443f8b54]
+  42  ??? (libswift_Concurrency.dylib + 30852) [0x189d0f884]
+    42  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 974164) [0x10763dd54]
+      42  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 968680) [0x10763c7e8]
+        42  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 973720) [0x10763db98]
+          42  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 888620) [0x107628f2c]
+            42  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 889156) [0x107629144]
+              42  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 810820) [0x107615f44]
+                42  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 7974688) [0x107ceaf20]
+                  42  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 7968632) [0x107ce9778]
+                    42  ??? (<0301B318-6347-3B55-8E54-025397D0E2A1> + 7932276) [0x107ce0974]
+                      42  ??? (Foundation + 2111224) [0x188e086f8]
+                        42  ??? (Foundation + 966352) [0x188cf0ed0]
+                          42  ??? (Foundation + 966040) [0x188cf0d98]
+                            42  ??? (Foundation + 2468592) [0x188e5faf0]
+                              42  ??? (Foundation + 7333128) [0x189303508]
+                                41  ??? (libsystem_kernel.dylib + 20528) [0x2443f8030]
+                                  41  <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive, p-core>
+                                1   ??? (libsystem_kernel.dylib + 33388) [0x2443fb26c]
+                                  1   <Effective Thread QoS User Interactive, Requested Thread QoS User Interactive, p-core>
+
+  Binary Images:
+           0x104a00000 -                ???  com.nkembi.nutrivault 1.0 (1) <0A6E1928-C6E0-3568-95EB-7A4A550EF67A>  /private/var/containers/Bundle/Application/FD783AF6-A07C-4F8B-8DAD-176D1A50FDD4/NutriVaultApp.app/NutriVaultApp
+           0x107550000 -                ???  ???                           <0301B318-6347-3B55-8E54-025397D0E2A1>
+           0x18865f000 -        0x18866b1e7  libsystem_pthread.dylib       <32E28303-2AAD-3166-9D11-70E8BCF8E076>  /usr/lib/system/libsystem_pthread.dylib
+           0x188c05000 -        0x189d07a23  Foundation                    <E623EEBD-082F-32AF-BFC7-F1DC83AE62DD>  /System/Library/Frameworks/Foundation.framework/Foundation
+           0x189d08000 -        0x189d943df  libswift_Concurrency.dylib    <C1F170C0-B349-32B9-8F2D-079D53B04C77>  /usr/lib/swift/libswift_Concurrency.dylib
+           0x1b7094000 -        0x1b70dadd7  libdispatch.dylib             <84B7E81D-B830-384F-A103-96323C6F5189>  /usr/lib/system/libdispatch.dylib
+           0x2443f3000 -        0x2444302db  libsystem_kernel.dylib        <26FFA906-5ACA-39BF-8F7C-94FE9AB8C657>  /usr/lib/system/libsystem_kernel.dylib
+
+
+Powerstats for:   pasted
+UUID:             F0EBCEE8-00EE-3721-87B4-8670EB8C470F
+Path:             /System/Library/PrivateFrameworks/Pasteboard.framework/Support/pasted
+Resource Coalition: 78 samples 488
+On Behalf Of:     78 samples NutriVaultApp (Growcery) [716] (78 samples originated by NutriVaultApp (Growcery) [716])
+Architecture:     arm64
+Start time:       2026-11-03 12:00:09.953 +0100
+End time:         2026-11-03 12:08:12.034 +0100
+Num samples:      78 (13%)
+Energy:           19.39 mWh
+Primary state:    78 samples Non-Frontmost App, Non-Suppressed, Kernel mode, Effective Thread QoS User Initiated, Requested Thread QoS User Initiated, Override Thread QoS Unspecified, p-core
+User Activity:    0 samples Idle, 78 samples Active
+Power Source:     78 samples on Battery, 0 samples on AC
+  78  ??? (libsystem_pthread.dylib + 2320) [0x18865f910]
+    78  ??? (libsystem_pthread.dylib + 4664) [0x188660238]
+      78  ??? (libdispatch.dylib + 87728) [0x1b70a96b0]
+        78  ??? (libdispatch.dylib + 89228) [0x1b70a9c8c]
+          78  ??? (libdispatch.dylib + 46192) [0x1b709f470]
+            78  ??? (libdispatch.dylib + 42768) [0x1b709e710]
+              78  ??? (libdispatch.dylib + 130340) [0x1b70b3d24]
+                78  ??? (libdispatch.dylib + 42768) [0x1b709e710]
+                  78  ??? (libdispatch.dylib + 126088) [0x1b70b2c88]
+                    78  ??? (libdispatch.dylib + 114684) [0x1b70afffc]
+                      78  ??? (libxpc.dylib + 118588) [0x1886daf3c]
+                        78  ??? (libxpc.dylib + 109204) [0x1886d8a94]
+                          78  ??? (Foundation + 210712) [0x188c38718]
+                            78  ??? (Foundation + 210988) [0x188c3882c]
+                              78  ??? (Foundation + 213428) [0x188c391b4]
+                                78  ??? (Foundation + 216900) [0x188c39f44]
+                                  78  ??? (pasted + 47648) [0x10075fa20]
+                                    78  ??? (pasted + 23512) [0x100759bd8]
+                                      78  ??? (libdispatch.dylib + 74032) [0x1b70a6130]
+                                        78  ??? (libdispatch.dylib + 114612) [0x1b70affb4]
+                                          78  ??? (pasted + 23836) [0x100759d1c]
+                                            78  ??? (pasted + 21652) [0x100759494]
+                                              78  ??? (pasted + 111964) [0x10076f55c]
+                                                78  ??? (Pasteboard + 117184) [0x2a622a9c0]
+                                                  45  ??? (Pasteboard + 118028) [0x2a622ad0c]
+                                                    45  ??? (pasted + 113836) [0x10076fcac]
+                                                      45  ??? (pasted + 98372) [0x10076c044]
+                                                        45  ??? (pasted + 94940) [0x10076b2dc]
+                                                          45  ??? (Pasteboard + 117184) [0x2a622a9c0]
+                                                            45  ??? (Pasteboard + 118028) [0x2a622ad0c]
+                                                              45  ??? (pasted + 96036) [0x10076b724]
+                                                                45  ??? (Pasteboard + 58744) [0x2a621c578]
+                                                                  45  ??? (Pasteboard + 54296) [0x2a621b418]
+                                                                    45  ??? (Pasteboard + 52916) [0x2a621aeb4]
+                                                                      45  ??? (libsystem_trace.dylib + 25116) [0x196a4521c]
+                                                                        45  ??? (Pasteboard + 53444) [0x2a621b0c4]
+                                                                          45  ??? (Pasteboard + 55168) [0x2a621b780]
+                                                                            45  ??? (Pasteboard + 135332) [0x2a622f0a4]
+                                                                              45  ??? (CoreFoundation + 342576) [0x188773a30]
+                                                                                45  ??? (CoreFoundation + 342040) [0x188773818]
+                                                                                  45  ??? (Foundation + 117260) [0x188c21a0c]
+                                                                                    45  ??? (Foundation + 227236) [0x188c3c7a4]
+                                                                                      45  ??? (Foundation + 233896) [0x188c3e1a8]
+                                                                                        45  ??? (Foundation + 235240) [0x188c3e6e8]
+                                                                                          45  ??? (CoreFoundation + 614384) [0x1887b5ff0]
+                                                                                            45  ??? (CoreFoundation + 613540) [0x1887b5ca4]
+                                                                                              45  ??? (Pasteboard + 136496) [0x2a622f530]
+                                                                                                45  ??? (Pasteboard + 56076) [0x2a621bb0c]
+                                                                                                  45  ??? (Pasteboard + 53640) [0x2a621b188]
+                                                                                                    45  ??? (Pasteboard + 116496) [0x2a622a710]
+                                                                                                      45  ??? (Pasteboard + 56340) [0x2a621bc14]
+                                                                                                        45  ??? (Pasteboard + 59320) [0x2a621c7b8]
+                                                                                                          45  ??? (Pasteboard + 116496) [0x2a622a710]
+                                                                                                            45  ??? (Pasteboard + 60452) [0x2a621cc24]
+                                                                                                              45  ??? (pasted + 96612) [0x10076b964]
+                                                                                                                45  ??? (Foundation + 541032) [0x188c89168]
+                                                                                                                  45  ??? (Foundation + 556492) [0x188c8cdcc]
+                                                                                                                    44  ??? (Foundation + 2023160) [0x188df2ef8]
+                                                                                                                      44  ??? (libsystem_kernel.dylib + 20528) [0x2443f8030]
+                                                                                                                        43  <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716])>
+                                                                                                                        1   <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716]), e-core>
+                                                                                                                    1   ??? (Foundation + 2022908) [0x188df2dfc]
+                                                                                                                      1   ??? (Foundation + 543740) [0x188c89bfc]
+                                                                                                                        1   ??? (libsystem_kernel.dylib + 21316) [0x2443f8344]
+                                                                                                                          1   <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716])>
+                                                  33  ??? (Pasteboard + 118164) [0x2a622ad94]
+                                                    33  ??? (pasted + 112488) [0x10076f768]
+                                                      33  ??? (Foundation + 541032) [0x188c89168]
+                                                        33  ??? (Foundation + 556492) [0x188c8cdcc]
+                                                          33  ??? (Foundation + 2023160) [0x188df2ef8]
+                                                            32  ??? (libsystem_kernel.dylib + 20528) [0x2443f8030]
+                                                              32  <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716])>
+                                                            1   ??? (libsystem_kernel.dylib + 33388) [0x2443fb26c]
+                                                              1   <on behalf of NutriVaultApp (Growcery) [716] (originated by NutriVaultApp (Growcery) [716]), e-core>
+
+  Binary Images:
+           0x100754000 -                ???  pasted                  <F0EBCEE8-00EE-3721-87B4-8670EB8C470F>  /System/Library/PrivateFrameworks/Pasteboard.framework/Support/pasted
+           0x18865f000 -        0x18866b1e7  libsystem_pthread.dylib <32E28303-2AAD-3166-9D11-70E8BCF8E076>  /usr/lib/system/libsystem_pthread.dylib
+           0x1886be000 -        0x18871f4af  libxpc.dylib            <9BA91DF0-39A5-3C28-B96E-BE2463C5C793>  /usr/lib/system/libxpc.dylib
+           0x188720000 -        0x188c04327  CoreFoundation          <D79F14D9-F948-3CD8-B0D1-EB66B9B8CF94>  /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+           0x188c05000 -        0x189d07a23  Foundation              <E623EEBD-082F-32AF-BFC7-F1DC83AE62DD>  /System/Library/Frameworks/Foundation.framework/Foundation
+           0x196a3f000 -        0x196a5e9af  libsystem_trace.dylib   <DB975691-E7DA-32DA-BFF1-DF8DD23A8A8D>  /usr/lib/system/libsystem_trace.dylib
+           0x1b7094000 -        0x1b70dadd7  libdispatch.dylib       <84B7E81D-B830-384F-A103-96323C6F5189>  /usr/lib/system/libdispatch.dylib
+           0x2443f3000 -        0x2444302db  libsystem_kernel.dylib  <26FFA906-5ACA-39BF-8F7C-94FE9AB8C657>  /usr/lib/system/libsystem_kernel.dylib
+           0x2a620e000 -        0x2a623e5eb  Pasteboard              <9C11FB42-DAC9-3025-A093-CBBE1AE73AC3>  /System/Library/PrivateFrameworks/Pasteboard.framework/Pasteboard

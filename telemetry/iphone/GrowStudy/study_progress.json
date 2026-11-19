@@ -1,0 +1,19 @@
+{
+  "cs-comptia-a-core1": false,
+  "cs-comptia-a-core2": false,
+  "cs-linux-admin": false,
+  "cs-networking": false,
+  "cs-phase1-hardware-lab": false,
+  "cs-phase1-linux-basics": false,
+  "cs-phase1-pbq-exam-sim": false,
+  "cs-python-automation": false,
+  "cs-wireshark": false,
+  "mat-german-textsorten": false,
+  "mat-math-foundations": false,
+  "mat-salzburg-sem2-start": true,
+  "sec-bsc-hm-prep": false,
+  "sec-comptia-secplus": false,
+  "sec-cryptography": false,
+  "sec-soc-siem": false,
+  "sec-web-owasp": false
+}

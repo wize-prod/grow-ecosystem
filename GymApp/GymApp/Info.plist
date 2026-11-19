@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>de</string>
+	<key>CFBundleDisplayName</key>
+	<string>Grow</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Grow</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Grow synchronisiert geplante und absolvierte Trainingseinheiten mit Ihrem Google Kalender.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Grow synchronisiert geplante und absolvierte Trainingseinheiten mit Ihrem Google Kalender.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Grow liest Ernaehrungs- und Vitaldaten zur Erholungsbewertung.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Grow uebertraegt absolvierte Einheiten und verbrannte Energie in Apple Health.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Grow ermittelt Ihren aktuellen Standort fuer praezise Wetterdaten, Temperatur (H/T) und Regenwahrscheinlichkeit.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Grow benoetigt die Kamera, um Ihre Waage zu fotografieren und das gemessene Koerpergewicht automatisch per Texterkennung zu erfassen.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Grow benoetigt Zugriff auf Fotos, um Bilder Ihrer Waage auszuwaehlen und das Gewicht zu analysieren.</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>grow</string>
+		<string>gym</string>
+		<string>growcery</string>
+		<string>nutrivault</string>
+		<string>growstudy</string>
+		<string>study</string>
+		<string>growfinance</string>
+		<string>finance</string>
+		<string>googlefit</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.nkembi.somagym</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gym</string>
+				<string>grow</string>
+			</array>
+			<key>NSLocalNetworkUsageDescription</key>
+	<string>Synchronisiert Trainingsplaene, Mahlzeiten, Aufgaben und Finanzen automatisch zwischen Mac und iPhone im lokalen Netzwerk.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_grow-mesh._tcp</string>
+		<string>_grow-mesh._udp</string>
+	</array>
+</dict>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Synchronisiert Trainingsplaene, Mahlzeiten, Aufgaben und Finanzen automatisch zwischen Mac und iPhone im lokalen Netzwerk.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_grow-mesh._tcp</string>
+		<string>_grow-mesh._udp</string>
+	</array>
+</dict>
+</plist>

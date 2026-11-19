@@ -1,0 +1,14 @@
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/BLE/GrowBLEPeripheralManager.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/HUD/GrowHUDTelemetry.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/IPC/GrowDarwinEventBus.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Mesh/GrowMeshSyncEngine.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Quality/BatchExecutionEngine.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Quality/KaizenHealthCheck.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Quality/PokaYokeReconciler.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Quality/PokaYokeStateMachine.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Quality/PokaYokeValidator.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Search/GrowUnifiedSearchEngine.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Search/GrowUnifiedSearchView.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Storage/FeliCaTransactionLedger.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Storage/GrowDatabase.swift
+/Users/parris-campbellnkembi/Developer/GrowWorkspace/Shared/GrowCore/Sources/GrowCore/Storage/GrowMMKV.swift

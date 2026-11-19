@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>de</string>
+	<key>CFBundleDisplayName</key>
+	<string>GrowFinance</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>GrowFinance</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>grow</string>
+		<string>gym</string>
+		<string>growcery</string>
+		<string>nutrivault</string>
+		<string>growstudy</string>
+		<string>study</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.nkembi.growfinance</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>growfinance</string>
+				<string>finance</string>
+			</array>
+			<key>NSLocalNetworkUsageDescription</key>
+	<string>Synchronisiert Trainingsplaene, Mahlzeiten, Aufgaben und Finanzen automatisch zwischen Mac und iPhone im lokalen Netzwerk.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_grow-mesh._tcp</string>
+		<string>_grow-mesh._udp</string>
+	</array>
+</dict>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>GrowFinance benötigt Zugriff auf die Kamera, um Quittungen, Rechnungen und Zahlungsbelege direkt per OCR zu scannen.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>GrowFinance benötigt Zugriff auf Ihre Fotomediathek, um Screenshots von Apple Pay, PayPal und Bankbuchungen auszuwerten.</string>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>GrowFinance synchronisiert feste Zahlungstermine und Budget-Ereignisse mit Ihrem Google Kalender.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>GrowFinance synchronisiert feste Zahlungstermine und Budget-Ereignisse mit Ihrem Google Kalender.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Synchronisiert Trainingsplaene, Mahlzeiten, Aufgaben und Finanzen automatisch zwischen Mac und iPhone im lokalen Netzwerk.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_grow-mesh._tcp</string>
+		<string>_grow-mesh._udp</string>
+	</array>
+</dict>
+</plist>

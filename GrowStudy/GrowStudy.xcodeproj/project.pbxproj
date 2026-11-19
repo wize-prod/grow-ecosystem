@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		SC0000000000000000000003 /* GrowCore in Frameworks */ = {isa = PBXBuildFile; productRef = SC0000000000000000000002 /* GrowCore */; };
+		CB0000000000000000000000 /* GrowStudyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000000 /* GrowStudyApp.swift */; };
+		CB0000000000000000000001 /* CustomRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000001 /* CustomRecurrenceRule.swift */; };
+		CB0000000000000000000002 /* StudyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000002 /* StudyModels.swift */; };
+		CB0000000000000000000003 /* GrowEcosystemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000003 /* GrowEcosystemRouter.swift */; };
+		CB0000000000000000000004 /* RoadmapCatalogSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000004 /* RoadmapCatalogSeed.swift */; };
+		CB0000000000000000000005 /* SharedMacrosBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000005 /* SharedMacrosBridge.swift */; };
+		CB0000000000000000000024 /* GrowPeerSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000024 /* GrowPeerSyncService.swift */; };
+		CB0000000000000000000006 /* StudyCalendarSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000006 /* StudyCalendarSyncService.swift */; };
+		CB0000000000000000000007 /* StudyMultiDeviceSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000007 /* StudyMultiDeviceSyncService.swift */; };
+		CB0000000000000000000008 /* StudyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000008 /* StudyStore.swift */; };
+		CB0000000000000000000009 /* VoiceQuoteEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000009 /* VoiceQuoteEngine.swift */; };
+		CB000000000000000000000A /* StudyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000000A /* StudyTheme.swift */; };
+		CB000000000000000000000B /* AddCustomModuleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000000B /* AddCustomModuleSheet.swift */; };
+		CB000000000000000000000C /* BFDCoursesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000000C /* BFDCoursesView.swift */; };
+		CB000000000000000000000D /* CollapsibleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000000D /* CollapsibleSection.swift */; };
+		CB000000000000000000000E /* ConcentricStudyRingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000000E /* ConcentricStudyRingsView.swift */; };
+		CB000000000000000000000F /* CyberSecView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000000F /* CyberSecView.swift */; };
+		CB0000000000000000000010 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000010 /* MainTabView.swift */; };
+		CB0000000000000000000011 /* MarkdownNotesEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000011 /* MarkdownNotesEditorView.swift */; };
+		CB0000000000000000000012 /* RoadmapListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000012 /* RoadmapListView.swift */; };
+		CB0000000000000000000013 /* StepDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000013 /* StepDetailSheet.swift */; };
+		CB0000000000000000000014 /* StoicQuoteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000014 /* StoicQuoteCard.swift */; };
+		CB0000000000000000000015 /* StudyCalendarStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000015 /* StudyCalendarStripView.swift */; };
+		CB0000000000000000000016 /* StudyCircularTimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000016 /* StudyCircularTimerButton.swift */; };
+		CB0000000000000000000017 /* StudyCircularWaterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000017 /* StudyCircularWaterButton.swift */; };
+		CB0000000000000000000018 /* StudyDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000018 /* StudyDashboardView.swift */; };
+		CB0000000000000000000019 /* StudyEcosystemProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000019 /* StudyEcosystemProfileSheet.swift */; };
+		CB000000000000000000001A /* StudyLogPlanningSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000001A /* StudyLogPlanningSheet.swift */; };
+		CB000000000000000000001B /* StudyOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000001B /* StudyOverviewView.swift */; };
+		CB000000000000000000001C /* StudyWaterTrackerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000001C /* StudyWaterTrackerCard.swift */; };
+		CB000000000000000000001D /* TaskLabelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000001D /* TaskLabelsView.swift */; };
+		CB000000000000000000001E /* TimerFocusSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000001E /* TimerFocusSheet.swift */; };
+		CB000000000000000000001F /* TodayStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA000000000000000000001F /* TodayStudyView.swift */; };
+		CB0000000000000000000020 /* TrackFilterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000020 /* TrackFilterSheet.swift */; };
+		CB0000000000000000000023 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA0000000000000000000023 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		333333333333333333333333 /* GrowStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrowStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA0000000000000000000000 /* GrowStudyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GrowStudyApp.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000001 /* CustomRecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/CustomRecurrenceRule.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000002 /* StudyModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/StudyModels.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000003 /* GrowEcosystemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GrowEcosystemRouter.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000004 /* RoadmapCatalogSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/RoadmapCatalogSeed.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000005 /* SharedMacrosBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/SharedMacrosBridge.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000024 /* GrowPeerSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GrowPeerSyncService.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000006 /* StudyCalendarSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/StudyCalendarSyncService.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000007 /* StudyMultiDeviceSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/StudyMultiDeviceSyncService.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000008 /* StudyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/StudyStore.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000009 /* VoiceQuoteEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/VoiceQuoteEngine.swift"; sourceTree = "<group>"; };
+		CA000000000000000000000A /* StudyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme/StudyTheme.swift"; sourceTree = "<group>"; };
+		CA000000000000000000000B /* AddCustomModuleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/AddCustomModuleSheet.swift"; sourceTree = "<group>"; };
+		CA000000000000000000000C /* BFDCoursesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/BFDCoursesView.swift"; sourceTree = "<group>"; };
+		CA000000000000000000000D /* CollapsibleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CollapsibleSection.swift"; sourceTree = "<group>"; };
+		CA000000000000000000000E /* ConcentricStudyRingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ConcentricStudyRingsView.swift"; sourceTree = "<group>"; };
+		CA000000000000000000000F /* CyberSecView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CyberSecView.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000010 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/MainTabView.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000011 /* MarkdownNotesEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/MarkdownNotesEditorView.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000012 /* RoadmapListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/RoadmapListView.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000013 /* StepDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StepDetailSheet.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000014 /* StoicQuoteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StoicQuoteCard.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000015 /* StudyCalendarStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StudyCalendarStripView.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000016 /* StudyCircularTimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StudyCircularTimerButton.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000017 /* StudyCircularWaterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StudyCircularWaterButton.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000018 /* StudyDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StudyDashboardView.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000019 /* StudyEcosystemProfileSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StudyEcosystemProfileSheet.swift"; sourceTree = "<group>"; };
+		CA000000000000000000001A /* StudyLogPlanningSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StudyLogPlanningSheet.swift"; sourceTree = "<group>"; };
+		CA000000000000000000001B /* StudyOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StudyOverviewView.swift"; sourceTree = "<group>"; };
+		CA000000000000000000001C /* StudyWaterTrackerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StudyWaterTrackerCard.swift"; sourceTree = "<group>"; };
+		CA000000000000000000001D /* TaskLabelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TaskLabelsView.swift"; sourceTree = "<group>"; };
+		CA000000000000000000001E /* TimerFocusSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TimerFocusSheet.swift"; sourceTree = "<group>"; };
+		CA000000000000000000001F /* TodayStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TodayStudyView.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000020 /* TrackFilterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TrackFilterSheet.swift"; sourceTree = "<group>"; };
+		CA0000000000000000000021 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		CA0000000000000000000022 /* GrowStudy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GrowStudy.entitlements"; sourceTree = "<group>"; };
+		CA0000000000000000000023 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A22222222222222222222221 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				SC0000000000000000000003 /* GrowCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A33333333333333333333331 /* GrowStudy */ = {
+			isa = PBXGroup;
+			children = (
+				CA0000000000000000000000 /* GrowStudyApp.swift */,
+				CA0000000000000000000001 /* CustomRecurrenceRule.swift */,
+				CA0000000000000000000002 /* StudyModels.swift */,
+				CA0000000000000000000003 /* GrowEcosystemRouter.swift */,
+				CA0000000000000000000004 /* RoadmapCatalogSeed.swift */,
+				CA0000000000000000000005 /* SharedMacrosBridge.swift */,
+				CA0000000000000000000024 /* GrowPeerSyncService.swift */,
+
+				CA0000000000000000000006 /* StudyCalendarSyncService.swift */,
+				CA0000000000000000000007 /* StudyMultiDeviceSyncService.swift */,
+				CA0000000000000000000008 /* StudyStore.swift */,
+				CA0000000000000000000009 /* VoiceQuoteEngine.swift */,
+				CA000000000000000000000A /* StudyTheme.swift */,
+				CA000000000000000000000B /* AddCustomModuleSheet.swift */,
+				CA000000000000000000000C /* BFDCoursesView.swift */,
+				CA000000000000000000000D /* CollapsibleSection.swift */,
+				CA000000000000000000000E /* ConcentricStudyRingsView.swift */,
+				CA000000000000000000000F /* CyberSecView.swift */,
+				CA0000000000000000000010 /* MainTabView.swift */,
+				CA0000000000000000000011 /* MarkdownNotesEditorView.swift */,
+				CA0000000000000000000012 /* RoadmapListView.swift */,
+				CA0000000000000000000013 /* StepDetailSheet.swift */,
+				CA0000000000000000000014 /* StoicQuoteCard.swift */,
+				CA0000000000000000000015 /* StudyCalendarStripView.swift */,
+				CA0000000000000000000016 /* StudyCircularTimerButton.swift */,
+				CA0000000000000000000017 /* StudyCircularWaterButton.swift */,
+				CA0000000000000000000018 /* StudyDashboardView.swift */,
+				CA0000000000000000000019 /* StudyEcosystemProfileSheet.swift */,
+				CA000000000000000000001A /* StudyLogPlanningSheet.swift */,
+				CA000000000000000000001B /* StudyOverviewView.swift */,
+				CA000000000000000000001C /* StudyWaterTrackerCard.swift */,
+				CA000000000000000000001D /* TaskLabelsView.swift */,
+				CA000000000000000000001E /* TimerFocusSheet.swift */,
+				CA000000000000000000001F /* TodayStudyView.swift */,
+				CA0000000000000000000020 /* TrackFilterSheet.swift */,
+				CA0000000000000000000021 /* Info.plist */,
+				CA0000000000000000000022 /* GrowStudy.entitlements */,
+				CA0000000000000000000023 /* Assets.xcassets */,
+			);
+			path = GrowStudy;
+			sourceTree = "<group>";
+		};
+		A33333333333333333333332 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				333333333333333333333333 /* GrowStudy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A33333333333333333333333 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				A33333333333333333333331 /* GrowStudy */,
+				A33333333333333333333332 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A44444444444444444444441 /* GrowStudy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A55555555555555555555551 /* Build configuration list for PBXNativeTarget "GrowStudy" */;
+			buildPhases = (
+				A66666666666666666666661 /* Sources */,
+				A22222222222222222222221 /* Frameworks */,
+				A77777777777777777777771 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GrowStudy;
+			productName = GrowStudy;
+			productReference = 333333333333333333333333 /* GrowStudy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A88888888888888888888888 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A44444444444444444444441 = {
+						CreatedOnToolsVersion = 15.0;
+						DevelopmentTeam = X83D9W2G74;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = A55555555555555555555552 /* Build configuration list for PBXProject "GrowStudy" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				de,
+				Base,
+			);
+			mainGroup = A33333333333333333333333 /* Main */;
+			productRefGroup = A33333333333333333333332 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A44444444444444444444441 /* GrowStudy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A77777777777777777777771 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB0000000000000000000023 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A66666666666666666666661 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB0000000000000000000000 /* GrowStudyApp.swift in Sources */,
+				CB0000000000000000000001 /* CustomRecurrenceRule.swift in Sources */,
+				CB0000000000000000000002 /* StudyModels.swift in Sources */,
+				CB0000000000000000000003 /* GrowEcosystemRouter.swift in Sources */,
+				CB0000000000000000000004 /* RoadmapCatalogSeed.swift in Sources */,
+				CB0000000000000000000005 /* SharedMacrosBridge.swift in Sources */,
+				CB0000000000000000000024 /* GrowPeerSyncService.swift in Sources */,
+
+				CB0000000000000000000006 /* StudyCalendarSyncService.swift in Sources */,
+				CB0000000000000000000007 /* StudyMultiDeviceSyncService.swift in Sources */,
+				CB0000000000000000000008 /* StudyStore.swift in Sources */,
+				CB0000000000000000000009 /* VoiceQuoteEngine.swift in Sources */,
+				CB000000000000000000000A /* StudyTheme.swift in Sources */,
+				CB000000000000000000000B /* AddCustomModuleSheet.swift in Sources */,
+				CB000000000000000000000C /* BFDCoursesView.swift in Sources */,
+				CB000000000000000000000D /* CollapsibleSection.swift in Sources */,
+				CB000000000000000000000E /* ConcentricStudyRingsView.swift in Sources */,
+				CB000000000000000000000F /* CyberSecView.swift in Sources */,
+				CB0000000000000000000010 /* MainTabView.swift in Sources */,
+				CB0000000000000000000011 /* MarkdownNotesEditorView.swift in Sources */,
+				CB0000000000000000000012 /* RoadmapListView.swift in Sources */,
+				CB0000000000000000000013 /* StepDetailSheet.swift in Sources */,
+				CB0000000000000000000014 /* StoicQuoteCard.swift in Sources */,
+				CB0000000000000000000015 /* StudyCalendarStripView.swift in Sources */,
+				CB0000000000000000000016 /* StudyCircularTimerButton.swift in Sources */,
+				CB0000000000000000000017 /* StudyCircularWaterButton.swift in Sources */,
+				CB0000000000000000000018 /* StudyDashboardView.swift in Sources */,
+				CB0000000000000000000019 /* StudyEcosystemProfileSheet.swift in Sources */,
+				CB000000000000000000001A /* StudyLogPlanningSheet.swift in Sources */,
+				CB000000000000000000001B /* StudyOverviewView.swift in Sources */,
+				CB000000000000000000001C /* StudyWaterTrackerCard.swift in Sources */,
+				CB000000000000000000001D /* TaskLabelsView.swift in Sources */,
+				CB000000000000000000001E /* TimerFocusSheet.swift in Sources */,
+				CB000000000000000000001F /* TodayStudyView.swift in Sources */,
+				CB0000000000000000000020 /* TrackFilterSheet.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A99999999999999999999991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A99999999999999999999992 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A99999999999999999999993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = GrowStudy/GrowStudy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GrowStudy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.growstudy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
+				SUPPORTS_MACCATALYST = YES;
+			};
+			name = Debug;
+		};
+		A99999999999999999999994 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = GrowStudy/GrowStudy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GrowStudy/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.growstudy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,6";
+				SUPPORTS_MACCATALYST = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A55555555555555555555551 /* Build configuration list for PBXNativeTarget "GrowStudy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A99999999999999999999993 /* Debug */,
+				A99999999999999999999994 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A55555555555555555555552 /* Build configuration list for PBXProject "GrowStudy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A99999999999999999999991 /* Debug */,
+				A99999999999999999999992 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+
+/* Begin XCLocalSwiftPackageReference section */
+		SC0000000000000000000001 /* XCLocalSwiftPackageReference "../Shared/GrowCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../Shared/GrowCore";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		SC0000000000000000000002 /* GrowCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = SC0000000000000000000001 /* XCLocalSwiftPackageReference "../Shared/GrowCore" */;
+			productName = GrowCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+	};
+	rootObject = A88888888888888888888888 /* Project object */;
+}

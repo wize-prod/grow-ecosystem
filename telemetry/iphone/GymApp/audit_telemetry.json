@@ -1,0 +1,16 @@
+[
+  {
+    "appName": "Grow",
+    "category": "ATHLETIC_STRAIN",
+    "detail": "Session 'Stuben- & Zimmer-Workout (Minimal-Raum)' vorzeitig abgebrochen (RPE: 3, Abbruch-Szenario: DIENST-UNTERBRECHUNG).",
+    "id": "50953D9B-3214-4E64-B8CB-C6B045E96BC8",
+    "metadata": {
+      "reason": "Dienstliche / Externe Unterbrechung (Spiess, Alarm, Dienstbetrieb)",
+      "rpe": "3",
+      "session": "Stuben- & Zimmer-Workout (Minimal-Raum)"
+    },
+    "severity": "LOGIC_VIOLATION",
+    "timestamp": 812493478.702879,
+    "title": "Workout vorzeitig beendet"
+  }
+]

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>de</string>
+	<key>CFBundleDisplayName</key>
+	<string>GrowTasks</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>GrowTasks</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>grow</string>
+		<string>gym</string>
+		<string>growcery</string>
+		<string>nutrivault</string>
+		<string>growfinance</string>
+		<string>finance</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.nkembi.growtasks</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>growtasks</string>
+				<string>tasks</string>
+				<string>growstudy</string>
+				<string>study</string>
+			</array>
+			<key>NSLocalNetworkUsageDescription</key>
+	<string>Synchronisiert Trainingsplaene, Mahlzeiten, Aufgaben und Finanzen automatisch zwischen Mac und iPhone im lokalen Netzwerk.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_grow-mesh._tcp</string>
+		<string>_grow-mesh._udp</string>
+	</array>
+</dict>
+	</array>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>NSCalendarsUsageDescription</key>
+	<string>GrowTasks synchronisiert geplante Aufgaben, Module und Routinen mit deinem Google Kalender.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>GrowTasks synchronisiert geplante Aufgaben, Module und Routinen mit deinem Google Kalender.</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Synchronisiert Trainingsplaene, Mahlzeiten, Aufgaben und Finanzen automatisch zwischen Mac und iPhone im lokalen Netzwerk.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_grow-mesh._tcp</string>
+		<string>_grow-mesh._udp</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,42 @@
+[
+  {
+    "dayNumber" : 1,
+    "exerciseNames" : [
+      "MAF-180 Herzfrequenz-Lauf",
+      "Kindeshaltung \/ Prayer Stretch (LWS Dekompression)"
+    ],
+    "id" : "551FE191-3102-41C5-8392-B888EDD250C7",
+    "isCompleted" : false,
+    "modalityRaw" : "cardio",
+    "notes" : "GA1-Dauerlauf (7 bis max. 20 km) zur mitochondrialen Dichte, Fettstoffwechsel-Optimierung & Sixpack-KFA-Reduktion.",
+    "plannedDate" : 816094800,
+    "programId" : "AC06DA37-47CA-4531-834F-A8882FA3A412",
+    "programName" : "",
+    "sessionId" : "F797FD8E-AF67-4104-8331-2025C4075CDC",
+    "templateId" : "D60D5FC4-9A1D-45A9-804E-0AA51D04A58B",
+    "title" : "Aerobe Grundlagenausdauer (7-20 km Dauerlauf)"
+  },
+  {
+    "completedAt" : 816032202.986927,
+    "dayNumber" : 1,
+    "exerciseNames" : [
+      "Einarmige Liegestuetze",
+      "Diamant-Liegestuetze (Calisthenics)",
+      "Stuhl-Dips (Stuben-Trizeps)",
+      "Unterarmstuetz \/ Plank",
+      "Deadbug mit Druck gegen die Knie",
+      "McGill Modifizierter Curl-Up (Haende unter LWS)",
+      "McGill Side Plank (Knie oder Fuesse)"
+    ],
+    "id" : "03D59263-5C81-42A5-AE32-88A0D03E78BE",
+    "isCompleted" : true,
+    "modalityRaw" : "calisthenics",
+    "notes" : "Intensives Stuben-Workout ohne Geraete (0 kg). Einarmige Liegestuetze, Diamant-Liegestuetze, Stuhl-Dips, 5-Minuten-Planks, Deadbugs, McGill Curl-Ups. Beine geschont fuer 7-20km Dauerlauf morgen (14:00 Uhr). Strikt BWK-konform.",
+    "plannedDate" : 816026786.812523,
+    "programId" : "BED5DFA4-D708-4C0F-9484-2D06BD50D963",
+    "programName" : "",
+    "sessionId" : "8DA6673D-7376-40BD-9A59-E5C885C92008",
+    "templateId" : "018474C1-FDC1-4827-A29F-5B30C564BAA4",
+    "title" : "Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete)"
+  }
+]

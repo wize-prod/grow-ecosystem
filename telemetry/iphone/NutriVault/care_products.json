@@ -1,0 +1,123 @@
+[
+  {
+    "activeIngredients": "3 essenzielle Ceramide, Hyaluronsaeure, MVE-Technologie",
+    "amazonUrl": "https://www.amazon.de/dp/B07C5V894J",
+    "brand": "CeraVe",
+    "category": "Reinigung",
+    "clinicalBenefit": "Bewahrt die natuerliche Hautbarriere, nicht komedogen, parfuemfrei, schuetzt vor Austrocknung.",
+    "id": "prod_cerave_cleanser",
+    "name": "Feuchtigkeitsspendende Reinigungslotion",
+    "price": 11.95,
+    "usageInstructions": "Morgens und abends auf angefeuchtete Haut auftragen, 30 Sekunden sanft einmassieren und mit lauwarmem Wasser abspuelen."
+  },
+  {
+    "activeIngredients": "Ceramide 1, 3, 6-II, Hyaluron, Phytosphingosin",
+    "amazonUrl": "https://www.amazon.de/dp/B07C5T648C",
+    "brand": "CeraVe",
+    "category": "Feuchtigkeitspflege",
+    "clinicalBenefit": "Restrukturiert die epidermale Lipidbarriere nach chemischen Peelings und Rasurvorgängen.",
+    "id": "prod_cerave_cream",
+    "name": "Feuchtigkeitscreme mit Ceramiden",
+    "price": 14.5,
+    "usageInstructions": "Nach der Reinigung oder Wirkstoffaufnahme gleichmaessig auf Gesicht, Hals und Rumpf auftragen."
+  },
+  {
+    "activeIngredients": "Mexoryl 400 Breitband-UV-Filter, Netlock-Technologie",
+    "amazonUrl": "https://www.amazon.de/dp/B09V7N7KLR",
+    "brand": "La Roche-Posay",
+    "category": "Sonnenschutz",
+    "clinicalBenefit": "Schuetzt vor ultralangen UVA-Strahlen (380-400nm), verhindert postinflammatorische Hyperpigmentierung.",
+    "id": "prod_lrp_sunscreen",
+    "name": "Anthelios UVMune 400 Invisible Fluid SPF 50+",
+    "price": 19.9,
+    "usageInstructions": "Morgens als finaler Pflegeschritt grosszuegig auftragen. Zieht rueckstandslos ein, brennt nicht in den Augen."
+  },
+  {
+    "activeIngredients": "2% Salicylsaeure (Beta-Hydroxysaeure), Gruentee-Extrakt, pH 3.2-3.8",
+    "amazonUrl": "https://www.amazon.de/dp/B00949CTQQ",
+    "brand": "Paula's Choice",
+    "category": "Wirkstoff-Peeling",
+    "clinicalBenefit": "Dringt tief in die Poren ein, loest Talg, verhindert Pseudofolliculitis Barbae (eingewachsene Barthaare).",
+    "id": "prod_paula_bha",
+    "name": "Skin Perfecting 2% BHA Liquid Peeling",
+    "price": 39,
+    "usageInstructions": "Abends nach der Reinigung mit den Haenden sanft einklopfen. 10 bis 15 Minuten einziehen lassen vor naechsten Schritten."
+  },
+  {
+    "activeIngredients": "10% hochreine Azelainsaeure",
+    "amazonUrl": "https://www.amazon.de/dp/B01MT293Q3",
+    "brand": "The Ordinary",
+    "category": "Wirkstoff-Serum",
+    "clinicalBenefit": "Reduziert bakterielle Besiedlung, daempft Entzuendungsreaktionen, glättet den Teint ohne Schaeleffekt.",
+    "id": "prod_azelaic_acid",
+    "name": "Azelaic Acid Suspension 10%",
+    "price": 12.8,
+    "usageInstructions": "Abends nach dem BHA-Peeling gleichmaessig auftragen. Augen- und Mundpartie aussparen."
+  },
+  {
+    "activeIngredients": "Titan-Carbon Klinge, 7.200 U/Min Motor, Cool-Blade Technologie",
+    "amazonUrl": "https://www.amazon.de/dp/B0C4M4Q97S",
+    "brand": "JRL Professional",
+    "category": "Rasur-Equipment",
+    "clinicalBenefit": "Verhindert Haarenden-Abschraegung unter der Hautoberflaeche. Goldstandard gegen Rasurbrand.",
+    "id": "prod_jrl_trimmer",
+    "name": "FreshFade 2025T Diamante Trimmer",
+    "price": 149,
+    "usageInstructions": "Ausschliesslich fuer Trockenschnitt verwenden. Schnittlaenge 0.5 bis 1.0 mm, parallel zur Wuchsrichtung."
+  },
+  {
+    "activeIngredients": "Acetylsalicylsaeure, Isopropanol, Glyzerin",
+    "amazonUrl": "https://www.amazon.de/dp/B0002CAQ6G",
+    "brand": "Tend Skin",
+    "category": "Aftershave",
+    "clinicalBenefit": "Bekaempft Rasurpickel und Rasurbrand bei stark gekraeuselten Haaren unmittelbar.",
+    "id": "prod_tend_skin",
+    "name": "After Shave Post-Shave Solution",
+    "price": 24.5,
+    "usageInstructions": "Nach dem Trimmen punktuell oder flächig aufgetupft. Beruhigt die Follikel."
+  },
+  {
+    "activeIngredients": "Rosmarinoel, Pfefferminzoel, Biotin, Sojaoel",
+    "amazonUrl": "https://www.amazon.de/dp/B07N7PK9QK",
+    "brand": "Mielle",
+    "category": "Haarpflege",
+    "clinicalBenefit": "Stimuliert die Mikrozirkulation der Follikel, versiegelt die Cuticula bei 4C Haar.",
+    "id": "prod_mielle_oil",
+    "name": "Rosemary Mint Scalp & Hair Strengthening Oil",
+    "price": 13.99,
+    "usageInstructions": "Auf die Kopfhaut und Haarspitzen traeufeln, 2 bis 3 Minuten einmassieren. Nicht ausspuelen."
+  },
+  {
+    "activeIngredients": "Reine Sheabutter, Rizinusoel, Canola-Oel",
+    "amazonUrl": "https://www.amazon.de/dp/B00449W35S",
+    "brand": "Cantu",
+    "category": "Haarpflege",
+    "clinicalBenefit": "Spendet langanhaltende Feuchtigkeit und verhindert Haarbruch bei hoher Porositaet.",
+    "id": "prod_cantu_leavein",
+    "name": "Shea Butter Leave-In Conditioning Repair Cream",
+    "price": 8.95,
+    "usageInstructions": "In feuchtes 4C-Haar einarbeiten. Bildet die Cream-Stufe der LOC-Methode."
+  },
+  {
+    "activeIngredients": "Schwarzes Jamaika-Rizinusoel, Pfefferminze, Apfelessig",
+    "amazonUrl": "https://www.amazon.de/dp/B00MY351Q8",
+    "brand": "SheaMoisture",
+    "category": "Haarpflege",
+    "clinicalBenefit": "Staerkung der Haarschaft-Integritaet gegen mechanische Belastung (Muetzen, Helme).",
+    "id": "prod_shea_castor",
+    "name": "Jamaican Black Castor Oil Strengthen & Restore",
+    "price": 15.49,
+    "usageInstructions": "Als abschliessende Versiegelung der Haarspitzen verwenden."
+  },
+  {
+    "activeIngredients": "BPA-freies Silikon, auslaufsicherer Dreifach-Verschluss",
+    "amazonUrl": "https://www.amazon.de/dp/B07W8P8M82",
+    "brand": "Grooming Travel",
+    "category": "Reise-Equipment",
+    "clinicalBenefit": "Ermoeglicht lückenlose Einhaltung der Pflegeroutine im Kasernendienst und auf Reisen.",
+    "id": "prod_travel_bottles",
+    "name": "Silikon Reiseflaschen Set 100ml (TSA Konform)",
+    "price": 12.99,
+    "usageInstructions": "Fuer CeraVe Cleanser, Feuchtigkeitscreme und Shampoo abfuellen."
+  }
+]

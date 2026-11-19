@@ -1,0 +1,67 @@
+[
+  {
+    "barcode" : "20677329",
+    "brand" : "Pantry",
+    "id" : "9707D690-10A5-4588-9F69-765DD010C670",
+    "isChecked" : false,
+    "name" : "Neues Produkt (EAN 20677329)",
+    "packQty" : 500,
+    "pantryItemId" : "ean_20677329",
+    "price" : 1.99,
+    "quantity" : 1,
+    "store" : "Sonstige",
+    "unit" : "g"
+  },
+  {
+    "barcode" : "20297305",
+    "brand" : "Pantry",
+    "id" : "671FD51B-85E3-4788-8A7D-C1729A7BB454",
+    "isChecked" : false,
+    "name" : "Neues Produkt (EAN 20297305)",
+    "packQty" : 500,
+    "pantryItemId" : "ean_20297305",
+    "price" : 1.99,
+    "quantity" : 1,
+    "store" : "Sonstige",
+    "unit" : "g"
+  },
+  {
+    "barcode" : "4006544205006",
+    "brand" : "Pantry",
+    "id" : "B24BEE53-7275-44B5-9136-6E4B893E2481",
+    "isChecked" : false,
+    "name" : "Neues Produkt (EAN 4006544205006)",
+    "packQty" : 500,
+    "pantryItemId" : "ean_4006544205006",
+    "price" : 1.99,
+    "quantity" : 1,
+    "store" : "Sonstige",
+    "unit" : "g"
+  },
+  {
+    "barcode" : "26390055",
+    "brand" : "Pantry",
+    "id" : "DE99304E-280A-44EC-A07E-AB30768542B7",
+    "isChecked" : false,
+    "name" : "Neues Produkt (EAN 26390055)",
+    "packQty" : 500,
+    "pantryItemId" : "ean_26390055",
+    "price" : 1.99,
+    "quantity" : 1,
+    "store" : "Sonstige",
+    "unit" : "g"
+  },
+  {
+    "barcode" : "26009117",
+    "brand" : "Pantry",
+    "id" : "D9FAD5E1-9D42-41BE-9063-23EB022D6748",
+    "isChecked" : false,
+    "name" : "Neues Produkt (EAN 26009117)",
+    "packQty" : 500,
+    "pantryItemId" : "ean_26009117",
+    "price" : 1.99,
+    "quantity" : 1,
+    "store" : "Sonstige",
+    "unit" : "g"
+  }
+]

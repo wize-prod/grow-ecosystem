@@ -1,0 +1,122 @@
+[
+  {
+    "id": "receipt_penny_cookies_20260912",
+    "date": 779389200.0,
+    "storeName": "PENNY",
+    "totalAmount": 11.79,
+    "imageFilename": null,
+    "notes": "PENNY Einkauf: Zutaten für Ultra-Soft One-Pot Chocolate Chip Cookies & Backpapier",
+    "items": [
+      {
+        "id": "rec_item_1",
+        "rawText": "DT. MARKENBUTTER 250G",
+        "parsedPrice": 1.59,
+        "quantityNote": null,
+        "matchedPantryItemId": "food_penny_butter",
+        "matchedPantryItemName": "Deutsche Markenbutter mildgesäuert",
+        "previousPrice": null,
+        "confidenceScore": 0.98,
+        "isConfirmed": true
+      },
+      {
+        "id": "rec_item_2",
+        "rawText": "BRAUNER ROHRZUCKER 500G",
+        "parsedPrice": 1.49,
+        "quantityNote": null,
+        "matchedPantryItemId": "food_penny_brauner_zucker",
+        "matchedPantryItemName": "Brauner Rohrzucker",
+        "previousPrice": null,
+        "confidenceScore": 0.98,
+        "isConfirmed": true
+      },
+      {
+        "id": "rec_item_3",
+        "rawText": "PENNY FEINZUCKER 1KG",
+        "parsedPrice": 1.19,
+        "quantityNote": null,
+        "matchedPantryItemId": "food_penny_zucker_weiss",
+        "matchedPantryItemName": "PENNY Zucker feine Körnung",
+        "previousPrice": null,
+        "confidenceScore": 0.98,
+        "isConfirmed": true
+      },
+      {
+        "id": "rec_item_4",
+        "rawText": "FRISCHE EIER M 10ER",
+        "parsedPrice": 1.99,
+        "quantityNote": null,
+        "matchedPantryItemId": "food_1787584551166_76",
+        "matchedPantryItemName": "Frische Eier Bodenhaltung M",
+        "previousPrice": null,
+        "confidenceScore": 0.98,
+        "isConfirmed": true
+      },
+      {
+        "id": "rec_item_5",
+        "rawText": "WEIZENMEHL 405 1KG",
+        "parsedPrice": 0.79,
+        "quantityNote": null,
+        "matchedPantryItemId": "food_penny_weizenmehl_405",
+        "matchedPantryItemName": "PENNY Weizenmehl Type 405",
+        "previousPrice": null,
+        "confidenceScore": 0.98,
+        "isConfirmed": true
+      },
+      {
+        "id": "rec_item_6",
+        "rawText": "RUF BACKPULVER 10X15G",
+        "parsedPrice": 0.69,
+        "quantityNote": null,
+        "matchedPantryItemId": "food_penny_backpulver",
+        "matchedPantryItemName": "Backpulver / Kaiser Natron",
+        "previousPrice": null,
+        "confidenceScore": 0.95,
+        "isConfirmed": true
+      },
+      {
+        "id": "rec_item_7",
+        "rawText": "RUF VANILLINZUCKER 10ER",
+        "parsedPrice": 0.59,
+        "quantityNote": null,
+        "matchedPantryItemId": "food_penny_vanillezucker",
+        "matchedPantryItemName": "Vanillin-Zucker (10er Pack)",
+        "previousPrice": null,
+        "confidenceScore": 0.95,
+        "isConfirmed": true
+      },
+      {
+        "id": "rec_item_8",
+        "rawText": "PENNY ZARTBITTER 100G",
+        "parsedPrice": 1.98,
+        "quantityNote": "2 x 0.99 EUR",
+        "matchedPantryItemId": "food_penny_zartbitter_schoko",
+        "matchedPantryItemName": "PENNY Zartbitter Schokolade 50%",
+        "previousPrice": null,
+        "confidenceScore": 0.96,
+        "isConfirmed": true
+      },
+      {
+        "id": "rec_item_9",
+        "rawText": "JODSALZ FEIN 500G",
+        "parsedPrice": 0.29,
+        "quantityNote": null,
+        "matchedPantryItemId": "food_penny_feinsalz",
+        "matchedPantryItemName": "PENNY Jodsalz mit Fluorid",
+        "previousPrice": null,
+        "confidenceScore": 0.95,
+        "isConfirmed": true
+      },
+      {
+        "id": "rec_item_10",
+        "rawText": "BACKPAPIER ZUSCHNITTE",
+        "parsedPrice": 1.19,
+        "quantityNote": null,
+        "matchedPantryItemId": "item_penny_backpapier",
+        "matchedPantryItemName": "PENNY Backpapier Zuschnitte 30 Blatt",
+        "previousPrice": null,
+        "confidenceScore": 0.95,
+        "isConfirmed": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,111 @@
+[
+  {
+    "date" : "2026-09-12T16:45:00Z",
+    "id" : "receipt_penny_cookies_20260912",
+    "items" : [
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p1",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_penny_butter",
+        "matchedPantryItemName" : "Deutsche Markenbutter mildgesäuert",
+        "parsedPrice" : 1.59,
+        "previousPrice" : 1.59,
+        "rawText" : "MARKENBUTTER 250G"
+      },
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p2",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_penny_brauner_zucker",
+        "matchedPantryItemName" : "Brauner Rohrzucker",
+        "parsedPrice" : 1.49,
+        "previousPrice" : 1.49,
+        "rawText" : "ROHROHRZUCKER 500G"
+      },
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p3",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_penny_zucker_weiss",
+        "matchedPantryItemName" : "PENNY Zucker feine Körnung",
+        "parsedPrice" : 1.19,
+        "previousPrice" : 1.19,
+        "rawText" : "FEINZUCKER 1000G"
+      },
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p4",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_1787584551166_76",
+        "matchedPantryItemName" : "Frische Eier Bodenhaltung M",
+        "parsedPrice" : 1.99,
+        "previousPrice" : 1.99,
+        "rawText" : "FRISCHE EIER 10ER"
+      },
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p5",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_penny_vanillezucker",
+        "matchedPantryItemName" : "Vanillin-Zucker (10er Pack)",
+        "parsedPrice" : 0.59,
+        "previousPrice" : 0.59,
+        "rawText" : "VANILLIN-ZUCKER 10X"
+      },
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p6",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_penny_weizenmehl_405",
+        "matchedPantryItemName" : "PENNY Weizenmehl Type 405",
+        "parsedPrice" : 0.79,
+        "previousPrice" : 0.79,
+        "rawText" : "WEIZENMEHL 405 1KG"
+      },
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p7",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_penny_backpulver",
+        "matchedPantryItemName" : "Backpulver \/ Kaiser Natron",
+        "parsedPrice" : 0.49,
+        "previousPrice" : 0.49,
+        "rawText" : "BACKPULVER \/ NATRON"
+      },
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p8",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_penny_feinsalz",
+        "matchedPantryItemName" : "PENNY Jodsalz mit Fluorid",
+        "parsedPrice" : 0.29,
+        "previousPrice" : 0.29,
+        "rawText" : "JODSALZ MIT FLUORID"
+      },
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p9",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_penny_zartbitter_schoko",
+        "matchedPantryItemName" : "PENNY Zartbitter Schokolade 50%",
+        "parsedPrice" : 1.98,
+        "previousPrice" : 1.98,
+        "rawText" : "ZARTBITTER 50% 2X"
+      },
+      {
+        "confidenceScore" : 0.98,
+        "id" : "line_p10",
+        "isConfirmed" : true,
+        "matchedPantryItemId" : "food_penny_backpapier",
+        "matchedPantryItemName" : "PENNY Backpapier Zuschnitte",
+        "parsedPrice" : 1.19,
+        "previousPrice" : 1.19,
+        "rawText" : "BACKPAPIER ZUSCHNIT"
+      }
+    ],
+    "notes" : "PENNY Einkauf fuer Soft Cookies Rezeptur",
+    "storeName" : "PENNY",
+    "totalAmount" : 11.79
+  }
+]

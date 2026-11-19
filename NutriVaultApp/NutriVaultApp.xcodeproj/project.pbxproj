@@ -1,0 +1,564 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB0000000000000000000000 /* NutriVaultApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000000 /* NutriVaultApp.swift */; };
+		BB0000000000000000000002 /* PantryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000002 /* PantryItem.swift */; };
+		BB0000000000000000000003 /* MealLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000003 /* MealLogEntry.swift */; };
+		BB0000000000000000000004 /* ShoppingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000004 /* ShoppingItem.swift */; };
+		BB0000000000000000000005 /* HapticFeedbackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000005 /* HapticFeedbackService.swift */; };
+		BB0000000000000000000006 /* OpenFoodFactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000006 /* OpenFoodFactsService.swift */; };
+		BB0000000000000000000007 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000007 /* LocalStore.swift */; };
+		BB0000000000000000000008 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000008 /* Theme.swift */; };
+		BB000000000000000000000A /* BarcodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000A /* BarcodeScannerView.swift */; };
+		BB000000000000000000000D /* MealTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000D /* MealTemplate.swift */; };
+		BB000000000000000000000E /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000E /* HealthKitService.swift */; };
+		BB000000000000000000000F /* MasterDataSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000F /* MasterDataSeed.swift */; };
+		BB0000000000000000000010 /* NutritionalProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000010 /* NutritionalProfile.swift */; };
+		BB0000000000000000000011 /* NutritionDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000011 /* NutritionDetailSheet.swift */; };
+		BB0000000000000000000012 /* CalendarStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000012 /* CalendarStripView.swift */; };
+		BB0000000000000000000013 /* CalendarSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000013 /* CalendarSyncService.swift */; };
+		BB0000000000000000000014 /* CollapsibleSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000014 /* CollapsibleSection.swift */; };
+		BB0000000000000000000015 /* CommodityReferenceCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000015 /* CommodityReferenceCatalog.swift */; };
+		BB0000000000000000000016 /* CustomizeRecipeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000016 /* CustomizeRecipeSheet.swift */; };
+		BB0000000000000000000017 /* EditStockSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000017 /* EditStockSheet.swift */; };
+		BB0000000000000000000018 /* HealthProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000018 /* HealthProfileSheet.swift */; };
+		BB0000000000000000000019 /* RecipeDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000019 /* RecipeDetailSheet.swift */; };
+		BB0000000000000000000022 /* ReceiptRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000022 /* ReceiptRecord.swift */; };
+		BB0000000000000000000023 /* ReceiptOCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000023 /* ReceiptOCRService.swift */; };
+		BB0000000000000000000024 /* ReceiptMatchingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000024 /* ReceiptMatchingEngine.swift */; };
+		BB0000000000000000000025 /* ReceiptScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000025 /* ReceiptScannerView.swift */; };
+		BB0000000000000000000026 /* ReceiptDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000026 /* ReceiptDetailSheet.swift */; };
+		BB0000000000000000000028 /* StoreScouterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000028 /* StoreScouterView.swift */; };
+		BB0000000000000000000029 /* RecipeFilterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000029 /* RecipeFilterSheet.swift */; };
+		BB000000000000000000002A /* ZoomableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002A /* ZoomableImageView.swift */; };
+		BB000000000000000000002B /* EditRecipeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002B /* EditRecipeSheet.swift */; };
+		BB000000000000000000002C /* ReceiptItemDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002C /* ReceiptItemDetailSheet.swift */; };
+		BB000000000000000000002F /* SharedMacrosBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002F /* SharedMacrosBridge.swift */; };
+		BB0000000000000000000032 /* EditMealLogSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000032 /* EditMealLogSheet.swift */; };
+		BB0000000000000000000033 /* CircadianSupplementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000033 /* CircadianSupplementModel.swift */; };
+		BB0000000000000000000035 /* SupplementNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000035 /* SupplementNotificationService.swift */; };
+		BB0000000000000000000036 /* InfoExplanationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000036 /* InfoExplanationSheet.swift */; };
+		BB0000000000000000000039 /* CustomRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000039 /* CustomRecurrenceRule.swift */; };
+		BB000000000000000000003B /* LogConsumptionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003B /* LogConsumptionSheet.swift */; };
+		BB000000000000000000003C /* CalendarDateDetailCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003C /* CalendarDateDetailCard.swift */; };
+		BB0000000000000000000040 /* AddPastMealSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000040 /* AddPastMealSheet.swift */; };
+		BB0000000000000000000041 /* GrowEcosystemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000041 /* GrowEcosystemRouter.swift */; };
+		BB0000000000000000000042 /* EcosystemProfileSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000042 /* EcosystemProfileSheet.swift */; };
+		BB0000000000000000000043 /* CircadianSupplementsManagementSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000043 /* CircadianSupplementsManagementSheet.swift */; };
+		BB0000000000000000000044 /* CuisineTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000044 /* CuisineTaxonomy.swift */; };
+		BB0000000000000000000045 /* EquipmentTaxonomy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000045 /* EquipmentTaxonomy.swift */; };
+		BB0000000000000000000047 /* UserAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000047 /* UserAccountService.swift */; };
+		BB0000000000000000000048 /* AccountLoginSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000048 /* AccountLoginSheet.swift */; };
+		BB0000000000000000000049 /* WaterNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000049 /* WaterNotificationService.swift */; };
+		BB000000000000000000004A /* StoreCanonicalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004A /* StoreCanonicalizer.swift */; };
+		BB000000000000000000004B /* NutritionalScoringEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004B /* NutritionalScoringEngine.swift */; };
+		BB000000000000000000004C /* NutritionalScoresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004C /* NutritionalScoresView.swift */; };
+		BB000000000000000000004D /* ProductComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004D /* ProductComparisonView.swift */; };
+		BB000000000000000000004E /* ScannedProductInspectorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004E /* ScannedProductInspectorSheet.swift */; };
+		BB000000000000000000004F /* GenerativeCulinaryEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004F /* GenerativeCulinaryEngine.swift */; };
+		BB0000000000000000000051 /* PantryMatchingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000051 /* PantryMatchingEngine.swift */; };
+		BB0000000000000000000052 /* InventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000052 /* InventoryView.swift */; };
+		BB0000000000000000000053 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000053 /* RecipesView.swift */; };
+		BB0000000000000000000054 /* ShoppingHubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000054 /* ShoppingHubView.swift */; };
+		BB0000000000000000000055 /* PantryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000055 /* PantryRepository.swift */; };
+		BB0000000000000000000056 /* NutritionLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000056 /* NutritionLogService.swift */; };
+		BB0000000000000000000057 /* ShoppingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000057 /* ShoppingService.swift */; };
+		BB0000000000000000000058 /* ReceiptRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000058 /* ReceiptRepository.swift */; };
+		BB0000000000000000000059 /* QuickAddMealSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000059 /* QuickAddMealSheet.swift */; };
+		BB000000000000000000005A /* FieldScratchpadCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005A /* FieldScratchpadCard.swift */; };
+		BB0000000000000000000030 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000030 /* Assets.xcassets */; };
+		BB0000000000000000000031 /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000031 /* Icons */; };
+		BB0000000000000000000046 /* penny_recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000046 /* penny_recipes.json */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		111111111111111111111111 /* NutriVaultApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutriVaultApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000000 /* NutriVaultApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NutriVaultApp.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		AA0000000000000000000002 /* PantryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PantryItem.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000003 /* MealLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealLogEntry.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000004 /* ShoppingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingItem.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000005 /* HapticFeedbackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HapticFeedbackService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000006 /* OpenFoodFactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenFoodFactsService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000007 /* LocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStore.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000008 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000A /* BarcodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BarcodeScannerView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000D /* MealTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealTemplate.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000E /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HealthKitService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000000F /* MasterDataSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MasterDataSeed.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000010 /* NutritionalProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NutritionalProfile.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000011 /* NutritionDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NutritionDetailSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000012 /* CalendarStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarStripView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000013 /* CalendarSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarSyncService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000014 /* CollapsibleSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollapsibleSection.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000015 /* CommodityReferenceCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommodityReferenceCatalog.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000016 /* CustomizeRecipeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomizeRecipeSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000017 /* EditStockSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditStockSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000018 /* HealthProfileSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HealthProfileSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000019 /* RecipeDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeDetailSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000022 /* ReceiptRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptRecord.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000023 /* ReceiptOCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptOCRService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000024 /* ReceiptMatchingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptMatchingEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000025 /* ReceiptScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptScannerView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000026 /* ReceiptDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptDetailSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000028 /* StoreScouterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreScouterView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000029 /* RecipeFilterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeFilterSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002A /* ZoomableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZoomableImageView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002B /* EditRecipeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditRecipeSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002C /* ReceiptItemDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptItemDetailSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000002F /* SharedMacrosBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SharedMacrosBridge.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000032 /* EditMealLogSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditMealLogSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000033 /* CircadianSupplementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CircadianSupplementModel.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000035 /* SupplementNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SupplementNotificationService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000036 /* InfoExplanationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InfoExplanationSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000039 /* CustomRecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomRecurrenceRule.swift"; sourceTree = "<group>"; };
+		AA000000000000000000003B /* LogConsumptionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogConsumptionSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000003C /* CalendarDateDetailCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarDateDetailCard.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000040 /* AddPastMealSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AddPastMealSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000041 /* GrowEcosystemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GrowEcosystemRouter.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000042 /* EcosystemProfileSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EcosystemProfileSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000043 /* CircadianSupplementsManagementSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CircadianSupplementsManagementSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000044 /* CuisineTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CuisineTaxonomy.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000045 /* EquipmentTaxonomy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EquipmentTaxonomy.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000047 /* UserAccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserAccountService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000048 /* AccountLoginSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AccountLoginSheet.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000049 /* WaterNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaterNotificationService.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004A /* StoreCanonicalizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StoreCanonicalizer.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004B /* NutritionalScoringEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NutritionalScoringEngine.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004C /* NutritionalScoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NutritionalScoresView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004D /* ProductComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductComparisonView.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004E /* ScannedProductInspectorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScannedProductInspectorSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000004F /* GenerativeCulinaryEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GenerativeCulinaryEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000051 /* PantryMatchingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PantryMatchingEngine.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000052 /* InventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InventoryView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000053 /* RecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipesView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000054 /* ShoppingHubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingHubView.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000055 /* PantryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PantryRepository.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000056 /* NutritionLogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NutritionLogService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000057 /* ShoppingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingService.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000058 /* ReceiptRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReceiptRepository.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000059 /* QuickAddMealSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickAddMealSheet.swift"; sourceTree = "<group>"; };
+		AA000000000000000000005A /* FieldScratchpadCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FieldScratchpadCard.swift"; sourceTree = "<group>"; };
+		AA0000000000000000000030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
+		AA0000000000000000000031 /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Icons"; sourceTree = "<group>"; };
+		AA0000000000000000000046 /* penny_recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = "penny_recipes.json"; path = "Resources/penny_recipes.json"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		222222222222222222222222 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		333333330000000000000001 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000002 /* PantryItem.swift */,
+				AA0000000000000000000003 /* MealLogEntry.swift */,
+				AA0000000000000000000004 /* ShoppingItem.swift */,
+				AA000000000000000000000D /* MealTemplate.swift */,
+				AA0000000000000000000010 /* NutritionalProfile.swift */,
+				AA0000000000000000000022 /* ReceiptRecord.swift */,
+				AA0000000000000000000033 /* CircadianSupplementModel.swift */,
+				AA0000000000000000000039 /* CustomRecurrenceRule.swift */,
+				AA0000000000000000000044 /* CuisineTaxonomy.swift */,
+				AA0000000000000000000045 /* EquipmentTaxonomy.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		333333330000000000000002 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000005 /* HapticFeedbackService.swift */,
+				AA0000000000000000000006 /* OpenFoodFactsService.swift */,
+				AA0000000000000000000007 /* LocalStore.swift */,
+				AA000000000000000000000E /* HealthKitService.swift */,
+				AA000000000000000000000F /* MasterDataSeed.swift */,
+				AA0000000000000000000013 /* CalendarSyncService.swift */,
+				AA0000000000000000000015 /* CommodityReferenceCatalog.swift */,
+				AA0000000000000000000023 /* ReceiptOCRService.swift */,
+				AA0000000000000000000024 /* ReceiptMatchingEngine.swift */,
+				AA000000000000000000002F /* SharedMacrosBridge.swift */,
+				AA0000000000000000000035 /* SupplementNotificationService.swift */,
+				AA0000000000000000000041 /* GrowEcosystemRouter.swift */,
+				AA0000000000000000000047 /* UserAccountService.swift */,
+				AA0000000000000000000049 /* WaterNotificationService.swift */,
+				AA000000000000000000004A /* StoreCanonicalizer.swift */,
+				AA000000000000000000004B /* NutritionalScoringEngine.swift */,
+				AA000000000000000000004F /* GenerativeCulinaryEngine.swift */,
+				AA0000000000000000000051 /* PantryMatchingEngine.swift */,
+				AA0000000000000000000055 /* PantryRepository.swift */,
+				AA0000000000000000000056 /* NutritionLogService.swift */,
+				AA0000000000000000000057 /* ShoppingService.swift */,
+				AA0000000000000000000058 /* ReceiptRepository.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		333333330000000000000003 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000052 /* InventoryView.swift */,
+				AA0000000000000000000053 /* RecipesView.swift */,
+				AA0000000000000000000054 /* ShoppingHubView.swift */,
+				AA0000000000000000000059 /* QuickAddMealSheet.swift */,
+				AA000000000000000000005A /* FieldScratchpadCard.swift */,
+				AA0000000000000000000008 /* Theme.swift */,
+				AA000000000000000000000A /* BarcodeScannerView.swift */,
+				AA0000000000000000000011 /* NutritionDetailSheet.swift */,
+				AA0000000000000000000012 /* CalendarStripView.swift */,
+				AA0000000000000000000014 /* CollapsibleSection.swift */,
+				AA0000000000000000000016 /* CustomizeRecipeSheet.swift */,
+				AA0000000000000000000017 /* EditStockSheet.swift */,
+				AA0000000000000000000018 /* HealthProfileSheet.swift */,
+				AA0000000000000000000019 /* RecipeDetailSheet.swift */,
+				AA0000000000000000000025 /* ReceiptScannerView.swift */,
+				AA0000000000000000000026 /* ReceiptDetailSheet.swift */,
+				AA0000000000000000000028 /* StoreScouterView.swift */,
+				AA0000000000000000000029 /* RecipeFilterSheet.swift */,
+				AA000000000000000000002A /* ZoomableImageView.swift */,
+				AA000000000000000000002B /* EditRecipeSheet.swift */,
+				AA000000000000000000002C /* ReceiptItemDetailSheet.swift */,
+				AA0000000000000000000032 /* EditMealLogSheet.swift */,
+				AA0000000000000000000036 /* InfoExplanationSheet.swift */,
+				AA000000000000000000003B /* LogConsumptionSheet.swift */,
+				AA000000000000000000003C /* CalendarDateDetailCard.swift */,
+				AA0000000000000000000040 /* AddPastMealSheet.swift */,
+				AA0000000000000000000042 /* EcosystemProfileSheet.swift */,
+				AA0000000000000000000043 /* CircadianSupplementsManagementSheet.swift */,
+				AA0000000000000000000048 /* AccountLoginSheet.swift */,
+				AA000000000000000000004C /* NutritionalScoresView.swift */,
+				AA000000000000000000004D /* ProductComparisonView.swift */,
+				AA000000000000000000004E /* ScannedProductInspectorSheet.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		333333333333333333333331 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				111111111111111111111111 /* NutriVaultApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		333333333333333333333332 /* NutriVaultApp */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000000 /* NutriVaultApp.swift */,
+				AA0000000000000000000001 /* Info.plist */,
+				AA0000000000000000000030 /* Assets.xcassets */,
+				AA0000000000000000000031 /* Icons */,
+				AA0000000000000000000046 /* penny_recipes.json */,
+				333333330000000000000001 /* Models */,
+				333333330000000000000002 /* Services */,
+				333333330000000000000003 /* Views */,
+			);
+			path = NutriVaultApp;
+			sourceTree = "<group>";
+		};
+		333333333333333333333333 = {
+			isa = PBXGroup;
+			children = (
+				333333333333333333333332 /* NutriVaultApp */,
+				333333333333333333333331 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		444444444444444444444444 /* NutriVaultApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 555555555555555555555551 /* Build configuration list for PBXNativeTarget "NutriVaultApp" */;
+			buildPhases = (
+				666666666666666666666666 /* Sources */,
+				222222222222222222222222 /* Frameworks */,
+				777777777777777777777777 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NutriVaultApp;
+			productName = NutriVaultApp;
+			productReference = 111111111111111111111111 /* NutriVaultApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		888888888888888888888888 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					444444444444444444444444 = {
+						CreatedOnToolsVersion = 16.0;
+						DevelopmentTeam = X83D9W2G74;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 555555555555555555555552 /* Build configuration list for PBXProject "NutriVaultApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				de,
+				Base,
+			);
+			mainGroup = 333333333333333333333333;
+			productRefGroup = 333333333333333333333331 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				444444444444444444444444 /* NutriVaultApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		777777777777777777777777 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000030 /* Assets.xcassets in Resources */,
+				BB0000000000000000000031 /* Icons in Resources */,
+				BB0000000000000000000046 /* penny_recipes.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		666666666666666666666666 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000000 /* NutriVaultApp.swift in Sources */,
+				BB0000000000000000000002 /* PantryItem.swift in Sources */,
+				BB0000000000000000000003 /* MealLogEntry.swift in Sources */,
+				BB0000000000000000000004 /* ShoppingItem.swift in Sources */,
+				BB0000000000000000000005 /* HapticFeedbackService.swift in Sources */,
+				BB0000000000000000000006 /* OpenFoodFactsService.swift in Sources */,
+				BB0000000000000000000007 /* LocalStore.swift in Sources */,
+				BB0000000000000000000008 /* Theme.swift in Sources */,
+				BB000000000000000000000A /* BarcodeScannerView.swift in Sources */,
+				BB000000000000000000000D /* MealTemplate.swift in Sources */,
+				BB000000000000000000000E /* HealthKitService.swift in Sources */,
+				BB000000000000000000000F /* MasterDataSeed.swift in Sources */,
+				BB0000000000000000000010 /* NutritionalProfile.swift in Sources */,
+				BB0000000000000000000011 /* NutritionDetailSheet.swift in Sources */,
+				BB0000000000000000000012 /* CalendarStripView.swift in Sources */,
+				BB0000000000000000000013 /* CalendarSyncService.swift in Sources */,
+				BB0000000000000000000014 /* CollapsibleSection.swift in Sources */,
+				BB0000000000000000000015 /* CommodityReferenceCatalog.swift in Sources */,
+				BB0000000000000000000016 /* CustomizeRecipeSheet.swift in Sources */,
+				BB0000000000000000000017 /* EditStockSheet.swift in Sources */,
+				BB0000000000000000000018 /* HealthProfileSheet.swift in Sources */,
+				BB0000000000000000000019 /* RecipeDetailSheet.swift in Sources */,
+				BB0000000000000000000022 /* ReceiptRecord.swift in Sources */,
+				BB0000000000000000000023 /* ReceiptOCRService.swift in Sources */,
+				BB0000000000000000000024 /* ReceiptMatchingEngine.swift in Sources */,
+				BB0000000000000000000025 /* ReceiptScannerView.swift in Sources */,
+				BB0000000000000000000026 /* ReceiptDetailSheet.swift in Sources */,
+				BB0000000000000000000028 /* StoreScouterView.swift in Sources */,
+				BB0000000000000000000029 /* RecipeFilterSheet.swift in Sources */,
+				BB000000000000000000002A /* ZoomableImageView.swift in Sources */,
+				BB000000000000000000002B /* EditRecipeSheet.swift in Sources */,
+				BB000000000000000000002C /* ReceiptItemDetailSheet.swift in Sources */,
+				BB000000000000000000002F /* SharedMacrosBridge.swift in Sources */,
+				BB0000000000000000000032 /* EditMealLogSheet.swift in Sources */,
+				BB0000000000000000000033 /* CircadianSupplementModel.swift in Sources */,
+				BB0000000000000000000035 /* SupplementNotificationService.swift in Sources */,
+				BB0000000000000000000036 /* InfoExplanationSheet.swift in Sources */,
+				BB0000000000000000000039 /* CustomRecurrenceRule.swift in Sources */,
+				BB000000000000000000003B /* LogConsumptionSheet.swift in Sources */,
+				BB000000000000000000003C /* CalendarDateDetailCard.swift in Sources */,
+				BB0000000000000000000040 /* AddPastMealSheet.swift in Sources */,
+				BB0000000000000000000041 /* GrowEcosystemRouter.swift in Sources */,
+				BB0000000000000000000042 /* EcosystemProfileSheet.swift in Sources */,
+				BB0000000000000000000043 /* CircadianSupplementsManagementSheet.swift in Sources */,
+				BB0000000000000000000044 /* CuisineTaxonomy.swift in Sources */,
+				BB0000000000000000000045 /* EquipmentTaxonomy.swift in Sources */,
+				BB0000000000000000000047 /* UserAccountService.swift in Sources */,
+				BB0000000000000000000048 /* AccountLoginSheet.swift in Sources */,
+				BB0000000000000000000049 /* WaterNotificationService.swift in Sources */,
+				BB000000000000000000004A /* StoreCanonicalizer.swift in Sources */,
+				BB000000000000000000004B /* NutritionalScoringEngine.swift in Sources */,
+				BB000000000000000000004C /* NutritionalScoresView.swift in Sources */,
+				BB000000000000000000004D /* ProductComparisonView.swift in Sources */,
+				BB000000000000000000004E /* ScannedProductInspectorSheet.swift in Sources */,
+				BB000000000000000000004F /* GenerativeCulinaryEngine.swift in Sources */,
+				BB0000000000000000000051 /* PantryMatchingEngine.swift in Sources */,
+				BB0000000000000000000052 /* InventoryView.swift in Sources */,
+				BB0000000000000000000053 /* RecipesView.swift in Sources */,
+				BB0000000000000000000054 /* ShoppingHubView.swift in Sources */,
+				BB0000000000000000000055 /* PantryRepository.swift in Sources */,
+				BB0000000000000000000056 /* NutritionLogService.swift in Sources */,
+				BB0000000000000000000057 /* ShoppingService.swift in Sources */,
+				BB0000000000000000000058 /* ReceiptRepository.swift in Sources */,
+				BB0000000000000000000059 /* QuickAddMealSheet.swift in Sources */,
+				BB000000000000000000005A /* FieldScratchpadCard.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		999999999999999999999991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		999999999999999999999992 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		999999999999999999999993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = NutriVaultApp/NutriVaultApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NutriVaultApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.nutrivault;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		999999999999999999999994 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = NutriVaultApp/NutriVaultApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NutriVaultApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.nutrivault;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		555555555555555555555551 /* Build configuration list for PBXNativeTarget "NutriVaultApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				999999999999999999999993 /* Debug */,
+				999999999999999999999994 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		555555555555555555555552 /* Build configuration list for PBXProject "NutriVaultApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				999999999999999999999991 /* Debug */,
+				999999999999999999999992 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 888888888888888888888888 /* Project object */;
+}

@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Xcode / DerivedData
+.derivedData/
+DerivedData/
+build/
+*.xcuserstate
+project.xcworkspace/xcuserdata/
+*.xcuserdatad
+
+# Python Virtual Environments
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Local Runtime Databases & Private Caches (Zero-Leakage)
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.fastkv.bin
+*.growbackup
+*.bin
+*.log
+
+# Environment variables & secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Symlinks to personal vaults
+ObsidianVault
+WInf_Vault

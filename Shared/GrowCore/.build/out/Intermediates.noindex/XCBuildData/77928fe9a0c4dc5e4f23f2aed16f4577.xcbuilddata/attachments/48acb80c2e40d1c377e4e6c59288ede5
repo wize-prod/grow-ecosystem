@@ -1,0 +1,4 @@
+module GrowCore {
+header "GrowCore-Swift.h"
+export *
+}

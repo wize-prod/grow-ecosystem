@@ -1,0 +1,643 @@
+{"client_id":"0C7239A6-D41A-41CE-A358-518C6402AA90","target_os_version":"24B119","restore_payload_version":"Unknown","restore_type":"OTAUpdate","os_version":"24B115","itunes_version":"24B115","bug_type":"183","restore_error":"812","name":"iPhoneRestore"}
+16b203000 : Sending load complete without error
+16b28f000 : Client softwareupdateservicesd[328] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16b28f000 : The secure object length value is: 1525
+16b28f000 : Caller has pased in downloadOptions: MADownloadOptions allowsCellular: 1 resourceTimeout: -1 canUseCacheServer: 0 discretionary: 0 disableUI: 0 sessionId: (null) additionalServerParams:{ } allowsExpensiveAccess:1 requiresPowerPluggedIn: 0 prefersInfraWiFi: 1 liveServerOnly: 0 DownloadAuthorizationHeader: not present analyticsData: not present allowDaemonConnectionRetries: 0  + MAMsuDownloadOptions reqProdVersion: (null) reqBuildVersion: (null) delayPeriod: 0 minorDelayPeriod: 0 majorDelayPeriod: 0 managedDevice: 0 allowSameVersion: 0 prereqBuild: (null) prereqVersion: (null) prereqReleaseType: (default) liveAssetAudienceUUID: (null) purpose: (null)
+16b28f000 : The attributes are: {
+    ActualMinimumSystemPartition = 8388;
+    ArchiveDecryptionKey = "VZ+lqABgX/yf+OyX0S5faiJEqeJAwZJSwUV5OJOrvNE=";
+    ArchiveID = "lNlgm4Y6FiEYdXuWn7QTdTI/6+DcD4rvhnqUGz0yTV8=";
+    AssetFormat = AppleEncryptedArchive;
+    AssetType = "com.apple.MobileAsset.SoftwareUpdate";
+    AutoUpdate = 1;
+    Build = 24B119;
+    CryptexSizeInfo =     (
+                {
+            CryptexSize = 16;
+            CryptexSizeDelta = 33;
+            CryptexTag = "cryptex-app";
+        },
+                {
+            CryptexSize = 5904;
+            CryptexSizeDelta = 92;
+            CryptexTag = "cryptex-system-arm64e";
+        }
+    );
+    DisablePreSoftwareUpdateAssetStaging = 1;
+    EAPFSEnabled = 1;
+    InstallationSize = 248365056;
+    "InstallationSize-Snapshot" = 650769398;
+    MinimumSystemPartition = 0;
+    OSVersion = "27.2";
+    PrerequisiteBuild = 24B115;
+    PrerequisiteOSVersion = "27.2";
+    RSEPDigest = {length = 48, bytes = 0x87827a5a 1954a258 f4d3a954 2334f6fb ... cb810ddf e1dae239 };
+    RSEPTBMDigests = "HAP/rfFuBdSTRxRKHQgEI5BRluDZjjpGCmVu8et0h/EBIiRxAz2HOCJOrlpO4HlO\n3eCwchI0cX+b4lKejvXsnUcgvhXUAN0bPAmQNCM8j9vJuznZNKZexeOhEWPZOQKd\nX2/mcHs9z42DgypjPW1JH5KsIkxx2zGjYQOiS4O2Ov7d33tJnFFnHlu/jjhYGXoW\neJKGlx8UeDbnv/6/H9sEIlGEKedoVfLaYcIhUk4PFeKnUC5Khpj1OBKjY0RU+eHM\n5yO9SBspit4NvT0QjiF9TnvChZhpjww5JaTjeJuHRK9bPMWWF4GZ7hLWQ3YAQU2G";
+    Ramp = 0;
+    RescueMinimumSystemPartition = 8962;
+    RestoreVersion = "24.2.119.0.0,0";
+    RestoreVersionInfo =     {
+        RestoreBuildGroup = 0;
+        RestoreLongVersion = "24.2.119.0.0,0";
+        RestoreVersion = "24.2.119.0.0";
+    };
+    SEPDigest = {length = 48, bytes = 0x79afe175 d63f7d1b bced6a38 67d86f06 ... 21c90eeb 61cd534e };
+    SEPTBMDigests = "9WA2IhI+cdeuvc5+yv5qA0JtiOY+8OfhCDObAwexokMtRUnLuY19nZv8iuWNj/Tq\nE2xUzhUANYmuKa3OXphTdQwyAn38orHXYeWlW9B/pOOnkR5WCtY1JsMpzvNDk55G\n2SXNthxxYNnTpt2OVPL+WWwXEZJs9/WgEzMlL4mrYBnn7WQ0NH77QlHhnVCBfd3e\na5aSdGCARFvdn1Qler8KSosoZl8wKU+8z0MUO79XA4rvhftT6yOgJzieR7EOIMgF\nuNk3moDT5nwc8//qzh0621jhBwkSMOPcu/vTUX7AWvgDlxWnIa4aJoBwH7uEAWde";
+    SUConvReqd = 1;
+    SUDocumentationID = iPadOS272Short;
+    SUInstallTonightEnabled = 1;
+    SUMultiPassEnabled = 1;
+    SUProductSystemName = iOS;
+    SUPublisher = "Apple Inc.";
+    SupportedDeviceModels =     (
+        J410AP
+    );
+    SupportedDevices =     (
+        "iPad16,1"
+    );
+    SystemPartitionPadding =     {
+        1024 = 1280;
+        128 = 1280;
+        16 = 160;
+        256 = 1280;
+        32 = 320;
+        512 = 1280;
+        64 = 640;
+        768 = 1280;
+        8 = 80;
+    };
+    SystemVolumeSealingOverhead = 292;
+    TrainName = RaveB;
+    "_CompressionAlgorithm" = aea;
+    "_DownloadSize" = 478150656;
+    "_EventRecordingServiceURL" = "https://xp.apple.com/report";
+    "_IsEncrypted" = 1;
+    "_IsZipStreamable" = 1;
+    "_MasteredVersion" = 119;
+    "_Measurement" = {length = 20, bytes = 0x<<<<<<<<<<<<<<<<<<UDID>>>>>>>>>>>>>>>>>>};
+    "_Measurement-SHA256" = {length = 32, bytes = 0x9783f109 5f808658 a89c49d2 cb5a58b1 ... d0818fa6 81408c80 };
+    "_MeasurementAlgorithm" = "SHA-1";
+    "_UnarchivedSize" = 585560064;
+    "__AssetDefaultGarbageCollectionBehavior" = NeverCollected;
+    "__BaseURL" = "https://updates.cdn-apple.com/2026FallFCS/7723207e-9daf-4bd3-9cc1XXXX>>>>>f919/";
+    "__CanUseLocalCacheServer" = 1;
+    "__FCSKeyURL" = "https://wkms-public.apple.com/fcs-keys/0EEoI4tzkkGlAJ53C2PbUZfY_-3RYSOjLvjFSL0VpH0=";
+    "__FCSResponse" = "{\"enc-request\": \"BBQkYg28JW00RYfi3YOWDoonWEy4wQPC2rxIlWQoB4AU4NGr0fAdmnGN/zKcQPoFyb+9GhJn/51e2q0qjAXgk1Q=\", \"wrapped-key\": \"a2rGNb8CwpYe4XSrnTX9ApuVzF5zEAJQx7ryMRvY9QUj2wrzuOBNSSLhpv03z76M\"}";
+    "__HideInstallAlert" = 0;
+    "__RelativePath" = "com_apple_MobileAsset_SoftwareUpdate/<<<<<<<<<<<<<<<<<<UDID>>>>>>>>>>>>>>>>>><<<<<<<<ICCID>>>>>>>4d5f.aea";
+}
+16b31b000 : Setting targetBrainVersion to 24B91020
+16b31b000 : Sending load complete without error
+16b31b000 : Entering handle_brain_is_loadable
+16b31b000 : Using OS apply calculation because MSUBrain is not loaded
+16b31b000 : Returning snapshot apply size
+16b31b000 : Sealing requires 292 MiB overhead
+16b31b000 : Use of APFSIOC_GET_PREALLOCATE_MIN_SPACE is not expressly disallowed by asset attributes
+16b31b000 : 292 MB reserve file will be needed (snapshot)
+16b31b000 : preallocating a 292 MB reserve file will require an additional 169 MB of free space
+16b31b000 : snapshot application size XXXX>>>>>>0 (861 MB)
+16b31b000 : 
+get_snapshot_apply_and_reserve_sizes():
+  400 MB 2*UPDATE_PARTITION_SIZE + UPDATE_APFS_RESERVE
+  292 MB update_attributes["SystemVolumeSealingOverhead"]
++ 169 MB get_apfs_preallocate_min(292 MB)
+-----
+  861 MB
+16b177000 : Client bird[372] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16b0eb000 : Client mobileassetd[119] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16b0eb000 : retrieve_previous_update_state: found previous update state MSUPreviousUpdateState=1
+16b177000 : Client AssetMetrics[784] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16b0eb000 : Client ASPCarryLog[681] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16b0eb000 : Client AssetMetrics[980] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16b177000 : Client AssetMetrics[1019] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+203ba2880 : MSU running in normal env
+203ba2880 : initializing new event recorder with options: (null)
+203ba2880 : start
+203ba2880 : Using NVRAM dictionary from IODeviceTree since there is no key for ota-uuid in there
+
+203ba2880 : Permanent update volume present..supportDir will be placed there
+203ba2880 : mountPoint is nil...Using /var/MobileSoftwareUpdate as the mountPoint
+203ba2880 : <UMEventRecorder: 0x100eba210>: initializing event recorder with systemMountPoint: (null)
+203ba2880 : <UMEventRecorder: 0x100eba210>: initializing event recorder with dataMountPoint: (null)
+203ba2880 : <UMEventRecorder: 0x100eba210>: initializing event recorder with updateMountPoint: (null)
+203ba2880 : <UMEventRecorder: 0x100eba210>: initializing event recorder with nvramPath: (null)
+203ba2880 : <UMEventRecorder: 0x100eba210>: initializing event recorder with targetOSVersion: 24B119
+203ba2880 : <UMEventRecorder: 0x100eba210>: initializing event recorder with context: (null)
+203ba2880 : <UMEventRecorder: 0x100eba210>: initializing event recorder with baseServerURL: https://xp.apple.com/report
+203ba2880 : <UMEventRecorder: 0x100eba210>: initializing event recorder with uuidXXXX>>>>>>-C82F-42DE-B556XXXX>>>>>0BBC
+203ba2880 : MSU running in normal env
+203ba2880 : CFDataRef MSUSEPClient_CopySandcatEpochs(void) : Device does not have sandcat.
+203ba2880 : Attempting to gather analytics data for phase : UpdateFinished
+203ba2880 : add_persistent_target_volume_metrics: nothing to do.
+203ba2880 : Additional analytics data is {
+}
+203ba2880 : msu_NVRAM_has_system_namespace: system namespace NOT present
+
+203ba2880 : copy_nvram_variable_with_system_nvram_check: Will read value of ota-uuid from common nvram region
+
+203ba2880 : InstallInProgressAfterApply is false
+
+203ba2880 : ignoring call to recordPostUpdateEvent when no install is in progress or we haven't performed the apply operation
+203ba2880 : initializing new submission queue
+203ba2880 : MSU running in normal env
+16f98f000 : submitEventsInBackground running
+16f98f000 : mountPoint is nil...Using /var/MobileSoftwareUpdate as the mountPoint
+203ba2880 : is_first_boot_after_update: is first boot: NO
+203ba2880 : retrieve_previous_update_state: found previous update state MSUPreviousUpdateState=1
+203ba2880 : is_first_boot_after_update: is first boot: NO
+16f98f000 : -[UMEventRecorder submitEventsInBackground:withOptions:]_block_invoke: Previously submitted events will NOT BE resubmitted
+
+16f98f000 : Found 1 unsubmitted events in update volume
+16f98f000 : posting to https://xp.apple.com/report/2/psr_ota length = 1186
+16f98f000 : data = {"clientId":"6A48FC72-C82F-42DE-B556XXXX>>>>>0BBC","events":[{"installTonight":"false","deviceModel":"J410AP","snapshotPrepareSize":2905,"batteryLevel":1,"batteryIsCharging":true,"context":"SUS-2.0","snapshotUpdate":"true","nonSnapshotApplySize":400,"eapfsMode":"YES","reportVersion":1,"eventTime":"1793598239268","currentBaseOSVersion":"24B115","MobileAssetAssetAudience":"DefaultAssetAudienceForReleaseTypeuser","currentOSVersion":"24B115","uptime":27,"controllerVersion":"SUS-2.0","type":"ota","splatInstalled":"false","systemFsCapacity":8983,"storageCapacity":122070,"failureReason":"MSU 812 (Failed to download catalog, MADownloadResult:MADownloadNotConnectedToInternet);com.apple.MobileAssetError.Download 65 (Download failed due to there being no Internet connection. (Catalog download for com.apple.MobileAsset.MobileSoftwareUpdate.UpdateBrain));","snapshotApplySize":400,"UUID":"0DA2A677-A989-5855-A2A2XXXX>>>>>358B","systemFsFree":0,"currentProductVersionExtra":"unknown","result":"MSU 812","cleanupLevel":"None","targetOSVersion":"24B119","event":"brainLoad","updateType":"incremental","dataFsFree":88590,"currentOSType":"user","deviceClass":"iPad","dataFsCapacity":112709}]}
+16f98f000 : UMEventSubmitter: -[UMEventSubmitter _defaultSession]: Setting waitsForConnectivity to true for splunk eventSubmission..
+
+203ba2880 : hw.osenvironment = ''
+203ba2880 : Detected BootedOS environment (hw.osenvironment=<empty>)
+203ba2880 : Successfully saved booted os state
+16faa7000 : Client softwareupdateservicesd[1087] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16fa1b000 : retrieve_previous_update_state: found previous update state MSUPreviousUpdateState=1
+16fb33000 : Client softwareupdateservicesd[1087] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16fb33000 : The secure object length value is: 1525
+16fb33000 : Caller has pased in downloadOptions: MADownloadOptions allowsCellular: 1 resourceTimeout: -1 canUseCacheServer: 0 discretionary: 0 disableUI: 0 sessionId: (null) additionalServerParams:{ } allowsExpensiveAccess:1 requiresPowerPluggedIn: 0 prefersInfraWiFi: 1 liveServerOnly: 0 DownloadAuthorizationHeader: not present analyticsData: not present allowDaemonConnectionRetries: 0  + MAMsuDownloadOptions reqProdVersion: (null) reqBuildVersion: (null) delayPeriod: 0 minorDelayPeriod: 0 majorDelayPeriod: 0 managedDevice: 0 allowSameVersion: 0 prereqBuild: (null) prereqVersion: (null) prereqReleaseType: (default) liveAssetAudienceUUID: (null) purpose: (null)
+16fb33000 : The attributes are: {
+    ActualMinimumSystemPartition = 8388;
+    ArchiveDecryptionKey = "VZ+lqABgX/yf+OyX0S5faiJEqeJAwZJSwUV5OJOrvNE=";
+    ArchiveID = "lNlgm4Y6FiEYdXuWn7QTdTI/6+DcD4rvhnqUGz0yTV8=";
+    AssetFormat = AppleEncryptedArchive;
+    AssetType = "com.apple.MobileAsset.SoftwareUpdate";
+    AutoUpdate = 1;
+    Build = 24B119;
+    CryptexSizeInfo =     (
+                {
+            CryptexSize = 16;
+            CryptexSizeDelta = 33;
+            CryptexTag = "cryptex-app";
+        },
+                {
+            CryptexSize = 5904;
+            CryptexSizeDelta = 92;
+            CryptexTag = "cryptex-system-arm64e";
+        }
+    );
+    DisablePreSoftwareUpdateAssetStaging = 1;
+    EAPFSEnabled = 1;
+    InstallationSize = 248365056;
+    "InstallationSize-Snapshot" = 650769398;
+    MinimumSystemPartition = 0;
+    OSVersion = "27.2";
+    PrerequisiteBuild = 24B115;
+    PrerequisiteOSVersion = "27.2";
+    RSEPDigest = {length = 48, bytes = 0x87827a5a 1954a258 f4d3a954 2334f6fb ... cb810ddf e1dae239 };
+    RSEPTBMDigests = "HAP/rfFuBdSTRxRKHQgEI5BRluDZjjpGCmVu8et0h/EBIiRxAz2HOCJOrlpO4HlO\n3eCwchI0cX+b4lKejvXsnUcgvhXUAN0bPAmQNCM8j9vJuznZNKZexeOhEWPZOQKd\nX2/mcHs9z42DgypjPW1JH5KsIkxx2zGjYQOiS4O2Ov7d33tJnFFnHlu/jjhYGXoW\neJKGlx8UeDbnv/6/H9sEIlGEKedoVfLaYcIhUk4PFeKnUC5Khpj1OBKjY0RU+eHM\n5yO9SBspit4NvT0QjiF9TnvChZhpjww5JaTjeJuHRK9bPMWWF4GZ7hLWQ3YAQU2G";
+    Ramp = 0;
+    RescueMinimumSystemPartition = 8962;
+    RestoreVersion = "24.2.119.0.0,0";
+    RestoreVersionInfo =     {
+        RestoreBuildGroup = 0;
+        RestoreLongVersion = "24.2.119.0.0,0";
+        RestoreVersion = "24.2.119.0.0";
+    };
+    SEPDigest = {length = 48, bytes = 0x79afe175 d63f7d1b bced6a38 67d86f06 ... 21c90eeb 61cd534e };
+    SEPTBMDigests = "9WA2IhI+cdeuvc5+yv5qA0JtiOY+8OfhCDObAwexokMtRUnLuY19nZv8iuWNj/Tq\nE2xUzhUANYmuKa3OXphTdQwyAn38orHXYeWlW9B/pOOnkR5WCtY1JsMpzvNDk55G\n2SXNthxxYNnTpt2OVPL+WWwXEZJs9/WgEzMlL4mrYBnn7WQ0NH77QlHhnVCBfd3e\na5aSdGCARFvdn1Qler8KSosoZl8wKU+8z0MUO79XA4rvhftT6yOgJzieR7EOIMgF\nuNk3moDT5nwc8//qzh0621jhBwkSMOPcu/vTUX7AWvgDlxWnIa4aJoBwH7uEAWde";
+    SUConvReqd = 1;
+    SUDocumentationID = iPadOS272Short;
+    SUInstallTonightEnabled = 1;
+    SUMultiPassEnabled = 1;
+    SUProductSystemName = iOS;
+    SUPublisher = "Apple Inc.";
+    SupportedDeviceModels =     (
+        J410AP
+    );
+    SupportedDevices =     (
+        "iPad16,1"
+    );
+    SystemPartitionPadding =     {
+        1024 = 1280;
+        128 = 1280;
+        16 = 160;
+        256 = 1280;
+        32 = 320;
+        512 = 1280;
+        64 = 640;
+        768 = 1280;
+        8 = 80;
+    };
+    SystemVolumeSealingOverhead = 292;
+    TrainName = RaveB;
+    "_CompressionAlgorithm" = aea;
+    "_DownloadSize" = 478150656;
+    "_EventRecordingServiceURL" = "https://xp.apple.com/report";
+    "_IsEncrypted" = 1;
+    "_IsZipStreamable" = 1;
+    "_MasteredVersion" = 119;
+    "_Measurement" = {length = 20, bytes = 0x<<<<<<<<<<<<<<<<<<UDID>>>>>>>>>>>>>>>>>>};
+    "_Measurement-SHA256" = {length = 32, bytes = 0x9783f109 5f808658 a89c49d2 cb5a58b1 ... d0818fa6 81408c80 };
+    "_MeasurementAlgorithm" = "SHA-1";
+    "_UnarchivedSize" = 585560064;
+    "__AssetDefaultGarbageCollectionBehavior" = NeverCollected;
+    "__BaseURL" = "https://updates.cdn-apple.com/2026FallFCS/7723207e-9daf-4bd3-9cc1XXXX>>>>>f919/";
+    "__CanUseLocalCacheServer" = 1;
+    "__FCSKeyURL" = "https://wkms-public.apple.com/fcs-keys/0EEoI4tzkkGlAJ53C2PbUZfY_-3RYSOjLvjFSL0VpH0=";
+    "__FCSResponse" = "{\"enc-request\": \"BBQkYg28JW00RYfi3YOWDoonWEy4wQPC2rxIlWQoB4AU4NGr0fAdmnGN/zKcQPoFyb+9GhJn/51e2q0qjAXgk1Q=\", \"wrapped-key\": \"a2rGNb8CwpYe4XSrnTX9ApuVzF5zEAJQx7ryMRvY9QUj2wrzuOBNSSLhpv03z76M\"}";
+    "__HideInstallAlert" = 0;
+    "__RelativePath" = "com_apple_MobileAsset_SoftwareUpdate/<<<<<<<<<<<<<<<<<<UDID>>>>>>>>>>>>>>>>>><<<<<<<<ICCID>>>>>>>4d5f.aea";
+}
+16fa1b000 : session (null) didReceiveChallenge
+16fbbf000 : 1 events successfully submitted
+16fbbf000 : session (null) became invalid: (null)
+16fa1b000 : Setting targetBrainVersion to 24B91020
+16fa1b000 : Sending load complete without error
+16f98f000 : Entering handle_brain_is_loadable
+16f98f000 : Using OS apply calculation because MSUBrain is not loaded
+16f98f000 : Returning snapshot apply size
+16f98f000 : Sealing requires 292 MiB overhead
+16f98f000 : Use of APFSIOC_GET_PREALLOCATE_MIN_SPACE is not expressly disallowed by asset attributes
+16f98f000 : 292 MB reserve file will be needed (snapshot)
+16f98f000 : preallocating a 292 MB reserve file will require an additional 169 MB of free space
+16f98f000 : snapshot application size XXXX>>>>>>0 (861 MB)
+16f98f000 : 
+get_snapshot_apply_and_reserve_sizes():
+  400 MB 2*UPDATE_PARTITION_SIZE + UPDATE_APFS_RESERVE
+  292 MB update_attributes["SystemVolumeSealingOverhead"]
++ 169 MB get_apfs_preallocate_min(292 MB)
+-----
+  861 MB
+16faa7000 : Client bird[1092] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16fa1b000 : Client AssetMetrics[1341] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16f98f000 : Client AssetMetrics[1371] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16fa1b000 : Client AssetMetrics[1388] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16f98f000 : Client AssetMetrics[1404] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16fa1b000 : Client AssetMetrics[1468] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16f98f000 : Client AssetMetrics[1548] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16fa1b000 : Client AssetMetrics[1620] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16f98f000 : Client AssetMetrics[1642] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16fa1b000 : Client AssetMetrics[1648] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16f98f000 : Client AssetMetrics[1667] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16fa1b000 : Client AssetMetrics[1679] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16f98f000 : Purge update service connection handler: <dictionary: 0x1f7d625b0> { count = 1, transaction: 0, voucher = 0x0, contents =
+	"XPCErrorDescription" => <string: 0x1f7d62720> { string cache = 0x0, length = 22, contents = "Connection interrupted" }
+}
+16f98f000 : Using OS prepare calculation because MSUBrain is not loaded
+16f98f000 : Returning non-snapshot preparation size
+16f98f000 : nonsnapshot preparation size XXXX>>>>>>6 (236 MB)
+16f98f000 : 
+get_nonsnapshot_preparation_size():
++ 236 MB update_attributes["InstallationSize"] (string)
+-----
+  236 MB
+16f98f000 : Also returning snapshot prepare size
+16f98f000 : cryptex size requirementXXXX>>>>>>03 (7103 MB)
+16f98f000 : 
+cryptex_size_requirement_for_update_type(msu_update_type_snapshot):
+    19 MB update_attributes["CryptexSizeInfo"][0(cryptex-app)]["CryptexSize"] * 1.2
++ 7084 MB update_attributes["CryptexSizeInfo"][1(cryptex-system-arm64e)]["CryptexSize"] * 1.2
+------
+  7103 MB
+16f98f000 : snapshot preparation size (mastered) XXXX>>>>>>01 (7724 MB)
+16f98f000 : 
+get_snapshot_preparation_size():
+   620 MB update_attributes["InstallationSize-Snapshot"] (string)
++ 7103 MB cryptex_size_requirement_for_update_type(msu_update_type_snapshot)
+------
+  7723 MB
+16f98f000 : Using OS apply calculation because MSUBrain is not loaded
+16f98f000 : Returning snapshot apply size
+16f98f000 : Sealing requires 292 MiB overhead
+16f98f000 : Use of APFSIOC_GET_PREALLOCATE_MIN_SPACE is not expressly disallowed by asset attributes
+16f98f000 : 292 MB reserve file will be needed (snapshot)
+16f98f000 : preallocating a 292 MB reserve file will require an additional 169 MB of free space
+16f98f000 : snapshot application size XXXX>>>>>>0 (861 MB)
+16f98f000 : 
+get_snapshot_apply_and_reserve_sizes():
+  400 MB 2*UPDATE_PARTITION_SIZE + UPDATE_APFS_RESERVE
+  292 MB update_attributes["SystemVolumeSealingOverhead"]
++ 169 MB get_apfs_preallocate_min(292 MB)
+-----
+  861 MB
+16f98f000 : Using OS prepare calculation because MSUBrain is not loaded
+16f98f000 : Returning non-snapshot preparation size
+16f98f000 : nonsnapshot preparation size : 0 (0 MB)
+16f98f000 : 
+get_nonsnapshot_preparation_size():
++ 0 MB update_attributes["InstallationSize"] (string)
+---
+  0 MB
+16f98f000 : Also returning snapshot prepare size
+16f98f000 : cryptex size requirementXXXX>>>>>>03 (7103 MB)
+16f98f000 : 
+cryptex_size_requirement_for_update_type(msu_update_type_snapshot):
+    19 MB update_attributes["CryptexSizeInfo"][0(cryptex-app)]["CryptexSize"] * 1.2
++ 7084 MB update_attributes["CryptexSizeInfo"][1(cryptex-system-arm64e)]["CryptexSize"] * 1.2
+------
+  7103 MB
+16f98f000 : snapshot preparation size (mastered) XXXX>>>>>>977 (10940 MB)
+16f98f000 : 
+get_snapshot_preparation_size():
+  3836 MB update_attributes["InstallationSize-Snapshot"] (string)
++ 7103 MB cryptex_size_requirement_for_update_type(msu_update_type_snapshot)
+------
+ 10939 MB
+16f98f000 : Using OS apply calculation because MSUBrain is not loaded
+16f98f000 : Returning snapshot apply size
+16f98f000 : Sealing requires 292 MiB overhead
+16f98f000 : Use of APFSIOC_GET_PREALLOCATE_MIN_SPACE is not expressly disallowed by asset attributes
+16f98f000 : 292 MB reserve file will be needed (snapshot)
+16f98f000 : preallocating a 292 MB reserve file will require an additional 169 MB of free space
+16f98f000 : snapshot application size XXXX>>>>>>0 (861 MB)
+16f98f000 : 
+get_snapshot_apply_and_reserve_sizes():
+  400 MB 2*UPDATE_PARTITION_SIZE + UPDATE_APFS_RESERVE
+  292 MB update_attributes["SystemVolumeSealingOverhead"]
++ 169 MB get_apfs_preallocate_min(292 MB)
+-----
+  861 MB
+16f98f000 : Using OS prepare calculation because MSUBrain is not loaded
+16f98f000 : Returning non-snapshot preparation size
+16f98f000 : nonsnapshot preparation size XXXX>>>>>>6 (236 MB)
+16f98f000 : 
+get_nonsnapshot_preparation_size():
++ 236 MB update_attributes["InstallationSize"] (string)
+-----
+  236 MB
+16f98f000 : Also returning snapshot prepare size
+16f98f000 : cryptex size requirementXXXX>>>>>>03 (7103 MB)
+16f98f000 : 
+cryptex_size_requirement_for_update_type(msu_update_type_snapshot):
+    19 MB update_attributes["CryptexSizeInfo"][0(cryptex-app)]["CryptexSize"] * 1.2
++ 7084 MB update_attributes["CryptexSizeInfo"][1(cryptex-system-arm64e)]["CryptexSize"] * 1.2
+------
+  7103 MB
+16f98f000 : snapshot preparation size (mastered) XXXX>>>>>>01 (7724 MB)
+16f98f000 : 
+get_snapshot_preparation_size():
+   620 MB update_attributes["InstallationSize-Snapshot"] (string)
++ 7103 MB cryptex_size_requirement_for_update_type(msu_update_type_snapshot)
+------
+  7723 MB
+16f98f000 : Using OS apply calculation because MSUBrain is not loaded
+16f98f000 : Returning snapshot apply size
+16f98f000 : Sealing requires 292 MiB overhead
+16f98f000 : Use of APFSIOC_GET_PREALLOCATE_MIN_SPACE is not expressly disallowed by asset attributes
+16f98f000 : 292 MB reserve file will be needed (snapshot)
+16f98f000 : preallocating a 292 MB reserve file will require an additional 169 MB of free space
+16f98f000 : snapshot application size XXXX>>>>>>0 (861 MB)
+16f98f000 : 
+get_snapshot_apply_and_reserve_sizes():
+  400 MB 2*UPDATE_PARTITION_SIZE + UPDATE_APFS_RESERVE
+  292 MB update_attributes["SystemVolumeSealingOverhead"]
++ 169 MB get_apfs_preallocate_min(292 MB)
+-----
+  861 MB
+16f98f000 : Using OS prepare calculation because MSUBrain is not loaded
+16f98f000 : Returning non-snapshot preparation size
+16f98f000 : nonsnapshot preparation size : 0 (0 MB)
+16f98f000 : 
+get_nonsnapshot_preparation_size():
++ 0 MB update_attributes["InstallationSize"] (string)
+---
+  0 MB
+16f98f000 : Also returning snapshot prepare size
+16f98f000 : cryptex size requirementXXXX>>>>>>03 (7103 MB)
+16f98f000 : 
+cryptex_size_requirement_for_update_type(msu_update_type_snapshot):
+    19 MB update_attributes["CryptexSizeInfo"][0(cryptex-app)]["CryptexSize"] * 1.2
++ 7084 MB update_attributes["CryptexSizeInfo"][1(cryptex-system-arm64e)]["CryptexSize"] * 1.2
+------
+  7103 MB
+16f98f000 : snapshot preparation size (mastered) XXXX>>>>>>977 (10940 MB)
+16f98f000 : 
+get_snapshot_preparation_size():
+  3836 MB update_attributes["InstallationSize-Snapshot"] (string)
++ 7103 MB cryptex_size_requirement_for_update_type(msu_update_type_snapshot)
+------
+ 10939 MB
+16f98f000 : Using OS apply calculation because MSUBrain is not loaded
+16f98f000 : Returning snapshot apply size
+16f98f000 : Sealing requires 292 MiB overhead
+16f98f000 : Use of APFSIOC_GET_PREALLOCATE_MIN_SPACE is not expressly disallowed by asset attributes
+16f98f000 : 292 MB reserve file will be needed (snapshot)
+16f98f000 : preallocating a 292 MB reserve file will require an additional 169 MB of free space
+16f98f000 : snapshot application size XXXX>>>>>>0 (861 MB)
+16f98f000 : 
+get_snapshot_apply_and_reserve_sizes():
+  400 MB 2*UPDATE_PARTITION_SIZE + UPDATE_APFS_RESERVE
+  292 MB update_attributes["SystemVolumeSealingOverhead"]
++ 169 MB get_apfs_preallocate_min(292 MB)
+-----
+  861 MB
+1f5efe880 : MSU running in normal env
+1f5efe880 : initializing new event recorder with options: (null)
+1f5efe880 : start
+1f5efe880 : Using NVRAM dictionary from IODeviceTree since there is no key for ota-uuid in there
+
+1f5efe880 : Permanent update volume present..supportDir will be placed there
+1f5efe880 : mountPoint is nil...Using /var/MobileSoftwareUpdate as the mountPoint
+1f5efe880 : <UMEventRecorder: 0x102bba220>: initializing event recorder with systemMountPoint: (null)
+1f5efe880 : <UMEventRecorder: 0x102bba220>: initializing event recorder with dataMountPoint: (null)
+1f5efe880 : <UMEventRecorder: 0x102bba220>: initializing event recorder with updateMountPoint: (null)
+1f5efe880 : <UMEventRecorder: 0x102bba220>: initializing event recorder with nvramPath: (null)
+1f5efe880 : <UMEventRecorder: 0x102bba220>: initializing event recorder with targetOSVersion: 24B119
+1f5efe880 : <UMEventRecorder: 0x102bba220>: initializing event recorder with context: (null)
+1f5efe880 : <UMEventRecorder: 0x102bba220>: initializing event recorder with baseServerURL: https://xp.apple.com/report
+1f5efe880 : <UMEventRecorder: 0x102bba220>: initializing event recorder with uuidXXXX>>>>>>-C82F-42DE-B556XXXX>>>>>0BBC
+1f5efe880 : MSU running in normal env
+1f5efe880 : CFDataRef MSUSEPClient_CopySandcatEpochs(void) : Device does not have sandcat.
+1f5efe880 : Attempting to gather analytics data for phase : UpdateFinished
+1f5efe880 : add_persistent_target_volume_metrics: nothing to do.
+1f5efe880 : Additional analytics data is {
+}
+1f5efe880 : msu_NVRAM_has_system_namespace: system namespace NOT present
+
+1f5efe880 : copy_nvram_variable_with_system_nvram_check: Will read value of ota-uuid from common nvram region
+
+1f5efe880 : InstallInProgressAfterApply is false
+
+1f5efe880 : ignoring call to recordPostUpdateEvent when no install is in progress or we haven't performed the apply operation
+1f5efe880 : initializing new submission queue
+1f5efe880 : MSU running in normal env
+16dc07000 : submitEventsInBackground running
+16dc07000 : mountPoint is nil...Using /var/MobileSoftwareUpdate as the mountPoint
+1f5efe880 : is_first_boot_after_update: is first boot: NO
+1f5efe880 : retrieve_previous_update_state: found previous update state MSUPreviousUpdateState=1
+1f5efe880 : is_first_boot_after_update: is first boot: NO
+16dc07000 : -[UMEventRecorder submitEventsInBackground:withOptions:]_block_invoke: Previously submitted events will NOT BE resubmitted
+
+1f5efe880 : hw.osenvironment = ''
+1f5efe880 : Detected BootedOS environment (hw.osenvironment=<empty>)
+1f5efe880 : Successfully saved booted os state
+16dc93000 : Client softwareupdateservicesd[339] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16dc93000 : retrieve_previous_update_state: found previous update state MSUPreviousUpdateState=1
+16dc07000 : Client softwareupdateservicesd[339] does not have the 'com.apple.private.softwareupdated-helpers' entitlement
+16dc07000 : The secure object length value is: 1525
+16dc07000 : Caller has pased in downloadOptions: MADownloadOptions allowsCellular: 1 resourceTimeout: -1 canUseCacheServer: 0 discretionary: 0 disableUI: 0 sessionId: (null) additionalServerParams:{ } allowsExpensiveAccess:1 requiresPowerPluggedIn: 0 prefersInfraWiFi: 1 liveServerOnly: 0 DownloadAuthorizationHeader: not present analyticsData: not present allowDaemonConnectionRetries: 0  + MAMsuDownloadOptions reqProdVersion: (null) reqBuildVersion: (null) delayPeriod: 0 minorDelayPeriod: 0 majorDelayPeriod: 0 managedDevice: 0 allowSameVersion: 0 prereqBuild: (null) prereqVersion: (null) prereqReleaseType: (default) liveAssetAudienceUUID: (null) purpose: (null)
+16dc07000 : The attributes are: {
+    ActualMinimumSystemPartition = 8388;
+    ArchiveDecryptionKey = "VZ+lqABgX/yf+OyX0S5faiJEqeJAwZJSwUV5OJOrvNE=";
+    ArchiveID = "lNlgm4Y6FiEYdXuWn7QTdTI/6+DcD4rvhnqUGz0yTV8=";
+    AssetFormat = AppleEncryptedArchive;
+    AssetType = "com.apple.MobileAsset.SoftwareUpdate";
+    AutoUpdate = 1;
+    Build = 24B119;
+    CryptexSizeInfo =     (
+                {
+            CryptexSize = 16;
+            CryptexSizeDelta = 33;
+            CryptexTag = "cryptex-app";
+        },
+                {
+            CryptexSize = 5904;
+            CryptexSizeDelta = 92;
+            CryptexTag = "cryptex-system-arm64e";
+        }
+    );
+    DisablePreSoftwareUpdateAssetStaging = 1;
+    EAPFSEnabled = 1;
+    InstallationSize = 248365056;
+    "InstallationSize-Snapshot" = 650769398;
+    MinimumSystemPartition = 0;
+    OSVersion = "27.2";
+    PrerequisiteBuild = 24B115;
+    PrerequisiteOSVersion = "27.2";
+    RSEPDigest = {length = 48, bytes = 0x87827a5a 1954a258 f4d3a954 2334f6fb ... cb810ddf e1dae239 };
+    RSEPTBMDigests = "HAP/rfFuBdSTRxRKHQgEI5BRluDZjjpGCmVu8et0h/EBIiRxAz2HOCJOrlpO4HlO\n3eCwchI0cX+b4lKejvXsnUcgvhXUAN0bPAmQNCM8j9vJuznZNKZexeOhEWPZOQKd\nX2/mcHs9z42DgypjPW1JH5KsIkxx2zGjYQOiS4O2Ov7d33tJnFFnHlu/jjhYGXoW\neJKGlx8UeDbnv/6/H9sEIlGEKedoVfLaYcIhUk4PFeKnUC5Khpj1OBKjY0RU+eHM\n5yO9SBspit4NvT0QjiF9TnvChZhpjww5JaTjeJuHRK9bPMWWF4GZ7hLWQ3YAQU2G";
+    Ramp = 0;
+    RescueMinimumSystemPartition = 8962;
+    RestoreVersion = "24.2.119.0.0,0";
+    RestoreVersionInfo =     {
+        RestoreBuildGroup = 0;
+        RestoreLongVersion = "24.2.119.0.0,0";
+        RestoreVersion = "24.2.119.0.0";
+    };
+    SEPDigest = {length = 48, bytes = 0x79afe175 d63f7d1b bced6a38 67d86f06 ... 21c90eeb 61cd534e };
+    SEPTBMDigests = "9WA2IhI+cdeuvc5+yv5qA0JtiOY+8OfhCDObAwexokMtRUnLuY19nZv8iuWNj/Tq\nE2xUzhUANYmuKa3OXphTdQwyAn38orHXYeWlW9B/pOOnkR5WCtY1JsMpzvNDk55G\n2SXNthxxYNnTpt2OVPL+WWwXEZJs9/WgEzMlL4mrYBnn7WQ0NH77QlHhnVCBfd3e\na5aSdGCARFvdn1Qler8KSosoZl8wKU+8z0MUO79XA4rvhftT6yOgJzieR7EOIMgF\nuNk3moDT5nwc8//qzh0621jhBwkSMOPcu/vTUX7AWvgDlxWnIa4aJoBwH7uEAWde";
+    SUConvReqd = 1;
+    SUDocumentationID = iPadOS272Short;
+    SUInstallTonightEnabled = 1;
+    SUMultiPassEnabled = 1;
+    SUProductSystemName = iOS;
+    SUPublisher = "Apple Inc.";
+    SupportedDeviceModels =     (
+        J410AP
+    );
+    SupportedDevices =     (
+        "iPad16,1"
+    );
+    SystemPartitionPadding =     {
+        1024 = 1280;
+        128 = 1280;
+        16 = 160;
+        256 = 1280;
+        32 = 320;
+        512 = 1280;
+        64 = 640;
+        768 = 1280;
+        8 = 80;
+    };
+    SystemVolumeSealingOverhead = 292;
+    TrainName = RaveB;
+    "_CompressionAlgorithm" = aea;
+    "_DownloadSize" = 478150656;
+    "_EventRecordingServiceURL" = "https://xp.apple.com/report";
+    "_IsEncrypted" = 1;
+    "_IsZipStreamable" = 1;
+    "_MasteredVersion" = 119;
+    "_Measurement" = {length = 20, bytes = 0x<<<<<<<<<<<<<<<<<<UDID>>>>>>>>>>>>>>>>>>};
+    "_Measurement-SHA256" = {length = 32, bytes = 0x9783f109 5f808658 a89c49d2 cb5a58b1 ... d0818fa6 81408c80 };
+    "_MeasurementAlgorithm" = "SHA-1";
+    "_UnarchivedSize" = 585560064;
+    "__AssetDefaultGarbageCollectionBehavior" = NeverCollected;
+    "__BaseURL" = "https://updates.cdn-apple.com/2026FallFCS/7723207e-9daf-4bd3-9cc1XXXX>>>>>f919/";
+    "__CanUseLocalCacheServer" = 1;
+    "__FCSKeyURL" = "https://wkms-public.apple.com/fcs-keys/0EEoI4tzkkGlAJ53C2PbUZfY_-3RYSOjLvjFSL0VpH0=";
+    "__FCSResponse" = "{\"enc-request\": \"BBQkYg28JW00RYfi3YOWDoonWEy4wQPC2rxIlWQoB4AU4NGr0fAdmnGN/zKcQPoFyb+9GhJn/51e2q0qjAXgk1Q=\", \"wrapped-key\": \"a2rGNb8CwpYe4XSrnTX9ApuVzF5zEAJQx7ryMRvY9QUj2wrzuOBNSSLhpv03z76M\"}";
+    "__HideInstallAlert" = 0;
+    "__RelativePath" = "com_apple_MobileAsset_SoftwareUpdate/<<<<<<<<<<<<<<<<<<UDID>>>>>>>>>>>>>>>>>><<<<<<<<ICCID>>>>>>>4d5f.aea";
+}
+16dc07000 : MobileSoftwareUpdateErrorDomain error 812 - Failed to download catalog, MADownloadResult:MADownloadNotConnectedToInternet
+16dc07000 : Setting targetBrainVersion to (null)
+16dc07000 : Failed to install update brain: Error Domain=MobileSoftwareUpdateErrorDomain Code=812 "Failed to download catalog, MADownloadResult:MADownloadNotConnectedToInternet" UserInfo={NSLocalizedDescription=Failed to download catalog, MADownloadResult:MADownloadNotConnectedToInternet, NSUnderlyingError=0x79e1021200 {Error Domain=com.apple.MobileAssetError.Download Code=65 "Download failed due to there being no Internet connection. (Catalog download for com.apple.MobileAsset.MobileSoftwareUpdate.UpdateBrain)" UserInfo={NSLocalizedDescription=Download failed due to there being no Internet connection. (Catalog download for com.apple.MobileAsset.MobileSoftwareUpdate.UpdateBrain), checkNetwork=true}}}
+16dc07000 : Permanent update volume present..supportDir will be placed there
+16dc07000 : mountPoint is nil...Using /var/MobileSoftwareUpdate as the mountPoint
+16dc07000 : generated a new uuid string 0C7239A6-D41A-41CE-A358XXXX>>>>>AA90
+16dc07000 : setting uuid in startRecordingInstall to 0C7239A6-D41A-41CE-A358XXXX>>>>>AA90
+16dc07000 : Permanent update volume present..supportDir will be placed there
+16dc07000 : mountPoint is nil...Using /var/MobileSoftwareUpdate as the mountPoint
+16dc07000 : Unable to determine asset audience from defaults. Assuming default audience for build in use
+16dc07000 : [-[UMEventRecorder _recordEvent:getPowerLog:information:callback:]] (brainLoad) - {
+    MobileAssetAssetAudience = DefaultAssetAudienceForReleaseTypeuser;
+    UUID = "0DA2A677-A989-5855-A2A2XXXX>>>>>358B";
+    batteryIsCharging = 1;
+    batteryLevel = 1;
+    cleanupLevel = None;
+    context = "SUS-2.0";
+    controllerVersion = "SUS-2.0";
+    currentBaseOSVersion = 24B115;
+    currentOSType = user;
+    currentOSVersion = 24B115;
+    currentProductVersionExtra = unknown;
+    dataFsCapacity = 112709;
+    dataFsFree = 87933;
+    deviceClass = iPad;
+    deviceModel = J410AP;
+    eapfsMode = YES;
+    event = brainLoad;
+    eventTime = 1793684045917;
+    failureReason = "MSU 812 (Failed to download catalog, MADownloadResult:MADownloadNotConnectedToInternet);com.apple.MobileAssetError.Download 65 (Download failed due to there being no Internet connection. (Catalog download for com.apple.MobileAsset.MobileSoftwareUpdate.UpdateBrain));";
+    installTonight = false;
+    nonSnapshotApplySize = 400;
+    reportVersion = 1;
+    result = "MSU 812";
+    snapshotApplySize = 400;
+    snapshotPrepareSize = 2905;
+    snapshotUpdate = true;
+    splatInstalled = false;
+    storageCapacity = 122070;
+    systemFsCapacity = 8983;
+    systemFsFree = 0;
+    targetOSVersion = 24B119;
+    type = ota;
+    updateType = incremental;
+    uptime = 25;
+}
+
+16dc07000 : mountPoint is nil...Using /var/MobileSoftwareUpdate as the mountPoint
+16dc07000 : Sending event to PowerLog: {
+    MobileAssetAssetAudience = DefaultAssetAudienceForReleaseTypeuser;
+    RequestUUID = "D38DBA72-9540-4E77-AE31XXXX>>>>>3496";
+    UUID = "0DA2A677-A989-5855-A2A2XXXX>>>>>358B";
+    batteryIsCharging = 1;
+    batteryLevel = 1;
+    cleanupLevel = None;
+    context = "SUS-2.0";
+    controllerVersion = "SUS-2.0";
+    currentBaseOSVersion = 24B115;
+    currentOSType = user;
+    currentOSVersion = 24B115;
+    currentProductVersionExtra = unknown;
+    dataFsCapacity = 112709;
+    dataFsFree = 87933;
+    deviceClass = iPad;
+    deviceModel = J410AP;
+    eapfsMode = YES;
+    event = 100;
+    eventTime = 1793684045917;
+    failureReason = "MSU 812 (Failed to download catalog, MADownloadResult:MADownloadNotConnectedToInternet);com.apple.MobileAssetError.Download 65 (Download failed due to there being no Internet connection. (Catalog download for com.apple.MobileAsset.MobileSoftwareUpdate.UpdateBrain));";
+    installTonight = false;
+    nonSnapshotApplySize = 400;
+    reportVersion = 1;
+    result = "MSU 812";
+    snapshotApplySize = 400;
+    snapshotPrepareSize = 2905;
+    snapshotUpdate = true;
+    splatInstalled = false;
+    storageCapacity = 122070;
+    systemFsCapacity = 8983;
+    systemFsFree = 0;
+    targetOSVersion = 24B119;
+    type = ota;
+    updateType = incremental;
+    uptime = 25;
+}
+16ddab000 : submitEventsInBackground running
+16ddab000 : mountPoint is nil...Using /var/MobileSoftwareUpdate as the mountPoint

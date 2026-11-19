@@ -1,0 +1,269 @@
+{"roots_installed":0,"app_name":"YouTube","timestamp":"2026-10-31 12:04:42.00 +0100","app_version":"21.42.4","slice_uuid":"182C0AA3-C162-3331-BE8D-8375A2696145","adam_id":"544007664","build_version":"21.42.4","bundleID":"com.google.ios.youtube","duration_ms":"97950","is_first_party":0,"share_with_app_devs":1,"bug_type":"202","os_version":"iPhone OS 27.2 (24B115)","distributor_id":"com.apple.AppStore","name":"YouTube","incident_id":"A6D3A3BC-227B-48C4-AAF2-C4F09CDFF192"}
+Date/Time:        2026-10-31 12:03:02.468 +0100
+End time:         2026-10-31 12:04:40.418 +0100
+OS Version:       iPhone OS 27.2 (Build 24B115)
+Architecture:     arm64e
+Report Version:   73
+Incident Identifier: A6D3A3BC-227B-48C4-AAF2-C4F09CDFF192
+Share With Devs:  Yes
+
+Data Source:      Microstackshots
+Shared Cache:     377B53F3-0E5D-399A-A031-41CAF2ECA8D6 slid base address 0x186c14000
+
+Command:          YouTube
+Path:             /private/var/containers/Bundle/Application/81D428AB-AC04-4792-A2B7-B2422252D0F8/YouTube.app/YouTube
+Identifier:       com.google.ios.youtube
+Version:          21.42.4 (21.42.4)
+Adam ID:          544007664
+Is First Party:   No
+Beta Identifier:  D162D6FA-9DA5-4C56-B371-50368A512C50
+Resource Coalition: 1527
+Architecture:     arm64
+PID:              3189
+
+Event:            cpu usage
+Action taken:     none
+CPU:              90 seconds cpu time over 98 seconds (92% cpu average), exceeding limit of 50% cpu over 180 seconds
+CPU limit:        90s
+Limit duration:   180s
+CPU used:         90s
+CPU duration:     98s
+Duration:         97.95s
+Duration Sampled: 89.56s (event starts 5.13s before samples, event ends 3.26s after samples)
+Steps:            30 (10 gigacycles/step, 33 samples lost)
+
+Hardware model:   iPad16,1
+Active cpus:      6
+Memory size:      7.72 GB
+HW page size:     16384
+VM page size:     16384
+
+Models:           UNKNOWN
+
+OS Cryptex File Extents: 1
+
+Heaviest stack for the target process:
+  27  ??? (dyld + 21796) [0x18709c524]
+  27  ??? (YouTube + 915216) [0x102e7f710]
+  27  ??? (UIKitCore + 764580) [0x18b420aa4]
+  27  ??? (GraphicsServices + 3876) [0x2338eaf24]
+  27  ??? (CoreFoundation + 243684) [0x18724b7e4]
+  25  ??? (CoreFoundation + 239740) [0x18724a87c]
+  25  ??? (CoreFoundation + 300564) [0x187259614]
+  25  ??? (libdispatch.dylib + 69700) [0x1b5b95044]
+  25  ??? (libdispatch.dylib + 70516) [0x1b5b95374]
+  25  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+  22  ??? (libdispatch.dylib + 7372) [0x1b5b85ccc]
+  13  ??? (YouTube + 3996632) [0x10316fbd8]
+  13  ??? (QuartzCore + 1803996) [0x18b0a06dc]
+  12  ??? (QuartzCore + 115628) [0x18af043ac]
+  5   ??? (QuartzCore + 126900) [0x18af06fb4]
+  5   ??? (QuartzCore + 139792) [0x18af0a210]
+  5   ??? (QuartzCore + 139792) [0x18af0a210]
+  4   ??? (QuartzCore + 139540) [0x18af0a114]
+  3   ??? (QuartzCore + 909180) [0x18afc5f7c]
+  2   ??? (QuartzCore + 1006560) [0x18afddbe0]
+  2   ??? (QuartzCore + 1527600) [0x18b05cf30]
+  2   ??? (QuartzCore + 991304) [0x18afda048]
+  1   ??? (QuartzCore + 1020720) [0x18afe1330]
+  1   ??? (QuartzCore + 998432) [0x18afdbc20]
+  1   ??? (QuartzCore + 999372) [0x18afdbfcc]
+  1   ??? (QuartzCore + 50920) [0x18aef46e8]
+
+
+Powerstats for:   YouTube [3189]
+UUID:             182C0AA3-C162-3331-BE8D-8375A2696145
+Path:             /private/var/containers/Bundle/Application/81D428AB-AC04-4792-A2B7-B2422252D0F8/YouTube.app/YouTube
+Identifier:       com.google.ios.youtube
+Version:          21.42.4 (21.42.4)
+Adam ID:          544007664
+Is First Party:   No
+Beta Identifier:  D162D6FA-9DA5-4C56-B371-50368A512C50
+Resource Coalition: 30 samples 1527
+Architecture:     arm64
+Footprint:        475.61 MB -> 452.19 MB (-23.42 MB)
+Pageins:          103 pages
+Start time:       2026-10-31 12:03:07.595 +0100
+End time:         2026-10-31 12:04:37.156 +0100
+Num samples:      30 (100%)
+Energy:           53.32 mWh
+Num threads:      4
+Primary state:    22 samples Frontmost App, Non-Suppressed, User mode, Effective Thread QoS User Interactive, Requested Thread QoS User Interactive, Override Thread QoS Unspecified, p-core
+User Activity:    0 samples Idle, 30 samples Active
+Power Source:     30 samples on Battery, 0 samples on AC
+  27  ??? (dyld + 21796) [0x18709c524]
+    27  ??? (YouTube + 915216) [0x102e7f710]
+      27  ??? (UIKitCore + 764580) [0x18b420aa4]
+        27  ??? (GraphicsServices + 3876) [0x2338eaf24]
+          27  ??? (CoreFoundation + 243684) [0x18724b7e4]
+            25  ??? (CoreFoundation + 239740) [0x18724a87c]
+              25  ??? (CoreFoundation + 300564) [0x187259614]
+                25  ??? (libdispatch.dylib + 69700) [0x1b5b95044]
+                  25  ??? (libdispatch.dylib + 70516) [0x1b5b95374]
+                    25  ??? (libdispatch.dylib + 114612) [0x1b5b9ffb4]
+                      22  ??? (libdispatch.dylib + 7372) [0x1b5b85ccc]
+                        13  ??? (YouTube + 3996632) [0x10316fbd8]
+                          13  ??? (QuartzCore + 1803996) [0x18b0a06dc]
+                            12  ??? (QuartzCore + 115628) [0x18af043ac]
+                              5   ??? (QuartzCore + 126900) [0x18af06fb4]
+                                5   ??? (QuartzCore + 139792) [0x18af0a210]
+                                  5   ??? (QuartzCore + 139792) [0x18af0a210]
+                                    4   ??? (QuartzCore + 139540) [0x18af0a114]
+                                      3   ??? (QuartzCore + 909180) [0x18afc5f7c]
+                                        2   ??? (QuartzCore + 1006560) [0x18afddbe0]
+                                          2   ??? (QuartzCore + 1527600) [0x18b05cf30]
+                                            2   ??? (QuartzCore + 991304) [0x18afda048]
+                                              1   ??? (QuartzCore + 1020720) [0x18afe1330]
+                                                1   ??? (QuartzCore + 998432) [0x18afdbc20]
+                                                  1   ??? (QuartzCore + 999372) [0x18afdbfcc]
+                                                    1   ??? (QuartzCore + 50920) [0x18aef46e8]
+                                              1   ??? (QuartzCore + 1020588) [0x18afe12ac]
+                                                1   ??? (QuartzCore + 984820) [0x18afd86f4]
+                                                  1   ??? (QuartzCore + 898800) [0x18afc36f0]
+                                                    1   ??? (libsystem_platform.dylib + 6448) [0x192fb2930]
+                                        1   ??? (libobjcMsgSend.dylib + 2048) [0x18ec14800]
+                                      1   ??? (QuartzCore + 909204) [0x18afc5f94]
+                                        1   ??? (QuartzCore + 1442736) [0x18b0483b0]
+                                          1   ??? (QuartzCore + 912252) [0x18afc6b7c]
+                                            1   ??? (QuartzCore + 55312) [0x18aef5810]
+                                    1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                      1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                        1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                          1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                            1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                              1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                  1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                    1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                      1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                        1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                          1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                            1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                              1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                                1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                                  1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                                    1   ??? (QuartzCore + 139792) [0x18af0a210]
+                                                                      1   ??? (QuartzCore + 139540) [0x18af0a114]
+                                                                        1   ??? (QuartzCore + 909180) [0x18afc5f7c]
+                                                                          1   ??? (QuartzCore + 1006656) [0x18afddc40]
+                                                                            1   ??? (QuartzCore + 1011348) [0x18afdee94]
+                                                                              1   ??? (QuartzCore + 1826104) [0x18b0a5d38]
+                                                                                1   ??? (QuartzCore + 1022120) [0x18afe18a8]
+                                                                                  1   ??? (QuartzCore + 992180) [0x18afda3b4]
+                                                                                    1   ??? (QuartzCore + 992436) [0x18afda4b4]
+                                                                                      1   ??? (QuartzCore + 1011548) [0x18afdef5c]
+                                                                                        1   ??? (libsystem_platform.dylib + 2508) [0x192fb19cc]
+                              3   ??? (QuartzCore + 119784) [0x18af053e8]
+                                3   ??? (libdispatch.dylib + 150240) [0x1b5ba8ae0]
+                                  3   ??? (libsystem_kernel.dylib + 2644) [0x242ee3a54]
+                                    3   <Kernel mode>
+                              2   ??? (QuartzCore + 128960) [0x18af077c0]
+                                2   ??? (QuartzCore + 143448) [0x18af0b058]
+                                  2   ??? (QuartzCore + 144152) [0x18af0b318]
+                                    2   ??? (libsystem_kernel.dylib + 16500) [0x242ee7074]
+                                      2   ??? (libsystem_kernel.dylib + 16936) [0x242ee7228]
+                                        2   ??? (libsystem_kernel.dylib + 3284) [0x242ee3cd4]
+                                          2   <Kernel mode>
+                              1   ??? (libsystem_platform.dylib + 2340) [0x192fb1924]
+                              1   ??? (QuartzCore + 119736) [0x18af053b8]
+                                1   ??? (QuartzCore + 146076) [0x18af0ba9c]
+                                  1   ??? (QuartzCore + 901932) [0x18afc432c]
+                                    1   ??? (CoreFoundation + 697980) [0x1872ba67c]
+                                      1   ??? (CoreFoundation + 526084) [0x187290704]
+                                        1   ??? (CoreFoundation + 259128) [0x18724f438]
+                                          1   ??? (CoreFoundation + 245312) [0x18724be40]
+                            1   ??? (QuartzCore + 115844) [0x18af04484]
+                              1   ??? (QuartzCore + 1779264) [0x18b09a640]
+                        3   ??? (YouTube + 3996452) [0x10316fb24]
+                          3   ??? (YouTube + 3997128) [0x10316fdc8]
+                            2   ??? (YouTube + 3998132) [0x1031701b4]
+                              2   ??? (YouTube + 4000576) [0x103170b40]
+                                1   ??? (YouTube + 4002772) [0x1031713d4]
+                                  1   ??? (QuartzCore + 1803872) [0x18b0a0660]
+                                    1   ??? (QuartzCore + 152124) [0x18af0d23c]
+                                      1   ??? (libsystem_malloc.dylib + 18700) [0x18716090c]
+                                1   ??? (YouTube + 4002764) [0x1031713cc]
+                                  1   ??? (QuartzCore + 166828) [0x18af10bac]
+                                    1   ??? (QuartzCore + 168796) [0x18af1135c]
+                                      1   ??? (QuartzCore + 170188) [0x18af118cc]
+                                        1   ??? (QuartzCore + 167556) [0x18af10e84]
+                                          1   ??? (QuartzCore + 28784) [0x18aeef070]
+                            1   ??? (YouTube + 3997980) [0x10317011c]
+                              1   ??? (YouTube + 4000028) [0x10317091c]
+                                1   ??? (QuartzCore + 154644) [0x18af0dc14]
+                                  1   ??? (QuartzCore + 154108) [0x18af0d9fc]
+                        2   ??? (YouTube + 3996200) [0x10316fa28]
+                          2   ??? (YouTube + 3997128) [0x10316fdc8]
+                            2   ??? (YouTube + 3998132) [0x1031701b4]
+                              2   ??? (YouTube + 4000576) [0x103170b40]
+                                2   ??? (YouTube + 4002764) [0x1031713cc]
+                                  1   ??? (QuartzCore + 166276) [0x18af10984]
+                                  1   ??? (QuartzCore + 166808) [0x18af10b98]
+                                    1   ??? [0x18ed4d9a0]
+                        1   ??? (YouTube + 3996548) [0x10316fb84]
+                        1   ??? (YouTube + 4499744) [0x1031ea920]
+                          1   ??? (YouTube + 3995672) [0x10316f818]
+                            1   ??? (YouTube + 3994436) [0x10316f344]
+                              1   ??? (UIKitCore + 1026036) [0x18b4607f4]
+                                1   ??? (CoreGraphics + 21968) [0x18a72f5d0]
+                                  1   ??? (CoreGraphics + 22196) [0x18a72f6b4]
+                                    1   ??? (CoreGraphics + 988636) [0x18a81b5dc]
+                                      1   ??? (ColorSync + 158044) [0x1a590d95c]
+                                        1   ??? (ColorSync + 157884) [0x1a590d8bc]
+                                          1   ??? (ColorSync + 11480) [0x1a58e9cd8]
+                                            1   ??? (ColorSync + 9264) [0x1a58e9430]
+                                              1   ??? (CoreFoundation + 155052) [0x187235dac]
+                                                1   ??? (CoreFoundation + 8752) [0x187212230]
+                                                  1   ??? (libsystem_platform.dylib + 5252) [0x192fb2484]
+                        1   ??? (YouTube + 3996608) [0x10316fbc0]
+                          1   ??? (YouTube + 3997128) [0x10316fdc8]
+                            1   ??? (YouTube + 3998132) [0x1031701b4]
+                              1   ??? (YouTube + 4000576) [0x103170b40]
+                                1   ??? (YouTube + 4002748) [0x1031713bc]
+                                  1   ??? (QuartzCore + 1171296) [0x18b005f60]
+                        1   ??? (YouTube + 3996380) [0x10316fadc]
+                          1   ??? (YouTube + 3997128) [0x10316fdc8]
+                            1   ??? (CoreFoundation + 17028) [0x187214284]
+                      2   ??? (libsystem_blocks.dylib + 4032) [0x2d0e83fc0]
+                        2   ??? (libsystem_blocks.dylib + 4108) [0x2d0e8400c]
+                          2   ??? (YouTube + 2210336) [0x102fbba20]
+                            2   ??? (libobjc.A.dylib + 23536) [0x18701dbf0]
+                              2   ??? (libobjc.A.dylib + 15300) [0x18701bbc4]
+                                2   ??? (libobjc.A.dylib + 33736) [0x1870203c8]
+                                  2   ??? (YouTube + 4499520) [0x1031ea840]
+                                    1   ??? (QuartzCore + 157988) [0x18af0e924]
+                                      1   ??? (QuartzCore + 79312) [0x18aefb5d0]
+                                        1   ??? (libsystem_malloc.dylib + 241128) [0x187196de8]
+                                    1   ??? (QuartzCore + 157812) [0x18af0e874]
+                                      1   ??? (QuartzCore + 152124) [0x18af0d23c]
+                                        1   ??? (libsystem_malloc.dylib + 240208) [0x187196a50]
+                      1   ??? (libsystem_blocks.dylib + 4048) [0x2d0e83fd0]
+                        1   ??? (libobjc.A.dylib + 14056) [0x18701b6e8]
+                          1   ??? (libobjc.A.dylib + 15316) [0x18701bbd4]
+                            1   ??? (libobjc.A.dylib + 14220) [0x18701b78c]
+                              1   ??? (libobjc.A.dylib + 186540) [0x1870458ac]
+                                1   ??? (libobjc.A.dylib + 186416) [0x187045830]
+            1   ??? (CoreFoundation + 300500) [0x1872595d4]
+            1   ??? (CoreFoundation + 239568) [0x18724a7d0]
+              1   ??? (CoreFoundation + 300316) [0x18725951c]
+  3   ??? (libsystem_pthread.dylib + 2312) [0x18714f908]
+    2   <Kernel mode, Effective Thread QoS User Initiated, Requested Thread QoS User Initiated>
+    1   <Kernel mode, Effective Thread QoS User Initiated, Requested Thread QoS User Initiated, e-core>
+
+  Binary Images:
+           0x102da0000 -                ???  com.google.ios.youtube 21.42.4 (21.42.4) <182C0AA3-C162-3331-BE8D-8375A2696145>  /private/var/containers/Bundle/Application/81D428AB-AC04-4792-A2B7-B2422252D0F8/YouTube.app/YouTube
+           0x187018000 -        0x187065a77  libobjc.A.dylib                          <377F9F28-1C74-3AED-8DD8-71B4361F3E39>  /usr/lib/libobjc.A.dylib
+           0x187097000 -        0x18714e8d7  dyld                                     <17F02809-E0E1-32F4-862E-FACDE862B8DE>  /usr/lib/dyld
+           0x18714f000 -        0x18715b1e7  libsystem_pthread.dylib                  <32E28303-2AAD-3166-9D11-70E8BCF8E076>  /usr/lib/system/libsystem_pthread.dylib
+           0x18715c000 -        0x1871adac7  libsystem_malloc.dylib                   <B2C94CD8-C539-303B-B510-65F6CA56A6E2>  /usr/lib/system/libsystem_malloc.dylib
+           0x187210000 -        0x1876f4327  CoreFoundation                           <D79F14D9-F948-3CD8-B0D1-EB66B9B8CF94>  /System/Library/Frameworks/CoreFoundation.framework/CoreFoundation
+           0x18a72a000 -        0x18aee79f7  CoreGraphics                             <314A6344-864D-33EB-8A8C-F8279D3014C8>  /System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+           0x18aee8000 -        0x18b365a67  QuartzCore                               <1FBACB38-CBCD-39CD-8D9A-D064392654F7>  /System/Library/Frameworks/QuartzCore.framework/QuartzCore
+           0x18b366000 -        0x18d3b4ed3  UIKitCore                                <58942358-B42D-383B-9032-48516012FB92>  /System/Library/PrivateFrameworks/UIKitCore.framework/UIKitCore
+           0x18ec14000 -        0x18ec150cf  libobjcMsgSend.dylib                     <E064329A-077B-3A63-8B53-D3B25F9DC799>  /usr/lib/objc/libobjcMsgSend.dylib
+           0x192fb1000 -        0x192fb967f  libsystem_platform.dylib                 <BE97AAD8-FA2C-35F4-9EA7-E2C41DB756AB>  /usr/lib/system/libsystem_platform.dylib
+           0x1a58e7000 -        0x1a5a7f397  ColorSync                                <DC7101B9-36B2-3EC0-A1FC-3F4732824430>  /System/Library/Frameworks/ColorSync.framework/ColorSync
+           0x1b5b84000 -        0x1b5bcadd7  libdispatch.dylib                        <84B7E81D-B830-384F-A103-96323C6F5189>  /usr/lib/system/libdispatch.dylib
+           0x2338ea000 -        0x2338f1ea3  GraphicsServices                         <94D8382E-73C7-3BC4-8357-A25A79687D11>  /System/Library/PrivateFrameworks/GraphicsServices.framework/GraphicsServices
+           0x242ee3000 -        0x242f202db  libsystem_kernel.dylib                   <26FFA906-5ACA-39BF-8F7C-94FE9AB8C657>  /usr/lib/system/libsystem_kernel.dylib
+           0x2d0e83000 -        0x2d0e85fe7  libsystem_blocks.dylib                   <B456262A-84CF-3384-99A0-5D73E7B0D50A>  /usr/lib/system/libsystem_blocks.dylib

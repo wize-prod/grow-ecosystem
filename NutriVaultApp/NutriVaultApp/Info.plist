@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>de</string>
+	<key>CFBundleDisplayName</key>
+	<string>Growcery</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Growcery</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.nkembi.nutrivault</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>growcery</string>
+				<string>nutrivault</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>grow</string>
+		<string>gym</string>
+		<string>growstudy</string>
+		<string>study</string>
+		<string>growfinance</string>
+		<string>finance</string>
+	</array>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon</string>
+			</array>
+			<key>CFBundleIconName</key>
+			<string>AppIcon</string>
+		</dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>AppIcon-Dark</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIcon-Dark</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>AppIcon-Light</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>AppIcon-Light</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Growcery benötigt Kamerazugriff zur optischen EAN-Barcode-Erfassung und Lebensmittelerkennung.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Growcery synchronisiert Aktivität, Schritte, Körpergewicht, Körperfett, Blutzucker, Vitalparameter und Flüssigkeitszufuhr zur physiologischen Optimierung.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Growcery synchronisiert Makronährstoffe (Eiweiß, Kohlenhydrate, Fett), Energieaufnahme und Flüssigkeitszufuhr bidirektional mit deinem Gesundheitskonto.</string>
+	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+	<string>Growcery synchronisiert verzehrte Mahlzeiten und Nährwerte direkt in deinen Google Kalender (wize.prod6878@gmail.com).</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Growcery synchronisiert verzehrte Mahlzeiten und Nährwerte direkt in deinen Google Kalender (wize.prod6878@gmail.com).</string>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Growcery sichert Belege und Quittungen auf Wunsch in deiner Fotomediathek.</string>
+</dict>
+</plist>

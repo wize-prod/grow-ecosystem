@@ -1,0 +1,557 @@
+[
+  {
+    "date": "2026-10-10T10:55:18Z",
+    "id": "7662949F-0D0C-4E93-B309-7DD0A2444587",
+    "imageFilename": "receipt_AB937C0F-72D9-4C5F-95E5-48EF8BA08F6D.jpg",
+    "items": [
+      {
+        "confidenceScore": 0,
+        "id": "645F7B38-1DED-4BA2-91B9-4669680F08BB",
+        "isConfirmed": false,
+        "parsedPrice": 3.96,
+        "quantity": 1,
+        "quantityNote": "0,198 kg x 19,99 EUR/kg",
+        "rawText": "ASC Goldlocke"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "FD2F4175-4323-469B-82C6-C5938D428A5F",
+        "isConfirmed": false,
+        "parsedPrice": 0.78,
+        "quantity": 1,
+        "quantityNote": "0,420 kg x 1,85",
+        "rawText": "Auberginen EUR/kg"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "EC6DE6D4-C425-4A17-8A70-DB51D2229FE3",
+        "isConfirmed": false,
+        "parsedPrice": 2.49,
+        "quantity": 1,
+        "rawText": "Spinat Lidl Plus Rabatt"
+      },
+      {
+        "confidenceScore": 0.7,
+        "id": "39E4A7AD-2D49-4A11-A3E1-598FDD1E0EEC",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787511014635_15",
+        "matchedPantryItemName": "Apfel rot Braeburn Deutschland",
+        "parsedPrice": 0.5,
+        "previousPrice": 2.29,
+        "quantity": 1,
+        "rawText": "Apfel rot"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "D5BE46FA-A533-44E7-9B9C-89DD54ED7EDC",
+        "isConfirmed": false,
+        "parsedPrice": 1.99,
+        "quantity": 1,
+        "quantityNote": "Tomaten Mix 500g",
+        "rawText": "Trauben hell kernlos"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "67C5A567-174E-4110-A9E5-02E8CCD8205C",
+        "isConfirmed": false,
+        "parsedPrice": 2,
+        "quantity": 1,
+        "rawText": "Gurken"
+      },
+      {
+        "confidenceScore": 0.45,
+        "id": "34835F88-3CD8-4B32-8543-3BDF75C8AD40",
+        "isConfirmed": false,
+        "parsedPrice": 2.2929227,
+        "quantity": 1,
+        "rawText": "Lauchzwiebeln"
+      },
+      {
+        "confidenceScore": 0.4,
+        "id": "8D140033-5DAC-41D1-BEFC-5311523C834E",
+        "isConfirmed": false,
+        "parsedPrice": 42,
+        "quantity": 1,
+        "rawText": "Skyr Natur OGT HF3"
+      },
+      {
+        "confidenceScore": 0.55,
+        "id": "BA712C6B-19CB-467C-921D-F8E9235E4C53",
+        "isConfirmed": false,
+        "parsedPrice": 0.2,
+        "quantity": 1,
+        "rawText": "Haferflocken zart Rabatt Haferflocken"
+      },
+      {
+        "confidenceScore": 0.55,
+        "id": "FA7845A5-48B5-46B7-9A5F-9B7804BA2BAE",
+        "isConfirmed": false,
+        "parsedPrice": 1.29,
+        "quantity": 1,
+        "rawText": "Ahre Weizenmehl"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "506B5F77-31FA-4DCD-8BD4-AEA66BDAC8D9",
+        "isConfirmed": false,
+        "parsedPrice": 2.69,
+        "quantity": 1,
+        "rawText": "HonigFeincremig"
+      },
+      {
+        "confidenceScore": 0.75,
+        "id": "40E34221-4C49-4367-804F-0CD42078068E",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_4311501688120_1790425439",
+        "matchedPantryItemName": "Eier",
+        "parsedPrice": 4,
+        "previousPrice": 1.99,
+        "quantity": 1,
+        "rawText": "Eier Bodenhalt.S18er"
+      },
+      {
+        "confidenceScore": 0.4,
+        "id": "C4683C06-6911-4807-AAE1-4D0FC5B3C795",
+        "isConfirmed": false,
+        "parsedPrice": 22,
+        "quantity": 1,
+        "rawText": "Kidney Bohnen"
+      },
+      {
+        "confidenceScore": 0.95,
+        "id": "27FEC7A4-ED12-4EEA-BDA1-1ED27B7284FA",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_20341046_1791629356",
+        "matchedPantryItemName": "Apfelsaft XXL",
+        "parsedPrice": 1.69,
+        "previousPrice": 1.99,
+        "quantity": 1,
+        "rawText": "Apfelsaft XXL"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "D9806648-BBA4-46BF-BCD0-809BA3AB59A3",
+        "isConfirmed": false,
+        "parsedPrice": 0.25,
+        "quantity": 1,
+        "rawText": "Sprite"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "BF6C0EDE-1848-4C68-B86B-8F3A72C0C11E",
+        "isConfirmed": false,
+        "parsedPrice": 24.18,
+        "quantity": 1,
+        "rawText": "PTand 0,25 M"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "7FA3CAB5-D05E-4BCD-A924-FF1AFD76E12A",
+        "isConfirmed": false,
+        "parsedPrice": 0.2,
+        "quantity": 1,
+        "rawText": "Schokoriege Caramel Preisvorteil"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "82C5F897-5B4B-4588-81F5-850FD85CE0BE",
+        "isConfirmed": false,
+        "parsedPrice": 24.1,
+        "quantity": 1,
+        "rawText": "Erdnuss-Riegel 6er Preisvorteil"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "5D7B47AC-B135-49B1-9543-16B7EAA4FA75",
+        "isConfirmed": false,
+        "parsedPrice": 0.2,
+        "quantity": 1,
+        "rawText": "Fruchtg.PartyMixMini"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "DB16B3A4-EAC2-4B2C-8770-E31C392164BE",
+        "isConfirmed": false,
+        "parsedPrice": 2.29,
+        "quantity": 1,
+        "rawText": "Milchknacker"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "1D41C3A9-6B7B-4A92-A188-C6B28C31EF9F",
+        "isConfirmed": false,
+        "parsedPrice": 1.45,
+        "quantity": 1,
+        "rawText": "Party Select. Minis"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "32DF6E87-397A-46CB-86EF-81B527E42DAD",
+        "isConfirmed": false,
+        "parsedPrice": 0.304,
+        "quantity": 1,
+        "rawText": "Axe Dusche Dark Tem."
+      },
+      {
+        "confidenceScore": 0,
+        "id": "A96250A8-B937-4E5D-8A28-D4663AA06387",
+        "isConfirmed": false,
+        "parsedPrice": 4.99,
+        "quantity": 1,
+        "rawText": "Axe Dusche Black"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "5C0DA89D-7A0B-4C21-8F70-8306E6740DC5",
+        "isConfirmed": false,
+        "parsedPrice": 4.99,
+        "quantity": 1,
+        "rawText": "Gefrierbeutel 31 Preisvortell"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "77CC458A-9D4F-471E-82D5-33396D3F6F12",
+        "isConfirmed": false,
+        "parsedPrice": 0.5,
+        "quantity": 1,
+        "rawText": "Gefrierbeutel 6l Preisvorteil"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "43C1626F-5D3A-4759-893A-363CACC2FD26",
+        "isConfirmed": false,
+        "parsedPrice": 1.25,
+        "quantity": 1,
+        "rawText": "HighEndRedlips"
+      },
+      {
+        "confidenceScore": 0.55,
+        "id": "F419CBE5-6280-4AA8-8F9F-9CF628157AFA",
+        "isConfirmed": false,
+        "parsedPrice": 1.25,
+        "quantity": 1,
+        "rawText": "Women Eau de Parfum Preisvorte!"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "9528E15C-F408-4D58-9A9F-10ED2A7A2FEA",
+        "isConfirmed": false,
+        "parsedPrice": 1.25,
+        "quantity": 1,
+        "rawText": "Lufterfrischer April"
+      }
+    ],
+    "notes": "",
+    "storeName": "LIDL",
+    "totalAmount": 85.26
+  },
+  {
+    "date": "2026-09-20T22:00:00Z",
+    "id": "61B3A7C9-94C1-4D77-931E-180613C46F99",
+    "imageFilename": "receipt_7BD74558-3573-4141-8E49-89147B50AF99.jpg",
+    "items": [
+      {
+        "confidenceScore": 0.5,
+        "id": "91D07955-26A0-4FFD-BF75-93BB18343E8B",
+        "isConfirmed": false,
+        "matchedPantryItemId": "pantry_F3545943-891D-41C2-80AB-913048851EE7",
+        "matchedPantryItemName": "Toa Basmatireis",
+        "parsedPrice": 2.9,
+        "quantity": 1,
+        "rawText": "ToA Basmatireis"
+      },
+      {
+        "confidenceScore": 1,
+        "id": "5C247C10-37D5-494F-874C-7EFB2B575E05",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787510996257_6",
+        "matchedPantryItemName": "Rote Linsen",
+        "parsedPrice": 1.19,
+        "previousPrice": 1.45,
+        "quantity": 1,
+        "quantityNote": "2 Stk x",
+        "rawText": "NG Rote Linsen"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "36851C25-E75A-4047-94C9-8AD36F57E062",
+        "isConfirmed": false,
+        "parsedPrice": 1.75,
+        "quantity": 1,
+        "rawText": "TOA Kokussmi 1ch45"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "8868550A-98CC-45B4-831B-125F0251FA44",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787511046504_55",
+        "matchedPantryItemName": "MM Peanut Butter",
+        "parsedPrice": 1.15,
+        "previousPrice": 1.75,
+        "quantity": 1,
+        "rawText": "MM Peanut Butter"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "D969FE1E-379B-4698-9621-D74E5BCB6458",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787511046504_55",
+        "matchedPantryItemName": "MM Peanut Butter",
+        "parsedPrice": 2.36,
+        "previousPrice": 1.75,
+        "quantity": 1,
+        "rawText": "MM Peanut Butter"
+      },
+      {
+        "confidenceScore": 0.8,
+        "id": "A4D14F09-FCD2-4931-BF66-1CB8879A0F14",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787511012274_12",
+        "matchedPantryItemName": "San Fab. Pizzato",
+        "parsedPrice": 2.36,
+        "previousPrice": 1.18,
+        "quantity": 1,
+        "quantityNote": "4 Stk x 0, 59",
+        "rawText": "San Fab. Pizzato"
+      },
+      {
+        "confidenceScore": 0.4,
+        "id": "9DC7606C-F358-42BD-BB67-EABADABAFC56",
+        "isConfirmed": false,
+        "parsedPrice": 6.49,
+        "quantity": 1,
+        "quantityNote": "4 Stk x 0, 59",
+        "rawText": "San rabio lomate"
+      }
+    ],
+    "notes": "",
+    "storeName": "PENNY",
+    "totalAmount": 6.49
+  },
+  {
+    "date": "2015-09-25T22:00:00Z",
+    "id": "61C2D821-C46C-4951-93C4-BB19D2F08304",
+    "imageFilename": "receipt_B15FB237-99E6-4FB7-B04A-E17DB262AC43.jpg",
+    "items": [
+      {
+        "confidenceScore": 0,
+        "id": "5860A514-4CF9-43EC-B2B7-C96417F3C7A9",
+        "isConfirmed": false,
+        "matchedPantryItemId": "pantry_D4740A0D-22F9-40AE-B210-B30C658A603E",
+        "matchedPantryItemName": "Tafeltrauben",
+        "parsedPrice": 5.22,
+        "quantity": 1,
+        "quantityNote": "1,046 kg x",
+        "rawText": "TRAUBE HELL"
+      },
+      {
+        "confidenceScore": 0.8,
+        "id": "F767AAA2-E25E-4FAC-9861-E5E97335B770",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787511030203_37",
+        "matchedPantryItemName": "HA-BRUSTFILET",
+        "parsedPrice": 6.79,
+        "previousPrice": 6.49,
+        "quantity": 1,
+        "rawText": "HA-BRUSTFILET"
+      },
+      {
+        "confidenceScore": 0.5,
+        "id": "D43F083D-559E-4216-8C5D-1F252CC02C80",
+        "isConfirmed": false,
+        "matchedPantryItemId": "pantry_13E1E9A7-1AD3-4300-8078-89FEF731F23F",
+        "matchedPantryItemName": "American Sandwich - Weizen",
+        "parsedPrice": 3.5819,
+        "quantity": 1,
+        "quantityNote": "11ghrroteinwraps 1, 79 2 Stk ›",
+        "rawText": "Weizen Sandwich"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "E230D4DE-A469-41BE-A295-BE768D4A5B3A",
+        "isConfirmed": false,
+        "parsedPrice": 1.1,
+        "quantity": 1,
+        "quantityNote": "2 Stk x 0, 55",
+        "rawText": "Kiwi gold"
+      },
+      {
+        "confidenceScore": 0,
+        "id": "FF4ACE36-5074-4F44-BCFD-2F903CE921A3",
+        "isConfirmed": false,
+        "matchedPantryItemId": "ean_4388860457704",
+        "matchedPantryItemName": "Mango (aus Spanien)",
+        "parsedPrice": 2.29,
+        "quantity": 1,
+        "rawText": "Mango"
+      },
+      {
+        "confidenceScore": 0.8,
+        "id": "2C984160-1EA3-40FA-90A5-2FF58959F40F",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787511015875_23",
+        "matchedPantryItemName": "Marktliebe Eisbergsalat Deutschland",
+        "parsedPrice": 0.99,
+        "previousPrice": 0.89,
+        "quantity": 1,
+        "rawText": "Eisbergsalat"
+      },
+      {
+        "confidenceScore": 1,
+        "id": "4C85A3C4-6F3E-4291-9C7A-BD1432191B8E",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787511012164_11",
+        "matchedPantryItemName": "Snickers Eisriegel",
+        "parsedPrice": 4.38,
+        "previousPrice": 6.57,
+        "quantity": 1,
+        "quantityNote": "2 Stk x 2,19",
+        "rawText": "Snickers Eisrieg"
+      },
+      {
+        "confidenceScore": 0.9,
+        "id": "F5682E03-1352-4395-8D12-0D6E4285BBF9",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787511046504_55",
+        "matchedPantryItemName": "MM Peanut Butter",
+        "parsedPrice": 1.75,
+        "previousPrice": 1.99,
+        "quantity": 1,
+        "rawText": "MM Peanut Butter"
+      },
+      {
+        "confidenceScore": 1,
+        "id": "28733A45-114B-40D5-B385-E65D1C401BFE",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_zucker_weiss",
+        "matchedPantryItemName": "PENNY Zucker feine Körnung",
+        "parsedPrice": 0.25,
+        "previousPrice": 1.19,
+        "quantity": 1,
+        "rawText": "PENNY Tasche"
+      }
+    ],
+    "notes": "",
+    "storeName": "PENNY",
+    "totalAmount": 27.54
+  },
+  {
+    "date": "2026-09-12T16:45:00Z",
+    "id": "receipt_penny_cookies_20260912",
+    "items": [
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p1",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_butter",
+        "matchedPantryItemName": "Deutsche Markenbutter mildgesäuert",
+        "parsedPrice": 1.59,
+        "previousPrice": 1.59,
+        "quantity": 1,
+        "rawText": "MARKENBUTTER 250G"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p2",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_brauner_zucker",
+        "matchedPantryItemName": "Brauner Rohrzucker",
+        "parsedPrice": 1.49,
+        "previousPrice": 1.49,
+        "quantity": 1,
+        "rawText": "ROHROHRZUCKER 500G"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p3",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_zucker_weiss",
+        "matchedPantryItemName": "PENNY Zucker feine Körnung",
+        "parsedPrice": 1.19,
+        "previousPrice": 1.19,
+        "quantity": 1,
+        "rawText": "FEINZUCKER 1000G"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p4",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_1787584551166_76",
+        "matchedPantryItemName": "Frische Eier Bodenhaltung M",
+        "parsedPrice": 1.99,
+        "previousPrice": 1.99,
+        "quantity": 1,
+        "rawText": "FRISCHE EIER 10ER"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p5",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_vanillezucker",
+        "matchedPantryItemName": "Vanillin-Zucker (10er Pack)",
+        "parsedPrice": 0.59,
+        "previousPrice": 0.59,
+        "quantity": 1,
+        "rawText": "VANILLIN-ZUCKER 10X"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p6",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_weizenmehl_405",
+        "matchedPantryItemName": "PENNY Weizenmehl Type 405",
+        "parsedPrice": 0.79,
+        "previousPrice": 0.79,
+        "quantity": 1,
+        "rawText": "WEIZENMEHL 405 1KG"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p7",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_backpulver",
+        "matchedPantryItemName": "Backpulver / Kaiser Natron",
+        "parsedPrice": 0.49,
+        "previousPrice": 0.49,
+        "quantity": 1,
+        "rawText": "BACKPULVER / NATRON"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p8",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_feinsalz",
+        "matchedPantryItemName": "PENNY Jodsalz mit Fluorid",
+        "parsedPrice": 0.29,
+        "previousPrice": 0.29,
+        "quantity": 1,
+        "rawText": "JODSALZ MIT FLUORID"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p9",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_zartbitter_schoko",
+        "matchedPantryItemName": "PENNY Zartbitter Schokolade 50%",
+        "parsedPrice": 1.98,
+        "previousPrice": 1.98,
+        "quantity": 1,
+        "rawText": "ZARTBITTER 50% 2X"
+      },
+      {
+        "confidenceScore": 0.98,
+        "id": "line_p10",
+        "isConfirmed": true,
+        "matchedPantryItemId": "food_penny_backpapier",
+        "matchedPantryItemName": "PENNY Backpapier Zuschnitte",
+        "parsedPrice": 1.19,
+        "previousPrice": 1.19,
+        "quantity": 1,
+        "rawText": "BACKPAPIER ZUSCHNIT"
+      }
+    ],
+    "notes": "PENNY Einkauf fuer Soft Cookies Rezeptur",
+    "storeName": "PENNY",
+    "totalAmount": 11.79
+  }
+]

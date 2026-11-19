@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BB0000000000000000000000 /* GrowCareApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000000 /* GrowCareApp.swift */; };
+		BB0000000000000000000001 /* CustomRecurrenceRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000001 /* CustomRecurrenceRule.swift */; };
+		BB0000000000000000000002 /* CareLogModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000002 /* CareLogModels.swift */; };
+		BB0000000000000000000003 /* CareModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000003 /* CareModels.swift */; };
+		BB0000000000000000000004 /* ChoreModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000004 /* ChoreModels.swift */; };
+		BB0000000000000000000005 /* CareNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000005 /* CareNotificationService.swift */; };
+		BB0000000000000000000006 /* ChoreNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000006 /* ChoreNotificationService.swift */; };
+		BB0000000000000000000007 /* GrowCareStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000007 /* GrowCareStore.swift */; };
+		BB0000000000000000000008 /* GrowEcosystemRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000008 /* GrowEcosystemRouter.swift */; };
+		BB0000000000000000000009 /* SharedMacrosBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000009 /* SharedMacrosBridge.swift */; };
+		BB000000000000000000000A /* CareTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000A /* CareTheme.swift */; };
+		BB000000000000000000000B /* CareCalendarStripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000B /* CareCalendarStripView.swift */; };
+		BB000000000000000000000C /* CareInventoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000C /* CareInventoryView.swift */; };
+		BB000000000000000000000D /* CareLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000D /* CareLogView.swift */; };
+		BB000000000000000000000E /* CareProductDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000E /* CareProductDetailSheet.swift */; };
+		BB000000000000000000000F /* ChoreDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA000000000000000000000F /* ChoreDetailSheet.swift */; };
+		BB0000000000000000000010 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000010 /* MainTabView.swift */; };
+		BB0000000000000000000011 /* RoutineDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000011 /* RoutineDetailSheet.swift */; };
+		BB0000000000000000000012 /* RoutineRunnerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000012 /* RoutineRunnerSheet.swift */; };
+		BB0000000000000000000013 /* CareZoneSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000013 /* CareZoneSelectorView.swift */; };
+		BB0000000000000000000014 /* StandardsGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000014 /* StandardsGuideView.swift */; };
+		BB0000000000000000000064 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0000000000000000000064 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FA0000000000000000000000 /* GrowCareApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GrowCareApp.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000001 /* CustomRecurrenceRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/CustomRecurrenceRule.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000002 /* CareLogModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/CareLogModels.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000003 /* CareModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/CareModels.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000004 /* ChoreModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Models/ChoreModels.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000005 /* CareNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/CareNotificationService.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000006 /* ChoreNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/ChoreNotificationService.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000007 /* GrowCareStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GrowCareStore.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000008 /* GrowEcosystemRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GrowEcosystemRouter.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000009 /* SharedMacrosBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/SharedMacrosBridge.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000A /* CareTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme/CareTheme.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000B /* CareCalendarStripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CareCalendarStripView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000C /* CareInventoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CareInventoryView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000D /* CareLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CareLogView.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000E /* CareProductDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CareProductDetailSheet.swift"; sourceTree = "<group>"; };
+		FA000000000000000000000F /* ChoreDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ChoreDetailSheet.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000010 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/MainTabView.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000011 /* RoutineDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/RoutineDetailSheet.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000012 /* RoutineRunnerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/RoutineRunnerSheet.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000013 /* CareZoneSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/CareZoneSelectorView.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000014 /* StandardsGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StandardsGuideView.swift"; sourceTree = "<group>"; };
+		FA0000000000000000000064 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
+		FA0000000000000000000065 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
+		FA0000000000000000000066 /* GrowCare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GrowCare.entitlements"; sourceTree = "<group>"; };
+		FA00000000000000000000C8 /* GrowCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrowCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A11111111111111111111111 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A22222222222222222222222 /* GrowCare */ = {
+			isa = PBXGroup;
+			children = (
+				FA0000000000000000000000 /* GrowCareApp.swift */,
+				FA0000000000000000000001 /* CustomRecurrenceRule.swift */,
+				FA0000000000000000000002 /* CareLogModels.swift */,
+				FA0000000000000000000003 /* CareModels.swift */,
+				FA0000000000000000000004 /* ChoreModels.swift */,
+				FA0000000000000000000005 /* CareNotificationService.swift */,
+				FA0000000000000000000006 /* ChoreNotificationService.swift */,
+				FA0000000000000000000007 /* GrowCareStore.swift */,
+				FA0000000000000000000008 /* GrowEcosystemRouter.swift */,
+				FA0000000000000000000009 /* SharedMacrosBridge.swift */,
+				FA000000000000000000000A /* CareTheme.swift */,
+				FA000000000000000000000B /* CareCalendarStripView.swift */,
+				FA000000000000000000000C /* CareInventoryView.swift */,
+				FA000000000000000000000D /* CareLogView.swift */,
+				FA000000000000000000000E /* CareProductDetailSheet.swift */,
+				FA000000000000000000000F /* ChoreDetailSheet.swift */,
+				FA0000000000000000000010 /* MainTabView.swift */,
+				FA0000000000000000000011 /* RoutineDetailSheet.swift */,
+				FA0000000000000000000012 /* RoutineRunnerSheet.swift */,
+				FA0000000000000000000013 /* CareZoneSelectorView.swift */,
+				FA0000000000000000000014 /* StandardsGuideView.swift */,
+				FA0000000000000000000064 /* Assets.xcassets */,
+				FA0000000000000000000065 /* Info.plist */,
+				FA0000000000000000000066 /* GrowCare.entitlements */,
+			);
+			path = GrowCare;
+			sourceTree = "<group>";
+		};
+		A33333333333333333333333 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FA00000000000000000000C8 /* GrowCare.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A44444444444444444444444 = {
+			isa = PBXGroup;
+			children = (
+				A22222222222222222222222 /* GrowCare */,
+				A33333333333333333333333 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A77777777777777777777777 /* GrowCare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A55555555555555555555551 /* Build configuration list for PBXNativeTarget "GrowCare" */;
+			buildPhases = (
+				A66666666666666666666661 /* Sources */,
+				A11111111111111111111111 /* Frameworks */,
+				A66666666666666666666662 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GrowCare;
+			productName = GrowCare;
+			productReference = FA00000000000000000000C8 /* GrowCare.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A88888888888888888888888 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A77777777777777777777777 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A55555555555555555555552 /* Build configuration list for PBXProject "GrowCare" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				de,
+				en,
+				Base,
+			);
+			mainGroup = A44444444444444444444444;
+			productRefGroup = A33333333333333333333333 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A77777777777777777777777 /* GrowCare */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A66666666666666666666662 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000064 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A66666666666666666666661 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BB0000000000000000000000 /* GrowCareApp.swift in Sources */,
+				BB0000000000000000000001 /* CustomRecurrenceRule.swift in Sources */,
+				BB0000000000000000000002 /* CareLogModels.swift in Sources */,
+				BB0000000000000000000003 /* CareModels.swift in Sources */,
+				BB0000000000000000000004 /* ChoreModels.swift in Sources */,
+				BB0000000000000000000005 /* CareNotificationService.swift in Sources */,
+				BB0000000000000000000006 /* ChoreNotificationService.swift in Sources */,
+				BB0000000000000000000007 /* GrowCareStore.swift in Sources */,
+				BB0000000000000000000008 /* GrowEcosystemRouter.swift in Sources */,
+				BB0000000000000000000009 /* SharedMacrosBridge.swift in Sources */,
+				BB000000000000000000000A /* CareTheme.swift in Sources */,
+				BB000000000000000000000B /* CareCalendarStripView.swift in Sources */,
+				BB000000000000000000000C /* CareInventoryView.swift in Sources */,
+				BB000000000000000000000D /* CareLogView.swift in Sources */,
+				BB000000000000000000000E /* CareProductDetailSheet.swift in Sources */,
+				BB000000000000000000000F /* ChoreDetailSheet.swift in Sources */,
+				BB0000000000000000000010 /* MainTabView.swift in Sources */,
+				BB0000000000000000000011 /* RoutineDetailSheet.swift in Sources */,
+				BB0000000000000000000012 /* RoutineRunnerSheet.swift in Sources */,
+				BB0000000000000000000013 /* CareZoneSelectorView.swift in Sources */,
+				BB0000000000000000000014 /* StandardsGuideView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A99999999999999999999991 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A99999999999999999999992 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A99999999999999999999993 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = GrowCare/GrowCare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GrowCare/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.growcare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A99999999999999999999994 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = GrowCare/GrowCare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = X83D9W2G74;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = GrowCare/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nkembi.growcare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A55555555555555555555551 /* Build configuration list for PBXNativeTarget "GrowCare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A99999999999999999999993 /* Debug */,
+				A99999999999999999999994 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A55555555555555555555552 /* Build configuration list for PBXProject "GrowCare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A99999999999999999999991 /* Debug */,
+				A99999999999999999999992 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = A88888888888888888888888 /* Project object */;
+}

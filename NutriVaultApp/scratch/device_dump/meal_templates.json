@@ -1,0 +1,523 @@
+[
+  {
+    "category" : "Warm Roast",
+    "id" : "rec_1_gnocchi",
+    "ingredients" : [
+      {
+        "grams" : 500,
+        "id" : "5015A0B8-F019-4A23-9702-5708EDAE0ACC",
+        "name" : "San Fabio Gnocchi",
+        "pantryItemId" : "food_1787511017022_32"
+      },
+      {
+        "grams" : 150,
+        "id" : "1F19E595-59CB-4E31-8D60-A0AB474AA6F5",
+        "name" : "TK-Gemuesemischung",
+        "pantryItemId" : "food_tk_gemuese"
+      },
+      {
+        "grams" : 10,
+        "id" : "7E85D79F-1D99-44EE-B535-5C7D2050528D",
+        "name" : "Natives Olivenoel Extra",
+        "pantryItemId" : "food_1787511047339_64"
+      }
+    ],
+    "instructions" : [
+      "AirFryer auf 190 Grad C fuer 2 Minuten vorheizen.",
+      "500 g frische Gnocchi und 150 g TK-Gemuese in eine Schuessel wiegen. Mit 1 EL Olivenoel, Meersalz, Paprikapulver und Rosmarin gruendlich vermengen.",
+      "Die marinierte Mischung gleichmaessig im Garkorb verteilen.",
+      "Bei 190 Grad C fuer 12-15 Minuten backen. Nach 7 Minuten den Korb kraeftig durchschuetteln, damit alle Gnocchi rundherum kross werden.",
+      "Heiss auf einem flachen Teller anrichten und servieren."
+    ],
+    "name" : "1. AirFryer-Gnocchi mit Gemuese („Knusper-Pfanne“)"
+  },
+  {
+    "category" : "Breakfast \/ Sandwich",
+    "id" : "rec_2_ruehrei",
+    "ingredients" : [
+      {
+        "grams" : 220,
+        "id" : "30E1A6AE-4858-4F27-B807-319107E04A15",
+        "name" : "EIER BH OKT",
+        "pantryItemId" : "food_1787510995665_3"
+      },
+      {
+        "grams" : 50,
+        "id" : "F2A34F54-41C9-4142-89F0-10320890605F",
+        "name" : "Schinkenwuerfel mager (2% Fett)",
+        "pantryItemId" : "food_schinkenwuerfel"
+      },
+      {
+        "grams" : 120,
+        "id" : "3B1855D2-40A6-4175-943E-62231CD25323",
+        "name" : "Vollkornbrot geschnitten",
+        "pantryItemId" : "food_vollkornbrot"
+      }
+    ],
+    "instructions" : [
+      "Pfanne auf mittlerer Stufe erwaermen. 50 g magere Schinkenwuerfel ohne Fett 1-2 Minuten anbraten, bis sie duften.",
+      "4 Eier in einer Schale kurz mit einer Gabel anschlagen, mit Pfeffer und wenig Salz wuerzen.",
+      "Eiermasse in die Pfanne giessen. Bei schwacher Hitze mit dem Spatel langsam von aussen nach innen schieben, bis das Ruehrei cremig stockt.",
+      "Ruehrei auf 3 Scheiben Vollkornbrot verteilen und mit Schnittlauch garnieren."
+    ],
+    "name" : "2. Protein-Ruehrei mit Schinken & Vollkornbrot"
+  },
+  {
+    "category" : "Warm Roast",
+    "id" : "rec_3_kumpir",
+    "ingredients" : [
+      {
+        "grams" : 400,
+        "id" : "0EB6EB11-119F-4905-B7D6-CFDB29D1A7DC",
+        "name" : "Fruehkartoffeln",
+        "pantryItemId" : "food_1787511011995_10"
+      },
+      {
+        "grams" : 150,
+        "id" : "9FF5BDAA-4992-4F63-A924-3B7AABF96E50",
+        "name" : "Bio Zwiebeln",
+        "pantryItemId" : "food_1787510995469_1"
+      },
+      {
+        "grams" : 30,
+        "id" : "C072D1F8-B852-42C3-AEBF-B017258F67C6",
+        "name" : "Gouda gerieben (light)",
+        "pantryItemId" : "food_reibekaese"
+      },
+      {
+        "grams" : 100,
+        "id" : "BB58B837-BE3E-4929-9CB2-E1ED6B4B1AEA",
+        "name" : "Kraeuterquark Magerstufe",
+        "pantryItemId" : "food_kraeuterquark"
+      }
+    ],
+    "instructions" : [
+      "2 grosse Kartoffeln waschen, trocken tupfen und rundherum mit einer Gabel mehrfach einstechen.",
+      "Im AirFryer bei 200 Grad C fuer 25-30 Minuten backen, bis das Innere weich ist.",
+      "Die heissen Kartoffeln laengs aufschneiden und das Innere mit einer Gabel leicht auflockern.",
+      "Gouda light in das heisse Innere streuen und mit Kraeuterquark toppen."
+    ],
+    "name" : "3. Ofen-Kumpir (Gefuellte Riesen-Kartoffeln)"
+  },
+  {
+    "category" : "Soups & Stews",
+    "id" : "rec_4_couscous",
+    "ingredients" : [
+      {
+        "grams" : 120,
+        "id" : "FEF183F8-BC5D-4F40-B178-EDFB5F9625CB",
+        "name" : "Couscous",
+        "pantryItemId" : "food_couscous"
+      },
+      {
+        "grams" : 240,
+        "id" : "6DE28A8F-2E0B-42D3-8428-D01E865E204B",
+        "name" : "Pizza Tomaten",
+        "pantryItemId" : "food_1787510996764_9"
+      },
+      {
+        "grams" : 50,
+        "id" : "EE3D05D5-7AA9-4C51-AE37-3C65BE3EC012",
+        "name" : "Feta \/ Hirtenkaese light",
+        "pantryItemId" : "food_feta"
+      }
+    ],
+    "instructions" : [
+      "120 g Couscous in einer Schuessel mit 150 ml kochendem Salzwasser uebergiessen, abdecken und 5 Minuten quellen lassen.",
+      "In einer Kasserolle 240 g Tomaten mit Kraeutern und Salz kurz erhitzen.",
+      "Couscous mit einer Gabel lockern und unter die Tomaten heben. 50 g Feta darueberkruemeln und 1 Minute anschmelzen lassen."
+    ],
+    "name" : "4. Blitz-Couscous-Pfanne mit Tomaten & Feta"
+  },
+  {
+    "category" : "Sandwiches & Wraps",
+    "id" : "rec_5_wraps",
+    "ingredients" : [
+      {
+        "grams" : 120,
+        "id" : "2582029A-4667-41CB-B95B-19209D9EB04B",
+        "name" : "WEIZEN TORTILLAS",
+        "pantryItemId" : "food_1787511031655_40"
+      },
+      {
+        "grams" : 120,
+        "id" : "8C0E0A25-78E8-40A8-902E-B12893F74441",
+        "name" : "HA-BRUSTFILET",
+        "pantryItemId" : "food_1787511030203_37"
+      },
+      {
+        "grams" : 50,
+        "id" : "F5A01091-0E71-4CCD-B963-98F6B8E865E8",
+        "name" : "Marktliebe Eisbergsalat Deutschland",
+        "pantryItemId" : "food_1787511015875_23"
+      },
+      {
+        "grams" : 50,
+        "id" : "CF55B3AF-DF84-41D7-B91D-F160C29DC4BB",
+        "name" : "Magerquark Speisequark",
+        "pantryItemId" : "food_1787584551166_75"
+      }
+    ],
+    "instructions" : [
+      "120 g Haehnchenbrustfilet in Streifen schneiden, mit Fajita-Gewuerz marinieren und im AirFryer bei 180 Grad C fuer 10 Minuten garen.",
+      "Tortilla-Wraps auslegen, mit Magerquark bestreichen, Salat und gegarte Haehnchenstreifen mittig auflegen.",
+      "Wraps straff einrollen und fuer 2-3 Minuten bei 200 Grad C im AirFryer knusprig toasten."
+    ],
+    "name" : "5. Mexikanische Knusper-Haehnchen-Wraps"
+  },
+  {
+    "category" : "Sandwiches",
+    "id" : "rec_6_tuna_melt",
+    "ingredients" : [
+      {
+        "grams" : 120,
+        "id" : "B2BFDF8D-25A2-4EEB-8630-EBA07E2D695C",
+        "name" : "Vollkornbrot geschnitten",
+        "pantryItemId" : "food_vollkornbrot"
+      },
+      {
+        "grams" : 150,
+        "id" : "8378C6F4-4EE9-47B1-A020-3C2399F859D5",
+        "name" : "Berida Thunfisch in Sauce",
+        "pantryItemId" : "food_1787511016349_27"
+      },
+      {
+        "grams" : 30,
+        "id" : "A6959BC3-4290-4D5C-8047-8915E6490744",
+        "name" : "Gouda gerieben (light)",
+        "pantryItemId" : "food_reibekaese"
+      },
+      {
+        "grams" : 30,
+        "id" : "AE10EA2C-9DF9-4D04-8F81-0888A2680662",
+        "name" : "Bio Zuckermais",
+        "pantryItemId" : "food_1787510995500_2"
+      }
+    ],
+    "instructions" : [
+      "150 g Thunfisch abtropfen lassen und mit Mais, Pfeffer und Oregano vermengen.",
+      "3 Scheiben Vollkornbrot mit der Masse belegen und mit 30 g Reibekaese light bestreuen.",
+      "Im AirFryer bei 185 Grad C fuer 6-8 Minuten backen, bis der Kaese goldbraun zerlaeuft."
+    ],
+    "name" : "6. AirFryer Tuna-Melt Toasties"
+  },
+  {
+    "category" : "High-Fiber Bowl",
+    "id" : "rec_7_kichererbsen",
+    "ingredients" : [
+      {
+        "grams" : 240,
+        "id" : "B086415A-07C7-4021-BC1F-8477AC5FA039",
+        "name" : "Kichererbsen Dose",
+        "pantryItemId" : "food_1787584551166_83"
+      },
+      {
+        "grams" : 150,
+        "id" : "EC60FF9D-9C00-4D50-883D-981B8CA4EC7E",
+        "name" : "Bio Zwiebeln",
+        "pantryItemId" : "food_1787510995469_1"
+      },
+      {
+        "grams" : 150,
+        "id" : "3CA38FCD-C1AB-4AFC-B4DB-8052EF86BB5A",
+        "name" : "Kraeuterquark Magerstufe",
+        "pantryItemId" : "food_kraeuterquark"
+      },
+      {
+        "grams" : 10,
+        "id" : "9406AE9B-684A-4686-87B7-1B7DCF6F5512",
+        "name" : "Natives Olivenoel Extra",
+        "pantryItemId" : "food_1787511047339_64"
+      }
+    ],
+    "instructions" : [
+      "240 g Kichererbsen abspuelen und mit Kuechenpapier gruendlich trocken reiben.",
+      "Mit 1 EL Olivenoel, Paprikapulver und Meersalz vermengen.",
+      "Im AirFryer bei 195 Grad C fuer 12-15 Minuten roesten, nach 6 und 10 Minuten den Korb schuetteln.",
+      "Mit 150 g Kraeuterquark servieren."
+    ],
+    "name" : "7. Knusprige Paprika-Kichererbsen mit Kraeuterquark"
+  },
+  {
+    "category" : "Soups & Stews",
+    "id" : "rec_8_shakshuka",
+    "ingredients" : [
+      {
+        "grams" : 80,
+        "id" : "E60D63A5-DAE6-469D-BE56-156386E40F68",
+        "name" : "Rote Linsen",
+        "pantryItemId" : "food_1787510996257_6"
+      },
+      {
+        "grams" : 200,
+        "id" : "8D3B95FA-BC11-4980-B198-2EBA9A5FADBA",
+        "name" : "Pizza Tomaten",
+        "pantryItemId" : "food_1787510996764_9"
+      },
+      {
+        "grams" : 165,
+        "id" : "FACE94CE-2EC7-41AC-8C19-7BD6DEF23B59",
+        "name" : "EIER BH OKT",
+        "pantryItemId" : "food_1787510995665_3"
+      }
+    ],
+    "instructions" : [
+      "80 g rote Linsen mit 150 ml kochendem Wasser und 200 g Tomaten in die Kasserolle geben. Mit Kreuzkuemmel und Salz 7 Minuten koecheln.",
+      "3 Mulden in die Sauce druecken und 3 Eier hineinschlagen.",
+      "Deckel aufsetzen und bei kleiner Hitze 4-5 Minuten stocken lassen, bis das Eiweiss fest ist."
+    ],
+    "name" : "8. Stuben-Shakshuka mit roten Linsen & 3 Eiern"
+  },
+  {
+    "category" : "Warm Roast",
+    "id" : "rec_9_wedges",
+    "ingredients" : [
+      {
+        "grams" : 300,
+        "id" : "CE2ADD80-73BB-42F3-8373-1028B279439B",
+        "name" : "Fruehkartoffeln",
+        "pantryItemId" : "food_1787511011995_10"
+      },
+      {
+        "grams" : 120,
+        "id" : "8565CBE4-C8C3-4BD5-8C65-2309C7CDBE19",
+        "name" : "HA-BRUSTFILET",
+        "pantryItemId" : "food_1787511030203_37"
+      },
+      {
+        "grams" : 10,
+        "id" : "2DC54E08-C27C-41F2-B043-78B1E7C032C8",
+        "name" : "Natives Olivenoel Extra",
+        "pantryItemId" : "food_1787511047339_64"
+      }
+    ],
+    "instructions" : [
+      "300 g Kartoffeln vierteln und 120 g Haehnchenbrustfilet wuerfeln.",
+      "Mit 1 EL Olivenoel, Rosmarin und Pommesgewuerz marinieren.",
+      "Im AirFryer bei 190 Grad C fuer 18-20 Minuten backen, nach 10 Minuten kraeftig schuetteln."
+    ],
+    "name" : "9. AirFryer Haehnchen-Kartoffel Wedges"
+  },
+  {
+    "category" : "Sweet Breakfast",
+    "id" : "rec_10_baked_oats",
+    "ingredients" : [
+      {
+        "grams" : 80,
+        "id" : "CC0B248D-253F-4CF8-9215-E2C046F6ECAB",
+        "name" : "Granola Haferflocken",
+        "pantryItemId" : "food_1787510996316_7"
+      },
+      {
+        "grams" : 55,
+        "id" : "90423B7D-9452-4DD4-B3D7-A00BEB5D25EB",
+        "name" : "EIER BH OKT",
+        "pantryItemId" : "food_1787510995665_3"
+      },
+      {
+        "grams" : 80,
+        "id" : "D12F9D20-DDEB-488B-B47D-26194E253AD4",
+        "name" : "TK-Beerenmischung",
+        "pantryItemId" : "food_1787584551166_88"
+      },
+      {
+        "grams" : 20,
+        "id" : "EDCDC7BC-C9A3-49C1-8CC8-F9E3F8C204D3",
+        "name" : "Whey Isolat \/ Protein Pulver Vanille",
+        "pantryItemId" : "supp-whey-isolat"
+      }
+    ],
+    "instructions" : [
+      "80 g Haferflocken, 1 Ei, 20 g Whey Protein, Zimt und 80 ml Wasser in einer ofenfesten Schale verruehren.",
+      "80 g TK-Beeren vorsichtig unterheben.",
+      "Im AirFryer bei 175 Grad C fuer 10-12 Minuten backen, bis das Oatmeal fluffig aufgeht."
+    ],
+    "name" : "10. Warmes Baked-Protein-Oatmeal aus dem AirFryer"
+  },
+  {
+    "category" : "Sweet Breakfast",
+    "id" : "rec_11_french_toast",
+    "ingredients" : [
+      {
+        "grams" : 120,
+        "id" : "3232ADDE-3F7D-4981-A429-0B074CBE9FD5",
+        "name" : "Vollkornbrot geschnitten",
+        "pantryItemId" : "food_vollkornbrot"
+      },
+      {
+        "grams" : 150,
+        "id" : "D067F5B1-B57D-46AE-A407-CCC376FB701A",
+        "name" : "EIER BH OKT",
+        "pantryItemId" : "food_1787510995665_3"
+      },
+      {
+        "grams" : 100,
+        "id" : "8D86DD1A-172F-4ACF-91F7-D62FFABCC7DC",
+        "name" : "Magerquark Speisequark",
+        "pantryItemId" : "food_1787584551166_75"
+      }
+    ],
+    "instructions" : [
+      "Eier mit Zimt und Suessstoff in einem tiefen Teller gruendlich verquirlen.",
+      "3 Scheiben Vollkornbrot beidseitig traenken, bis die Eimasse vollstaendig aufgesaugt ist.",
+      "Im AirFryer bei 185 Grad C fuer 6-8 Minuten goldbraun backen.",
+      "Mit 100 g Magerquark-Creme und Zimt als Topping anrichten."
+    ],
+    "name" : "11. Anabolic French Toast (Greg Doucette Signature)"
+  },
+  {
+    "category" : "Sweet Breakfast",
+    "id" : "rec_12_berry_fluff",
+    "ingredients" : [
+      {
+        "grams" : 150,
+        "id" : "A5E3B21D-1C43-454A-A1BF-D1870DC07EE7",
+        "name" : "TK-Beerenmischung",
+        "pantryItemId" : "food_1787584551166_88"
+      },
+      {
+        "grams" : 150,
+        "id" : "34BCC900-029D-4755-837E-CC62630EB4D7",
+        "name" : "Magerquark Speisequark",
+        "pantryItemId" : "food_1787584551166_75"
+      },
+      {
+        "grams" : 25,
+        "id" : "03B6E433-0B50-4433-80C5-AC064DB976D1",
+        "name" : "Whey Isolat \/ Protein Pulver Vanille",
+        "pantryItemId" : "supp-whey-isolat"
+      }
+    ],
+    "instructions" : [
+      "150 g gefrorene Beeren kurz mit 50 ml kaltem Wasser anpuerieren.",
+      "150 g Magerquark und 25 g Whey Protein Pulver zugeben.",
+      "Mit einem Ruehrbesen auf hoechster Stufe 3-4 Minuten schaumig schlagen, bis sich das Volumen vervielfacht.",
+      "Sofort eiskalt in einer grossen Schale servieren."
+    ],
+    "name" : "12. Anabolic Berry Fluff Mousse"
+  },
+  {
+    "category" : "Warm Roast",
+    "id" : "rec_13_teriyaki",
+    "ingredients" : [
+      {
+        "grams" : 120,
+        "id" : "453187A0-A3A7-435E-8C75-2669302A150F",
+        "name" : "HA-BRUSTFILET",
+        "pantryItemId" : "food_1787511030203_37"
+      },
+      {
+        "grams" : 200,
+        "id" : "C0A96814-39EA-4053-A617-B40C41DAF041",
+        "name" : "TK-Gemuesemischung",
+        "pantryItemId" : "food_tk_gemuese"
+      },
+      {
+        "grams" : 10,
+        "id" : "F9F746AD-0ED4-4D4E-B001-AB7397C438F9",
+        "name" : "Natives Olivenoel Extra",
+        "pantryItemId" : "food_1787511047339_64"
+      }
+    ],
+    "instructions" : [
+      "120 g Haehnchenbrustfilet wuerfeln und mit Sojasauce und Pfeffer marinieren.",
+      "200 g TK-Gemuese dazugeben und gruendlich vermengen.",
+      "Im AirFryer bei 185 Grad C fuer 12 Minuten garen, nach 6 Minuten kraeftig durchschuetteln.",
+      "Heiss anrichten und servieren."
+    ],
+    "name" : "13. Asiatische AirFryer Teriyaki Haehnchen-Pfanne"
+  },
+  {
+    "category" : "Soups & Stews",
+    "id" : "rec_14_kasernen_power_dal",
+    "ingredients" : [
+      {
+        "grams" : 150,
+        "id" : "5C1F5CDC-C322-4B31-AFEF-9DF38F5105AA",
+        "name" : "Rote Linsen getrocknet",
+        "pantryItemId" : "cat-rote-linsen"
+      },
+      {
+        "grams" : 240,
+        "id" : "B5C3C6E8-FF1C-4EF1-B342-9AD7BE4DF036",
+        "name" : "Kichererbsen (Greenland \/ PENNY)",
+        "pantryItemId" : "food_1787655672345_105"
+      },
+      {
+        "grams" : 120,
+        "id" : "6B337857-EEBA-43F2-BB64-FFE7C6F508D7",
+        "name" : "Bio Hartweizen Couscous (Natur Gut)",
+        "pantryItemId" : "food_1787655672345_106"
+      },
+      {
+        "grams" : 250,
+        "id" : "8CE98F26-3E46-4584-A598-5A3C490C02F5",
+        "name" : "Passierte Tomaten (San Fabio)",
+        "pantryItemId" : "food_1787655672345_107"
+      },
+      {
+        "grams" : 180,
+        "id" : "7F9C3A1B-06F7-43EF-959B-459E558961FB",
+        "name" : "Kokosmilch fettreduziert (Light)",
+        "pantryItemId" : "cat-kokosmilch-aldi"
+      },
+      {
+        "grams" : 30,
+        "id" : "9F33BFD4-BAA9-41CF-919F-96C1E5882866",
+        "name" : "Erdnussbutter Creamy \/ Crunchy",
+        "pantryItemId" : "cat-erdnussbutter-20166076"
+      }
+    ],
+    "instructions" : [
+      "120 g Couscous mit 150 ml kochendem Salzwasser uebergiessen, abdecken und 5 Minuten ziehen lassen.",
+      "150 g rote Linsen mit 350 ml kochendem Wasser in der Kasserolle 5 Minuten koecheln lassen.",
+      "Passierte Tomaten, Kokosmilch, Kichererbsen und Erdnussbutter einruehren. Mit Curry und Salz abschmecken.",
+      "3-4 Minuten saemig einkoecheln lassen und mit dem Couscous anrichten."
+    ],
+    "name" : "14. 15-Minuten Kasernen-Power-Dal mit Blitz-Couscous"
+  },
+  {
+    "category" : "Soups & Stews",
+    "id" : "rec_15_kokos_tomaten_dal",
+    "ingredients" : [
+      {
+        "grams" : 180,
+        "id" : "C1B20F4E-D7C5-4C57-B327-1DFFF83B7407",
+        "name" : "Rote Linsen getrocknet",
+        "pantryItemId" : "cat-rote-linsen"
+      },
+      {
+        "grams" : 191,
+        "id" : "DFA39B02-A38A-45C0-AE4E-04CC5F47728A",
+        "name" : "Basmati Reis Spitzenqualitaet",
+        "pantryItemId" : "cat-basmati-reis-191g"
+      },
+      {
+        "grams" : 400,
+        "id" : "6E1DF674-F3B7-4858-AC2A-0728671B4389",
+        "name" : "Gehackte Tomaten in Tomatensaft",
+        "pantryItemId" : "cat-tomaten-penny"
+      },
+      {
+        "grams" : 200,
+        "id" : "17E5EA54-B17A-40FA-9077-A9102B092D86",
+        "name" : "Kokosmilch fettreduziert (Light)",
+        "pantryItemId" : "cat-kokosmilch-aldi"
+      },
+      {
+        "grams" : 31,
+        "id" : "BC021E8A-E541-4C44-A3EE-F4C8E9570DBE",
+        "name" : "Erdnussbutter Creamy \/ Crunchy",
+        "pantryItemId" : "cat-erdnussbutter-20166076"
+      }
+    ],
+    "instructions" : [
+      "191 g Basmati-Reis abspuelen, mit 380 ml kochendem Wasser und 0.5 TL Salz im Reiskocher starten.",
+      "180 g rote Linsen in die Kasserolle wiegen, mit 350-400 ml kochendem Wasser 4-5 Minuten vorkoecheln.",
+      "400 g gehackte Tomaten, 200 ml Kokosmilch light und 31 g Erdnussbutter einruehren, bis das Fett emulgiert.",
+      "Mit Kreuzkuemmel, Curry, Salz und Pfeffer auf niedriger Stufe 6-8 Minuten saemig eindicken lassen.",
+      "Reis in eine Schale fuellen, heisses Dal daruebergeben und servieren."
+    ],
+    "name" : "15. Cremiges Kokos-Tomaten-Dal mit Basmati-Reis & Erdnussbutter"
+  }
+]

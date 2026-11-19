@@ -1,0 +1,3470 @@
+[
+  {
+    "calendarEventId" : "8F966E9C-0906-4BC6-83A4-8AFAFA1E7387:9B4745AD-3C62-4321-A248-F9E91F343389",
+    "endTime" : 816207293.874519,
+    "estimatedCaloriesBurned" : 242,
+    "exercises" : [
+      {
+        "exercise" : {
+          "categoryType" : "Pull",
+          "commonMistakes" : [
+            "Vor- und Zurueckschwingen des Oberkoerpers mit Schwung",
+            "Ellbogen wandern nach vorn waehrend des Curls",
+            "Handgelenke knicken unter Last ab"
+          ],
+          "cues" : [
+            "Ellbogen sind an der Koerperseite festgetackert",
+            "Nur die Unterarme bewegen sich durch den Raum",
+            "Volle Dehnung am Umkehrpunkt zulassen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 4,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Kabelcurls mit gerader Stange",
+            "Kurzhantelcurls sitzend mit Rueckenlehne"
+          ],
+          "equipment" : "Eigenkoerpergewicht (Bodyweight)",
+          "execution" : "Unterarme kontrolliert nach oben beugen. Am Endpunkt maximale Spitzenkontraktion fuer 1-2 Sekunden halten. Kontrolliert ueber 2-3 Sekunden absenken bis zur vollen Streckung.",
+          "executionNotes" : "Reha-Goldstandard nach Prof. Stuart McGill: Haende unter die LWS zur Erhaltung der natuerlichen Lordose. Ein Bein gebeugt, ein Bein gestreckt. Nur Kopf und Brustguertel minimal anheben (10s isometrischer Halt pro Satz\/Wiederholung).",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Incline Dumbbell Curls (maximaler Stretch des langen Bizepskopfs)",
+            "Scott-Bank Curls mit 3 Sekunden Exzentrik"
+          ],
+          "id" : "B37EEB07-D5AC-4FC8-A546-86EE5EDE3846",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "isExplicitlyTimeBased" : true,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "McGill Modifizierter Curl-Up (Haende unter LWS)",
+          "primaryMusclesDetailed" : [
+            "Biceps Brachii Long Head",
+            "Biceps Brachii Short Head"
+          ],
+          "programmingGuidance" : "3 Saetze x 10-14 Wiederholungen, 60-75 Sekunden Pause, RIR 1-2.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Brachialis",
+            "Brachioradialis"
+          ],
+          "setup" : "Aufrechter Stand oder stabiler Sitz. Ellbogen eng an den Rippen fixieren und waehrend des gesamten Satzes unbeweglich halten.",
+          "stabilizersDetailed" : [
+            "Rotator Cuff",
+            "Forearm Flexors",
+            "Core"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)",
+          "youtubeVideoId" : "I_drRVYlHbc"
+        },
+        "id" : "D521EF6D-162A-4DA2-8322-B8F6FAB256D0",
+        "notes" : "",
+        "sets" : [
+          {
+            "durationSeconds" : 10,
+            "executionDurationSeconds" : 10,
+            "id" : "4646FF0C-E719-464C-BCAD-D3E87488A351",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 10,
+            "rpe" : 6,
+            "setNumber" : 1,
+            "timestamp" : 816204734.97135,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 10,
+            "executionDurationSeconds" : 10,
+            "id" : "AEAFBDF4-6B08-41D8-9293-0B77B2E4114E",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 10,
+            "rpe" : 6,
+            "setNumber" : 2,
+            "timestamp" : 816204820.69841,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 10,
+            "executionDurationSeconds" : 10,
+            "id" : "CF18F812-7064-473B-BA2F-B5997D7AF394",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 10,
+            "rpe" : 6,
+            "setNumber" : 3,
+            "timestamp" : 816204895.500884,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 10,
+            "executionDurationSeconds" : 10,
+            "id" : "3B9ED645-F38A-48B6-9B8C-4D18C3D288FE",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 10,
+            "rpe" : 6,
+            "setNumber" : 4,
+            "timestamp" : 816204969.152055,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 75,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Eigenkoerpergewicht (Bodyweight)",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "Bauchnabel fest nach innen saugen, LWS hat stetigen Bodenkontakt.",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "9434EA57-FFD5-40CF-B331-8B5CB9C8BFBF",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Deadbug mit Rueckendruck gegen Boden",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "EE0A7825-CD67-4F57-9B33-1986FC3C46B8",
+        "notes" : "",
+        "sets" : [
+          {
+            "durationSeconds" : 12,
+            "executionDurationSeconds" : 12,
+            "id" : "88FCCDEA-EE88-4AF1-88B1-0275532F6E65",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 12,
+            "rpe" : 6,
+            "setNumber" : 1,
+            "timestamp" : 816205477.723501,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 12,
+            "executionDurationSeconds" : 12,
+            "id" : "24142987-B454-4B7A-A1FA-200769B27E02",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 12,
+            "rpe" : 6,
+            "setNumber" : 2,
+            "timestamp" : 816205512.156525,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 12,
+            "executionDurationSeconds" : 12,
+            "id" : "EF30541F-9B30-4297-BD06-8F0B219EC586",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 12,
+            "rpe" : 6,
+            "setNumber" : 3,
+            "timestamp" : 816205531.10195,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 12,
+            "executionDurationSeconds" : 12,
+            "id" : "F20D02A0-98CE-4C21-B208-3BCD2EFFCB80",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 12,
+            "rpe" : 6,
+            "setNumber" : 4,
+            "timestamp" : 816205549.26128,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 75,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Eigenkoerpergewicht (Bodyweight)",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "Kopplung von Gluteus Medius und Quadratus Lumborum.",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "69DF2DA1-7F28-4D6A-A9DF-9B5782863056",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "McGill Side Plank (Knie oder Fuesse)",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "EE408375-B55E-41AC-9A50-E09A3F960FC1",
+        "notes" : "",
+        "sets" : [
+          {
+            "durationSeconds" : 45,
+            "executionDurationSeconds" : 45,
+            "id" : "D2AA6DD3-8226-4A72-9D13-40ADD75CFB9E",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 45,
+            "rpe" : 6,
+            "setNumber" : 1,
+            "timestamp" : 816205679.690915,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 45,
+            "executionDurationSeconds" : 45,
+            "id" : "EA911E5D-7467-4CDB-9E55-9232D33B2C4B",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 45,
+            "rpe" : 6,
+            "setNumber" : 2,
+            "timestamp" : 816205802.6571,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 45,
+            "executionDurationSeconds" : 45,
+            "id" : "E3E14A83-FD09-42B5-BA8C-00C6BD78D954",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 45,
+            "rpe" : 6,
+            "setNumber" : 3,
+            "timestamp" : 816205925.280503,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 45,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Grosse Mattenflaeche",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "Reha-Grundpfeiler: Statische Ganzkoerperspannung ohne Quetschung der Eingeweide.",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "03CE474F-1801-438E-BD4C-9773FD2EE623",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Unterarmstuetz \/ Plank",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "F5102F13-37FE-4C6E-8F55-1CB563EDD964",
+        "notes" : "",
+        "sets" : [
+          {
+            "durationSeconds" : 75,
+            "executionDurationSeconds" : 75,
+            "id" : "A9C13DCD-0876-434D-8FC5-EF27C6C0F0DF",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 75,
+            "rpe" : 7.5,
+            "setNumber" : 1,
+            "timestamp" : 816206112.613754,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 75,
+            "executionDurationSeconds" : 75,
+            "id" : "64C9FB7C-4509-4332-AE1B-2A0C6028C736",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 75,
+            "rpe" : 7.5,
+            "setNumber" : 2,
+            "timestamp" : 816206253.072705,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 75,
+            "executionDurationSeconds" : 75,
+            "id" : "A9A527A3-AD9A-49F7-8D82-C878E23FD182",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 75,
+            "rpe" : 8,
+            "setNumber" : 3,
+            "timestamp" : 816206390.835831,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Legs",
+          "commonMistakes" : [
+            "Einrunden der Lendenwirbelsaeule unter Last (strikte Reha-Kontraindikation)",
+            "Stange driftet vom Koerper weg nach vorn",
+            "Ueberstreckung ins Hohlkreuz am oberen Endpunkt"
+          ],
+          "cues" : [
+            "Eine Tuer mit dem Gesaess nach hinten zuschlagen",
+            "Stange streift dauerhaft Oberschenkel und Schienbeine",
+            "Nacken neutral halten, Blick 2 Meter vor sich auf den Boden"
+          ],
+          "defaultReps" : 15,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Mittelstufe",
+          "easierOptions" : [
+            "Hyperextensions 45 Grad mit Eigengewicht",
+            "Kabel-Pull-Through (minimiert axiale Wirbelsaeulenkompression)",
+            "Kurzhantel RDL mit moderater Last"
+          ],
+          "equipment" : "Grosse Mattenflaeche",
+          "execution" : "Huefte weit nach hinten schieben (Hip Hinge). Oberkoerper neigt sich kontrolliert nach vorn bis spuerbare Dehnung in den Hamstrings eintritt. Stange eng am Schienbein fuehren. Durch kraftvolle Gesaessstreckung die Huefte wieder nach vorn bringen.",
+          "executionNotes" : "Fersen fest in den Boden druecken, Gesaess am obersten Punkt fuer 2 Sekunden anspannen.",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Langhantel RDL mit 3 Sekunden Stopp in maximaler Dehnung",
+            "Glute Drive mit hohem Arbeitsgewicht und 2s Spitzenkontraktion",
+            "Einbeiniges rumaenisches Kreuzheben"
+          ],
+          "id" : "18B7D0AD-1EF8-4BC6-A53D-B6724E2BABD8",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Hinge",
+          "name" : "Glute Bridge am Boden (Beckenheben)",
+          "primaryMusclesDetailed" : [
+            "Gluteus Maximus",
+            "Biceps Femoris",
+            "Semitendinosus"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-10 Wiederholungen, 120 Sekunden Pause, RIR 2. BWK Reha: Keine Maximalversuche, strikte Neutralitaet der Wirbelsaeule.",
+          "secondaryMuscles" : [
+            "Funktioneller Rumpf (Reha)",
+            "Unterer Ruecken"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Erector Spinae",
+            "Adductor Magnus",
+            "Latissimus Dorsi",
+            "Trapezius"
+          ],
+          "setup" : "Huftbreiter Stand vor der Stange oder Positionierung im Hip-Thrust-Polster. Knie minimal entriegelt. Schulterblaetter nach hinten fixieren, LWS neutral verriegeln.",
+          "stabilizersDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi",
+            "Quadratus Lumborum"
+          ],
+          "targetMuscle" : "Gluteus & Ischios"
+        },
+        "id" : "55ABF640-BFF8-49C4-B7D8-EB82FA008686",
+        "notes" : "",
+        "sets" : [
+          {
+            "executionDurationSeconds" : 86,
+            "id" : "88B0B8FE-65B4-45C8-8D76-E493E666B7A7",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 15,
+            "rpe" : 6,
+            "setNumber" : 1,
+            "timestamp" : 816206571.639939,
+            "weightKg" : 0
+          },
+          {
+            "executionDurationSeconds" : 42,
+            "id" : "3D69A3FF-8235-43D1-B37C-8AC28859A115",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 15,
+            "rpe" : 6,
+            "setNumber" : 2,
+            "timestamp" : 816206674.33347,
+            "weightKg" : 0
+          },
+          {
+            "executionDurationSeconds" : 22,
+            "id" : "AF18DCE5-A254-4E9A-B8A7-C1D573FCC95B",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 15,
+            "rpe" : 6,
+            "setNumber" : 3,
+            "timestamp" : 816206756.992269,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Legs",
+          "commonMistakes" : [
+            "Einrunden der Lendenwirbelsaeule unter Last (strikte Reha-Kontraindikation)",
+            "Stange driftet vom Koerper weg nach vorn",
+            "Ueberstreckung ins Hohlkreuz am oberen Endpunkt"
+          ],
+          "cues" : [
+            "Eine Tuer mit dem Gesaess nach hinten zuschlagen",
+            "Stange streift dauerhaft Oberschenkel und Schienbeine",
+            "Nacken neutral halten, Blick 2 Meter vor sich auf den Boden"
+          ],
+          "defaultReps" : 45,
+          "defaultRestSeconds" : 30,
+          "defaultSets" : 3,
+          "difficulty" : "Mittelstufe",
+          "easierOptions" : [
+            "Hyperextensions 45 Grad mit Eigengewicht",
+            "Kabel-Pull-Through (minimiert axiale Wirbelsaeulenkompression)",
+            "Kurzhantel RDL mit moderater Last"
+          ],
+          "equipment" : "Grosse Mattenflaeche",
+          "execution" : "Huefte weit nach hinten schieben (Hip Hinge). Oberkoerper neigt sich kontrolliert nach vorn bis spuerbare Dehnung in den Hamstrings eintritt. Stange eng am Schienbein fuehren. Durch kraftvolle Gesaessstreckung die Huefte wieder nach vorn bringen.",
+          "executionNotes" : "Entlastungsdehnung: Fersensitz mit nach vorn gestreckten Armen zur maximalen axialen LWS-Entlastung.",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Langhantel RDL mit 3 Sekunden Stopp in maximaler Dehnung",
+            "Glute Drive mit hohem Arbeitsgewicht und 2s Spitzenkontraktion",
+            "Einbeiniges rumaenisches Kreuzheben"
+          ],
+          "id" : "9010FCF2-AA8B-4BF0-A592-46D0DB6C092B",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Hinge",
+          "name" : "Kindeshaltung \/ Prayer Stretch (LWS Dekompression)",
+          "primaryMusclesDetailed" : [
+            "Gluteus Maximus",
+            "Biceps Femoris",
+            "Semitendinosus"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-10 Wiederholungen, 120 Sekunden Pause, RIR 2. BWK Reha: Keine Maximalversuche, strikte Neutralitaet der Wirbelsaeule.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Erector Spinae",
+            "Adductor Magnus",
+            "Latissimus Dorsi",
+            "Trapezius"
+          ],
+          "setup" : "Huftbreiter Stand vor der Stange oder Positionierung im Hip-Thrust-Polster. Knie minimal entriegelt. Schulterblaetter nach hinten fixieren, LWS neutral verriegeln.",
+          "stabilizersDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi",
+            "Quadratus Lumborum"
+          ],
+          "targetMuscle" : "Unterer Ruecken"
+        },
+        "id" : "011EC6DE-065B-43C0-BD02-33AC943821F2",
+        "notes" : "",
+        "sets" : [
+          {
+            "durationSeconds" : 60,
+            "executionDurationSeconds" : 60,
+            "id" : "BD948C49-98CE-4049-944A-C7BA977AB7C3",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 60,
+            "setNumber" : 1,
+            "timestamp" : 816207080.637857,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 60,
+            "executionDurationSeconds" : 60,
+            "id" : "4BADB891-811E-41C6-9512-E15B39FCE53E",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 60,
+            "setNumber" : 2,
+            "timestamp" : 816207173.311304,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 60,
+            "executionDurationSeconds" : 60,
+            "id" : "1F977BAF-E3A9-4091-9B1A-171F09147977",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 60,
+            "setNumber" : 3,
+            "timestamp" : 816207278.590647,
+            "weightKg" : 0
+          }
+        ]
+      }
+    ],
+    "id" : "30624F7A-A033-4AA7-B124-1110E434FD4C",
+    "isEarlyTermination" : false,
+    "isPaused" : false,
+    "isSyncedToCalendar" : true,
+    "isSyncedToHealthKit" : true,
+    "pausedIntervals" : 0,
+    "perceivedExertionRPE" : 6,
+    "prCount" : 0,
+    "somaticNotes" : "Spontanes Workout gewaehlt. Ausreichende Regenerationskapazitaet verfuegbar. Standard-Lasten freigegeben.",
+    "startTime" : 816204634.450642,
+    "templateId" : "8D1025C4-3A45-4FAF-9418-A19ACBC2EEBB",
+    "terminationReason" : "Planmaessig beendet",
+    "title" : "Stuben-Workout: Core & Lumbale Tiefenstabilität"
+  },
+  {
+    "calendarEventId" : "8F966E9C-0906-4BC6-83A4-8AFAFA1E7387:EEF915A9-A119-40D3-853E-F50A4965D711",
+    "endTime" : 816032202.986927,
+    "estimatedCaloriesBurned" : 308,
+    "exercises" : [
+      {
+        "exercise" : {
+          "categoryType" : "Push",
+          "commonMistakes" : [
+            "Starke Rotation des Beckens zur Seite (Ausweichbewegung bei mangelnder Rumpfspannung)",
+            "Durchhaengen der Huefte \/ LWS-Hohlkreuz",
+            "Zu enger Fussstand mit Verlust des Gleichgewichts"
+          ],
+          "cues" : [
+            "Anti-Rotation: Beckenknochen zeigen wie Scheinwerfer senkrecht zum Boden",
+            "Koerper wie eine Stahlstange spannen",
+            "Ellbogen 45 Grad am Koerper fuehren, nicht nach aussen spreizen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 90,
+          "defaultSets" : 3,
+          "difficulty" : "Elite",
+          "easierOptions" : [
+            "Einarmige Liegestuetze erhoeht an einer Bank oder Wand",
+            "Archer Push-Ups (unterstuetzte einarmige Liegestuetze)",
+            "Diamant-Liegestuetze mit enger Handstellung"
+          ],
+          "equipment" : "Eigenkoerpergewicht (Bodyweight)",
+          "execution" : "Oberkoerper als starre Einheit kontrolliert absenken, bis die Brust ca. 5-10 cm ueber dem Boden ist. Huefte parallel zum Boden halten (Rotation aktiv bekaempfen). Kraftvoll aus Brust und Trizeps wieder nach oben in die vollstaendige Streckung druecken.",
+          "executionNotes" : "Elite Calisthenics: Dreiecks-Stand fuer Anti-Rotationsstabilitaet. Freie Hand am Ruecken. Becken parallel zum Boden halten. 10 Wdh pro Arm.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Einarmige Liegestuetze mit geschlossenen Beinen",
+            "Einarmige Liegestuetze mit erhoeht platzierten Fuessen",
+            "Einarmige Liegestuetze mit 2 Sekunden Pause am Tiefpunkt"
+          ],
+          "id" : "1781527A-83C8-4ABC-86E5-46B9F3F1D188",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Horizontal Push",
+          "name" : "Einarmige Liegestuetze",
+          "primaryMusclesDetailed" : [
+            "Pectoralis Major Sternal Head",
+            "Pectoralis Major Clavicular Head"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 5-10 Wdh pro Arm, 90-120s Pause, RIR 1-2. Frequenz: 2x woechentlich.",
+          "secondaryMuscles" : [
+            "Arme (Bizeps & Trizeps)",
+            "Funktioneller Rumpf (Reha)",
+            "Schultern"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Triceps Brachii Lateral Head",
+            "Triceps Brachii Medial Head",
+            "Deltoid Anterior Head"
+          ],
+          "setup" : "Fuesse schulterbreit oder weiter spreizen (Dreiecks-Basis fuer maximale Anti-Rotations-Stabilitaet). Die arbeitende Hand unter der Brustmitte platzieren. Die freie Hand auf den Ruecken oder an den Oberschenkel legen. Bauch, Gluteus und Beine unter maximale Koerperspannung bringen.",
+          "stabilizersDetailed" : [
+            "Obliques Internus & Externus",
+            "Transversus Abdominis",
+            "Gluteus Medius",
+            "Serratus Anterior"
+          ],
+          "targetMuscle" : "Brust"
+        },
+        "id" : "B016FC1E-B342-469D-85DE-BF83A02F92D8",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "C0077350-37CF-4C6E-BBC4-3BF4612B3F9F",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 1,
+            "timestamp" : 816028840.598677,
+            "weightKg" : 0
+          },
+          {
+            "id" : "F3B9654E-C187-4613-A57D-06AD083D642D",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 2,
+            "timestamp" : 816028840.598678,
+            "weightKg" : 0
+          },
+          {
+            "id" : "B86136CA-C15E-426D-B09F-4775D5CAF94F",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 3,
+            "timestamp" : 816028840.598678,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Push",
+          "commonMistakes" : [
+            "Vor- und Zurueckschwingen des Oberkoerpers mit Schwung",
+            "Ellbogen wandern nach vorn waehrend des Curls",
+            "Handgelenke knicken unter Last ab"
+          ],
+          "cues" : [
+            "Ellbogen sind an der Koerperseite festgetackert",
+            "Nur die Unterarme bewegen sich durch den Raum",
+            "Volle Dehnung am Umkehrpunkt zulassen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 75,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Trizepsdruecken am Kabelzug mit V-Griff",
+            "Dips an der unterstuetzten Maschine mit Gegengewicht"
+          ],
+          "equipment" : "Eigenkoerpergewicht (Bodyweight)",
+          "execution" : "Unterarme kraftvoll nach unten strecken. Am Endpunkt den Trizeps 1 Sekunde maximal kontrahieren. Kontrolliert bis zu einem 90-Grad Ellbogenwinkel zurueckfuehren.",
+          "executionNotes" : "Daumen und Zeigefinger beruehren sich zur Raute. Maximaler Fokus auf Trizeps und sternale Brust.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Schaedelzertruemmerer (Skull Crushers) mit SZ-Stange",
+            "Trizepsdruecken ueber Kopf am Kabelzug"
+          ],
+          "id" : "56D52E4C-C9D9-4DDB-97E9-AA92F76F2EA1",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Diamant-Liegestuetze (Calisthenics)",
+          "primaryMusclesDetailed" : [
+            "Triceps Brachii Lateral Head",
+            "Triceps Brachii Long Head",
+            "Triceps Brachii Medial Head"
+          ],
+          "programmingGuidance" : "3 Saetze x 10-14 Wiederholungen, 60-75 Sekunden Pause, RIR 1-2.",
+          "secondaryMuscles" : [
+            "Brust",
+            "Schultern"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Anconeus"
+          ],
+          "setup" : "Aufrechter Stand oder stabiler Sitz. Ellbogen eng an den Rippen fixieren und waehrend des gesamten Satzes unbeweglich halten.",
+          "stabilizersDetailed" : [
+            "Rotator Cuff",
+            "Forearm Flexors",
+            "Core"
+          ],
+          "targetMuscle" : "Arme (Bizeps & Trizeps)"
+        },
+        "id" : "252DC16B-E4BE-477B-92F8-B5150ACDA4BB",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "9ED05036-34EB-46F6-9988-2358A74EE380",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 15,
+            "setNumber" : 1,
+            "timestamp" : 816028840.598685,
+            "weightKg" : 0
+          },
+          {
+            "id" : "3880B458-1F5B-4D87-B68E-EC28FF928110",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 2,
+            "timestamp" : 816028840.598686,
+            "weightKg" : 0
+          },
+          {
+            "id" : "5F95646C-B9E0-451E-8695-341656D85A08",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 8,
+            "setNumber" : 3,
+            "timestamp" : 816028840.598686,
+            "weightKg" : 0
+          },
+          {
+            "id" : "A20DFC1F-DD82-4FA0-8382-E88A77D3242D",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 8,
+            "setNumber" : 4,
+            "timestamp" : 816028840.598686,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Push",
+          "commonMistakes" : [
+            "Vor- und Zurueckschwingen des Oberkoerpers mit Schwung",
+            "Ellbogen wandern nach vorn waehrend des Curls",
+            "Handgelenke knicken unter Last ab"
+          ],
+          "cues" : [
+            "Ellbogen sind an der Koerperseite festgetackert",
+            "Nur die Unterarme bewegen sich durch den Raum",
+            "Volle Dehnung am Umkehrpunkt zulassen"
+          ],
+          "defaultReps" : 12,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Trizepsdruecken am Kabelzug mit V-Griff",
+            "Dips an der unterstuetzten Maschine mit Gegengewicht"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Unterarme kraftvoll nach unten strecken. Am Endpunkt den Trizeps 1 Sekunde maximal kontrahieren. Kontrolliert bis zu einem 90-Grad Ellbogenwinkel zurueckfuehren.",
+          "executionNotes" : "Auf stabilem Stuhl oder Bettkante abstuetzen. Ellbogen eng nach hinten fuehren, 90-Grad-Winkel nicht ueberschreiten.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Schaedelzertruemmerer (Skull Crushers) mit SZ-Stange",
+            "Trizepsdruecken ueber Kopf am Kabelzug"
+          ],
+          "id" : "34FC944E-D1CB-48F7-9142-F97C40E6917C",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Stuhl-Dips (Stuben-Trizeps)",
+          "primaryMusclesDetailed" : [
+            "Triceps Brachii Lateral Head",
+            "Triceps Brachii Long Head",
+            "Triceps Brachii Medial Head"
+          ],
+          "programmingGuidance" : "3 Saetze x 10-14 Wiederholungen, 60-75 Sekunden Pause, RIR 1-2.",
+          "secondaryMuscles" : [
+            "Brust",
+            "Schultern"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Anconeus"
+          ],
+          "setup" : "Aufrechter Stand oder stabiler Sitz. Ellbogen eng an den Rippen fixieren und waehrend des gesamten Satzes unbeweglich halten.",
+          "stabilizersDetailed" : [
+            "Rotator Cuff",
+            "Forearm Flexors",
+            "Core"
+          ],
+          "targetMuscle" : "Arme (Bizeps & Trizeps)"
+        },
+        "id" : "FD22B54A-A8B4-4BF2-9D07-DFA5A3C21452",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "0C719207-DB0D-4E9B-B0AB-0F9D109C62F0",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 15,
+            "setNumber" : 1,
+            "timestamp" : 816028840.598691,
+            "weightKg" : 0
+          },
+          {
+            "id" : "BE7C4538-D3DF-4726-90DB-7F0598FADFDD",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 15,
+            "setNumber" : 2,
+            "timestamp" : 816028840.598691,
+            "weightKg" : 0
+          },
+          {
+            "id" : "ACEE1279-2C4C-4FF1-86A2-F370FF16FFFD",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 3,
+            "timestamp" : 816028840.598692,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 45,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Grosse Mattenflaeche",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "Reha-Grundpfeiler: Statische Ganzkoerperspannung ohne Quetschung der Eingeweide.",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "E2E7C0C1-7D28-4A5F-9C52-5433C5BE1F9B",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Unterarmstuetz \/ Plank",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "035614BD-D9E4-46FE-AE19-58BC1B7FD5A7",
+        "notes" : "",
+        "sets" : [
+          {
+            "durationSeconds" : 124,
+            "id" : "CC0EADC2-57A3-4FDE-B7FE-3A92AF5BA354",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 300,
+            "setNumber" : 1,
+            "timestamp" : 816028840.598693,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 75,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Eigenkoerpergewicht (Bodyweight)",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "Maximale diagonale Rumpfspannung ohne Wirbelsaeulenkruemmung.",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "B596C682-7F0E-4127-B7C2-5E2768A4A8DA",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Deadbug mit Druck gegen die Knie",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "FA199E54-181D-4905-A3FA-ED1E275952E0",
+        "notes" : "",
+        "sets" : [
+          {
+            "durationSeconds" : 15,
+            "id" : "197609C8-CF43-45F8-9768-60680A80FA12",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 15,
+            "setNumber" : 1,
+            "timestamp" : 816028840.598695,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 15,
+            "id" : "9F3A7D9B-9C00-49C1-A791-9D37A45A8485",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 15,
+            "setNumber" : 2,
+            "timestamp" : 816028840.598695,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 15,
+            "id" : "F9AC496C-0D43-4997-AE80-48E276F7BE0E",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 15,
+            "setNumber" : 3,
+            "timestamp" : 816028840.598695,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 15,
+            "id" : "D31D98AF-D067-4861-88B8-DCAD7471E4EE",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 15,
+            "setNumber" : 4,
+            "timestamp" : 816028840.598695,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Pull",
+          "commonMistakes" : [
+            "Vor- und Zurueckschwingen des Oberkoerpers mit Schwung",
+            "Ellbogen wandern nach vorn waehrend des Curls",
+            "Handgelenke knicken unter Last ab"
+          ],
+          "cues" : [
+            "Ellbogen sind an der Koerperseite festgetackert",
+            "Nur die Unterarme bewegen sich durch den Raum",
+            "Volle Dehnung am Umkehrpunkt zulassen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 75,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Kabelcurls mit gerader Stange",
+            "Kurzhantelcurls sitzend mit Rueckenlehne"
+          ],
+          "equipment" : "Eigenkoerpergewicht (Bodyweight)",
+          "execution" : "Unterarme kontrolliert nach oben beugen. Am Endpunkt maximale Spitzenkontraktion fuer 1-2 Sekunden halten. Kontrolliert ueber 2-3 Sekunden absenken bis zur vollen Streckung.",
+          "executionNotes" : "Nur Kopf und Schulterguertel minimal anheben, LWS bleibt voellig neutral.",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Incline Dumbbell Curls (maximaler Stretch des langen Bizepskopfs)",
+            "Scott-Bank Curls mit 3 Sekunden Exzentrik"
+          ],
+          "id" : "8EF00359-2F25-4F2F-AD6A-9A4B7CA2D258",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "McGill Modifizierter Curl-Up (Haende unter LWS)",
+          "primaryMusclesDetailed" : [
+            "Biceps Brachii Long Head",
+            "Biceps Brachii Short Head"
+          ],
+          "programmingGuidance" : "3 Saetze x 10-14 Wiederholungen, 60-75 Sekunden Pause, RIR 1-2.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Brachialis",
+            "Brachioradialis"
+          ],
+          "setup" : "Aufrechter Stand oder stabiler Sitz. Ellbogen eng an den Rippen fixieren und waehrend des gesamten Satzes unbeweglich halten.",
+          "stabilizersDetailed" : [
+            "Rotator Cuff",
+            "Forearm Flexors",
+            "Core"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "CCDE58CC-C5EB-494A-9891-42CAFC9D0B1D",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "290D20CD-5355-456A-8000-D84AAB2CC66B",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 1,
+            "timestamp" : 816028840.598702,
+            "weightKg" : 0
+          },
+          {
+            "id" : "A072C7EB-73C3-4F00-AEC0-3FD007F90E79",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 2,
+            "timestamp" : 816028840.598702,
+            "weightKg" : 0
+          },
+          {
+            "id" : "A83B88C1-A8AA-49C7-BE56-29C7FB99A602",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 3,
+            "timestamp" : 816028840.598702,
+            "weightKg" : 0
+          },
+          {
+            "id" : "18C8D963-539D-4B9E-99EE-66B1C3DAF5E2",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 4,
+            "timestamp" : 816028840.598702,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 75,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Eigenkoerpergewicht (Bodyweight)",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "Kopplung von Gluteus Medius und Quadratus Lumborum.",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "409B4175-E2C2-48FC-B905-82446C204CDE",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "McGill Side Plank (Knie oder Fuesse)",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "D99D22C6-EF4A-4C04-ABBF-0DFC6A9EC04B",
+        "notes" : "",
+        "sets" : [
+          {
+            "durationSeconds" : 82,
+            "id" : "78764C2B-5517-4C03-B952-CA109AD838B0",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 90,
+            "setNumber" : 1,
+            "timestamp" : 816028840.598703,
+            "weightKg" : 0
+          },
+          {
+            "durationSeconds" : 81,
+            "id" : "168C0F2A-7FD2-497C-9791-8F6D8574F1A4",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : true,
+            "isWarmup" : false,
+            "reps" : 90,
+            "setNumber" : 2,
+            "timestamp" : 816028840.598704,
+            "weightKg" : 0
+          }
+        ]
+      }
+    ],
+    "id" : "BB1C612E-C546-4B76-B31F-9496B703B466",
+    "isEarlyTermination" : false,
+    "isPaused" : false,
+    "isSyncedToCalendar" : true,
+    "isSyncedToHealthKit" : true,
+    "pausedIntervals" : 0,
+    "perceivedExertionRPE" : 6,
+    "prCount" : 0,
+    "somaticNotes" : "Spontane Oberkoerper-Wahl detektiert. Da der Oberkoerper bereits dominiert (8.0:1), hat JARVIS das Volumen auf RIR 2-3 autoreguliert (-1 Satz pro Uebung), um Sehnenuenerlastung zu vermeiden, und Kinetik-Primer fuer Becken\/Beine vorgeschaltet.",
+    "startTime" : 816028840.598705,
+    "templateId" : "018474C1-FDC1-4827-A29F-5B30C564BAA4",
+    "terminationReason" : "Planmaessig beendet",
+    "title" : "Stuben-Workout: Sixpack & Liegestuetze (Ohne Geraete)"
+  },
+  {
+    "calendarEventId" : "8F966E9C-0906-4BC6-83A4-8AFAFA1E7387:8C017CFA-F51A-463F-880D-CFE7BE11746C",
+    "endTime" : 816002991.89344,
+    "estimatedCaloriesBurned" : 248.5,
+    "exercises" : [
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 0,
+          "defaultRestSeconds" : 0,
+          "defaultSets" : 0,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Roemische Bank fuer Bauchtraining",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "BWK ULM REHA SPERRE: Klassische Crunches\/Sit-ups sind strikt verboten (erhoeht intraabdominalen Druck).",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "DC9CDCAF-E173-46ED-A0D3-C094BE7F7512",
+          "isBWKRehaSafe" : false,
+          "isContraindicated" : true,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Crunches \/ Sit-ups auf Roemischer Bank",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "CBDBF1A8-326C-42AC-9B63-FF14256C8176",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "A3824E45-D784-4DED-B10A-3B1AEB891C14",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 20,
+            "setNumber" : 1,
+            "timestamp" : 816001363.065398,
+            "weightKg" : 0
+          },
+          {
+            "id" : "8021EAB0-AB91-4A4D-A2F2-8A1AF9AF0E99",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 20,
+            "setNumber" : 2,
+            "timestamp" : 816001450.251597,
+            "weightKg" : 0
+          },
+          {
+            "id" : "6F159C55-59D7-4404-9CBC-2517113A8791",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 20,
+            "setNumber" : 3,
+            "timestamp" : 816001761.641074,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Push",
+          "commonMistakes" : [
+            "Vor- und Zurueckschwingen des Oberkoerpers mit Schwung",
+            "Ellbogen wandern nach vorn waehrend des Curls",
+            "Handgelenke knicken unter Last ab"
+          ],
+          "cues" : [
+            "Ellbogen sind an der Koerperseite festgetackert",
+            "Nur die Unterarme bewegen sich durch den Raum",
+            "Volle Dehnung am Umkehrpunkt zulassen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 75,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Trizepsdruecken am Kabelzug mit V-Griff",
+            "Dips an der unterstuetzten Maschine mit Gegengewicht"
+          ],
+          "equipment" : "Eigenkoerpergewicht (Bodyweight)",
+          "execution" : "Unterarme kraftvoll nach unten strecken. Am Endpunkt den Trizeps 1 Sekunde maximal kontrahieren. Kontrolliert bis zu einem 90-Grad Ellbogenwinkel zurueckfuehren.",
+          "executionNotes" : "Daumen und Zeigefinger beruehren sich zur Raute. Maximaler Fokus auf Trizeps und sternale Brust.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Schaedelzertruemmerer (Skull Crushers) mit SZ-Stange",
+            "Trizepsdruecken ueber Kopf am Kabelzug"
+          ],
+          "id" : "3771CCA7-B15E-4D6D-B5AA-11E148F90D7A",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Diamant-Liegestuetze (Calisthenics)",
+          "primaryMusclesDetailed" : [
+            "Triceps Brachii Lateral Head",
+            "Triceps Brachii Long Head",
+            "Triceps Brachii Medial Head"
+          ],
+          "programmingGuidance" : "3 Saetze x 10-14 Wiederholungen, 60-75 Sekunden Pause, RIR 1-2.",
+          "secondaryMuscles" : [
+            "Brust",
+            "Schultern"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Anconeus"
+          ],
+          "setup" : "Aufrechter Stand oder stabiler Sitz. Ellbogen eng an den Rippen fixieren und waehrend des gesamten Satzes unbeweglich halten.",
+          "stabilizersDetailed" : [
+            "Rotator Cuff",
+            "Forearm Flexors",
+            "Core"
+          ],
+          "targetMuscle" : "Arme (Bizeps & Trizeps)"
+        },
+        "id" : "16A9E0D6-9892-429B-B49F-EAB39465C3D4",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "16908B7D-76EB-45DA-AA9E-AAB7E416D201",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 1,
+            "timestamp" : 816001638.343077,
+            "weightKg" : 0
+          },
+          {
+            "id" : "FEE33DFF-508A-4386-B5CB-C7438656C57F",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 2,
+            "timestamp" : 816001638.343097,
+            "weightKg" : 0
+          },
+          {
+            "id" : "1E330A1A-4076-4759-B7BF-222361704D0F",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 3,
+            "timestamp" : 816001638.343114,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Pull",
+          "commonMistakes" : [
+            "Schultern zu den Ohren hochziehen (Trapezius Pars Descendens Dominanz)",
+            "Schwungholen mit dem Oberkoerper aus der Lendenwirbelsaeule",
+            "Verkuerzter Bewegungsumfang ohne volle Streckung im Latissimus"
+          ],
+          "cues" : [
+            "Ellbogen fuehren die Bewegung, Haende sind nur Haken",
+            "Brustbein aktiv zum Griff oder zur Stange schieben",
+            "Schulterblaetter bewusst in die Gesaesstaschen ziehen"
+          ],
+          "defaultReps" : 8,
+          "defaultRestSeconds" : 90,
+          "defaultSets" : 3,
+          "difficulty" : "Mittelstufe",
+          "easierOptions" : [
+            "Unterstuetzte Klimmzug-Maschine mit Gegengewicht",
+            "Latzug am Kabel mit moderatem Gewicht",
+            "Kabelrudern mit Parallelgriff (V-Griff)"
+          ],
+          "equipment" : "Klimmzugstange",
+          "execution" : "Aus dem Ruecken heraus die Ellbogen kraftvoll nach hinten bzw. unten fuehren. Am Endpunkt der Bewegung die Schulterblaetter fest zusammenpressen und 1 Sekunde halten. Kontrolliert ueber 2-3 Sekunden in die Dehnung zurueckkehren.",
+          "executionNotes" : "Handflaechen zum Gesicht. Hohe Bizeps- und Latissimus-Beteiligung.",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Zusatzgewicht am Guertel",
+            "1.5 Wiederholungen (halbe Wiederholung im kontrahierten Zustand)",
+            "3 Sekunden Pause am Peak-Kontraktionspunkt"
+          ],
+          "id" : "8DE02607-8F70-413E-A32A-DF17D96AF51A",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Klimmzuege Untergriff (Chin-ups)",
+          "primaryMusclesDetailed" : [
+            "Latissimus Dorsi",
+            "Trapezius"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-12 Wiederholungen, 90-120 Sekunden Pause, RIR 1-2. Frequenz: 2x woechentlich.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Biceps Brachii Long Head",
+            "Biceps Brachii Short Head",
+            "Deltoid Posterior Head",
+            "Brachioradialis"
+          ],
+          "setup" : "Griffe oder Stange mit festem Griff fassen. Brustbein anheben, Schulterblaetter nach hinten unten ziehen und den Rumpf stabilisieren.",
+          "stabilizersDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Upper",
+            "Serratus Anterior"
+          ],
+          "targetMuscle" : "Arme (Bizeps & Trizeps)"
+        },
+        "id" : "84378C38-12B5-4114-9374-11DD38F1CD14",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "148468CA-AC81-411E-8FC6-66F366818079",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 5,
+            "setNumber" : 1,
+            "timestamp" : 816002328.191585,
+            "weightKg" : 0
+          },
+          {
+            "id" : "B80BC2D3-1395-4308-B3E4-7409CA8FAB5B",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 5,
+            "setNumber" : 2,
+            "timestamp" : 816002328.191606,
+            "weightKg" : 0
+          },
+          {
+            "id" : "F977E6E7-F7C4-41C9-AD5F-7DA76DBA74C5",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 5,
+            "setNumber" : 3,
+            "timestamp" : 816002328.191622,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 45,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Grosse Mattenflaeche",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "Reha-Grundpfeiler: Statische Ganzkoerperspannung ohne Quetschung der Eingeweide.",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "728B7FD5-A57B-4D67-9ACD-18B28E143442",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Unterarmstuetz \/ Plank",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "29E3F8CF-52C5-4D40-92E9-D5CF87960207",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "EA84ABC4-8C7B-40A8-950D-C329AA637E23",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 250,
+            "setNumber" : 1,
+            "timestamp" : 816002619.885995,
+            "weightKg" : 0
+          },
+          {
+            "id" : "5E1CAB87-9B0D-4484-A7D6-2DC25269438B",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 0,
+            "setNumber" : 2,
+            "timestamp" : 816002619.886015,
+            "weightKg" : 0
+          },
+          {
+            "id" : "FC83C333-E739-4A36-96C1-7F9CB8DBC506",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 0,
+            "setNumber" : 3,
+            "timestamp" : 816002619.886031,
+            "weightKg" : 0
+          }
+        ]
+      }
+    ],
+    "id" : "01311C02-9954-4278-95E9-4BEA47DD0CC0",
+    "isEarlyTermination" : false,
+    "isPaused" : false,
+    "isSyncedToCalendar" : true,
+    "isSyncedToHealthKit" : true,
+    "pausedIntervals" : 0,
+    "perceivedExertionRPE" : 6,
+    "prCount" : 0,
+    "somaticNotes" : "Einzeluebung: Crunches \/ Sit-ups auf Roemischer Bank",
+    "startTime" : 816001363.065412,
+    "terminationReason" : "Planmaessig beendet",
+    "title" : "Crunches \/ Sit-ups auf Roemischer Bank"
+  },
+  {
+    "calendarEventId" : "8F966E9C-0906-4BC6-83A4-8AFAFA1E7387:326DBEBC-EE57-42F6-90F3-CB9486C4CF6D",
+    "endTime" : 816000834.754588,
+    "estimatedCaloriesBurned" : 93.5,
+    "exercises" : [
+      {
+        "exercise" : {
+          "categoryType" : "Pull",
+          "commonMistakes" : [
+            "Schultern zu den Ohren hochziehen (Trapezius Pars Descendens Dominanz)",
+            "Schwungholen mit dem Oberkoerper aus der Lendenwirbelsaeule",
+            "Verkuerzter Bewegungsumfang ohne volle Streckung im Latissimus"
+          ],
+          "cues" : [
+            "Ellbogen fuehren die Bewegung, Haende sind nur Haken",
+            "Brustbein aktiv zum Griff oder zur Stange schieben",
+            "Schulterblaetter bewusst in die Gesaesstaschen ziehen"
+          ],
+          "defaultReps" : 8,
+          "defaultRestSeconds" : 90,
+          "defaultSets" : 3,
+          "difficulty" : "Fortgeschritten",
+          "easierOptions" : [
+            "Unterstuetzte Klimmzug-Maschine mit Gegengewicht",
+            "Latzug am Kabel mit moderatem Gewicht",
+            "Kabelrudern mit Parallelgriff (V-Griff)"
+          ],
+          "equipment" : "Klimmzugstange",
+          "execution" : "Aus dem Ruecken heraus die Ellbogen kraftvoll nach hinten bzw. unten fuehren. Am Endpunkt der Bewegung die Schulterblaetter fest zusammenpressen und 1 Sekunde halten. Kontrolliert ueber 2-3 Sekunden in die Dehnung zurueckkehren.",
+          "executionNotes" : "Klassische Bundeswehr-Klimmzuege. Volle Streckung und Kinn ueber die Stange.",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Zusatzgewicht am Guertel",
+            "1.5 Wiederholungen (halbe Wiederholung im kontrahierten Zustand)",
+            "3 Sekunden Pause am Peak-Kontraktionspunkt"
+          ],
+          "id" : "CE8306FC-ED98-4908-B70F-F6905B1ABC38",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Vertical Pull",
+          "name" : "Klimmzuege Obergriff (Pull-ups)",
+          "primaryMusclesDetailed" : [
+            "Latissimus Dorsi",
+            "Trapezius"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-12 Wiederholungen, 90-120 Sekunden Pause, RIR 1-2. Frequenz: 2x woechentlich.",
+          "secondaryMuscles" : [
+
+          ],
+          "secondaryMusclesDetailed" : [
+            "Biceps Brachii Long Head",
+            "Biceps Brachii Short Head",
+            "Deltoid Posterior Head",
+            "Brachioradialis"
+          ],
+          "setup" : "Griffe oder Stange mit festem Griff fassen. Brustbein anheben, Schulterblaetter nach hinten unten ziehen und den Rumpf stabilisieren.",
+          "stabilizersDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Upper",
+            "Serratus Anterior"
+          ],
+          "targetMuscle" : "Ruecken \/ Latissimus"
+        },
+        "id" : "37EEC4F7-B2EF-48AA-B824-9B78E54543F4",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "830FB956-81E5-48DE-B1EB-2CD81CAEDCE0",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 5,
+            "setNumber" : 1,
+            "timestamp" : 815999804.388122,
+            "weightKg" : 0
+          },
+          {
+            "id" : "F4CC638D-ABB1-45CB-8106-D338AA5392D2",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 5,
+            "setNumber" : 2,
+            "timestamp" : 815999804.388126,
+            "weightKg" : 0
+          },
+          {
+            "id" : "D4D393BE-8BB0-4797-B167-69C89C644620",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 5,
+            "setNumber" : 3,
+            "timestamp" : 815999804.388127,
+            "weightKg" : 0
+          },
+          {
+            "id" : "1B11BEEC-62B6-4EF5-899F-238389622B86",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 5,
+            "setNumber" : 4,
+            "timestamp" : 816000033.844962,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Push",
+          "commonMistakes" : [
+            "Ellbogen 90 Grad nach aussen abspreizen (Gefahr fuer Schulter-Impingement)",
+            "Abfedern des Gewichts auf dem Brustkorb",
+            "Schultern waehrend des Drueckens vom Polster nach vorn schieben"
+          ],
+          "cues" : [
+            "Boden ueber die Fersen in den Raum druecken",
+            "Stange in den Haenden gedanklich zusammenbiegen",
+            "Brustbein stolz aufgerichtet lassen"
+          ],
+          "defaultReps" : 12,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Brustpresse-Maschine (fuehrte Trajektorie entlastet Stabilisatoren)",
+            "Kurzhantel-Bankdruecken mit freiem Gelenkwinkel",
+            "Erhoehte Liegestuetze an einer Bank"
+          ],
+          "equipment" : "Grosse Mattenflaeche",
+          "execution" : "Gewicht kontrolliert zur mittleren\/unteren Brust absenken. Ellbogen in einem 45-60 Grad Winkel zum Koerper fuehren. Tiefe Dehnung spueren, danach kraftvoll nach oben herausdruecken ohne die Schulterblaetter zu oeffnen.",
+          "executionNotes" : "Saubere Koerperspannung. Brust absenken, gleichmaessig ausatmen beim Druecken. Kein Pressen.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Pausiertes Bankdruecken (2 Sekunden Stopp auf der Brust)",
+            "Schraegbankdruecken mit Kurzhanteln",
+            "Dips mit Zusatzgewicht"
+          ],
+          "id" : "08965978-F333-4E94-B9E2-48BFC1DE77F5",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Horizontal Push",
+          "name" : "Liegestuetze (BWK-konform kontrolliert)",
+          "primaryMusclesDetailed" : [
+            "Pectoralis Major Sternal Head",
+            "Pectoralis Major Clavicular Head"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 6-10 Wiederholungen, 120-150 Sekunden Pause, RIR 1-2. Progression: +2.5 kg bei Erreichen des oberen Rep-Limits.",
+          "secondaryMuscles" : [
+            "Schultern",
+            "Arme (Bizeps & Trizeps)",
+            "Funktioneller Rumpf (Reha)"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Deltoid Anterior Head",
+            "Triceps Brachii Lateral Head",
+            "Triceps Brachii Long Head"
+          ],
+          "setup" : "Auf der Bank positionieren, Augen unter der Hantelstange oder Sitzhoehe auf Brustwarzenhoehe einstellen. Fuesse fest in den Boden druecken (Leg Drive). Schulterblaetter zusammenziehen und fest in die Bank graben.",
+          "stabilizersDetailed" : [
+            "Serratus Anterior",
+            "Rotator Cuff (Infraspinatus)",
+            "Rectus Abdominis"
+          ],
+          "targetMuscle" : "Brust"
+        },
+        "id" : "234BEADF-09E6-4F65-ABCE-C0E48AF54436",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "71694B45-F0A9-4EAD-B515-4C137A199667",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 1,
+            "timestamp" : 816000187.482598,
+            "weightKg" : 0
+          },
+          {
+            "id" : "E1BB424B-DEE3-4DBA-A4B7-ABD78E89F40F",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 2,
+            "timestamp" : 816000187.482617,
+            "weightKg" : 0
+          },
+          {
+            "id" : "7AB65005-0896-44CB-9E2C-F92A1D9450F8",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 3,
+            "timestamp" : 816000187.482634,
+            "weightKg" : 0
+          },
+          {
+            "id" : "225A0A41-24F5-4B04-8B87-B88C3594F7A8",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 4,
+            "timestamp" : 816000490.608096,
+            "weightKg" : 0
+          }
+        ]
+      }
+    ],
+    "id" : "7B1D5A4F-E163-4218-A045-AB4BA09ADB2B",
+    "isEarlyTermination" : false,
+    "isPaused" : false,
+    "isSyncedToCalendar" : true,
+    "isSyncedToHealthKit" : true,
+    "pausedIntervals" : 0,
+    "perceivedExertionRPE" : 6,
+    "prCount" : 0,
+    "somaticNotes" : "Einzeluebung: Klimmzuege Obergriff (Pull-ups)",
+    "startTime" : 815999804.388143,
+    "terminationReason" : "Planmaessig beendet",
+    "title" : "Push Pull basic"
+  },
+  {
+    "calendarEventId" : "8F966E9C-0906-4BC6-83A4-8AFAFA1E7387:F82F088D-FDA8-448F-9819-1A964E47534F",
+    "endTime" : 815338089.052037,
+    "estimatedCaloriesBurned" : 143,
+    "exercises" : [
+      {
+        "exercise" : {
+          "categoryType" : "Push",
+          "commonMistakes" : [
+            "Ellbogen 90 Grad nach aussen abspreizen (Gefahr fuer Schulter-Impingement)",
+            "Abfedern des Gewichts auf dem Brustkorb",
+            "Schultern waehrend des Drueckens vom Polster nach vorn schieben"
+          ],
+          "cues" : [
+            "Boden ueber die Fersen in den Raum druecken",
+            "Stange in den Haenden gedanklich zusammenbiegen",
+            "Brustbein stolz aufgerichtet lassen"
+          ],
+          "defaultReps" : 12,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Brustpresse-Maschine (fuehrte Trajektorie entlastet Stabilisatoren)",
+            "Kurzhantel-Bankdruecken mit freiem Gelenkwinkel",
+            "Erhoehte Liegestuetze an einer Bank"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Gewicht kontrolliert zur mittleren\/unteren Brust absenken. Ellbogen in einem 45-60 Grad Winkel zum Koerper fuehren. Tiefe Dehnung spueren, danach kraftvoll nach oben herausdruecken ohne die Schulterblaetter zu oeffnen.",
+          "executionNotes" : "Haende auf Schreibtischkante oder stabiles Bett stuetzen. Kontrollierte Exzentrik, kein Hohlkreuz.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Pausiertes Bankdruecken (2 Sekunden Stopp auf der Brust)",
+            "Schraegbankdruecken mit Kurzhanteln",
+            "Dips mit Zusatzgewicht"
+          ],
+          "id" : "E662A185-7757-4203-924E-60ECBD6AE052",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Horizontal Push",
+          "name" : "Stuben Liegestuetze am Schreibtisch \/ Bett",
+          "primaryMusclesDetailed" : [
+            "Pectoralis Major Sternal Head",
+            "Pectoralis Major Clavicular Head"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 6-10 Wiederholungen, 120-150 Sekunden Pause, RIR 1-2. Progression: +2.5 kg bei Erreichen des oberen Rep-Limits.",
+          "secondaryMuscles" : [
+            "Arme (Bizeps & Trizeps)",
+            "Schultern",
+            "Funktioneller Rumpf (Reha)"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Deltoid Anterior Head",
+            "Triceps Brachii Lateral Head",
+            "Triceps Brachii Long Head"
+          ],
+          "setup" : "Auf der Bank positionieren, Augen unter der Hantelstange oder Sitzhoehe auf Brustwarzenhoehe einstellen. Fuesse fest in den Boden druecken (Leg Drive). Schulterblaetter zusammenziehen und fest in die Bank graben.",
+          "stabilizersDetailed" : [
+            "Serratus Anterior",
+            "Rotator Cuff (Infraspinatus)",
+            "Rectus Abdominis"
+          ],
+          "targetMuscle" : "Brust"
+        },
+        "id" : "8E8C46A1-65C2-433E-B414-9ED7ACC7DB81",
+        "notes" : "[JARVIS: Standard Progressive Overload]",
+        "sets" : [
+          {
+            "id" : "321B2296-8CC9-4D25-8E21-362A1A7F575F",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 1,
+            "timestamp" : 815336482.579839,
+            "weightKg" : 0
+          },
+          {
+            "id" : "B3158812-5963-4516-8A0C-8F2EDE1D3C12",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 7,
+            "setNumber" : 2,
+            "timestamp" : 815336482.57984,
+            "weightKg" : 0
+          },
+          {
+            "id" : "3A065D33-781A-4E9A-99E7-43DB1FB1029D",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 7,
+            "setNumber" : 3,
+            "timestamp" : 815336482.57984,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Pull",
+          "commonMistakes" : [
+            "Schultern zu den Ohren hochziehen (Trapezius Pars Descendens Dominanz)",
+            "Schwungholen mit dem Oberkoerper aus der Lendenwirbelsaeule",
+            "Verkuerzter Bewegungsumfang ohne volle Streckung im Latissimus"
+          ],
+          "cues" : [
+            "Ellbogen fuehren die Bewegung, Haende sind nur Haken",
+            "Brustbein aktiv zum Griff oder zur Stange schieben",
+            "Schulterblaetter bewusst in die Gesaesstaschen ziehen"
+          ],
+          "defaultReps" : 12,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 4,
+          "difficulty" : "Mittelstufe",
+          "easierOptions" : [
+            "Unterstuetzte Klimmzug-Maschine mit Gegengewicht",
+            "Latzug am Kabel mit moderatem Gewicht",
+            "Kabelrudern mit Parallelgriff (V-Griff)"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Aus dem Ruecken heraus die Ellbogen kraftvoll nach hinten bzw. unten fuehren. Am Endpunkt der Bewegung die Schulterblaetter fest zusammenpressen und 1 Sekunde halten. Kontrolliert ueber 2-3 Sekunden in die Dehnung zurueckkehren.",
+          "executionNotes" : "Fester Griff an die Tuerzarge. Oberkoerper zuruecklehnen und mit Latissimus und Ruecken heranziehen.",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Zusatzgewicht am Guertel",
+            "1.5 Wiederholungen (halbe Wiederholung im kontrahierten Zustand)",
+            "3 Sekunden Pause am Peak-Kontraktionspunkt"
+          ],
+          "id" : "D77757BE-EC49-4A78-978A-6F265018B62C",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Tuerrahmen Isometrisches Rudern",
+          "primaryMusclesDetailed" : [
+            "Latissimus Dorsi",
+            "Trapezius"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-12 Wiederholungen, 90-120 Sekunden Pause, RIR 1-2. Frequenz: 2x woechentlich.",
+          "secondaryMuscles" : [
+            "Arme (Bizeps & Trizeps)",
+            "Funktioneller Rumpf (Reha)"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Biceps Brachii Long Head",
+            "Biceps Brachii Short Head",
+            "Deltoid Posterior Head",
+            "Brachioradialis"
+          ],
+          "setup" : "Griffe oder Stange mit festem Griff fassen. Brustbein anheben, Schulterblaetter nach hinten unten ziehen und den Rumpf stabilisieren.",
+          "stabilizersDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Upper",
+            "Serratus Anterior"
+          ],
+          "targetMuscle" : "Ruecken \/ Latissimus"
+        },
+        "id" : "68820D26-3A85-461B-9B01-BC99C01974A2",
+        "notes" : "[JARVIS: Standard Progressive Overload]",
+        "sets" : [
+          {
+            "id" : "2A6C7AE5-1601-4AFF-A20B-D8E41E4A308E",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 1,
+            "timestamp" : 815336482.579843,
+            "weightKg" : 0
+          },
+          {
+            "id" : "75B6515F-AA45-4E33-91FD-82FC450E6B60",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 2,
+            "timestamp" : 815336482.579844,
+            "weightKg" : 0
+          },
+          {
+            "id" : "F62DEC0E-EABF-4794-8E4B-B7BC08EC9856",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 3,
+            "timestamp" : 815336482.579844,
+            "weightKg" : 0
+          },
+          {
+            "id" : "6BF374AB-6851-4D26-9F90-589C06F95034",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 4,
+            "timestamp" : 815336482.579844,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Legs",
+          "commonMistakes" : [
+            "Kollabieren der Knie nach innen (Knievalgus)",
+            "Becken rollt sich von der Rueckenlehne ein (Butt Wink)",
+            "Fersen heben vom Trittbrett ab"
+          ],
+          "cues" : [
+            "Boden mit den Fuessen nach aussen spreizen",
+            "Brustbein stolz nach oben richten",
+            "Druck gleichmaessig ueber Fersen und Grosszehenballen verteilen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 75,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Beinpresse 45 Grad mit moderater Tiefe",
+            "Goblet Squat mit leichter Kurzhantel vor der Brust",
+            "Ausfallschritte auf der Stelle ohne Zusatzgewicht"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Gleichzeitig Knie und Huefte beugen. Knie fuehren praezise ueber die zweite Zehe. Absenken bis mindestens 90 Grad Kniebeugung. Ueber die gesamte Fusssohle kraftvoll aufrichten, Knie am Umkehrpunkt nicht durchschlagen.",
+          "executionNotes" : "Hinterer Fuss auf der Bettkante oder Stuhl abgelegt. Tief absenken, vorderes Knie stabil halten.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Pausierte Kniebeugen (2s Stopp im tiefsten Punkt)",
+            "Bulgarian Split Squats mit Kurzhanteln",
+            "Einbeinige Beinpresse zur Beseitigung von Dysbalancen"
+          ],
+          "id" : "AE566642-D11E-4C9C-9B0C-43D6F3B239E4",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Squat",
+          "name" : "Bettkanten Bulgarian Split Squats",
+          "primaryMusclesDetailed" : [
+            "Quadriceps Femoris (Rectus Femoris, Vastus Lateralis, Vastus Medialis)"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-12 Wiederholungen, 90-120 Sekunden Pause, RIR 1-2. Wadenheben: 3 Saetze x 12-15 Reps mit 2s Dehnung.",
+          "secondaryMuscles" : [
+            "Gluteus & Ischios",
+            "Funktioneller Rumpf (Reha)"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Gluteus Maximus",
+            "Adductor Magnus",
+            "Soleus",
+            "Gastrocnemius"
+          ],
+          "setup" : "Fuesse schulterbreit platzieren, Zehen ca. 15 Grad nach aussen gedreht. Bei der Beinpresse Becken fest an die Rueckenlehne pressen (kein Butt-Wink). Rumpf versteifen.",
+          "stabilizersDetailed" : [
+            "Rectus Abdominis",
+            "Erector Spinae",
+            "Gluteus Medius"
+          ],
+          "targetMuscle" : "Quadrizeps & Waden"
+        },
+        "id" : "95C5E57B-F2FA-46D6-B652-DED5504DB3A0",
+        "notes" : "[JARVIS: Standard Progressive Overload]",
+        "sets" : [
+          {
+            "id" : "19368B21-8400-4969-9CB1-B766749D479A",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 1,
+            "timestamp" : 815336482.579846,
+            "weightKg" : 0
+          },
+          {
+            "id" : "3B6038A6-E168-4214-B551-B1177CB3CEE9",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 2,
+            "timestamp" : 815336482.579846,
+            "weightKg" : 0
+          },
+          {
+            "id" : "554BC08D-73E9-436B-A5A1-8C61A1A83941",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 3,
+            "timestamp" : 815336482.579846,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Push",
+          "commonMistakes" : [
+            "Vor- und Zurueckschwingen des Oberkoerpers mit Schwung",
+            "Ellbogen wandern nach vorn waehrend des Curls",
+            "Handgelenke knicken unter Last ab"
+          ],
+          "cues" : [
+            "Ellbogen sind an der Koerperseite festgetackert",
+            "Nur die Unterarme bewegen sich durch den Raum",
+            "Volle Dehnung am Umkehrpunkt zulassen"
+          ],
+          "defaultReps" : 12,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Trizepsdruecken am Kabelzug mit V-Griff",
+            "Dips an der unterstuetzten Maschine mit Gegengewicht"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Unterarme kraftvoll nach unten strecken. Am Endpunkt den Trizeps 1 Sekunde maximal kontrahieren. Kontrolliert bis zu einem 90-Grad Ellbogenwinkel zurueckfuehren.",
+          "executionNotes" : "Auf stabilem Stuhl oder Bettkante abstuetzen. Ellbogen eng nach hinten fuehren, 90-Grad-Winkel nicht ueberschreiten.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Schaedelzertruemmerer (Skull Crushers) mit SZ-Stange",
+            "Trizepsdruecken ueber Kopf am Kabelzug"
+          ],
+          "id" : "9229C731-1AB5-4DDF-99AC-485A8B4F720B",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Stuhl-Dips (Stuben-Trizeps)",
+          "primaryMusclesDetailed" : [
+            "Triceps Brachii Lateral Head",
+            "Triceps Brachii Long Head",
+            "Triceps Brachii Medial Head"
+          ],
+          "programmingGuidance" : "3 Saetze x 10-14 Wiederholungen, 60-75 Sekunden Pause, RIR 1-2.",
+          "secondaryMuscles" : [
+            "Brust",
+            "Schultern"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Anconeus"
+          ],
+          "setup" : "Aufrechter Stand oder stabiler Sitz. Ellbogen eng an den Rippen fixieren und waehrend des gesamten Satzes unbeweglich halten.",
+          "stabilizersDetailed" : [
+            "Rotator Cuff",
+            "Forearm Flexors",
+            "Core"
+          ],
+          "targetMuscle" : "Arme (Bizeps & Trizeps)"
+        },
+        "id" : "06E2513B-8BEE-404D-8543-A6C80CBFF7FD",
+        "notes" : "[JARVIS: Standard Progressive Overload]",
+        "sets" : [
+          {
+            "id" : "6BB8F991-B80C-4A93-9D5E-8DFB00D9D501",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 1,
+            "timestamp" : 815336482.579848,
+            "weightKg" : 0
+          },
+          {
+            "id" : "D93E6FDA-16FC-4021-93BA-E8D1C5625096",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 2,
+            "timestamp" : 815336482.579848,
+            "weightKg" : 0
+          },
+          {
+            "id" : "4931E951-FF5F-4F60-9C2A-9963D4E7BCFD",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 3,
+            "timestamp" : 815336482.579848,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Pull",
+          "commonMistakes" : [
+            "Vor- und Zurueckschwingen des Oberkoerpers mit Schwung",
+            "Ellbogen wandern nach vorn waehrend des Curls",
+            "Handgelenke knicken unter Last ab"
+          ],
+          "cues" : [
+            "Ellbogen sind an der Koerperseite festgetackert",
+            "Nur die Unterarme bewegen sich durch den Raum",
+            "Volle Dehnung am Umkehrpunkt zulassen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Kabelcurls mit gerader Stange",
+            "Kurzhantelcurls sitzend mit Rueckenlehne"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Unterarme kontrolliert nach oben beugen. Am Endpunkt maximale Spitzenkontraktion fuer 1-2 Sekunden halten. Kontrolliert ueber 2-3 Sekunden absenken bis zur vollen Streckung.",
+          "executionNotes" : "Handtuch unter die Oberschenkel oder Tuergriff spannen und 10 Sekunden mit voller Kraft isometrisch ziehen.",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Incline Dumbbell Curls (maximaler Stretch des langen Bizepskopfs)",
+            "Scott-Bank Curls mit 3 Sekunden Exzentrik"
+          ],
+          "id" : "9F3DDC8E-E3F6-4666-A4B1-521DD6583348",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Handtuch-Isometrie Bizepszug",
+          "primaryMusclesDetailed" : [
+            "Biceps Brachii Long Head",
+            "Biceps Brachii Short Head"
+          ],
+          "programmingGuidance" : "3 Saetze x 10-14 Wiederholungen, 60-75 Sekunden Pause, RIR 1-2.",
+          "secondaryMuscles" : [
+            "Ruecken \/ Latissimus"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Brachialis",
+            "Brachioradialis"
+          ],
+          "setup" : "Aufrechter Stand oder stabiler Sitz. Ellbogen eng an den Rippen fixieren und waehrend des gesamten Satzes unbeweglich halten.",
+          "stabilizersDetailed" : [
+            "Rotator Cuff",
+            "Forearm Flexors",
+            "Core"
+          ],
+          "targetMuscle" : "Arme (Bizeps & Trizeps)"
+        },
+        "id" : "3AD8DE8F-8034-4D70-AAE0-DCEDCFCFBB98",
+        "notes" : "[JARVIS: Standard Progressive Overload]",
+        "sets" : [
+          {
+            "id" : "2DC597A5-725A-446B-9973-1396BBF49A96",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 1,
+            "timestamp" : 815336482.579849,
+            "weightKg" : 0
+          },
+          {
+            "id" : "F3B69757-1B26-4487-8D7C-900FCF4B50FF",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 2,
+            "timestamp" : 815336482.57985,
+            "weightKg" : 0
+          },
+          {
+            "id" : "DED7E6B3-C2CB-4A56-91FB-022457B6D349",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 3,
+            "timestamp" : 815336482.57985,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Legs",
+          "commonMistakes" : [
+            "Kollabieren der Knie nach innen (Knievalgus)",
+            "Becken rollt sich von der Rueckenlehne ein (Butt Wink)",
+            "Fersen heben vom Trittbrett ab"
+          ],
+          "cues" : [
+            "Boden mit den Fuessen nach aussen spreizen",
+            "Brustbein stolz nach oben richten",
+            "Druck gleichmaessig ueber Fersen und Grosszehenballen verteilen"
+          ],
+          "defaultReps" : 45,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Beinpresse 45 Grad mit moderater Tiefe",
+            "Goblet Squat mit leichter Kurzhantel vor der Brust",
+            "Ausfallschritte auf der Stelle ohne Zusatzgewicht"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Gleichzeitig Knie und Huefte beugen. Knie fuehren praezise ueber die zweite Zehe. Absenken bis mindestens 90 Grad Kniebeugung. Ueber die gesamte Fusssohle kraftvoll aufrichten, Knie am Umkehrpunkt nicht durchschlagen.",
+          "executionNotes" : "90-Grad Knie- und Hueftwinkel an der Stubenwand. Ruecken komplett flach an die Wand pressen.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Pausierte Kniebeugen (2s Stopp im tiefsten Punkt)",
+            "Bulgarian Split Squats mit Kurzhanteln",
+            "Einbeinige Beinpresse zur Beseitigung von Dysbalancen"
+          ],
+          "id" : "AA38BE2B-A551-42E1-964A-4B94FDA98B17",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Squat",
+          "name" : "Wandsitz Isometrisch (Wall Sit)",
+          "primaryMusclesDetailed" : [
+            "Quadriceps Femoris (Rectus Femoris, Vastus Lateralis, Vastus Medialis)"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-12 Wiederholungen, 90-120 Sekunden Pause, RIR 1-2. Wadenheben: 3 Saetze x 12-15 Reps mit 2s Dehnung.",
+          "secondaryMuscles" : [
+            "Gluteus & Ischios"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Gluteus Maximus",
+            "Adductor Magnus",
+            "Soleus",
+            "Gastrocnemius"
+          ],
+          "setup" : "Fuesse schulterbreit platzieren, Zehen ca. 15 Grad nach aussen gedreht. Bei der Beinpresse Becken fest an die Rueckenlehne pressen (kein Butt-Wink). Rumpf versteifen.",
+          "stabilizersDetailed" : [
+            "Rectus Abdominis",
+            "Erector Spinae",
+            "Gluteus Medius"
+          ],
+          "targetMuscle" : "Quadrizeps & Waden"
+        },
+        "id" : "C314E961-F8F6-4CA1-B1C4-D112AE195103",
+        "notes" : "[JARVIS: Standard Progressive Overload]",
+        "sets" : [
+          {
+            "id" : "62DC9110-72A5-4C1A-8637-2543C03647C0",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 1,
+            "timestamp" : 815336482.579851,
+            "weightKg" : 0
+          },
+          {
+            "id" : "248B1A3B-5B0E-49DE-BE00-874F5BAD2B62",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 2,
+            "timestamp" : 815336482.579851,
+            "weightKg" : 0
+          },
+          {
+            "id" : "470D2A95-3239-43EF-996B-F99D86083E1D",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 3,
+            "timestamp" : 815336482.579852,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 45,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "Direkt auf dem Zimmerboden oder Teppich. Rumpf und Gesaess wie ein Brett spannen, ruhig atmen.",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "93699AB4-833B-42C7-871F-B24E8C444B78",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Teppich Unterarmstuetz (Plank)",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+            "Unterer Ruecken"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "EC4FC4F5-60D2-45BF-B30D-FEE69F811519",
+        "notes" : "[JARVIS: Standard Progressive Overload]",
+        "sets" : [
+          {
+            "id" : "9523097A-3687-4085-A3BE-4B51E7147FD1",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 1,
+            "timestamp" : 815336482.579853,
+            "weightKg" : 0
+          },
+          {
+            "id" : "DD511461-1C98-4F70-AB6F-B1CF9E7F670D",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 2,
+            "timestamp" : 815336482.579853,
+            "weightKg" : 0
+          },
+          {
+            "id" : "F4F74AB0-B6EE-499A-8627-67AE805B9494",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 3,
+            "timestamp" : 815336482.579853,
+            "weightKg" : 0
+          }
+        ]
+      }
+    ],
+    "id" : "4F6E48A0-BB1C-4096-B75F-3101AB662135",
+    "isEarlyTermination" : true,
+    "isPaused" : false,
+    "isSyncedToCalendar" : true,
+    "isSyncedToHealthKit" : true,
+    "pausedIntervals" : 0,
+    "perceivedExertionRPE" : 6,
+    "prCount" : 0,
+    "somaticNotes" : "Spontanes Workout gewaehlt. Ausreichende Regenerationskapazitaet verfuegbar. Standard-Lasten freigegeben.",
+    "startTime" : 815336482.579857,
+    "templateId" : "D5E872F3-9FB4-4704-846C-B0D7FAFC99B7",
+    "terminationReason" : "Systemische Erschoepfung",
+    "title" : "Stuben- & Zimmer-Workout (Minimal-Raum)"
+  },
+  {
+    "debriefRecord" : {
+      "achievedMetric" : "0 km",
+      "coachResult" : {
+        "actionSteps" : [
+          "Dienstliche Pflicht ohne kognitive Reibung wahrnehmen.",
+          "Erbrachte Teilsaetze bleiben im System gespeichert.",
+          "Naechster regulärer Block wird am Folgetag absolviert."
+        ],
+        "diagnoseText" : "Die Einheit wurde durch aeussere militaerische Pflichten (Dienstanordnung, Antreten, Stubeninspektion, Zeitnot) unterbrochen. Es liegt kein physiologisches Versagen vor.",
+        "immediatePrescription" : "Kein Nachholzwang am Abend. Die erbrachte Teilleistung (0 km) wird vollstaendig in den Muskel-Index und das Banister-Modell eingespeist.",
+        "nextWorkoutConstraint" : "Naechste planmaessige Einheit wird ohne Strafpunkte und ohne zusaetzliche Lastverschiebungen fortgesetzt.",
+        "paceOrLoadCap" : "Regulaere Vorgaben ohne Einschraenkung",
+        "physiologicalRationale" : "Dienstliche Prioritaeten bilden den unverrueckbaren Existenzanker gemaess Global Operating System. Teilleistungen werden vollwertig verarbeitet.",
+        "scenarioBadge" : "DIENST-UNTERBRECHUNG",
+        "scenarioId" : "SCENARIO_6_ADMINISTRATIVE_MILITARY_DUTY",
+        "scenarioNumber" : 6,
+        "scenarioTitle" : "Szenario 6: Dienstlicher Lageabbruch (Bundeswehr Dienstbetrieb)"
+      },
+      "daysSinceLastWorkout" : 1,
+      "id" : "17CCBAD2-EFB6-4B3B-AE23-DF17DCDD3961",
+      "notes" : "",
+      "nutritionHydrationRating" : 3,
+      "pacingDisciplineRating" : 4,
+      "perceivedExertionRPE" : 3,
+      "plannedMetric" : "0 km",
+      "plannedVsAchievedRatio" : 0.1,
+      "primaryReason" : "Dienstliche \/ Externe Unterbrechung (Spiess, Alarm, Dienstbetrieb)",
+      "sleepRecoveryRating" : 1,
+      "timestamp" : 812493478.680681
+    },
+    "endTime" : 812493478.692,
+    "estimatedCaloriesBurned" : 0,
+    "exercises" : [
+      {
+        "exercise" : {
+          "categoryType" : "Push",
+          "commonMistakes" : [
+            "Ellbogen 90 Grad nach aussen abspreizen (Gefahr fuer Schulter-Impingement)",
+            "Abfedern des Gewichts auf dem Brustkorb",
+            "Schultern waehrend des Drueckens vom Polster nach vorn schieben"
+          ],
+          "cues" : [
+            "Boden ueber die Fersen in den Raum druecken",
+            "Stange in den Haenden gedanklich zusammenbiegen",
+            "Brustbein stolz aufgerichtet lassen"
+          ],
+          "defaultReps" : 12,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Brustpresse-Maschine (fuehrte Trajektorie entlastet Stabilisatoren)",
+            "Kurzhantel-Bankdruecken mit freiem Gelenkwinkel",
+            "Erhoehte Liegestuetze an einer Bank"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Gewicht kontrolliert zur mittleren\/unteren Brust absenken. Ellbogen in einem 45-60 Grad Winkel zum Koerper fuehren. Tiefe Dehnung spueren, danach kraftvoll nach oben herausdruecken ohne die Schulterblaetter zu oeffnen.",
+          "executionNotes" : "Haende auf Schreibtischkante oder stabiles Bett stuetzen. Kontrollierte Exzentrik, kein Hohlkreuz.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Pausiertes Bankdruecken (2 Sekunden Stopp auf der Brust)",
+            "Schraegbankdruecken mit Kurzhanteln",
+            "Dips mit Zusatzgewicht"
+          ],
+          "id" : "E662A185-7757-4203-924E-60ECBD6AE052",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Horizontal Push",
+          "name" : "Stuben Liegestuetze am Schreibtisch \/ Bett",
+          "primaryMusclesDetailed" : [
+            "Pectoralis Major Sternal Head",
+            "Pectoralis Major Clavicular Head"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 6-10 Wiederholungen, 120-150 Sekunden Pause, RIR 1-2. Progression: +2.5 kg bei Erreichen des oberen Rep-Limits.",
+          "secondaryMuscles" : [
+            "Arme (Bizeps & Trizeps)",
+            "Schultern",
+            "Funktioneller Rumpf (Reha)"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Deltoid Anterior Head",
+            "Triceps Brachii Lateral Head",
+            "Triceps Brachii Long Head"
+          ],
+          "setup" : "Auf der Bank positionieren, Augen unter der Hantelstange oder Sitzhoehe auf Brustwarzenhoehe einstellen. Fuesse fest in den Boden druecken (Leg Drive). Schulterblaetter zusammenziehen und fest in die Bank graben.",
+          "stabilizersDetailed" : [
+            "Serratus Anterior",
+            "Rotator Cuff (Infraspinatus)",
+            "Rectus Abdominis"
+          ],
+          "targetMuscle" : "Brust"
+        },
+        "id" : "02B5F925-C297-4235-B191-2F32FE0AE937",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "38A44AE5-6700-4D1F-8A07-D9C7DF220313",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 1,
+            "timestamp" : 812490897.766674,
+            "weightKg" : 0
+          },
+          {
+            "id" : "890D2B7B-3156-4C77-8DFF-F85CB3315976",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 2,
+            "timestamp" : 812490897.766675,
+            "weightKg" : 0
+          },
+          {
+            "id" : "9ECC170D-F515-40C7-8F8F-2D2BBD08021B",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 3,
+            "timestamp" : 812490897.766676,
+            "weightKg" : 0
+          },
+          {
+            "id" : "6986BF2C-2D54-40DF-B14E-AF995D387FAF",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 4,
+            "timestamp" : 812490959.2613,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Pull",
+          "commonMistakes" : [
+            "Schultern zu den Ohren hochziehen (Trapezius Pars Descendens Dominanz)",
+            "Schwungholen mit dem Oberkoerper aus der Lendenwirbelsaeule",
+            "Verkuerzter Bewegungsumfang ohne volle Streckung im Latissimus"
+          ],
+          "cues" : [
+            "Ellbogen fuehren die Bewegung, Haende sind nur Haken",
+            "Brustbein aktiv zum Griff oder zur Stange schieben",
+            "Schulterblaetter bewusst in die Gesaesstaschen ziehen"
+          ],
+          "defaultReps" : 12,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 4,
+          "difficulty" : "Mittelstufe",
+          "easierOptions" : [
+            "Unterstuetzte Klimmzug-Maschine mit Gegengewicht",
+            "Latzug am Kabel mit moderatem Gewicht",
+            "Kabelrudern mit Parallelgriff (V-Griff)"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Aus dem Ruecken heraus die Ellbogen kraftvoll nach hinten bzw. unten fuehren. Am Endpunkt der Bewegung die Schulterblaetter fest zusammenpressen und 1 Sekunde halten. Kontrolliert ueber 2-3 Sekunden in die Dehnung zurueckkehren.",
+          "executionNotes" : "Fester Griff an die Tuerzarge. Oberkoerper zuruecklehnen und mit Latissimus und Ruecken heranziehen.",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Zusatzgewicht am Guertel",
+            "1.5 Wiederholungen (halbe Wiederholung im kontrahierten Zustand)",
+            "3 Sekunden Pause am Peak-Kontraktionspunkt"
+          ],
+          "id" : "D77757BE-EC49-4A78-978A-6F265018B62C",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Tuerrahmen Isometrisches Rudern",
+          "primaryMusclesDetailed" : [
+            "Latissimus Dorsi",
+            "Trapezius"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-12 Wiederholungen, 90-120 Sekunden Pause, RIR 1-2. Frequenz: 2x woechentlich.",
+          "secondaryMuscles" : [
+            "Arme (Bizeps & Trizeps)",
+            "Funktioneller Rumpf (Reha)"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Biceps Brachii Long Head",
+            "Biceps Brachii Short Head",
+            "Deltoid Posterior Head",
+            "Brachioradialis"
+          ],
+          "setup" : "Griffe oder Stange mit festem Griff fassen. Brustbein anheben, Schulterblaetter nach hinten unten ziehen und den Rumpf stabilisieren.",
+          "stabilizersDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Upper",
+            "Serratus Anterior"
+          ],
+          "targetMuscle" : "Ruecken \/ Latissimus"
+        },
+        "id" : "24C8995B-0B21-41B3-9980-12E2654F6C9A",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "36503B2E-AEEE-43E0-B384-663B53C5DAB1",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 1,
+            "timestamp" : 812490897.766682,
+            "weightKg" : 0
+          },
+          {
+            "id" : "9E3A05BC-A34E-4BDB-B968-F9F82E53E22C",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 2,
+            "timestamp" : 812490897.766683,
+            "weightKg" : 0
+          },
+          {
+            "id" : "D3FCDB38-B7CE-41AC-B172-FAE517042913",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 3,
+            "timestamp" : 812490897.766683,
+            "weightKg" : 0
+          },
+          {
+            "id" : "63CF4346-5185-413C-A9AE-3E347067273E",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 4,
+            "timestamp" : 812490897.766684,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Legs",
+          "commonMistakes" : [
+            "Kollabieren der Knie nach innen (Knievalgus)",
+            "Becken rollt sich von der Rueckenlehne ein (Butt Wink)",
+            "Fersen heben vom Trittbrett ab"
+          ],
+          "cues" : [
+            "Boden mit den Fuessen nach aussen spreizen",
+            "Brustbein stolz nach oben richten",
+            "Druck gleichmaessig ueber Fersen und Grosszehenballen verteilen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 75,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Beinpresse 45 Grad mit moderater Tiefe",
+            "Goblet Squat mit leichter Kurzhantel vor der Brust",
+            "Ausfallschritte auf der Stelle ohne Zusatzgewicht"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Gleichzeitig Knie und Huefte beugen. Knie fuehren praezise ueber die zweite Zehe. Absenken bis mindestens 90 Grad Kniebeugung. Ueber die gesamte Fusssohle kraftvoll aufrichten, Knie am Umkehrpunkt nicht durchschlagen.",
+          "executionNotes" : "Hinterer Fuss auf der Bettkante oder Stuhl abgelegt. Tief absenken, vorderes Knie stabil halten.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Pausierte Kniebeugen (2s Stopp im tiefsten Punkt)",
+            "Bulgarian Split Squats mit Kurzhanteln",
+            "Einbeinige Beinpresse zur Beseitigung von Dysbalancen"
+          ],
+          "id" : "AE566642-D11E-4C9C-9B0C-43D6F3B239E4",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Squat",
+          "name" : "Bettkanten Bulgarian Split Squats",
+          "primaryMusclesDetailed" : [
+            "Quadriceps Femoris (Rectus Femoris, Vastus Lateralis, Vastus Medialis)"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-12 Wiederholungen, 90-120 Sekunden Pause, RIR 1-2. Wadenheben: 3 Saetze x 12-15 Reps mit 2s Dehnung.",
+          "secondaryMuscles" : [
+            "Gluteus & Ischios",
+            "Funktioneller Rumpf (Reha)"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Gluteus Maximus",
+            "Adductor Magnus",
+            "Soleus",
+            "Gastrocnemius"
+          ],
+          "setup" : "Fuesse schulterbreit platzieren, Zehen ca. 15 Grad nach aussen gedreht. Bei der Beinpresse Becken fest an die Rueckenlehne pressen (kein Butt-Wink). Rumpf versteifen.",
+          "stabilizersDetailed" : [
+            "Rectus Abdominis",
+            "Erector Spinae",
+            "Gluteus Medius"
+          ],
+          "targetMuscle" : "Quadrizeps & Waden"
+        },
+        "id" : "2C61EFE3-0686-47D2-A6D2-4BF88D2F044B",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "45303BDA-2011-413A-837B-B0F1200C9E92",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 1,
+            "timestamp" : 812490897.766688,
+            "weightKg" : 0
+          },
+          {
+            "id" : "0490958B-2155-4CAB-8AB1-08024CCB52FA",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 2,
+            "timestamp" : 812490897.766689,
+            "weightKg" : 0
+          },
+          {
+            "id" : "FED22849-C5D3-40AE-866A-17C6926186CF",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 3,
+            "timestamp" : 812490897.766689,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Push",
+          "commonMistakes" : [
+            "Vor- und Zurueckschwingen des Oberkoerpers mit Schwung",
+            "Ellbogen wandern nach vorn waehrend des Curls",
+            "Handgelenke knicken unter Last ab"
+          ],
+          "cues" : [
+            "Ellbogen sind an der Koerperseite festgetackert",
+            "Nur die Unterarme bewegen sich durch den Raum",
+            "Volle Dehnung am Umkehrpunkt zulassen"
+          ],
+          "defaultReps" : 12,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Trizepsdruecken am Kabelzug mit V-Griff",
+            "Dips an der unterstuetzten Maschine mit Gegengewicht"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Unterarme kraftvoll nach unten strecken. Am Endpunkt den Trizeps 1 Sekunde maximal kontrahieren. Kontrolliert bis zu einem 90-Grad Ellbogenwinkel zurueckfuehren.",
+          "executionNotes" : "Auf stabilem Stuhl oder Bettkante abstuetzen. Ellbogen eng nach hinten fuehren, 90-Grad-Winkel nicht ueberschreiten.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Schaedelzertruemmerer (Skull Crushers) mit SZ-Stange",
+            "Trizepsdruecken ueber Kopf am Kabelzug"
+          ],
+          "id" : "9229C731-1AB5-4DDF-99AC-485A8B4F720B",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Stuhl-Dips (Stuben-Trizeps)",
+          "primaryMusclesDetailed" : [
+            "Triceps Brachii Lateral Head",
+            "Triceps Brachii Long Head",
+            "Triceps Brachii Medial Head"
+          ],
+          "programmingGuidance" : "3 Saetze x 10-14 Wiederholungen, 60-75 Sekunden Pause, RIR 1-2.",
+          "secondaryMuscles" : [
+            "Brust",
+            "Schultern"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Anconeus"
+          ],
+          "setup" : "Aufrechter Stand oder stabiler Sitz. Ellbogen eng an den Rippen fixieren und waehrend des gesamten Satzes unbeweglich halten.",
+          "stabilizersDetailed" : [
+            "Rotator Cuff",
+            "Forearm Flexors",
+            "Core"
+          ],
+          "targetMuscle" : "Arme (Bizeps & Trizeps)"
+        },
+        "id" : "3E7CD7A4-1552-46B7-BAE2-9970848B0C58",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "8FCD7753-C17A-43CE-B1BA-26A8AC333874",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 1,
+            "timestamp" : 812490897.766692,
+            "weightKg" : 0
+          },
+          {
+            "id" : "ABA8CC90-717B-4B2B-8631-E4F151E24A15",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 2,
+            "timestamp" : 812490897.766692,
+            "weightKg" : 0
+          },
+          {
+            "id" : "40FB271E-BFD6-4776-9384-2B1F7FE7383B",
+            "isCompleted" : true,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 12,
+            "setNumber" : 3,
+            "timestamp" : 812490897.766693,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Pull",
+          "commonMistakes" : [
+            "Vor- und Zurueckschwingen des Oberkoerpers mit Schwung",
+            "Ellbogen wandern nach vorn waehrend des Curls",
+            "Handgelenke knicken unter Last ab"
+          ],
+          "cues" : [
+            "Ellbogen sind an der Koerperseite festgetackert",
+            "Nur die Unterarme bewegen sich durch den Raum",
+            "Volle Dehnung am Umkehrpunkt zulassen"
+          ],
+          "defaultReps" : 10,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Kabelcurls mit gerader Stange",
+            "Kurzhantelcurls sitzend mit Rueckenlehne"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Unterarme kontrolliert nach oben beugen. Am Endpunkt maximale Spitzenkontraktion fuer 1-2 Sekunden halten. Kontrolliert ueber 2-3 Sekunden absenken bis zur vollen Streckung.",
+          "executionNotes" : "Handtuch unter die Oberschenkel oder Tuergriff spannen und 10 Sekunden mit voller Kraft isometrisch ziehen.",
+          "force" : "Pull",
+          "harderOptions" : [
+            "Incline Dumbbell Curls (maximaler Stretch des langen Bizepskopfs)",
+            "Scott-Bank Curls mit 3 Sekunden Exzentrik"
+          ],
+          "id" : "9F3DDC8E-E3F6-4666-A4B1-521DD6583348",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Handtuch-Isometrie Bizepszug",
+          "primaryMusclesDetailed" : [
+            "Biceps Brachii Long Head",
+            "Biceps Brachii Short Head"
+          ],
+          "programmingGuidance" : "3 Saetze x 10-14 Wiederholungen, 60-75 Sekunden Pause, RIR 1-2.",
+          "secondaryMuscles" : [
+            "Ruecken \/ Latissimus"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Brachialis",
+            "Brachioradialis"
+          ],
+          "setup" : "Aufrechter Stand oder stabiler Sitz. Ellbogen eng an den Rippen fixieren und waehrend des gesamten Satzes unbeweglich halten.",
+          "stabilizersDetailed" : [
+            "Rotator Cuff",
+            "Forearm Flexors",
+            "Core"
+          ],
+          "targetMuscle" : "Arme (Bizeps & Trizeps)"
+        },
+        "id" : "C3C93847-6CC6-453C-9A78-AC803187B474",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "4881E3BB-9926-4CA8-855A-CEDB45022D73",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 1,
+            "timestamp" : 812490897.766695,
+            "weightKg" : 0
+          },
+          {
+            "id" : "BD6198D5-06ED-4391-BA3D-26A5277C35C7",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 2,
+            "timestamp" : 812490897.766696,
+            "weightKg" : 0
+          },
+          {
+            "id" : "90346360-888B-49E8-8AB3-D3E9DC987FE7",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 10,
+            "setNumber" : 3,
+            "timestamp" : 812490897.766696,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Legs",
+          "commonMistakes" : [
+            "Kollabieren der Knie nach innen (Knievalgus)",
+            "Becken rollt sich von der Rueckenlehne ein (Butt Wink)",
+            "Fersen heben vom Trittbrett ab"
+          ],
+          "cues" : [
+            "Boden mit den Fuessen nach aussen spreizen",
+            "Brustbein stolz nach oben richten",
+            "Druck gleichmaessig ueber Fersen und Grosszehenballen verteilen"
+          ],
+          "defaultReps" : 45,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Beinpresse 45 Grad mit moderater Tiefe",
+            "Goblet Squat mit leichter Kurzhantel vor der Brust",
+            "Ausfallschritte auf der Stelle ohne Zusatzgewicht"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Gleichzeitig Knie und Huefte beugen. Knie fuehren praezise ueber die zweite Zehe. Absenken bis mindestens 90 Grad Kniebeugung. Ueber die gesamte Fusssohle kraftvoll aufrichten, Knie am Umkehrpunkt nicht durchschlagen.",
+          "executionNotes" : "90-Grad Knie- und Hueftwinkel an der Stubenwand. Ruecken komplett flach an die Wand pressen.",
+          "force" : "Push",
+          "harderOptions" : [
+            "Pausierte Kniebeugen (2s Stopp im tiefsten Punkt)",
+            "Bulgarian Split Squats mit Kurzhanteln",
+            "Einbeinige Beinpresse zur Beseitigung von Dysbalancen"
+          ],
+          "id" : "AA38BE2B-A551-42E1-964A-4B94FDA98B17",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Grunduebung (Compound)",
+          "movementPattern" : "Squat",
+          "name" : "Wandsitz Isometrisch (Wall Sit)",
+          "primaryMusclesDetailed" : [
+            "Quadriceps Femoris (Rectus Femoris, Vastus Lateralis, Vastus Medialis)"
+          ],
+          "programmingGuidance" : "3-4 Saetze x 8-12 Wiederholungen, 90-120 Sekunden Pause, RIR 1-2. Wadenheben: 3 Saetze x 12-15 Reps mit 2s Dehnung.",
+          "secondaryMuscles" : [
+            "Gluteus & Ischios"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Gluteus Maximus",
+            "Adductor Magnus",
+            "Soleus",
+            "Gastrocnemius"
+          ],
+          "setup" : "Fuesse schulterbreit platzieren, Zehen ca. 15 Grad nach aussen gedreht. Bei der Beinpresse Becken fest an die Rueckenlehne pressen (kein Butt-Wink). Rumpf versteifen.",
+          "stabilizersDetailed" : [
+            "Rectus Abdominis",
+            "Erector Spinae",
+            "Gluteus Medius"
+          ],
+          "targetMuscle" : "Quadrizeps & Waden"
+        },
+        "id" : "4C4CFAC5-C375-4CF5-AE5D-D7CB91F204A8",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "C962EA4F-34D5-40A4-B3AA-206E10F147E5",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 1,
+            "timestamp" : 812490897.7667,
+            "weightKg" : 0
+          },
+          {
+            "id" : "46A2FEFA-1BFB-4583-8E2E-6BB37FC445A5",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 2,
+            "timestamp" : 812490897.766701,
+            "weightKg" : 0
+          },
+          {
+            "id" : "AF641FDD-2344-48E7-965E-EE5892DA0C31",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 3,
+            "timestamp" : 812490897.766701,
+            "weightKg" : 0
+          }
+        ]
+      },
+      {
+        "exercise" : {
+          "categoryType" : "Core",
+          "commonMistakes" : [
+            "Pressatmung (Valsalva-Manover) erhoeht gefaehrlich den intraabdominalen Druck",
+            "Durchhaengen der Lendenwirbelsaeule ins Hohlkreuz",
+            "Schultern verkrampfen nach oben"
+          ],
+          "cues" : [
+            "Bauchnabel sanft nach innen oben saugen",
+            "Rumpf stabilisieren wie ein solides Korsett",
+            "Gleichmaessig und kontrolliert weiteratmen"
+          ],
+          "defaultReps" : 45,
+          "defaultRestSeconds" : 60,
+          "defaultSets" : 3,
+          "difficulty" : "Anfaenger",
+          "easierOptions" : [
+            "Unterarmstuetz auf den Knien",
+            "Bird-Dog mit kuerzerer Haltezeit (1-2 Sekunden)"
+          ],
+          "equipment" : "Stube & Zimmer (Tuerrahmen, Stuhl, Bett)",
+          "execution" : "Isometrische Rumpfspannung aufbauen. Sanft und kontinuierlich in den Brustkorb weiteratmen. Die Bauchdecke nicht nach aussen pressen (keine Druckspitzen im Beckenboden).",
+          "executionNotes" : "Direkt auf dem Zimmerboden oder Teppich. Rumpf und Gesaess wie ein Brett spannen, ruhig atmen.",
+          "force" : "Static",
+          "harderOptions" : [
+            "Pallof Press mit Vor- und Rueckschritten",
+            "Plank mit alternierendem Armheben",
+            "Bird-Dog mit Gewichtsmanschetten"
+          ],
+          "id" : "93699AB4-833B-42C7-871F-B24E8C444B78",
+          "isBWKRehaSafe" : true,
+          "isContraindicated" : false,
+          "isCustom" : false,
+          "mechanics" : "Isolationsuebung (Isolation)",
+          "movementPattern" : "Horizontal Pull",
+          "name" : "Teppich Unterarmstuetz (Plank)",
+          "primaryMusclesDetailed" : [
+            "Transversus Abdominis",
+            "Multifidi"
+          ],
+          "programmingGuidance" : "3-4 Durchgaenge x 30-45 Sekunden isometrisch, 45 Sekunden Pause. BWK Ulm Reha: Goldstandard fuer postoperative Bauchwand- und LWS-Stabilitaet.",
+          "secondaryMuscles" : [
+            "Unterer Ruecken"
+          ],
+          "secondaryMusclesDetailed" : [
+            "Rectus Abdominis",
+            "Obliques Internus & Externus"
+          ],
+          "setup" : "Auf der Matte in Bauch- oder Rueckenlage positionieren. Wirbelsaeule in eine vollstaendig neutrale Position bringen. Beckenboden aktivieren.",
+          "stabilizersDetailed" : [
+            "Gluteus Medius",
+            "Quadratus Lumborum",
+            "Diaphragma"
+          ],
+          "targetMuscle" : "Funktioneller Rumpf (Reha)"
+        },
+        "id" : "C06661E4-A661-4265-B0D6-6F67A56DEF6E",
+        "notes" : "",
+        "sets" : [
+          {
+            "id" : "DE1F0C45-309B-433D-8685-1401C8591BA1",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 1,
+            "timestamp" : 812490897.766703,
+            "weightKg" : 0
+          },
+          {
+            "id" : "B54F9440-DF86-44C3-AF9D-78C0A53362B5",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 2,
+            "timestamp" : 812490897.766703,
+            "weightKg" : 0
+          },
+          {
+            "id" : "FEE2FDEA-3152-4C84-A9F3-E86825531F7C",
+            "isCompleted" : false,
+            "isPR" : false,
+            "isTimeBased" : false,
+            "isWarmup" : false,
+            "reps" : 45,
+            "setNumber" : 3,
+            "timestamp" : 812490897.766704,
+            "weightKg" : 0
+          }
+        ]
+      }
+    ],
+    "id" : "BEA3C434-285C-4A3E-8265-51FE7AEA75E6",
+    "isEarlyTermination" : true,
+    "isPaused" : false,
+    "isSyncedToCalendar" : false,
+    "isSyncedToHealthKit" : false,
+    "pausedIntervals" : 0,
+    "perceivedExertionRPE" : 3,
+    "prCount" : 0,
+    "somaticNotes" : "Die Einheit wurde durch aeussere militaerische Pflichten (Dienstanordnung, Antreten, Stubeninspektion, Zeitnot) unterbrochen. Es liegt kein physiologisches Versagen vor.",
+    "startTime" : 812490897.766705,
+    "templateId" : "D5E872F3-9FB4-4704-846C-B0D7FAFC99B7",
+    "terminationReason" : "Dienstliche \/ Externe Unterbrechung (Spiess, Alarm, Dienstbetrieb)",
+    "title" : "Stuben- & Zimmer-Workout (Minimal-Raum)"
+  }
+]
