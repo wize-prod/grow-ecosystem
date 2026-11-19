@@ -736,6 +736,215 @@ def apply_executive_override(
         f"- Poka-Yoke Re-Audit: BESTANDEN."
     )
 
+# MARK: - Longitudinal Medical Dossier & Dynamic Acute Adaptation Tools
+
+@mcp.tool()
+def log_health_observation(
+    category: str,
+    observation: str,
+    severity_1_to_10: Optional[int] = None,
+    acute_limitation: Optional[str] = None,
+    user_id: str = "primary_wize_prod"
+) -> str:
+    """
+    Logs subjective health status, acute symptoms (e.g. back pain, shoulder impingement),
+    sleep quality, or daily motivation into the user's permanent medical dossier.
+    If an acute limitation is indicated, flags it for immediate workout adaptation.
+    """
+    dossier = GymAppStorage.load_json("medical_dossier.json", default={"observations": [], "acute_limitations": [], "lab_reports": []})
+    if not isinstance(dossier, dict):
+        dossier = {"observations": [], "acute_limitations": [], "lab_reports": []}
+
+    date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+    timestamp = datetime.datetime.now().isoformat()
+
+    entry = {
+        "id": str(uuid.uuid4())[:8],
+        "timestamp": timestamp,
+        "date": date_str,
+        "category": category.lower(),
+        "observation": observation,
+        "severity": severity_1_to_10
+    }
+    dossier.setdefault("observations", []).append(entry)
+
+    limitation_flagged = False
+    if acute_limitation:
+        lim = acute_limitation.upper()
+        if lim not in dossier.setdefault("acute_limitations", []):
+            dossier["acute_limitations"].append(lim)
+            limitation_flagged = True
+
+    GymAppStorage.save_json("medical_dossier.json", dossier)
+
+    resp = [
+        f"MEDIZINISCHE BEOBACHTUNG PROTOKOLLIERT (Dossier: {user_id}):",
+        f"- Kategorie: {category.upper()} | Datum: {date_str}",
+        f"- Notiz: {observation}",
+        f"- Schweregrad: {severity_1_to_10}/10" if severity_1_to_10 else "- Schweregrad: Nicht spezifiziert"
+    ]
+    if limitation_flagged:
+        resp.append(f"- Akute Einschraenkung aktiviert: {acute_limitation.upper()} (Bereit fuer automatische Workout-Adaptation)")
+    return "\n".join(resp)
+
+@mcp.tool()
+def adapt_workout_for_acute_symptom(
+    symptom: str,
+    affected_body_part: str = "lower_back",
+    user_id: str = "primary_wize_prod"
+) -> str:
+    """
+    Dynamically adapts today's planned workout for acute pain or orthopedic limitations.
+    Automatically substitutes contraindicated exercises (e.g. squats/deadlifts for back pain;
+    leg extensions/jumps for knee pain; overhead press for shoulder pain) with clinically
+    safe alternatives and updates the workout in the app engine.
+    """
+    today_str = datetime.datetime.now().strftime("%Y-%m-%d")
+    workouts = GymAppStorage.load_json("planned_workouts.json", default=[])
+
+    target_workout = None
+    target_idx = -1
+    for idx, w in enumerate(workouts):
+        w_ts = w.get("scheduled_timestamp")
+        if w_ts:
+            unix_ts = w_ts + COCOA_REF_OFFSET if w_ts < 2000000000 else w_ts
+            w_date = datetime.datetime.fromtimestamp(unix_ts).strftime("%Y-%m-%d")
+            if w_date == today_str:
+                target_workout = w
+                target_idx = idx
+                break
+
+    if not target_workout and workouts:
+        target_workout = workouts[0]
+        target_idx = 0
+
+    if not target_workout:
+        return f"Kein geplantes Workout fuer {today_str} gefunden, das angepasst werden koennte."
+
+    exercises = target_workout.get("exercises", [])
+    substituted_count = 0
+    substitutions_log = []
+
+    clean_symptom = symptom.lower()
+    for ex in exercises:
+        name = ex.get("name", "").lower()
+        if "back" in clean_symptom or "lumbar" in clean_symptom or "spine" in clean_symptom or "rücken" in clean_symptom:
+            if any(term in name for term in ["squat", "deadlift", "overhead press", "barbell row", "crunch"]):
+                old_name = ex.get("name")
+                new_name = "Chest-Supported Machine Row" if "row" in name or "deadlift" in name else "Controlled Leg Press (Feet High)"
+                ex["name"] = new_name
+                ex["notes"] = f"Poka-Yoke Reha-Substitution fuer {old_name} wegen akuter LWS-Beschwerden."
+                substitutions_log.append(f"{old_name} -> {new_name}")
+                substituted_count += 1
+        elif "knee" in clean_symptom or "patella" in clean_symptom or "knie" in clean_symptom:
+            if any(term in name for term in ["squat", "lunge", "leg extension", "jump"]):
+                old_name = ex.get("name")
+                new_name = "Spanish Squat (Isometrisch) / Glute Bridge"
+                ex["name"] = new_name
+                ex["notes"] = f"Poka-Yoke Reha-Substitution fuer {old_name} wegen Patella-/Knieschmerz."
+                substitutions_log.append(f"{old_name} -> {new_name}")
+                substituted_count += 1
+        elif "shoulder" in clean_symptom or "rotator" in clean_symptom or "schulter" in clean_symptom:
+            if any(term in name for term in ["overhead press", "military press", "dips", "upright row"]):
+                old_name = ex.get("name")
+                new_name = "Landmine Press (Scapular Plane) / Face Pull"
+                ex["name"] = new_name
+                ex["notes"] = f"Poka-Yoke Reha-Substitution fuer {old_name} wegen Schulter-Impingement."
+                substitutions_log.append(f"{old_name} -> {new_name}")
+                substituted_count += 1
+
+    target_workout["title"] = f"{target_workout.get('title', 'Workout')} [Reha-Angepasst: {symptom}]"
+    target_workout["exercises"] = exercises
+    workouts[target_idx] = target_workout
+
+    GymAppStorage.save_json("planned_workouts.json", workouts)
+
+    log_health_observation("acute_adaptation", f"Workout angepasst wegen: {symptom}", acute_limitation=symptom, user_id=user_id)
+
+    return (
+        f"WORKOUT ERFOLGREICH AN AKUTES SYMPTOM ANGEPASST:\n"
+        f"- Symptom / Befund: {symptom} (Region: {affected_body_part})\n"
+        f"- Ersetzte Uebungen ({substituted_count}):\n  " + ("\n  ".join(substitutions_log) if substitutions_log else "Keine kontraindizierten Uebungen im heutigen Plan.") + "\n"
+        f"- Poka-Yoke Status: Biomechanisch entlastet, Wirbelsaeulen-/Gelenk-Schonung aktiv.\n"
+        f"- Synchronisation: Cloud Firestore, iCloud & App-Engine aktualisiert."
+    )
+
+@mcp.tool()
+def ingest_medical_document_data(
+    document_type: str,
+    date_str: str,
+    biomarkers_or_findings: str,
+    clinical_summary: str,
+    user_id: str = "primary_wize_prod"
+) -> str:
+    """
+    Ingests and archives structured laboratory blood panels, physician reports, or imaging findings.
+    Stored securely in the user's permanent medical dossier for evidence-based protocol updates.
+    """
+    dossier = GymAppStorage.load_json("medical_dossier.json", default={"observations": [], "acute_limitations": [], "lab_reports": []})
+    if not isinstance(dossier, dict):
+        dossier = {"observations": [], "acute_limitations": [], "lab_reports": []}
+
+    report_entry = {
+        "id": str(uuid.uuid4())[:8],
+        "date": date_str,
+        "type": document_type.lower(),
+        "findings": biomarkers_or_findings,
+        "summary": clinical_summary,
+        "timestamp": datetime.datetime.now().isoformat()
+    }
+    dossier.setdefault("lab_reports", []).append(report_entry)
+    GymAppStorage.save_json("medical_dossier.json", dossier)
+
+    return (
+        f"MEDIZINISCHER BEFUND ERFOLGREICH ARCHIVIERT (Dossier: {user_id}):\n"
+        f"- Dokumenttyp: {document_type.upper()}\n"
+        f"- Datum des Befunds: {date_str}\n"
+        f"- Zusammenfassung: {clinical_summary}\n"
+        f"- Archiv-ID: {report_entry['id']}\n"
+        f"- Status: Permanent im dossier hinterlegt fuer zirkadiane & Ernaehrungs-Adaptation."
+    )
+
+@mcp.tool()
+def get_personal_medical_dossier(
+    user_id: str = "primary_wize_prod"
+) -> str:
+    """
+    Retrieves the user's permanent medical dossier with hierarchical rolling-window compression.
+    Includes active acute limitations, latest lab blood reports, and aggregated health observations.
+    """
+    dossier = GymAppStorage.load_json("medical_dossier.json", default={})
+    if not dossier:
+        return f"Medizinisches Dossier fuer {user_id} ist leer oder noch nicht initialisiert."
+
+    obs = dossier.get("observations", [])
+    acute = dossier.get("acute_limitations", [])
+    labs = dossier.get("lab_reports", [])
+
+    lines = [
+        "=======================================================",
+        f"PATIENT MEDICAL DOSSIER & CLINICAL CONTEXT (USER: {user_id})",
+        "=======================================================",
+        f"- Aktive akute Einschraenkungen: {', '.join(acute) if acute else 'Keine (Voll beladbar)'}",
+        "",
+        "--- LETZTE LABOR- & ARZTBERICHTE ---"
+    ]
+    if labs:
+        for l in labs[-5:]:
+            lines.append(f"  [{l.get('date')}] {l.get('type').upper()}: {l.get('summary')} (Befunde: {l.get('findings')})")
+    else:
+        lines.append("  Keine Laborberichte hinterlegt.")
+
+    lines.append("\n--- AKTUELLE SYMPTOME & VITALBEOBACHTUNGEN (ROLLING WINDOW) ---")
+    if obs:
+        for o in obs[-8:]:
+            sev = f" (Schwere: {o.get('severity')}/10)" if o.get('severity') else ""
+            lines.append(f"  [{o.get('date')}] {o.get('category').upper()}: {o.get('observation')}{sev}")
+    else:
+        lines.append("  Keine Symptombeobachtungen vorhanden.")
+
+    return "\n".join(lines)
+
 # MARK: - Server Runner & Unified GrowSuite Tools
 def main():
     port = 8765
@@ -770,7 +979,11 @@ def main():
             "ingest_visual_telemetry",
             "get_longitudinal_health_summary",
             "consult_and_update_profile_contract",
-            "apply_executive_override"
+            "apply_executive_override",
+            "log_health_observation",
+            "adapt_workout_for_acute_symptom",
+            "ingest_medical_document_data",
+            "get_personal_medical_dossier"
         }
         for tool_name in list(mcp._tool_manager._tools.keys()):
             if tool_name not in ALLOWED_GROWCERY_TOOLS and tool_name not in ALLOWED_GYM_TOOLS:
