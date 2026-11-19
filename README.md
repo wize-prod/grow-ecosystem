@@ -59,7 +59,7 @@
 |  iPhone 16 Pro Max      | Point-of-Performance         | Grow (GymApp) - Workouts & Timer     |
 |                         | Real-Time Sensor Terminal    | Growcery (NutriVault) - Scanner      |
 +-------------------------+------------------------------+--------------------------------------+
-|  iPad mini (A17 Pro)    | Focus Desk & Deep Work       | GrowStudy - HsH B.Sc. & BFD Kurse    |
+|  iPad mini (A17 Pro)    | Focus Desk & Deep Work       | GrowStudy - Deep Learning & Certs    |
 |                         |                              | GrowFinance - Budgeting & Tilgung    |
 +-------------------------+------------------------------+--------------------------------------+
 ```
@@ -88,7 +88,7 @@ Every user onboarded to the device operates in an isolated data sandbox:
 ├── GrowAndroid/                # Android companion client (Kotlin 2.0 / JNI Bridge)
 ├── GrowCare/                   # Skincare (4C/Pseudofolliculitis Barbae) & chore routines
 ├── GrowFinance/                # Budget reconciliation, 5-gate purchase audit, debt repayment
-├── GrowStudy/                  # HsH B.Sc. Wirtschaftsinformatik & BFD 2027 curriculum
+├── GrowStudy/                  # Deep study tracking & technical curricula
 ├── GymApp/                     # iOS Athletic OS (SwiftUI, HealthKit, SSE SmartTV Sink)
 ├── NutriVaultApp/              # iOS Nutrition OS (Receipt scanning, barcode engine, pantry)
 ├── Shared/GrowCore/            # C++20 Portable Core Engine (C-ABI header & implementation)

@@ -8,10 +8,10 @@
 
 ### 1.1 Der Ausgangspunkt: Das Produktivitäts-Paradoxon
 Am Anfang stand ein universelles menschliches Problem: Der Versuch, viele anspruchsvolle Lebensbereiche gleichzeitig zu meistern:
-- Militärischer Bundeswehr-Dienstbetrieb (Disziplin, Märsche, körperliche Höchstleistung).
-- Sportliche Leistungsfähigkeit und kardiologische Besonderheiten (Sinusbradykardie, BWK-Ulm-Rehabilitation).
-- Akademische Vorbereitung auf den Bachelor of Science Wirtschaftsinformatik (Hochschule Hannover) und BFD-Zertifikate (Scrum, AWS, ITIL, SAP).
-- Strikte Haushaltsführung und Tilgung von Altverbindlichkeiten.
+- Anspruchsvolle tägliche Verpflichtungen mit strikter Disziplin und körperlicher Belastung.
+- Höchstleistungen im Kraft- und Ausdauersport bei gleichzeitiger physiologischer Überwachung (Autoregulation).
+- Kontinuierliche technische und akademische Weiterbildung in Software-Engineering und verteilten Systemen.
+- Präzise Haushaltsführung und algorithmische Budgetkontrolle.
 
 ### 1.2 Der Fehler: Meta-Planung und Gamification-Fallen
 In den ersten Monaten wurde versucht, dieses Leben mit gängigen westlichen Methoden zu organisieren:
@@ -53,8 +53,8 @@ Um das System robust zu machen, musste die Hardware radikal bereinigt werden:
 
 ### Die Verschiebung des Homelabs auf 2027
 Ursprünglich war der Aufbau eines komplexen Homelab-Servers (Toshiba-Server) geplant. Nach einer nüchternen Analyse wurde dieser Plan **verbindlich auf 2027 verschoben**:
-- *Grund:* Ein Server erfordert Administration, Kabel, Strom und Wartung. Das band kognitive Energie, die akut für den B-Führerschein, die Wirtschaftsinformatik Phase 0 und die Schuldentilgung benötigt wurde.
-- *Entscheidung:* Lokale Ausführung auf dem MacBook M4 und dem iPhone reicht vollständig aus.
+- *Grund:* Ein physischer Server erfordert Administration, Verkabelung, Kühlung und Wartung. Dies erzeugte vermeidbare administrative Reibung (Muda).
+- *Entscheidung:* Lokale Ausführung auf dem MacBook M4 (16 GB) und den mobilen Endgeräten via SQLite WAL und MMKV ist um ein Vielfaches robuster, energieeffizienter und wartungsfrei.
 
 ---
 

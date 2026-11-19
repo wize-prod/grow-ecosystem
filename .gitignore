@@ -36,3 +36,15 @@ __pycache__/
 # Symlinks to personal vaults
 ObsidianVault
 WInf_Vault
+
+# Personal telemetry, scratch dumps, receipts and personal documents
+telemetry/
+scratch/
+backup_growcery/
+Fitness_Library/
+*.pdf
+*.jpg
+*.jpeg
+*.png
+!docs/assets/*.png
+
