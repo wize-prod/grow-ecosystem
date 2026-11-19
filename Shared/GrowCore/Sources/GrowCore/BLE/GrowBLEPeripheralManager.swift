@@ -1,6 +1,7 @@
 import Foundation
 import CoreBluetooth
 import SQLite3
+import Combine
 
 public struct BLEBiometricMeasurement: Sendable {
     public let weightKg: Double
@@ -27,7 +28,17 @@ public struct BLEBiometricMeasurement: Sendable {
     }
 }
 
-public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate, @unchecked Sendable {
+public enum BLEScaleStatus: String, Sendable {
+    case bluetoothOff = "Bluetooth Deaktiviert"
+    case unauthorized = "Keine Bluetooth-Berechtigung"
+    case scanning = "Suche Renpho-Waage..."
+    case connecting = "Verbinde..."
+    case connected = "Renpho-Waage Verbunden"
+    case measuring = "Waegevorgang laeuft..."
+    case received = "Messung synchronisiert"
+}
+
+public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate, @unchecked Sendable {
     public static let shared = GrowBLEPeripheralManager()
 
     // Standard Bluetooth SIG GATT Services
@@ -39,11 +50,19 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
     public static let renphoScaleServiceUUID = CBUUID(string: "FFE0")
     public static let renphoNotifyCharUUID = CBUUID(string: "FFE1")
     public static let renphoWriteCharUUID = CBUUID(string: "FFE3")
+    public static let renphoWriteChar2UUID = CBUUID(string: "FFE4")
 
     // Characteristics
     public static let weightMeasurementCharUUID = CBUUID(string: "2A9D")
     public static let bodyCompositionCharUUID = CBUUID(string: "2A9C")
     public static let heartRateMeasurementCharUUID = CBUUID(string: "2A37")
+
+    // MARK: - Published Observables for Live UI Feedback
+    @Published public var status: BLEScaleStatus = .scanning
+    @Published public var connectedDeviceName: String = "Renpho ES-26M-W"
+    @Published public var liveWeightKg: Double? = nil
+    @Published public var lastMeasurementSummary: String? = nil
+    @Published public var lastMeasurementTimestamp: Date? = nil
 
     private var centralManager: CBCentralManager!
     private var connectedPeripheral: CBPeripheral?
@@ -55,16 +74,46 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
         super.init()
         self.centralManager = CBCentralManager(
             delegate: self,
-            queue: DispatchQueue(label: "com.grow.core.ble", qos: .background),
-            options: [CBCentralManagerOptionShowPowerAlertKey: true]
+            queue: DispatchQueue(label: "com.grow.core.ble", qos: .userInitiated),
+            options: [
+                CBCentralManagerOptionShowPowerAlertKey: true,
+                CBCentralManagerOptionRestoreIdentifierKey: "com.grow.core.ble.restore"
+            ]
         )
     }
 
+    public func triggerManualScan() {
+        stopScan()
+        if let p = connectedPeripheral {
+            centralManager.cancelPeripheralConnection(p)
+            connectedPeripheral = nil
+        }
+        startActiveScan()
+    }
+
     public func startActiveScan() {
-        guard centralManager != nil, centralManager.state == .poweredOn else { return }
+        guard centralManager != nil else { return }
+        guard centralManager.state == .poweredOn else {
+            DispatchQueue.main.async {
+                if self.centralManager.state == .unauthorized {
+                    self.status = .unauthorized
+                } else if self.centralManager.state == .poweredOff {
+                    self.status = .bluetoothOff
+                } else {
+                    self.status = .scanning
+                }
+            }
+            return
+        }
+
+        DispatchQueue.main.async {
+            self.status = .scanning
+        }
+
+        print("[BLE] Starte aktiven Foreground-Scan nach Renpho-Waagen...")
         centralManager.scanForPeripherals(
             withServices: nil,
-            options: [CBCentralManagerScanOptionAllowDuplicatesKey: false]
+            options: [CBCentralManagerScanOptionAllowDuplicatesKey: true]
         )
     }
 
@@ -87,8 +136,16 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
 
     // MARK: - CBCentralManagerDelegate
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn {
+        print("[BLE] CBCentralManager State: \(central.state.rawValue)")
+        switch central.state {
+        case .poweredOn:
             startActiveScan()
+        case .poweredOff:
+            DispatchQueue.main.async { self.status = .bluetoothOff }
+        case .unauthorized:
+            DispatchQueue.main.async { self.status = .unauthorized }
+        default:
+            DispatchQueue.main.async { self.status = .scanning }
         }
     }
 
@@ -98,37 +155,79 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
         advertisementData: [String: Any],
         rssi RSSI: NSNumber
     ) {
-        let name = (peripheral.name ?? (advertisementData[CBAdvertisementDataLocalNameKey] as? String) ?? "").lowercased()
+        let rawName = peripheral.name ?? (advertisementData[CBAdvertisementDataLocalNameKey] as? String) ?? ""
+        let name = rawName.lowercased()
         let serviceUUIDs = advertisementData[CBAdvertisementDataServiceUUIDsKey] as? [CBUUID] ?? []
-        let isKnownService = serviceUUIDs.contains(where: {
+        let mfgData = advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data
+
+        let hasMatchingService = serviceUUIDs.contains(where: {
             $0 == Self.weightScaleServiceUUID ||
             $0 == Self.bodyCompositionServiceUUID ||
             $0 == Self.heartRateServiceUUID ||
-            $0 == Self.renphoScaleServiceUUID
+            $0 == Self.renphoScaleServiceUUID ||
+            $0.uuidString.contains("FFE0") ||
+            $0.uuidString.contains("FEE7")
         })
-        let isScaleDevice = name.contains("scale") || name.contains("renpho") || name.contains("qn-") || name.contains("chipsea") || name.contains("es-26")
 
-        guard isKnownService || isScaleDevice else { return }
+        let hasScaleName = name.contains("scale") || name.contains("renpho") || name.contains("qn-") || name.contains("chipsea") || name.contains("es-26") || name.contains("yolanda")
+
+        var hasMfgSignature = false
+        if let data = mfgData, data.count >= 2 {
+            let b0 = data[0]
+            let b1 = data[1]
+            if (b0 == 0x51 && b1 == 0x4E) || (b0 == 0x02 && b1 == 0x1B) || (b0 == 0x00 && b1 == 0xFF) {
+                hasMfgSignature = true
+            }
+        }
+
+        // Live Advertisement broadcast weight decoding
+        if let data = mfgData, data.count >= 8 {
+            decodeAdvertisementWeight(data)
+        }
+
+        guard hasMatchingService || hasScaleName || hasMfgSignature else {
+            return
+        }
+
+        print("[BLE] Waage identifiziert: '\(rawName)' (RSSI: \(RSSI)). Verbinde...")
+        DispatchQueue.main.async {
+            self.status = .connecting
+            self.connectedDeviceName = rawName.isEmpty ? "Renpho ES-26M" : rawName
+        }
 
         self.connectedPeripheral = peripheral
         peripheral.delegate = self
         centralManager.stopScan()
-        centralManager.connect(peripheral, options: nil)
-    }
-
-    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        peripheral.discoverServices([
-            Self.weightScaleServiceUUID,
-            Self.bodyCompositionServiceUUID,
-            Self.heartRateServiceUUID,
-            Self.renphoScaleServiceUUID
+        centralManager.connect(peripheral, options: [
+            CBConnectPeripheralOptionNotifyOnDisconnectionKey: true
         ])
     }
 
+    public func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        let name = peripheral.name ?? "Renpho ES-26M-W"
+        print("[BLE] Erfolgreich verbunden mit: \(name)")
+        DispatchQueue.main.async {
+            self.status = .connected
+            self.connectedDeviceName = name
+        }
+        // Entdecke alle Services der Waage
+        peripheral.discoverServices(nil)
+    }
+
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        print("[BLE] Verbindung zu Waage getrennt. Starte Scan erneut.")
         self.connectedPeripheral = nil
-        // Resume background scanning
-        startBackgroundScan()
+        DispatchQueue.main.async {
+            self.status = .scanning
+            self.liveWeightKg = nil
+        }
+        startActiveScan()
+    }
+
+    public func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        print("[BLE] Verbindung fehlgeschlagen: \(error?.localizedDescription ?? "Unbekannt")")
+        self.connectedPeripheral = nil
+        startActiveScan()
     }
 
     // MARK: - CBPeripheralDelegate
@@ -146,11 +245,20 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
     ) {
         guard let characteristics = service.characteristics else { return }
         for char in characteristics {
+            let uuid = char.uuid.uuidString.uppercased()
+
+            // 1. Notify aktivieren fuer Messdaten
             if char.properties.contains(.notify) || char.properties.contains(.indicate) {
                 peripheral.setNotifyValue(true, for: char)
+                print("[BLE] Notify aktiviert auf: \(uuid)")
             }
-            if char.properties.contains(.read) {
-                peripheral.readValue(for: char)
+
+            // 2. Renpho Handshake auf FFE3 / FFE4
+            if uuid.contains("FFE3") || uuid.contains("FFE4") {
+                let handshakeCmd: [UInt8] = [0x13, 0x09, 0x15, 0x01, 0x10, 0x00, 0x00, 0x00, 0x42]
+                let writeType: CBCharacteristicWriteType = char.properties.contains(.writeWithoutResponse) ? .withoutResponse : .withResponse
+                peripheral.writeValue(Data(handshakeCmd), for: char, type: writeType)
+                print("[BLE] Renpho Handshake an \(uuid) gesendet.")
             }
         }
     }
@@ -161,14 +269,16 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
         error: Error?
     ) {
         guard let data = characteristic.value, !data.isEmpty else { return }
+        let uuid = characteristic.uuid.uuidString.uppercased()
 
-        if characteristic.uuid == Self.weightMeasurementCharUUID {
+        if uuid.contains("2A9D") {
             parseWeightMeasurement(data)
-        } else if characteristic.uuid == Self.bodyCompositionCharUUID {
+        } else if uuid.contains("2A9C") {
             parseBodyComposition(data)
-        } else if characteristic.uuid == Self.heartRateMeasurementCharUUID {
+        } else if uuid.contains("2A37") {
             parseHeartRate(data)
-        } else if characteristic.uuid == Self.renphoNotifyCharUUID {
+        } else {
+            // Renpho FFE1 Custom BIA Stream
             parseRenphoQingniuPayload(data)
         }
     }
@@ -176,47 +286,91 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
     // MARK: - Parsing Renpho QN-Scale (ES-26M-W) Custom BLE Encodings
     private func parseRenphoQingniuPayload(_ data: Data) {
         let bytes = [UInt8](data)
-        guard bytes.count >= 8 else { return }
+        guard bytes.count >= 4 else { return }
 
-        // Byte 1 & 2: Weight in units of 10g (Big-Endian)
-        let rawWeight = (UInt16(bytes[1]) << 8) | UInt16(bytes[2])
-        let weightKg = Double(rawWeight) / 100.0
+        // Adaptive Multi-Offset Extractor fuer Renpho / Yolanda Pakete
+        var detectedWeight: Double? = nil
+        var detectedImpedance: Double? = nil
 
-        var impedance: Double? = nil
-        var bodyFatPct: Double? = nil
-        var muscleMassKg: Double? = nil
+        // Kandidat 1: Byte 1..2 (Big-Endian / 100)
+        let w1 = Double((UInt16(bytes[1]) << 8) | UInt16(bytes[2])) / 100.0
+        // Kandidat 2: Byte 2..3 (Big-Endian / 100)
+        let w2 = (bytes.count >= 4) ? (Double((UInt16(bytes[2]) << 8) | UInt16(bytes[3])) / 100.0) : 0.0
+        // Kandidat 3: Byte 1..2 (Big-Endian / 10)
+        let w3 = Double((UInt16(bytes[1]) << 8) | UInt16(bytes[2])) / 10.0
 
-        // Byte 3 & 4: Impedance in Ohms
+        if w1 >= 40.0 && w1 <= 220.0 {
+            detectedWeight = w1
+        } else if w2 >= 40.0 && w2 <= 220.0 {
+            detectedWeight = w2
+        } else if w3 >= 40.0 && w3 <= 220.0 {
+            detectedWeight = w3
+        }
+
+        guard let weightKg = detectedWeight else { return }
+
+        // Live-Feedback sofort auf UI schalten
+        DispatchQueue.main.async {
+            self.liveWeightKg = (weightKg * 100.0).rounded() / 100.0
+            self.status = .measuring
+        }
+
+        // Impedanz suchen (typisch 250 - 1200 Ohm)
         if bytes.count >= 6 {
-            let rawImpedance = (UInt16(bytes[3]) << 8) | UInt16(bytes[4])
-            if rawImpedance > 200 && rawImpedance < 1500 {
-                impedance = Double(rawImpedance)
-                // Lukaski-Deurenberg Bioelectrical Impedance Analysis (BIA)
-                // Baseline: Male, 24y, 182cm (or pulled from UserProfileContract)
-                let heightCm = 182.0
-                let ffm = (0.396 * (heightCm * heightCm) / Double(rawImpedance)) + (0.49 * weightKg) + (0.158 * heightCm) - 10.5
-                let fatMass = max(0.0, weightKg - ffm)
-                let fatPct = (fatMass / weightKg) * 100.0
-                bodyFatPct = (fatPct * 10.0).rounded() / 10.0
-                muscleMassKg = (ffm * 10.0).rounded() / 10.0
+            let imp1 = Double((UInt16(bytes[3]) << 8) | UInt16(bytes[4]))
+            let imp2 = (bytes.count >= 8) ? Double((UInt16(bytes[5]) << 8) | UInt16(bytes[6])) : 0.0
+            if imp1 >= 250 && imp1 <= 1400 {
+                detectedImpedance = imp1
+            } else if imp2 >= 250 && imp2 <= 1400 {
+                detectedImpedance = imp2
             }
         }
 
-        guard weightKg > 30.0 && weightKg < 250.0 else { return }
+        var bodyFatPct: Double? = nil
+        var muscleMassKg: Double? = nil
 
+        if let imp = detectedImpedance {
+            let heightCm = 182.0
+            let ffm = (0.396 * (heightCm * heightCm) / imp) + (0.49 * weightKg) + (0.158 * heightCm) - 10.5
+            let fatMass = max(0.0, weightKg - ffm)
+            bodyFatPct = ((fatMass / weightKg) * 1000.0).rounded() / 10.0
+            muscleMassKg = (ffm * 10.0).rounded() / 10.0
+        }
+
+        // Stabile Endmessung registrieren
         let measurement = BLEBiometricMeasurement(
             weightKg: (weightKg * 100.0).rounded() / 100.0,
             bodyFatPct: bodyFatPct,
             muscleMassKg: muscleMassKg,
-            impedanceOhms: impedance
+            impedanceOhms: detectedImpedance
         )
+
+        DispatchQueue.main.async {
+            self.status = .received
+            let summary = String(format: "%.2f kg%@", measurement.weightKg, measurement.bodyFatPct.map { String(format: " • %.1f %% KFA", $0) } ?? "")
+            self.lastMeasurementSummary = summary
+            self.lastMeasurementTimestamp = Date()
+        }
+
         persistMeasurement(measurement, source: "BLE_Renpho_ES26M_0xFFE0")
         onMeasurementReceived?(measurement)
     }
 
+    private func decodeAdvertisementWeight(_ data: Data) {
+        let bytes = [UInt8](data)
+        guard bytes.count >= 6 else { return }
+        // Pruefe Byte 2..3 oder 3..4
+        let w = Double((UInt16(bytes[2]) << 8) | UInt16(bytes[3])) / 100.0
+        if w >= 40.0 && w <= 220.0 {
+            DispatchQueue.main.async {
+                self.liveWeightKg = (w * 100.0).rounded() / 100.0
+                self.status = .measuring
+            }
+        }
+    }
+
     // MARK: - Parsing Standard Bluetooth GATT Encodings
     private func parseWeightMeasurement(_ data: Data) {
-        // Flags: byte 0 (Bit 0: 0 = SI [kg], 1 = Imperial [lbs])
         let bytes = [UInt8](data)
         guard bytes.count >= 3 else { return }
 
@@ -226,6 +380,11 @@ public final class GrowBLEPeripheralManager: NSObject, CBCentralManagerDelegate,
         let weightKg = Double(rawWeight) * factor
 
         let measurement = BLEBiometricMeasurement(weightKg: (weightKg * 100).rounded() / 100)
+        DispatchQueue.main.async {
+            self.status = .received
+            self.lastMeasurementSummary = String(format: "%.2f kg", measurement.weightKg)
+            self.lastMeasurementTimestamp = Date()
+        }
         persistMeasurement(measurement, source: "BLE_Scale_0x181D")
         onMeasurementReceived?(measurement)
     }

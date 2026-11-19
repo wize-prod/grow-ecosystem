@@ -172,6 +172,47 @@ SAFE_FUNCTIONAL_SUBSTITUTES = [
 # MARK: - MCP Server Initialization
 mcp = MCPServer("GymApp-Controller")
 
+def format_system_temporal_header() -> str:
+    now = datetime.datetime.now()
+    weekdays_de = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
+    weekday = weekdays_de[now.weekday()]
+    formatted = now.strftime("%d.%m.%Y %H:%M:%S")
+    return f"[SYSTEM-ZEITPUNKT: {weekday}, {formatted} CET (ISO: {now.isoformat()})]\n"
+
+@mcp.tool()
+def get_system_temporal_context() -> str:
+    """[Echtzeit-System-Zeitstempel] Gibt das exakte aktuelle Datum, die Uhrzeit, den Wochentag und das aktive zirkadiane Zeitfenster der Anfrage zurueck.
+    
+    Garantiert, dass Gemini und alle MCP-Agenten bei jeder Interaktion exakt wissen, an welchem Tag und zu welcher Uhrzeit der Nutzer Anfragen stellt.
+    """
+    now = datetime.datetime.now()
+    weekdays_de = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
+    weekday = weekdays_de[now.weekday()]
+    iso = now.isoformat()
+    formatted = now.strftime("%d.%m.%Y, %H:%M:%S Uhr")
+    hour = now.hour
+    if 5 <= hour < 10:
+        window = "Morgenroutine / Fruehdienst (Rhodiola 06:00, Magnesium-Malat 06:30)"
+    elif 10 <= hour < 14:
+        window = "Tagesmitte / Truppenkueche Mittagessen (D3 5.000 IE + K2 MK-7 200 mcg um 11:45)"
+    elif 14 <= hour < 17:
+        window = "Nachmittag / Pre-Workout Phase (Rote Bete / Nitrat um 16:00)"
+    elif 17 <= hour < 19:
+        window = "Fokusfenster / Training (Omega-3 2.000 mg um 16:45)"
+    elif 19 <= hour < 22:
+        window = "Abend / Truppenkueche (18:30) & Tagesabschluss (Magnesium-Bisglycinat um 21:00)"
+    else:
+        window = "Nachtruhe / Zirkadiane Tiefschlaf-Erholung (CPAP & Zero Blue-Light)"
+
+    return (
+        f"=== ECHTZEIT-SYSTEM-ZEITPUNKT & ZIRKADIANES PROFIL ===\n"
+        f"- Wochentag: {weekday}\n"
+        f"- Datum & Zeit: {formatted}\n"
+        f"- ISO-8601: {iso}\n"
+        f"- UNIX-Timestamp: {int(now.timestamp())}\n"
+        f"- Aktives Zeitfenster: {window}\n"
+    )
+
 @mcp.tool()
 def get_daily_schedule(date_str: Optional[str] = None) -> str:
     """[Grow Master - 24h Gesamtfahrplan Ökosystem] Ruft den ganzheitlichen Tagesplan ab, wenn der Nutzer nach 'Was steht heute an?', 'Tagesablauf', 'Plan für heute' oder dem Ökosystem fragt.
@@ -1220,6 +1261,7 @@ def main():
 
         # Prune redundant/noisy GymApp tools
         ALLOWED_GYM_TOOLS = {
+            "get_system_temporal_context",
             "get_daily_schedule",
             "plan_workout",
             "get_workout_history",
