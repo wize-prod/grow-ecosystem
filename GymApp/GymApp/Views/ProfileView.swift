@@ -1,17 +1,22 @@
 import SwiftUI
+import Combine
+import AuthenticationServices
 
-// MARK: - Unified Ecosystem Profile & Settings Sheet (Grow Architecture Parity)
+// MARK: - Unified Consumer-Grade Profile & Settings Sheet (Grow Multi-Tenant Architecture)
 public struct EcosystemProfileAndSettingsSheet: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var store: GymStore
     @ObservedObject private var userAccount = UserAccountService.shared
-    @StateObject private var growceryService = GrowcerySyncService.shared
+    @ObservedObject private var tvCasting = WorkoutTVCastingManager.shared
     @StateObject private var healthService = HealthKitService.shared
-    @StateObject private var googleService = GoogleHealthSyncService.shared
 
-    @State private var showingAccountLogin = false
+    @State private var showingAddProfileSheet = false
+    @State private var showingEditProfileSheet = false
+    @State private var showingEditMacrosSheet = false
     @State private var showingMeasurements = false
     @State private var showingResetConfirmationAlert = false
+    @State private var showingLogOutAlert = false
+    @State private var showingBackupSuccessAlert = false
 
     public init() {}
 
@@ -21,27 +26,24 @@ public struct EcosystemProfileAndSettingsSheet: View {
                 GymTheme.bg.ignoresSafeArea()
 
                 ScrollView(.vertical, showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 16) {
-                        // 1. Hero Identity & Athlete Level Card
-                        heroHeaderSection
+                    VStack(alignment: .leading, spacing: 20) {
+                        // 1. Clean Consumer Hero Profile Card
+                        heroProfileCard
 
-                        // 2. Konto & Google Kalender 2-Way Sync
-                        accountSettingsSection
+                        // 2. Multi-Tenant Accounts & Profile Switcher
+                        accountsAndProfilesSection
 
-                        // 3. 4-Pfeiler Ecosystem Status (0 - 999)
-                        ecosystemMatrixSection
+                        // 3. Individual Physiologie & Ziele des aktiven Profils
+                        individualTargetsSection
 
-                        // 4. Ecosystem Integrationen & Synchronisation (Einstellungen)
-                        integrationsSection
+                        // 4. System & Vernetzung (Funktional, keine Status-Show)
+                        systemAndConnectivitySection
 
-                        // 5. Trainings-Dashboard & Performance-Metriken (Profil)
-                        trainingPerformanceSection
+                        // 5. Konto-Aktionen & Backup
+                        accountAndBackupSection
 
-                        // 6. System-Verwaltung & Daten-Hygiene (Einstellungen)
-                        systemManagementSection
-
-                        // 7. App Metadata Footer
-                        appMetadataFooter
+                        // 6. Diskrete Daten-Hygiene & App-Info
+                        dataHygieneAndFooterSection
 
                         Spacer(minLength: 32)
                     }
@@ -62,8 +64,14 @@ public struct EcosystemProfileAndSettingsSheet: View {
                     .foregroundColor(GymTheme.strongBlue)
                 }
             }
-            .sheet(isPresented: $showingAccountLogin) {
+            .sheet(isPresented: $showingAddProfileSheet) {
+                AddProfileSheet()
+            }
+            .sheet(isPresented: $showingEditProfileSheet) {
                 GymAccountLoginSheet()
+            }
+            .sheet(isPresented: $showingEditMacrosSheet) {
+                EditMacroTargetSheet()
             }
             .sheet(isPresented: $showingMeasurements) {
                 NavigationStack {
@@ -79,448 +87,742 @@ public struct EcosystemProfileAndSettingsSheet: View {
                     dismiss()
                 }
             } message: {
-                Text("Dies loescht alle absolvierten Einheiten, Koerper-Messungen und setzt saemtliche Leistungs-Standards zurueck.")
+                Text("Dies loescht alle absolvierten Einheiten und Koerper-Messungen fuer das aktive Profil und setzt saemtliche Leistungs-Standards zurueck.")
+            }
+            .alert("Abmelden", isPresented: $showingLogOutAlert) {
+                Button("Abbrechen", role: .cancel) {}
+                Button("Abmelden", role: .destructive) {
+                    userAccount.logOut()
+                    HapticFeedback.medium()
+                }
+            } message: {
+                Text("Moechtest du dich wirklich vom aktiven Profil abmelden?")
+            }
+            .alert("Backup erfolgreich", isPresented: $showingBackupSuccessAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text("Die lokalen Profildaten und Trainingsprotokolle wurden atomar im SQLite WAL gesichert.")
             }
         }
     }
 
-    // MARK: - 1. Hero Header
-    private var heroHeaderSection: some View {
+    // MARK: - 1. Clean Consumer Hero Profile Card
+    private var heroProfileCard: some View {
         HStack(spacing: 16) {
             Circle()
                 .fill(GymTheme.surfaceElevated)
-                .frame(width: 64, height: 64)
+                .frame(width: 58, height: 58)
                 .overlay(
                     Text(userAccount.currentAccount.initial)
-                        .font(.system(size: 26, weight: .bold))
+                        .font(.system(size: 24, weight: .bold))
                         .foregroundColor(GymTheme.textPrimary)
                 )
                 .overlay(Circle().stroke(GymTheme.border, lineWidth: 1))
 
             VStack(alignment: .leading, spacing: 3) {
-                Text(userAccount.currentAccount.displayName)
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(GymTheme.textPrimary)
+                HStack(spacing: 6) {
+                    Text(userAccount.currentAccount.displayName)
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(GymTheme.textPrimary)
 
-                Text("Ecosystem Athlet")
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(GymTheme.strongBlue)
+                    if userAccount.currentAccount.isPrimaryAccount {
+                        Text("Inhaber")
+                            .font(.system(size: 10, weight: .bold))
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(GymTheme.strongBlue.opacity(0.18))
+                            .foregroundColor(GymTheme.strongBlue)
+                            .cornerRadius(4)
+                    }
+                }
 
-                Text(userAccount.currentAccount.googleAccountEmail.isEmpty ? "Lokales Profil • Bundeswehr-Standard" : "\(userAccount.currentAccount.googleAccountEmail) • Bundeswehr-Standard")
-                    .font(.system(size: 10, weight: .medium, design: .monospaced))
+                Text(userAccount.currentAccount.userGoal)
+                    .font(.system(size: 12, weight: .medium))
                     .foregroundColor(GymTheme.textSecondary)
+
+                Text(userAccount.currentAccount.googleAccountEmail.isEmpty ? "Lokales Profil" : userAccount.currentAccount.googleAccountEmail)
+                    .font(.system(size: 10.5, weight: .medium, design: .monospaced))
+                    .foregroundColor(GymTheme.textMuted)
                     .lineLimit(1)
             }
 
             Spacer()
-        }
-        .somaCard()
-    }
 
-    // MARK: - 2. Account & Google Calendar Section
-    private var accountSettingsSection: some View {
-        Button {
-            HapticFeedback.light()
-            showingAccountLogin = true
-        } label: {
-            HStack(spacing: 12) {
-                ZStack {
-                    Circle()
-                        .fill(GymTheme.surfaceElevated)
-                        .frame(width: 40, height: 40)
-                    Image(systemName: "person.crop.circle.badge.checkmark")
-                        .font(.system(size: 18))
-                        .foregroundColor(GymTheme.strongBlue)
-                }
-
-                VStack(alignment: .leading, spacing: 2) {
-                    HStack(spacing: 6) {
-                        Text("Konto & Google Kalender")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(GymTheme.textPrimary)
-
-                        Text(userAccount.currentAccount.googleAccountEmail.isEmpty ? "ISOLIERT" : "VERBUNDEN")
-                            .font(.system(size: 8.5, weight: .bold, design: .monospaced))
-                            .foregroundColor(userAccount.currentAccount.googleAccountEmail.isEmpty ? GymTheme.warmSand : GymTheme.sageGreen)
-                            .padding(.horizontal, 5)
-                            .padding(.vertical, 1.5)
-                            .background(GymTheme.surfaceElevated)
-                            .cornerRadius(3)
-                    }
-
-                    if userAccount.currentAccount.googleAccountEmail.isEmpty {
-                        Text("Kein Google Kalender verknuepft • Antippen zum Einrichten")
-                            .font(.system(size: 10.5, design: .monospaced))
-                            .foregroundColor(GymTheme.textSecondary)
-                    } else {
-                        Text(userAccount.currentAccount.googleAccountEmail)
-                            .font(.system(size: 10.5, design: .monospaced))
-                            .foregroundColor(GymTheme.textSecondary)
-                            .lineLimit(1)
-                    }
-                }
-
-                Spacer()
-
-                Image(systemName: "chevron.right")
-                    .font(.caption)
-                    .foregroundColor(GymTheme.textMuted)
-            }
-            .somaCard()
-        }
-        .buttonStyle(.plain)
-    }
-
-    // MARK: - 3. 4-Pfeiler Ecosystem Matrix
-    private var ecosystemMatrixSection: some View {
-        return VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text("ECOSYSTEM TELEMETRIE & STATUS")
-                    .font(.system(size: 9.5, weight: .bold, design: .monospaced))
-                    .foregroundColor(GymTheme.textMuted)
-                    .tracking(0.8)
-                Spacer()
-                Text("Ecosystem Verbunden")
-                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                    .foregroundColor(GymTheme.sageGreen)
-            }
-
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 8) {
-                pillarItem(name: "Grow (Training)", status: "Training aktiv", color: GymTheme.strongBlue)
-                pillarItem(name: "Grow (Ernährung)", status: "Ernährung synchron", color: GymTheme.sageGreen)
-                pillarItem(name: "GrowTasks (Akademik)", status: "Tasks gekoppelt", color: GymTheme.warmSand)
-                pillarItem(name: "GrowFinance (Finanzen)", status: "Budget geschützt", color: GymTheme.warmAmber)
-            }
-        }
-        .somaCard()
-    }
-
-    private func pillarItem(name: String, status: String, color: Color) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Text(name)
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(GymTheme.textPrimary)
-                Spacer()
-                Circle()
-                    .fill(color)
-                    .frame(width: 6, height: 6)
-            }
-            Text(status)
-                .font(.system(size: 10, weight: .medium))
-                .foregroundColor(GymTheme.textSecondary)
-        }
-        .padding(8)
-        .background(RoundedRectangle(cornerRadius: 8).fill(GymTheme.surfaceElevated.opacity(0.6)))
-    }
-
-    // MARK: - 4. Integrations & Synchronisation (Einstellungen)
-    private var integrationsSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("SYNCHRONISATION & BRIDGES")
-                .font(.system(size: 9.5, weight: .bold, design: .monospaced))
-                .foregroundColor(GymTheme.textMuted)
-                .tracking(0.8)
-
-            // Growcery Sync-Bridge Card
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    HStack(spacing: 6) {
-                        Image(systemName: "fork.knife")
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(GymTheme.sageGreen)
-                        Text("Growcery Sync-Bridge")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(GymTheme.textPrimary)
-                    }
-                    Spacer()
-                    Circle()
-                        .fill(GymTheme.sageGreen)
-                        .frame(width: 7, height: 7)
-                    Text("Aktiv")
-                        .font(.system(size: 11, weight: .bold, design: .monospaced))
-                        .foregroundColor(GymTheme.sageGreen)
-                }
-
-                Text("Autonome Makro-, Regenerations- und Belastungsberechnung.")
-                    .font(.system(size: 11))
-                    .foregroundColor(GymTheme.textSecondary)
-
-                HStack(spacing: 12) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Protein-Ziel")
-                            .font(.system(size: 9, weight: .bold))
-                            .foregroundColor(GymTheme.textMuted)
-                        Text("160 g / Tag")
-                            .font(.system(size: 12, weight: .bold, design: .monospaced))
-                            .foregroundColor(GymTheme.sageGreen)
-                    }
-
-                    Spacer()
-
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Energie-Budget")
-                            .font(.system(size: 9, weight: .bold))
-                            .foregroundColor(GymTheme.textMuted)
-                        Text("1.850 - 2.000 kcal")
-                            .font(.system(size: 12, weight: .bold, design: .monospaced))
-                            .foregroundColor(GymTheme.textPrimary)
-                    }
-
-                    Spacer()
-
-                    Button {
-                        HapticFeedback.medium()
-                        growceryService.openGrowcery(context: "settings")
-                    } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: "arrow.up.right")
-                                .font(.system(size: 10, weight: .bold))
-                            Text("Oeffnen")
-                                .font(.system(size: 11, weight: .bold))
-                        }
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
-                        .background(GymTheme.surfaceElevated)
-                        .foregroundColor(GymTheme.strongBlue)
-                        .cornerRadius(6)
-                    }
-                }
-                .padding(.top, 2)
-            }
-            .somaCard()
-
-            // Apple Health & Google Fit 2-Way Sync Card
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    HStack(spacing: 6) {
-                        Image(systemName: "heart.fill")
-                            .font(.system(size: 13, weight: .semibold))
-                            .foregroundColor(GymTheme.terracotta)
-                        Text("Apple Health & Google Fit")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(GymTheme.textPrimary)
-                    }
-                    Spacer()
-                    Circle()
-                        .fill(healthService.isAuthorized ? GymTheme.sageGreen : GymTheme.terracotta)
-                        .frame(width: 7, height: 7)
-                    Text(healthService.isAuthorized ? "2-Wege Aktiv" : "Nicht autorisiert")
-                        .font(.system(size: 10, weight: .bold, design: .monospaced))
-                        .foregroundColor(healthService.isAuthorized ? GymTheme.sageGreen : GymTheme.terracotta)
-                }
-
-                Text("Workouts werden in Apple Health gebucht; Ruhepuls und Schritte werden in Grow eingelesen.")
-                    .font(.system(size: 11))
-                    .foregroundColor(GymTheme.textSecondary)
-
-                VStack(spacing: 6) {
-                    metricRow(title: "Ruhepuls", value: healthService.restingHeartRate > 0 ? "\(healthService.restingHeartRate) bpm" : "Keine Messung", isAccent: healthService.restingHeartRate > 0)
-                    metricRow(title: "Aktivkalorien heute", value: "\(Int(healthService.activeEnergyBurnedToday)) kcal", isAccent: false)
-                    metricRow(title: "Schritte heute", value: "\(healthService.todaySteps)", isAccent: false)
-                    metricRow(title: "Externe Einheiten", value: "\(healthService.syncedWorkouts.count) synchronisiert", isAccent: false)
-                }
-                .padding(10)
-                .background(GymTheme.surface)
-                .cornerRadius(8)
-
-                HStack(spacing: 10) {
-                    Button {
-                        HapticFeedback.medium()
-                        if healthService.isAuthorized {
-                            healthService.fetchAllHealthData()
-                        } else {
-                            healthService.checkAndRequestAuthorization()
-                        }
-                    } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: "arrow.triangle.2.circlepath")
-                                .font(.system(size: 11, weight: .bold))
-                            Text(healthService.isAuthorized ? "Jetzt synchronisieren" : "Freigabe anfordern")
-                                .font(.system(size: 11, weight: .bold))
-                        }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 7)
-                        .background(GymTheme.surfaceElevated)
-                        .foregroundColor(GymTheme.strongBlue)
-                        .cornerRadius(7)
-                    }
-
-                    if googleService.isGoogleFitAppInstalled {
-                        Button {
-                            HapticFeedback.light()
-                            googleService.openGoogleFitApp()
-                        } label: {
-                            HStack(spacing: 4) {
-                                Image(systemName: "arrow.up.right")
-                                    .font(.system(size: 10, weight: .bold))
-                                Text("Google Fit")
-                                    .font(.system(size: 11, weight: .bold))
-                            }
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 7)
-                            .background(GymTheme.surfaceElevated)
-                            .foregroundColor(GymTheme.sageGreen)
-                            .cornerRadius(7)
-                        }
-                    }
-                }
-                .padding(.top, 2)
-            }
-            .somaCard()
-        }
-    }
-
-    private func metricRow(title: String, value: String, isAccent: Bool) -> some View {
-        HStack {
-            Text(title)
-                .font(.system(size: 11))
-                .foregroundColor(GymTheme.textMuted)
-            Spacer()
-            Text(value)
-                .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                .foregroundColor(isAccent ? GymTheme.strongBlue : GymTheme.textPrimary)
-        }
-    }
-
-    // MARK: - 5. Training Performance & Dashboard (Profil)
-    private var trainingPerformanceSection: some View {
-        let calendar = Calendar.current
-        let today = Date()
-        let weekSessions = store.allSessionsWithExternal.filter { s in
-            let days = calendar.dateComponents([.day], from: s.startTime, to: today).day ?? 0
-            return days <= 7
-        }
-        let totalTonnage = weekSessions.reduce(0.0) { $0 + $1.totalTonnageKg }
-
-        return VStack(alignment: .leading, spacing: 12) {
-            Text("TRAININGS-LEISTUNG & PROFIL-STATISTIKEN")
-                .font(.system(size: 9.5, weight: .bold, design: .monospaced))
-                .foregroundColor(GymTheme.textMuted)
-                .tracking(0.8)
-
-            // Weekly Summary Card
-            VStack(alignment: .leading, spacing: 10) {
-                HStack {
-                    Text("Workouts Diese Woche")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(GymTheme.textPrimary)
-                    Spacer()
-                    Text("\(weekSessions.count) / 4")
-                        .font(.system(size: 15, weight: .bold, design: .monospaced))
-                        .foregroundColor(weekSessions.count >= 4 ? GymTheme.sageGreen : GymTheme.strongBlue)
-                }
-
-                HStack(spacing: 16) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Wochentonnage")
-                            .font(.system(size: 9.5, weight: .bold))
-                            .foregroundColor(GymTheme.textMuted)
-                        Text("\(Int(totalTonnage)) kg")
-                            .font(.system(size: 16, weight: .bold, design: .monospaced))
-                            .foregroundColor(GymTheme.strongBlue)
-                    }
-
-                    Spacer()
-
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Gesamte Workouts")
-                            .font(.system(size: 9.5, weight: .bold))
-                            .foregroundColor(GymTheme.textMuted)
-                        Text("\(store.allSessionsWithExternal.count)")
-                            .font(.system(size: 16, weight: .bold, design: .monospaced))
-                            .foregroundColor(GymTheme.textPrimary)
-                    }
-                }
-            }
-            .somaCard()
-
-            // Measurements Quick Link Card
             Button {
                 HapticFeedback.light()
-                showingMeasurements = true
+                showingEditProfileSheet = true
             } label: {
+                Image(systemName: "pencil")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(GymTheme.textSecondary)
+                    .frame(width: 32, height: 32)
+                    .background(GymTheme.surfaceElevated)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(GymTheme.border, lineWidth: 0.8))
+            }
+        }
+        .padding(14)
+        .somaCard()
+    }
+
+    // MARK: - 2. Multi-Tenant Accounts & Profile Switcher
+    private var accountsAndProfilesSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("KONTEN & PROFILE")
+                    .font(.system(size: 10, weight: .bold, design: .monospaced))
+                    .foregroundColor(GymTheme.textMuted)
+                    .tracking(0.8)
+
+                Spacer()
+
+                Text("\(userAccount.savedAccounts.count) Registriert")
+                    .font(.system(size: 10, weight: .medium, design: .monospaced))
+                    .foregroundColor(GymTheme.textMuted)
+            }
+
+            VStack(spacing: 0) {
+                ForEach(userAccount.savedAccounts, id: \.userKey) { account in
+                    let isCurrent = account.userKey == userAccount.currentAccount.userKey
+
+                    Button {
+                        if !isCurrent {
+                            HapticFeedback.selection()
+                            userAccount.switchToSavedAccount(userKey: account.userKey)
+                        }
+                    } label: {
+                        HStack(spacing: 12) {
+                            Circle()
+                                .fill(isCurrent ? GymTheme.strongBlue.opacity(0.15) : GymTheme.surfaceElevated)
+                                .frame(width: 34, height: 34)
+                                .overlay(
+                                    Text(account.initial)
+                                        .font(.system(size: 13, weight: .bold))
+                                        .foregroundColor(isCurrent ? GymTheme.strongBlue : GymTheme.textPrimary)
+                                )
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(account.displayName)
+                                    .font(.system(size: 13, weight: .semibold))
+                                    .foregroundColor(GymTheme.textPrimary)
+
+                                Text(account.userGoal)
+                                    .font(.system(size: 10.5))
+                                    .foregroundColor(GymTheme.textSecondary)
+                                    .lineLimit(1)
+                            }
+
+                            Spacer()
+
+                            if isCurrent {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.system(size: 15))
+                                    .foregroundColor(GymTheme.strongBlue)
+                            }
+                        }
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 14)
+                    }
+                    .buttonStyle(.plain)
+
+                    if account.userKey != userAccount.savedAccounts.last?.userKey {
+                        Divider()
+                            .background(GymTheme.border.opacity(0.6))
+                            .padding(.leading, 60)
+                    }
+                }
+
+                Divider()
+                    .background(GymTheme.border.opacity(0.6))
+
+                // Action: Add new family profile or account
+                Button {
+                    HapticFeedback.light()
+                    showingAddProfileSheet = true
+                } label: {
+                    HStack(spacing: 10) {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.system(size: 15))
+                            .foregroundColor(GymTheme.strongBlue)
+
+                        Text("Neues Profil oder Konto anlegen")
+                            .font(.system(size: 12.5, weight: .semibold))
+                            .foregroundColor(GymTheme.strongBlue)
+
+                        Spacer()
+
+                        Image(systemName: "chevron.right")
+                            .font(.system(size: 11))
+                            .foregroundColor(GymTheme.textMuted)
+                    }
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 14)
+                }
+                .buttonStyle(.plain)
+            }
+            .somaCard()
+        }
+    }
+
+    // MARK: - 3. Individual Physiologie & Ziele
+    private var individualTargetsSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("INDIVIDUELLE ZIELE (\(userAccount.currentAccount.displayName.uppercased()))")
+                .font(.system(size: 10, weight: .bold, design: .monospaced))
+                .foregroundColor(GymTheme.textMuted)
+                .tracking(0.8)
+
+            VStack(spacing: 0) {
+                // Measurements Row
+                Button {
+                    HapticFeedback.light()
+                    showingMeasurements = true
+                } label: {
+                    settingsRow(
+                        icon: "ruler",
+                        title: "Koerpermasse & Reha-Messungen",
+                        subtitle: "Tagesgewicht, Bauchumfang & viszerale Parameter",
+                        badge: nil
+                    )
+                }
+                .buttonStyle(.plain)
+
+                Divider()
+                    .background(GymTheme.border.opacity(0.6))
+                    .padding(.leading, 48)
+
+                // Macro Target Configuration Row
+                Button {
+                    HapticFeedback.light()
+                    showingEditMacrosSheet = true
+                } label: {
+                    settingsRow(
+                        icon: "fork.knife",
+                        title: "Ernaehrungs- & Makro-Ziele",
+                        subtitle: "\(Int(userAccount.currentAccount.targetKcal)) kcal • \(Int(userAccount.currentAccount.targetProtein)) g Protein • \(Int(userAccount.currentAccount.targetWaterMl)) ml",
+                        badge: nil
+                    )
+                }
+                .buttonStyle(.plain)
+
+                Divider()
+                    .background(GymTheme.border.opacity(0.6))
+                    .padding(.leading, 48)
+
+                // Training Goal Row
+                Button {
+                    HapticFeedback.light()
+                    showingEditProfileSheet = true
+                } label: {
+                    settingsRow(
+                        icon: "figure.walk",
+                        title: "Trainings-Fokus & Reha-Bedingung",
+                        subtitle: userAccount.currentAccount.userGoal,
+                        badge: nil
+                    )
+                }
+                .buttonStyle(.plain)
+            }
+            .somaCard()
+        }
+    }
+
+    // MARK: - 4. System & Vernetzung
+    private var systemAndConnectivitySection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("VERNETZUNG & HARDWARE")
+                .font(.system(size: 10, weight: .bold, design: .monospaced))
+                .foregroundColor(GymTheme.textMuted)
+                .tracking(0.8)
+
+            VStack(spacing: 0) {
+                // Apple Health Toggle
                 HStack(spacing: 12) {
                     ZStack {
                         Circle()
                             .fill(GymTheme.surfaceElevated)
-                            .frame(width: 38, height: 38)
-                        Image(systemName: "ruler.fill")
-                            .font(.system(size: 15))
-                            .foregroundColor(GymTheme.warmSand)
+                            .frame(width: 32, height: 32)
+                        Image(systemName: "heart.fill")
+                            .font(.system(size: 13))
+                            .foregroundColor(GymTheme.terracotta)
                     }
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Koerpermasse & Messungen")
+                        Text("Apple Health")
                             .font(.system(size: 13, weight: .semibold))
                             .foregroundColor(GymTheme.textPrimary)
-                        Text("Gewicht, Bauchumfang & viszerale Reha-Werte")
+                        Text(healthService.isAuthorized ? "Workouts & Vitalwerte synchron" : "Berechtigung anfordern")
                             .font(.system(size: 10.5))
                             .foregroundColor(GymTheme.textSecondary)
                     }
 
                     Spacer()
 
-                    Image(systemName: "chevron.right")
-                        .font(.caption)
-                        .foregroundColor(GymTheme.textMuted)
+                    Toggle("", isOn: Binding(
+                        get: { healthService.isAuthorized },
+                        set: { enable in
+                            if enable && !healthService.isAuthorized {
+                                healthService.checkAndRequestAuthorization()
+                            }
+                        }
+                    ))
+                    .labelsHidden()
                 }
-                .somaCard()
-            }
-            .buttonStyle(.plain)
-        }
-    }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 14)
 
-    // MARK: - 6. System Management & Reset (Einstellungen)
-    private var systemManagementSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("DATEN-HYGIENE & SYSTEM-VERWALTUNG")
-                .font(.system(size: 9.5, weight: .bold, design: .monospaced))
-                .foregroundColor(GymTheme.textMuted)
-                .tracking(0.8)
+                Divider()
+                    .background(GymTheme.border.opacity(0.6))
+                    .padding(.leading, 48)
 
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Fortschritt & Standards auf 0 zuruecksetzen")
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundColor(GymTheme.textPrimary)
-
-                Text("Loescht alle absolvierten Einheiten, Koerper-Messungen und setzt Leistungs-Standards zurueck.")
-                    .font(.system(size: 11))
-                    .foregroundColor(GymTheme.textSecondary)
-
-                Button(role: .destructive) {
-                    HapticFeedback.medium()
-                    showingResetConfirmationAlert = true
-                } label: {
-                    HStack(spacing: 4) {
-                        Image(systemName: "arrow.counterclockwise")
-                            .font(.system(size: 11, weight: .bold))
-                        Text("Kompletten Fortschritt auf 0 setzen")
-                            .font(.system(size: 11, weight: .bold))
+                // SmartTV Stream Row
+                HStack(spacing: 12) {
+                    ZStack {
+                        Circle()
+                            .fill(GymTheme.surfaceElevated)
+                            .frame(width: 32, height: 32)
+                        Image(systemName: "tv")
+                            .font(.system(size: 13))
+                            .foregroundColor(GymTheme.strongBlue)
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 7)
-                    .background(GymTheme.terracotta.opacity(0.18))
-                    .foregroundColor(GymTheme.terracotta)
-                    .cornerRadius(7)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("SmartTV HUD Stream")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(GymTheme.textPrimary)
+                        Text(tvCasting.activeSSEClientCount > 0 ? "Live-Stream aktiv (\(tvCasting.activeSSEClientCount) TV)" : "Server-Sent Events auf Port 8080")
+                            .font(.system(size: 10.5))
+                            .foregroundColor(GymTheme.textSecondary)
+                    }
+
+                    Spacer()
+
+                    Text(tvCasting.activeSSEClientCount > 0 ? "Aktiv" : "Bereit")
+                        .font(.system(size: 10, weight: .bold, design: .monospaced))
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 3)
+                        .background(tvCasting.activeSSEClientCount > 0 ? GymTheme.accentGreen.opacity(0.18) : GymTheme.surfaceElevated)
+                        .foregroundColor(tvCasting.activeSSEClientCount > 0 ? GymTheme.accentGreen : GymTheme.textMuted)
+                        .cornerRadius(4)
                 }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 14)
             }
             .somaCard()
         }
     }
 
-    // MARK: - 7. App Metadata Footer
-    private var appMetadataFooter: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text("Grow iOS v1.0.0")
-                .font(.system(size: 11, weight: .semibold, design: .monospaced))
-                .foregroundColor(GymTheme.textSecondary)
-            Text("Bundle ID: com.nkembi.somagym • Grow Ecosystem 2026")
-                .font(.system(size: 10, design: .monospaced))
+    // MARK: - 5. Konto-Aktionen & Backup
+    private var accountAndBackupSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("KONTO & SICHERUNG")
+                .font(.system(size: 10, weight: .bold, design: .monospaced))
+                .foregroundColor(GymTheme.textMuted)
+                .tracking(0.8)
+
+            VStack(spacing: 0) {
+                // Local Backup
+                Button {
+                    HapticFeedback.success()
+                    GymStore.shared.flushAllSync()
+                    LocalStore.shared.flushAllSync()
+                    showingBackupSuccessAlert = true
+                } label: {
+                    settingsRow(
+                        icon: "arrow.triangle.2.circlepath",
+                        title: "Lokale Datensicherung",
+                        subtitle: "Atomarer Snapshot im SQLite Write-Ahead-Log",
+                        badge: "WAL"
+                    )
+                }
+                .buttonStyle(.plain)
+
+                Divider()
+                    .background(GymTheme.border.opacity(0.6))
+                    .padding(.leading, 48)
+
+                // Log out
+                Button {
+                    HapticFeedback.medium()
+                    showingLogOutAlert = true
+                } label: {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            Circle()
+                                .fill(GymTheme.surfaceElevated)
+                                .frame(width: 32, height: 32)
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .font(.system(size: 13))
+                                .foregroundColor(GymTheme.terracotta)
+                        }
+
+                        Text("Abmelden")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundColor(GymTheme.terracotta)
+
+                        Spacer()
+                    }
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 14)
+                }
+                .buttonStyle(.plain)
+            }
+            .somaCard()
+        }
+    }
+
+    // MARK: - 6. Diskrete Daten-Hygiene & Footer
+    private var dataHygieneAndFooterSection: some View {
+        VStack(spacing: 16) {
+            // Discrete reset link instead of giant red banner
+            Button {
+                HapticFeedback.medium()
+                showingResetConfirmationAlert = true
+            } label: {
+                Text("Lokalen Fortschritt fuer dieses Profil zuruecksetzen")
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(GymTheme.textMuted)
+                    .underline()
+            }
+            .buttonStyle(.plain)
+
+            VStack(spacing: 2) {
+                Text("Grow iOS v1.0.0 (Build 2026.11)")
+                    .font(.system(size: 10.5, weight: .semibold, design: .monospaced))
+                    .foregroundColor(GymTheme.textSecondary)
+
+                Text("Bundle ID: com.nkembi.somagym • Multi-Tenant Portable Architecture")
+                    .font(.system(size: 9.5, design: .monospaced))
+                    .foregroundColor(GymTheme.textMuted)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 8)
+    }
+
+    // MARK: - Helper Settings Row
+    private func settingsRow(icon: String, title: String, subtitle: String, badge: String?) -> some View {
+        HStack(spacing: 12) {
+            ZStack {
+                Circle()
+                    .fill(GymTheme.surfaceElevated)
+                    .frame(width: 32, height: 32)
+                Image(systemName: icon)
+                    .font(.system(size: 13))
+                    .foregroundColor(GymTheme.strongBlue)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(GymTheme.textPrimary)
+
+                Text(subtitle)
+                    .font(.system(size: 10.5))
+                    .foregroundColor(GymTheme.textSecondary)
+                    .lineLimit(1)
+            }
+
+            Spacer()
+
+            if let badge = badge {
+                Text(badge)
+                    .font(.system(size: 9.5, weight: .bold, design: .monospaced))
+                    .padding(.horizontal, 5)
+                    .padding(.vertical, 2)
+                    .background(GymTheme.surfaceElevated)
+                    .foregroundColor(GymTheme.textMuted)
+                    .cornerRadius(4)
+            }
+
+            Image(systemName: "chevron.right")
+                .font(.system(size: 11))
                 .foregroundColor(GymTheme.textMuted)
         }
-        .padding(.horizontal, 4)
-        .padding(.top, 4)
+        .padding(.vertical, 10)
+        .padding(.horizontal, 14)
+    }
+}
+
+// MARK: - Add Individual Profile Sheet (Multi-User Onboarding)
+public struct AddProfileSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var userAccount = UserAccountService.shared
+
+    @State private var name: String = ""
+    @State private var email: String = ""
+    @State private var selectedGoal: String = "Gelenkschonung & Mobilitaet"
+    @State private var targetKcal: Double = 1600
+    @State private var targetProtein: Double = 80
+    @State private var targetWaterMl: Double = 2000
+
+    private let availableGoals = [
+        "Gelenkschonung & Mobilitaet",
+        "Hypertrophie & Muskelaufbau",
+        "Gewichtsmanagement & Vitalitaet",
+        "Kardiologische Reha & Ausdauer",
+        "Allgemeine Fitness"
+    ]
+
+    public init() {}
+
+    public var body: some View {
+        NavigationStack {
+            ZStack {
+                GymTheme.bg.ignoresSafeArea()
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 18) {
+                        Text("NEUES MITGLIED / PROFIL")
+                            .font(.system(size: 10, weight: .bold, design: .monospaced))
+                            .foregroundColor(GymTheme.textMuted)
+                            .tracking(0.8)
+
+                        // Basic Info Card
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Name oder Pseudonym")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(GymTheme.textPrimary)
+
+                            TextField("z. B. Mama, Sarah, Alex", text: $name)
+                                .font(.system(size: 14))
+                                .padding(10)
+                                .background(GymTheme.surfaceElevated)
+                                .cornerRadius(8)
+                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(GymTheme.border, lineWidth: 1))
+
+                            Text("E-Mail / Google-Adresse (Optional)")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(GymTheme.textPrimary)
+                                .padding(.top, 4)
+
+                            TextField("name@gmail.com", text: $email)
+                                .font(.system(size: 14))
+                                .keyboardType(.emailAddress)
+                                .autocapitalization(.none)
+                                .padding(10)
+                                .background(GymTheme.surfaceElevated)
+                                .cornerRadius(8)
+                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(GymTheme.border, lineWidth: 1))
+                        }
+                        .padding(14)
+                        .somaCard()
+
+                        // Health Goal & Conditions Card
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Physiologischer Fokus & Reha-Bedingung")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(GymTheme.textPrimary)
+
+                            Picker("Fokus", selection: $selectedGoal) {
+                                ForEach(availableGoals, id: \.self) { goal in
+                                    Text(goal).tag(goal)
+                                }
+                            }
+                            .pickerStyle(.menu)
+                            .padding(8)
+                            .background(GymTheme.surfaceElevated)
+                            .cornerRadius(8)
+                        }
+                        .padding(14)
+                        .somaCard()
+
+                        // Macro Targets Card
+                        VStack(alignment: .leading, spacing: 14) {
+                            Text("Individuelle Zielwerte")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(GymTheme.textPrimary)
+
+                            VStack(alignment: .leading, spacing: 6) {
+                                HStack {
+                                    Text("Energie-Budget:")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(GymTheme.textSecondary)
+                                    Spacer()
+                                    Text("\(Int(targetKcal)) kcal")
+                                        .font(.system(size: 13, weight: .bold, design: .monospaced))
+                                        .foregroundColor(GymTheme.textPrimary)
+                                }
+                                Slider(value: $targetKcal, in: 1200...3500, step: 50)
+                            }
+
+                            VStack(alignment: .leading, spacing: 6) {
+                                HStack {
+                                    Text("Protein-Ziel:")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(GymTheme.textSecondary)
+                                    Spacer()
+                                    Text("\(Int(targetProtein)) g")
+                                        .font(.system(size: 13, weight: .bold, design: .monospaced))
+                                        .foregroundColor(GymTheme.accentGreen)
+                                }
+                                Slider(value: $targetProtein, in: 50...240, step: 5)
+                            }
+
+                            VStack(alignment: .leading, spacing: 6) {
+                                HStack {
+                                    Text("Hydration:")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(GymTheme.textSecondary)
+                                    Spacer()
+                                    Text("\(Int(targetWaterMl)) ml")
+                                        .font(.system(size: 13, weight: .bold, design: .monospaced))
+                                        .foregroundColor(GymTheme.strongBlue)
+                                }
+                                Slider(value: $targetWaterMl, in: 1500...4000, step: 100)
+                            }
+                        }
+                        .padding(14)
+                        .somaCard()
+
+                        // Create Button
+                        Button {
+                            let cleanName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+                            let finalName = cleanName.isEmpty ? "Neues Profil" : cleanName
+                            userAccount.createOrSwitchToFamilyMember(
+                                name: finalName,
+                                email: email,
+                                goal: selectedGoal,
+                                targetKcal: targetKcal,
+                                targetProtein: targetProtein,
+                                targetWaterMl: targetWaterMl
+                            )
+                            HapticFeedback.success()
+                            dismiss()
+                        } label: {
+                            Text("Profil anlegen & sofort aktivieren")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 14)
+                                .background(GymTheme.strongBlue)
+                                .cornerRadius(10)
+                        }
+                        .padding(.top, 4)
+                    }
+                    .padding(16)
+                }
+            }
+            .navigationTitle("Profil hinzufuegen")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Abbrechen") {
+                        dismiss()
+                    }
+                    .foregroundColor(GymTheme.textMuted)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Edit Macro Target Sheet
+public struct EditMacroTargetSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var userAccount = UserAccountService.shared
+
+    @State private var targetKcal: Double = 1950
+    @State private var targetProtein: Double = 160
+    @State private var targetWaterMl: Double = 2500
+
+    public init() {}
+
+    public var body: some View {
+        NavigationStack {
+            ZStack {
+                GymTheme.bg.ignoresSafeArea()
+
+                VStack(alignment: .leading, spacing: 20) {
+                    Text("ZIELWERTE FUER \(userAccount.currentAccount.displayName.uppercased())")
+                        .font(.system(size: 10, weight: .bold, design: .monospaced))
+                        .foregroundColor(GymTheme.textMuted)
+                        .tracking(0.8)
+
+                    VStack(alignment: .leading, spacing: 16) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            HStack {
+                                Text("Tages-Energie-Budget:")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(GymTheme.textSecondary)
+                                Spacer()
+                                Text("\(Int(targetKcal)) kcal")
+                                    .font(.system(size: 14, weight: .bold, design: .monospaced))
+                                    .foregroundColor(GymTheme.textPrimary)
+                            }
+                            Slider(value: $targetKcal, in: 1200...4000, step: 25)
+                        }
+
+                        VStack(alignment: .leading, spacing: 6) {
+                            HStack {
+                                Text("Protein-Ziel:")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(GymTheme.textSecondary)
+                                Spacer()
+                                Text("\(Int(targetProtein)) g")
+                                    .font(.system(size: 14, weight: .bold, design: .monospaced))
+                                    .foregroundColor(GymTheme.accentGreen)
+                            }
+                            Slider(value: $targetProtein, in: 40...250, step: 5)
+                        }
+
+                        VStack(alignment: .leading, spacing: 6) {
+                            HStack {
+                                Text("Hydration:")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(GymTheme.textSecondary)
+                                Spacer()
+                                Text("\(Int(targetWaterMl)) ml")
+                                    .font(.system(size: 14, weight: .bold, design: .monospaced))
+                                    .foregroundColor(GymTheme.strongBlue)
+                            }
+                            Slider(value: $targetWaterMl, in: 1000...5000, step: 100)
+                        }
+                    }
+                    .padding(16)
+                    .somaCard()
+
+                    Spacer()
+
+                    Button {
+                        userAccount.updateAccount(
+                            name: userAccount.currentAccount.displayName,
+                            email: userAccount.currentAccount.googleAccountEmail,
+                            calendarId: userAccount.currentAccount.selectedCalendarIdentifier,
+                            kcal: targetKcal,
+                            protein: targetProtein,
+                            waterMl: targetWaterMl
+                        )
+                        HapticFeedback.success()
+                        dismiss()
+                    } label: {
+                        Text("Aenderungen speichern")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                            .background(GymTheme.strongBlue)
+                            .cornerRadius(10)
+                    }
+                }
+                .padding(16)
+            }
+            .navigationTitle("Ziele anpassen")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Schliessen") {
+                        dismiss()
+                    }
+                    .foregroundColor(GymTheme.textMuted)
+                }
+            }
+            .onAppear {
+                targetKcal = userAccount.currentAccount.targetKcal
+                targetProtein = userAccount.currentAccount.targetProtein
+                targetWaterMl = userAccount.currentAccount.targetWaterMl
+            }
+        }
     }
 }
 

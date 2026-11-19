@@ -112,7 +112,9 @@ public final class WorkoutTVCastingManager: ObservableObject {
             params.allowLocalEndpointReuse = true
             let listener = try NWListener(using: params, on: 8765)
             listener.newConnectionHandler = { [weak self] connection in
-                self?.handleIncomingConnection(connection)
+                Task { @MainActor in
+                    self?.handleIncomingConnection(connection)
+                }
             }
             listener.start(queue: .global(qos: .utility))
             self.telemetryListener = listener
@@ -277,8 +279,8 @@ public final class WorkoutTVCastingManager: ObservableObject {
         let restSecs = store.restTimer.secondsRemaining
         let isResting = store.restTimer.isRunning
 
-        let workoutName = session?.templateTitle ?? (session != nil ? "Aktives Training" : "Kein aktives Training")
-        let exerciseName = session?.exercises.last?.name ?? "Bereit"
+        let workoutName = session?.title ?? (session != nil ? "Aktives Training" : "Kein aktives Training")
+        let exerciseName = session?.exercises.last?.exercise.name ?? "Bereit"
 
         return """
         {
@@ -312,7 +314,7 @@ public struct WorkoutTVSinkView: View {
                         Text("GROW HUD | SMARTTV SINK")
                             .font(.system(size: 14, weight: .bold, design: .monospaced))
                             .foregroundColor(.gray)
-                        Text(gymStore.activeSession?.templateTitle ?? "SYSTEM BEREIT")
+                        Text(gymStore.activeSession?.title ?? "SYSTEM BEREIT")
                             .font(.system(size: 28, weight: .black, design: .default))
                             .foregroundColor(.white)
                     }
@@ -347,7 +349,7 @@ public struct WorkoutTVSinkView: View {
                             .foregroundColor(.cyan)
 
                         let activeEx = gymStore.activeSession?.exercises.last
-                        Text(activeEx?.name ?? "Keine aktive Uebung")
+                        Text(activeEx?.exercise.name ?? "Keine aktive Uebung")
                             .font(.system(size: 38, weight: .heavy))
                             .foregroundColor(.white)
                             .lineLimit(2)

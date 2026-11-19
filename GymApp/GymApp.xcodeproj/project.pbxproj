@@ -99,6 +99,7 @@
 		BB0000000000000000000059 /* PlateCalculatorEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000059 /* PlateCalculatorEngine.swift */; };
 		BB000000000000000000005A /* SharedMacrosBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005A /* SharedMacrosBridge.swift */; };
 		BB00000000000000000000E5 /* GrowPeerSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E5 /* GrowPeerSyncService.swift */; };
+		BB00000000000000000000E6 /* WorkoutTVCastingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E6 /* WorkoutTVCastingManager.swift */; };
 		BB000000000000000000005B /* StravaSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005B /* StravaSyncService.swift */; };
 		BB000000000000000000005C /* UserAccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005C /* UserAccountService.swift */; };
 		BB000000000000000000005D /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005D /* WeatherService.swift */; };
@@ -330,6 +331,7 @@
 		AA0000000000000000000059 /* PlateCalculatorEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/PlateCalculatorEngine.swift"; sourceTree = "<group>"; };
 		AA000000000000000000005A /* SharedMacrosBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/SharedMacrosBridge.swift"; sourceTree = "<group>"; };
 		AA00000000000000000000E5 /* GrowPeerSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/GrowPeerSyncService.swift"; sourceTree = "<group>"; };
+		AA00000000000000000000E6 /* WorkoutTVCastingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/WorkoutTVCastingManager.swift"; sourceTree = "<group>"; };
 		AA000000000000000000005B /* StravaSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/StravaSyncService.swift"; sourceTree = "<group>"; };
 		AA000000000000000000005C /* UserAccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/UserAccountService.swift"; sourceTree = "<group>"; };
 		AA000000000000000000005D /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/WeatherService.swift"; sourceTree = "<group>"; };
@@ -576,6 +578,7 @@
 				AA0000000000000000000059 /* PlateCalculatorEngine.swift */,
 				AA000000000000000000005A /* SharedMacrosBridge.swift */,
 				AA00000000000000000000E5 /* GrowPeerSyncService.swift */,
+				AA00000000000000000000E6 /* WorkoutTVCastingManager.swift */,
 
 				AA000000000000000000005B /* StravaSyncService.swift */,
 				AA000000000000000000005C /* UserAccountService.swift */,
@@ -970,6 +973,7 @@
 				BB0000000000000000000059 /* PlateCalculatorEngine.swift in Sources */,
 				BB000000000000000000005A /* SharedMacrosBridge.swift in Sources */,
 				BB00000000000000000000E5 /* GrowPeerSyncService.swift in Sources */,
+				BB00000000000000000000E6 /* WorkoutTVCastingManager.swift in Sources */,
 
 				BB000000000000000000005B /* StravaSyncService.swift in Sources */,
 				BB000000000000000000005C /* UserAccountService.swift in Sources */,
