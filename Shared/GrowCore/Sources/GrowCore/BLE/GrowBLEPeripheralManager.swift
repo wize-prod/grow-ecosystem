@@ -311,26 +311,58 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
         guard bytes.count >= 4 else { return }
 
         let hexDump = bytes.map { String(format: "%02X", $0) }.joined(separator: " ")
-        print("[BLE RX FFE1] \(hexDump)")
+        print("[BLE RX FFE1] Laenge \(bytes.count): \(hexDump)")
 
         let opcode = bytes[0]
         let isOfficialStableFrame = (opcode == 0x11 || opcode == 0xB1 || (bytes.count >= 6 && (bytes[1] & 0x20 != 0)))
 
-        // Exakte QN-Scale Byte-Positionen:
-        // Byte 1 & 2: Gewicht in Big-Endian (/ 100 fuer kg)
-        // Alternativ Byte 2 & 3 bei vorangestelltem Command-Byte
         var parsedKg: Double? = nil
+        var detectedImpedance: Double? = nil
 
-        let c1 = Double((UInt16(bytes[1]) << 8) | UInt16(bytes[2])) / 100.0
-        let c2 = (bytes.count >= 4) ? (Double((UInt16(bytes[2]) << 8) | UInt16(bytes[3])) / 100.0) : 0.0
-
-        if c1 >= 40.0 && c1 <= 220.0 {
-            parsedKg = c1
-        } else if c2 >= 40.0 && c2 <= 220.0 {
-            parsedKg = c2
+        // 1. Standard 20-Byte QN-Scale / Yolanda Protokoll (ES-26M, ES-30M, ES-CS20M)
+        // Byte 0: 0x10 / 0x11 (Opcode)
+        // Bytes 1..14: Status, MAC, User-Index
+        // Bytes 15 & 16: Gewicht in Big-Endian (/ 100.0)
+        // Bytes 17 & 18: Impedanz in Ohm (Big-Endian)
+        if bytes.count >= 17 {
+            let wStd = Double((UInt16(bytes[15]) << 8) | UInt16(bytes[16])) / 100.0
+            if wStd >= 35.0 && wStd <= 220.0 {
+                parsedKg = wStd
+                if bytes.count >= 19 {
+                    let imp = Double((UInt16(bytes[17]) << 8) | UInt16(bytes[18]))
+                    if imp >= 250 && imp <= 1500 {
+                        detectedImpedance = imp
+                    }
+                }
+            }
         }
 
-        guard let weightKg = parsedKg else { return }
+        // 2. 19-Byte Dialekt (ES-26M Extended Variant, Gewicht an Bytes 10 & 11)
+        if parsedKg == nil && bytes.count >= 12 {
+            let w10 = Double((UInt16(bytes[10]) << 8) | UInt16(bytes[11])) / 100.0
+            if w10 >= 35.0 && w10 <= 220.0 {
+                parsedKg = w10
+                if bytes.count >= 14 {
+                    let imp = Double((UInt16(bytes[12]) << 8) | UInt16(bytes[13]))
+                    if imp >= 250 && imp <= 1500 {
+                        detectedImpedance = imp
+                    }
+                }
+            }
+        }
+
+        // 3. Fallback fuer kurze Broadcast-Frames (Bytes 2 & 3 nur bei Paketlaenge < 14)
+        if parsedKg == nil && bytes.count < 14 && bytes.count >= 4 {
+            let wShort = Double((UInt16(bytes[2]) << 8) | UInt16(bytes[3])) / 100.0
+            if wShort >= 35.0 && wShort <= 220.0 {
+                parsedKg = wShort
+            }
+        }
+
+        guard let weightKg = parsedKg else {
+            print("[BLE] FFE1 Frame ignoriert (kein valides Gewicht an QN-Offsets 15-16 / 10-11): \(hexDump)")
+            return
+        }
 
         // Live-Anzeige aktualisieren waehrend des Einpendelns
         DispatchQueue.main.async {
@@ -377,18 +409,6 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
         // Messung fixieren
         isMeasurementLocked = true
         let finalWeight = (weightKg * 100.0).rounded() / 100.0
-
-        // Impedanz suchen (typisch 250 - 1200 Ohm)
-        var detectedImpedance: Double? = nil
-        if bytes.count >= 6 {
-            let imp1 = Double((UInt16(bytes[3]) << 8) | UInt16(bytes[4]))
-            let imp2 = (bytes.count >= 8) ? Double((UInt16(bytes[5]) << 8) | UInt16(bytes[6])) : 0.0
-            if imp1 >= 250 && imp1 <= 1400 {
-                detectedImpedance = imp1
-            } else if imp2 >= 250 && imp2 <= 1400 {
-                detectedImpedance = imp2
-            }
-        }
 
         var bodyFatPct: Double? = nil
         var muscleMassKg: Double? = nil
