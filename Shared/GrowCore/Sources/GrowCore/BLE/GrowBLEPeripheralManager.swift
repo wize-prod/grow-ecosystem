@@ -9,6 +9,7 @@ public struct BLEBiometricMeasurement: Sendable {
     public let muscleMassKg: Double?
     public let impedanceOhms: Double?
     public let heartRateBpm: Int?
+    public let metrics: GrowBodyCompositionMetrics?
     public let timestamp: Date
 
     public init(
@@ -17,6 +18,7 @@ public struct BLEBiometricMeasurement: Sendable {
         muscleMassKg: Double? = nil,
         impedanceOhms: Double? = nil,
         heartRateBpm: Int? = nil,
+        metrics: GrowBodyCompositionMetrics? = nil,
         timestamp: Date = Date()
     ) {
         self.weightKg = weightKg
@@ -24,6 +26,7 @@ public struct BLEBiometricMeasurement: Sendable {
         self.muscleMassKg = muscleMassKg
         self.impedanceOhms = impedanceOhms
         self.heartRateBpm = heartRateBpm
+        self.metrics = metrics
         self.timestamp = timestamp
     }
 }
@@ -66,6 +69,7 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
 
     private var centralManager: CBCentralManager!
     private var connectedPeripheral: CBPeripheral?
+    private var writeCharacteristic: CBCharacteristic?
     private let db = GrowDatabase.shared
 
     // MARK: - Settling & Stabilization Engine State
@@ -279,6 +283,7 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
             // 2. Renpho Handshake auf FFE3 / FFE4 / FFE1
             if uuid.contains("FFE3") || uuid.contains("FFE4") || uuid.contains("FFE1") {
                 if char.properties.contains(.write) || char.properties.contains(.writeWithoutResponse) {
+                    self.writeCharacteristic = char
                     let handshakeCmd: [UInt8] = [0x13, 0x09, 0x15, 0x01, 0x10, 0x00, 0x00, 0x00, 0x42]
                     let writeType: CBCharacteristicWriteType = char.properties.contains(.writeWithoutResponse) ? .withoutResponse : .withResponse
                     peripheral.writeValue(Data(handshakeCmd), for: char, type: writeType)
@@ -413,22 +418,28 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
         isMeasurementLocked = true
         let finalWeight = (weightKg * 100.0).rounded() / 100.0
 
-        var bodyFatPct: Double? = nil
-        var muscleMassKg: Double? = nil
+        let biaMetrics = GrowBIACalculator.calculate(
+            weightKg: finalWeight,
+            impedanceOhms: detectedImpedance,
+            heightCm: 177.0,
+            ageYears: 26,
+            isMale: true
+        )
 
-        if let imp = detectedImpedance {
-            let heightCm = 182.0
-            let ffm = (0.396 * (heightCm * heightCm) / imp) + (0.49 * finalWeight) + (0.158 * heightCm) - 10.5
-            let fatMass = max(0.0, finalWeight - ffm)
-            bodyFatPct = ((fatMass / finalWeight) * 1000.0).rounded() / 10.0
-            muscleMassKg = (ffm * 10.0).rounded() / 10.0
+        // ACK senden falls Write-Charakteristik verfuegbar
+        if let wChar = writeCharacteristic, let peri = connectedPeripheral {
+            let ackCmd: [UInt8] = [0x1F]
+            let writeType: CBCharacteristicWriteType = wChar.properties.contains(.writeWithoutResponse) ? .withoutResponse : .withResponse
+            peri.writeValue(Data(ackCmd), for: wChar, type: writeType)
+            print("[BLE] Renpho Bestaetigungs-ACK 0x1F an \(wChar.uuid.uuidString) gesendet.")
         }
 
         let measurement = BLEBiometricMeasurement(
             weightKg: finalWeight,
-            bodyFatPct: bodyFatPct,
-            muscleMassKg: muscleMassKg,
-            impedanceOhms: detectedImpedance
+            bodyFatPct: biaMetrics.bodyFatPct,
+            muscleMassKg: biaMetrics.muscleMassKg,
+            impedanceOhms: detectedImpedance,
+            metrics: biaMetrics
         )
 
         DispatchQueue.main.async {
