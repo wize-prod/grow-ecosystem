@@ -54,6 +54,9 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
     public static let renphoNotifyCharUUID = CBUUID(string: "FFE1")
     public static let renphoWriteCharUUID = CBUUID(string: "FFE3")
     public static let renphoWriteChar2UUID = CBUUID(string: "FFE4")
+    public static let renphoScaleAltServiceUUID = CBUUID(string: "FFF0")
+    public static let renphoNotifyAltCharUUID = CBUUID(string: "FFF1")
+    public static let renphoWriteAltCharUUID = CBUUID(string: "FFF2")
 
     // Characteristics
     public static let weightMeasurementCharUUID = CBUUID(string: "2A9D")
@@ -194,11 +197,13 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
             $0 == Self.bodyCompositionServiceUUID ||
             $0 == Self.heartRateServiceUUID ||
             $0 == Self.renphoScaleServiceUUID ||
+            $0 == Self.renphoScaleAltServiceUUID ||
             $0.uuidString.contains("FFE0") ||
+            $0.uuidString.contains("FFF0") ||
             $0.uuidString.contains("FEE7")
         })
 
-        let hasScaleName = name.contains("scale") || name.contains("renpho") || name.contains("qn-") || name.contains("chipsea") || name.contains("es-26") || name.contains("yolanda")
+        let hasScaleName = name.contains("scale") || name.contains("renpho") || name.contains("qn-") || name.contains("qn_") || name.contains("qn ") || name.contains("chipsea") || name.contains("es-26") || name.contains("es26") || name.contains("escs") || name.contains("yolanda")
 
         var hasMfgSignature = false
         if let data = mfgData, data.count >= 2 {
@@ -280,14 +285,31 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
                 print("[BLE] Notify aktiviert auf: \(uuid)")
             }
 
-            // 2. Renpho Handshake auf FFE3 / FFE4 / FFE1
-            if uuid.contains("FFE3") || uuid.contains("FFE4") || uuid.contains("FFE1") {
+            // 2. Renpho Handshake auf FFE3 / FFE4 / FFE1 / FFF2
+            if uuid.contains("FFE3") || uuid.contains("FFE4") || uuid.contains("FFE1") || uuid.contains("FFF2") {
                 if char.properties.contains(.write) || char.properties.contains(.writeWithoutResponse) {
                     self.writeCharacteristic = char
-                    let handshakeCmd: [UInt8] = [0x13, 0x09, 0x15, 0x01, 0x10, 0x00, 0x00, 0x00, 0x42]
                     let writeType: CBCharacteristicWriteType = char.properties.contains(.writeWithoutResponse) ? .withoutResponse : .withResponse
-                    peripheral.writeValue(Data(handshakeCmd), for: char, type: writeType)
-                    print("[BLE] Renpho Handshake an \(uuid) gesendet.")
+
+                    // Frame 1: Unit & Protocol Magic Frame (ES-26M qn_scale_ble)
+                    // [0x13, 0x09, 0x15, 0x01 (kg), 0x10, 0x00, 0x00, 0x00, Checksum]
+                    var magicCmd: [UInt8] = [0x13, 0x09, 0x15, 0x01, 0x10, 0x00, 0x00, 0x00, 0x00]
+                    var sum: UInt8 = 0
+                    for i in 0..<8 { sum = sum &+ magicCmd[i] }
+                    magicCmd[8] = sum
+                    peripheral.writeValue(Data(magicCmd), for: char, type: writeType)
+                    print("[BLE] Renpho Magic Handshake 1 gesendet an \(uuid).")
+
+                    // Frame 2: Timestamp Frame (Sekunden seit 2000-01-01 UTC, 946702800 Offset)
+                    let scaleOffset: TimeInterval = 946702800
+                    let rawSec = max(0, Date().timeIntervalSince1970 - scaleOffset)
+                    let scaleSeconds = UInt32(rawSec)
+                    var datePayload = Data()
+                    var leSeconds = scaleSeconds.littleEndian
+                    withUnsafeBytes(of: &leSeconds) { datePayload.append(contentsOf: $0) }
+                    datePayload.append(0x02) // Weight unit identifier (kg)
+                    peripheral.writeValue(datePayload, for: char, type: writeType)
+                    print("[BLE] Renpho Timestamp-Sync 2 gesendet an \(uuid).")
                 }
             }
         }
@@ -322,12 +344,31 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
         print("[BLE RX FFE1] Laenge \(bytes.count): \(hexDump)")
 
         let opcode = bytes[0]
-        let isOfficialStableFrame = (opcode == 0x11 || opcode == 0xB1 || (bytes.count >= 6 && (bytes[1] & 0x20 != 0)))
+        var isOfficialStableFrame = (opcode == 0x11 || opcode == 0xB1 || (bytes.count >= 6 && (bytes[1] & 0x20 != 0)))
 
         var parsedKg: Double? = nil
         var detectedImpedance: Double? = nil
 
-        // 1. Standard 20-Byte QN-Scale / Yolanda Protokoll (ES-26M, ES-30M, ES-CS20M)
+        // 1. ES-26M / ESCS20M Format (qn_scale_ble / OpenScale)
+        // Byte 0: 0x10 (16)
+        // Bytes 3 & 4: Gewicht ((bytes[3] << 8) | bytes[4]) / 100.0
+        // Byte 5: Stabilisierungs-Flag (1 = stabilisiert, 0 = in Bewegung)
+        // Bytes 6 & 7: Impedanz ((bytes[6] << 8) | bytes[7]) in Ohm
+        if bytes.count >= 8 && opcode == 0x10 {
+            let wEs26 = Double((UInt16(bytes[3]) << 8) | UInt16(bytes[4])) / 100.0
+            if wEs26 >= 35.0 && wEs26 <= 220.0 {
+                parsedKg = wEs26
+                if bytes[5] == 1 {
+                    isOfficialStableFrame = true
+                    let imp = Double((UInt16(bytes[6]) << 8) | UInt16(bytes[7]))
+                    if imp >= 200 && imp <= 1500 {
+                        detectedImpedance = imp
+                    }
+                }
+            }
+        }
+
+        // 2. Standard 20-Byte QN-Scale / Yolanda Protokoll (ES-26M, ES-30M, ES-CS20M)
         // Byte 0: 0x10 / 0x11 (Opcode)
         // Bytes 1..14: Status, MAC, User-Index
         // Bytes 15 & 16: Gewicht in Big-Endian (/ 100.0)
