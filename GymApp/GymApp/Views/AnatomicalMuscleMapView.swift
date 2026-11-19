@@ -206,6 +206,14 @@ public struct AnatomicalMuscleMapView: View {
             } else {
                 defaultFooterGuidance
             }
+
+            Divider()
+                .background(GymTheme.borderSubtle)
+                .padding(.horizontal, 16)
+                .padding(.top, 4)
+
+            // MARK: - Autonomer 22:00 Uhr Tagesabschluss-Report (Unter der Muskelkarte)
+            eveningDebriefSection
         }
         .background(Color(red: 0.08, green: 0.09, blue: 0.12))
         .cornerRadius(20)
@@ -703,6 +711,112 @@ public struct AnatomicalMuscleMapView: View {
             Spacer()
         }
         .padding(14)
+    }
+
+    // MARK: - Autonomer 22:00 Uhr Tagesabschluss-Report (Unter der Muskelkarte)
+    private var eveningDebriefSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                HStack(spacing: 6) {
+                    Image(systemName: "clock.badge.checkmark.fill")
+                        .font(.system(size: 11))
+                        .foregroundColor(GymTheme.warmAmber)
+                    Text("TAGESABSCHLUSS-REPORT (22:00 UHR)")
+                        .font(.system(size: 10, weight: .bold, design: .monospaced))
+                        .foregroundColor(GymTheme.textPrimary)
+                }
+
+                Spacer()
+
+                Text("AUTONOM")
+                    .font(.system(size: 8.5, weight: .bold, design: .monospaced))
+                    .foregroundColor(GymTheme.sageGreen)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(GymTheme.sageGreen.opacity(0.15))
+                    .cornerRadius(4)
+            }
+
+            if let eval = loadLatestDailyEvaluation() {
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack(spacing: 12) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("KALORIEN")
+                                .font(.system(size: 8.5, weight: .bold, design: .monospaced))
+                                .foregroundColor(GymTheme.textMuted)
+                            Text("\(eval.nutrition.caloriesActual) / \(eval.nutrition.caloriesTarget) kcal")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundColor(GymTheme.textPrimary)
+                        }
+
+                        Divider().frame(height: 24).background(GymTheme.borderSubtle)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("PROTEIN")
+                                .font(.system(size: 8.5, weight: .bold, design: .monospaced))
+                                .foregroundColor(GymTheme.textMuted)
+                            Text("\(eval.nutrition.proteinActualG) / \(eval.nutrition.proteinTargetG) g")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundColor(GymTheme.textPrimary)
+                        }
+
+                        Divider().frame(height: 24).background(GymTheme.borderSubtle)
+
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("ADHAERENZ")
+                                .font(.system(size: 8.5, weight: .bold, design: .monospaced))
+                                .foregroundColor(GymTheme.textMuted)
+                            Text("\(eval.nutrition.adherenceScorePct)%")
+                                .font(.system(size: 11, weight: .bold))
+                                .foregroundColor(eval.nutrition.adherenceScorePct >= 80 ? GymTheme.sageGreen : GymTheme.warmAmber)
+                        }
+                    }
+                    .padding(8)
+                    .background(GymTheme.surfaceElevated.opacity(0.6))
+                    .cornerRadius(8)
+
+                    Text(eval.evaluationSummary)
+                        .font(.system(size: 10.5))
+                        .foregroundColor(GymTheme.textSecondary)
+                        .lineLimit(3)
+                }
+            } else {
+                HStack(spacing: 8) {
+                    Image(systemName: "hourglass")
+                        .font(.system(size: 10))
+                        .foregroundColor(GymTheme.textMuted)
+                    Text("Autonome Tages-Evaluation wird taeglich um 22:00 Uhr via MCP generiert.")
+                        .font(.system(size: 10))
+                        .foregroundColor(GymTheme.textMuted)
+                    Spacer()
+                }
+                .padding(8)
+                .background(GymTheme.surfaceElevated.opacity(0.4))
+                .cornerRadius(8)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 4)
+        .padding(.bottom, 12)
+    }
+
+    private func loadLatestDailyEvaluation() -> DailyEveningEvaluation? {
+        let fm = FileManager.default
+        let docs = fm.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let dir = docs.appendingPathComponent("userData", isDirectory: true)
+            .appendingPathComponent("primary_wize_prod", isDirectory: true)
+            .appendingPathComponent("daily_evaluations", isDirectory: true)
+
+        guard let files = try? fm.contentsOfDirectory(at: dir, includingPropertiesForKeys: nil), !files.isEmpty else {
+            return nil
+        }
+        let sorted = files.filter { $0.pathExtension == "json" }.sorted { $0.lastPathComponent > $1.lastPathComponent }
+        guard let latest = sorted.first,
+              let data = try? Data(contentsOf: latest),
+              let eval = try? JSONDecoder().decode(DailyEveningEvaluation.self, from: data) else {
+            return nil
+        }
+        return eval
     }
 
     // MARK: - Anatomical Zone Resolver

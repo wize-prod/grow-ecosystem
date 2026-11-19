@@ -319,3 +319,53 @@ public struct OlympicCoachHardcodedRuleEngine {
         )
     }
 }
+
+// MARK: - Autonomer 22:00 Uhr Tagesabschluss-Report (Data Contract)
+public struct DailyEveningEvaluation: Codable, Identifiable, Equatable, Sendable {
+    public var id: String { date }
+    public let date: String
+    public let userId: String
+    public let timestamp: String
+    public let nutrition: NutritionEval
+    public let training: TrainingEval
+    public let evaluationSummary: String
+
+    public struct NutritionEval: Codable, Equatable, Sendable {
+        public let caloriesActual: Int
+        public let caloriesTarget: Int
+        public let calorieDelta: Int
+        public let proteinActualG: Int
+        public let proteinTargetG: Int
+        public let adherenceScorePct: Int
+
+        enum CodingKeys: String, CodingKey {
+            case caloriesActual = "calories_actual"
+            case caloriesTarget = "calories_target"
+            case calorieDelta = "calorie_delta"
+            case proteinActualG = "protein_actual_g"
+            case proteinTargetG = "protein_target_g"
+            case adherenceScorePct = "adherence_score_pct"
+        }
+    }
+
+    public struct TrainingEval: Codable, Equatable, Sendable {
+        public let workoutPlanned: String
+        public let exercisesCount: Int
+        public let status: String
+
+        enum CodingKeys: String, CodingKey {
+            case workoutPlanned = "workout_planned"
+            case exercisesCount = "exercises_count"
+            case status
+        }
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case date
+        case userId = "user_id"
+        case timestamp
+        case nutrition
+        case training
+        case evaluationSummary = "evaluation_summary"
+    }
+}

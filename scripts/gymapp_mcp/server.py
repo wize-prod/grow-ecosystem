@@ -1087,9 +1087,11 @@ def generate_evening_health_evaluation(
         )
     }
 
-    eval_dir = ICLOUD_DATA_DIR / "daily_evaluations"
-    eval_dir.mkdir(parents=True, exist_ok=True)
-    (eval_dir / f"{target_date}.json").write_text(json.dumps(eval_record, indent=2), encoding="utf-8")
+    # Write to both iCloud and local telemetry paths
+    for base_dir in [ICLOUD_DATA_DIR, TELEMETRY_DATA_DIR]:
+        eval_dir = base_dir / "daily_evaluations"
+        eval_dir.mkdir(parents=True, exist_ok=True)
+        (eval_dir / f"{target_date}.json").write_text(json.dumps(eval_record, indent=2), encoding="utf-8")
 
     return (
         f"22:00 UHR TAGES-EVALUATION ERFOLGREICH GENERIERT ({target_date}):\n"
@@ -1107,31 +1109,86 @@ def prune_and_tier_data_retention(
     """
     Executes the formal tiered data retention policy:
     - Retains Tier 1 (Immutable: surgeries, height, chronic gates) permanently.
+    - Scrapes & aggregates useful KPIs from 24h daily evaluation reports into longitudinal_recomp_trends.json before auto-deleting verbose logs.
     - Compresses Tier 2 (Longitudinal: weight, PRs, milestone photos) into weekly trend curves.
     - Purges Tier 4 (Ephemeral: transient soreness logs, daily motivation, blurry/duplicate check-in photos) older than 14 days.
     """
+    now = datetime.datetime.now()
+    cutoff_24h = (now - datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+
+    # 1. Scrape useful KPIs from daily_evaluations before deletion
+    trends_file = ICLOUD_DATA_DIR / "longitudinal_recomp_trends.json"
+    trends = []
+    if trends_file.exists():
+        try:
+            trends = json.loads(trends_file.read_text(encoding="utf-8"))
+        except Exception:
+            trends = []
+
+    existing_dates = {t.get("date") for t in trends}
+    scraped_count = 0
+    purged_eval_count = 0
+
+    for base_dir in [ICLOUD_DATA_DIR, TELEMETRY_DATA_DIR]:
+        eval_dir = base_dir / "daily_evaluations"
+        if eval_dir.exists():
+            for p in sorted(eval_dir.glob("*.json")):
+                file_date = p.stem
+                if file_date < cutoff_24h:
+                    try:
+                        data = json.loads(p.read_text(encoding="utf-8"))
+                        if file_date not in existing_dates:
+                            kpi_summary = {
+                                "date": file_date,
+                                "calories_actual": data.get("nutrition", {}).get("calories_actual", 0),
+                                "calories_target": data.get("nutrition", {}).get("calories_target", 0),
+                                "protein_actual_g": data.get("nutrition", {}).get("protein_actual_g", 0),
+                                "protein_target_g": data.get("nutrition", {}).get("protein_target_g", 0),
+                                "adherence_score_pct": data.get("nutrition", {}).get("adherence_score_pct", 0),
+                                "workout_planned": data.get("training", {}).get("workout_planned", "-"),
+                                "summary": data.get("evaluation_summary", "")
+                            }
+                            trends.append(kpi_summary)
+                            existing_dates.add(file_date)
+                            scraped_count += 1
+                        # Safe deletion after scraping
+                        p.unlink()
+                        purged_eval_count += 1
+                    except Exception as e:
+                        print(f"[Prune] Error scraping/deleting {p}: {e}", file=sys.stderr)
+
+    # Save aggregated longitudinal trends
+    trends.sort(key=lambda x: x.get("date", ""))
+    for base_dir in [ICLOUD_DATA_DIR, TELEMETRY_DATA_DIR]:
+        try:
+            (base_dir / "longitudinal_recomp_trends.json").write_text(json.dumps(trends, indent=2), encoding="utf-8")
+        except Exception:
+            pass
+
+    # 2. Prune ephemeral medical observations older than 14 days
     dossier = GymAppStorage.load_json("medical_dossier.json", default={"observations": [], "acute_limitations": [], "lab_reports": []})
     obs = dossier.get("observations", [])
 
-    cutoff_14_days = (datetime.datetime.now() - datetime.timedelta(days=14)).strftime("%Y-%m-%d")
+    cutoff_14_days = (now - datetime.timedelta(days=14)).strftime("%Y-%m-%d")
     retained_obs = []
-    purged_count = 0
+    purged_obs_count = 0
 
     for o in obs:
         o_date = o.get("date", "")
         if o_date >= cutoff_14_days or o.get("category") in ["surgery", "chronic", "baseline"]:
             retained_obs.append(o)
         else:
-            purged_count += 1
+            purged_obs_count += 1
 
     dossier["observations"] = retained_obs
     GymAppStorage.save_json("medical_dossier.json", dossier)
 
     return (
         f"DATEN-HYGIENE & RETENTION-POLITIK AUSGEFUEHRT (Dossier: {user_id}):\n"
+        f"- KPI-Scraping: {scraped_count} Tagesabschluesse dauerhaft in 'longitudinal_recomp_trends.json' verdichtet.\n"
+        f"- 24h-Evaluation-Purge: {purged_eval_count} Rohdateien (> 24h) nach Extraktion sauber geloescht.\n"
         f"- Tier 1 (Permanent): Operationen, chronische Befunde, Laborberichte VOLLSTAENDIG ERHALTEN.\n"
-        f"- Tier 2 (Longitudinal): Gewichtskurve, KFA-Trends, Meilenstein-Fotos ERHALTEN.\n"
-        f"- Tier 4 (Ephemeral): {purged_count} veraltete Tagesnotizen (> 14 Tage alt) bereinigt.\n"
+        f"- Tier 4 (Ephemeral): {purged_obs_count} veraltete Tagesnotizen (> 14 Tage alt) bereinigt.\n"
         f"- Aktive Eintraege im Dossier: {len(retained_obs)}\n"
         f"- Systemzustand: Schlank, frei von Kontext-Muda, maximal rechenfaehig."
     )
