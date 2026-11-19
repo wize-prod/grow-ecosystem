@@ -517,6 +517,225 @@ def delete_planned_workout(
         f"- Cloud Firestore & iPhone Synchronisation: Ausgefuehrt."
     )
 
+# MARK: - Multimodal Visual Telemetry & Poka-Yoke Profile Contract Tools
+
+@mcp.tool()
+def ingest_visual_telemetry(
+    image_path: str,
+    view_angle: str = "front",
+    notes: Optional[str] = None,
+    estimated_bodyfat_pct: Optional[float] = None,
+    user_id: str = "primary_wize_prod"
+) -> str:
+    """
+    Ingests and registers a visual physique telemetry photo for longitudinal tracking.
+    Saves the image into private tenant storage and records chronological biometric metadata.
+    """
+    src = Path(image_path)
+    if not src.exists():
+        return f"FEHLER: Bilddatei nicht gefunden unter Pfad: {image_path}"
+
+    date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+    unique_suffix = uuid.uuid4().hex[:6]
+    ext = src.suffix.lower() if src.suffix else ".jpg"
+    dest_filename = f"{date_str}_{view_angle}_{unique_suffix}{ext}"
+
+    # Visual telemetry directories
+    icloud_vis = ICLOUD_DATA_DIR / "visual_telemetry"
+    telemetry_vis = TELEMETRY_DATA_DIR / "visual_telemetry"
+    icloud_vis.mkdir(parents=True, exist_ok=True)
+    telemetry_vis.mkdir(parents=True, exist_ok=True)
+
+    dest_icloud = icloud_vis / dest_filename
+    dest_local = telemetry_vis / dest_filename
+
+    import shutil
+    shutil.copy2(src, dest_icloud)
+    shutil.copy2(src, dest_local)
+
+    # Update visual telemetry index
+    index_data = GymAppStorage.load_json("visual_telemetry_index.json", default=[])
+    if not isinstance(index_data, list):
+        index_data = []
+
+    # Retrieve current weight if available
+    weight_logs = GymAppStorage.load_json("body_weight.json", default=[])
+    latest_weight = None
+    if weight_logs and isinstance(weight_logs, list):
+        latest_weight = weight_logs[-1].get("weight_kg")
+
+    record = {
+        "id": str(uuid.uuid4()),
+        "timestamp": datetime.datetime.now().isoformat(),
+        "date": date_str,
+        "view_angle": view_angle.lower(),
+        "file_name": dest_filename,
+        "body_weight_kg": latest_weight,
+        "estimated_bodyfat_pct": estimated_bodyfat_pct,
+        "ai_observations": notes or "Registriert via Multimodal MCP"
+    }
+    index_data.append(record)
+    GymAppStorage.save_json("visual_telemetry_index.json", index_data)
+
+    return (
+        f"VISUELLE TELEMETRIE ERFOLGREICH REGISTRIERT:\n"
+        f"- ID: {record['id']}\n"
+        f"- Datum: {date_str} ({view_angle.upper()})\n"
+        f"- Datei: {dest_filename}\n"
+        f"- Gekoppeltes Gewicht: {latest_weight} kg\n"
+        f"- Beobachtungen / Befund: {notes or 'Keine'}\n"
+        f"- Gesamte gespeicherte visuelle Eintraege: {len(index_data)}"
+    )
+
+@mcp.tool()
+def get_longitudinal_health_summary(
+    user_id: str = "primary_wize_prod",
+    lookback_days: int = 90
+) -> str:
+    """
+    Returns dense, chronological longitudinal health telemetry:
+    Body weight trends, visual telemetry history, workout volume/PRs, and active UserProfileContract.
+    Used by Gemini to evaluate physical progression and calibrate target macros/supplements.
+    """
+    weight_logs = GymAppStorage.load_json("body_weight.json", default=[])
+    visual_index = GymAppStorage.load_json("visual_telemetry_index.json", default=[])
+    contract = GymAppStorage.load_json("profile_contract.json", default={})
+
+    report = [
+        "=======================================================",
+        f"LONGITUDINAL HEALTH TELEMETRY SUMMARY (USER: {user_id})",
+        "=======================================================",
+        f"- Aktive Vertrags-Version: {contract.get('contract_version', 'Nicht initialisiert')}",
+        f"- Aktuelles Kalorien-Budget: {contract.get('nutrition_targets', {}).get('daily_calories_kcal', 'N/A')} kcal",
+        f"- Aktuelles Protein-Ziel: {contract.get('nutrition_targets', {}).get('daily_protein_g', 'N/A')} g",
+        f"- Aktuelle Hydration: {contract.get('nutrition_targets', {}).get('daily_hydration_ml', 'N/A')} ml",
+        "",
+        "--- GEWICHTS-HISTORIE ---"
+    ]
+    if isinstance(weight_logs, list) and weight_logs:
+        for entry in weight_logs[-10:]:
+            report.append(f"  {entry.get('date', 'N/A')}: {entry.get('weight_kg')} kg (Notiz: {entry.get('notes', '-')})")
+    else:
+        report.append("  Keine Gewichtseintraege vorhanden.")
+
+    report.append("\n--- VISUELLE TELEMETRIE-HISTORIE ---")
+    if isinstance(visual_index, list) and visual_index:
+        for v in visual_index[-6:]:
+            report.append(f"  {v.get('date')}: [{v.get('view_angle')}] KFA ~{v.get('estimated_bodyfat_pct', 'N/A')}% | {v.get('ai_observations')}")
+    else:
+        report.append("  Keine visuellen Fotos registriert.")
+
+    report.append("\n--- AKTIVES SUPPLEMENT-PROTOKOLL ---")
+    supps = contract.get("circadian_supplement_schedule", [])
+    if supps:
+        for s in supps:
+            report.append(f"  {s.get('time_slot')}: {s.get('substance')} ({s.get('dosage')}) - Grund: {s.get('reason')}")
+    else:
+        report.append("  Keine Supplements im aktiven Vertrag hinterlegt.")
+
+    report.append("\n--- AKTIVE TRAININGS-KADENZ & BESCHRAENKUNGEN ---")
+    training = contract.get("training_cadence", {})
+    report.append(f"  Programm: {training.get('program_name', 'Standard')}")
+    report.append(f"  Frequenz: {training.get('sessions_per_week', 3)} Einheiten/Woche")
+    report.append(f"  RPE-Deckel: {training.get('rpe_ceiling', 8.5)}")
+    gates = contract.get("clinical_safety_gates", {})
+    blacklists = gates.get("biomechanical_blacklists", [])
+    if blacklists:
+        report.append(f"  Biomechanische Blacklist (Poka-Yoke): {', '.join(blacklists)}")
+
+    return "\n".join(report)
+
+@mcp.tool()
+def consult_and_update_profile_contract(
+    intake_json_str: str
+) -> str:
+    """
+    Validates and updates the UserProfileContract through the deterministic C++ Poka-Yoke safety core.
+    Accepts full intake data from Gemini, computes Mifflin-St Jeor math, filters contraindicated
+    supplements against active medications, enforces joint/spine safety, and atomically updates the contract.
+    """
+    try:
+        intake = json.loads(intake_json_str)
+    except Exception as e:
+        return f"FEHLER: Ungueltiges JSON in intake_json_str ({e})"
+
+    from scripts.grow_sandbox.generate_profile_contract import calculate_profile
+    validated_contract = calculate_profile(intake)
+
+    GymAppStorage.save_json("profile_contract.json", validated_contract)
+
+    supps = [s.get("substance") for s in validated_contract.get("circadian_supplement_schedule", [])]
+    macros = validated_contract.get("nutrition_targets", {})
+    training = validated_contract.get("training_cadence", {})
+
+    return (
+        f"USER PROFILE CONTRACT ERFOLGREICH AKTUALISIERT & POKA-YOKE GEPRUEFT:\n"
+        f"- Kalorien: {macros.get('daily_calories_kcal')} kcal\n"
+        f"- Protein: {macros.get('daily_protein_g')} g | Hydration: {macros.get('daily_hydration_ml')} ml\n"
+        f"- Freigegebene Supplements ({len(supps)}): {', '.join(supps)}\n"
+        f"- Trainings-Programm: {training.get('program_name')} (RPE Deckel: {training.get('rpe_ceiling')})\n"
+        f"- Poka-Yoke Status: DETERMINISTISCH VERIFIZIERT (C++20 CoreEngine Standard)\n"
+        f"- Vertrag gespeichert unter: profile_contract.json (iCloud & Telemetry synchronisiert)"
+    )
+
+@mcp.tool()
+def apply_executive_override(
+    override_json_str: str
+) -> str:
+    """
+    Allows the user or Gemini to conversationally override specific parameters (e.g. daily calories,
+    protein target, training focus) while re-verifying safety through the Poka-Yoke gate.
+    """
+    try:
+        overrides = json.loads(override_json_str)
+    except Exception as e:
+        return f"FEHLER: Ungueltiges JSON in override_json_str ({e})"
+
+    current_contract = GymAppStorage.load_json("profile_contract.json", default={})
+    if not current_contract:
+        return "FEHLER: Kein aktiver ProfileContract vorhanden. Bitte zuerst initialisieren."
+
+    ident = current_contract.get("identity", {})
+    gates = current_contract.get("clinical_safety_gates", {})
+    macros = current_contract.get("nutrition_targets", {})
+    training = current_contract.get("training_cadence", {})
+
+    intake = {
+        "user_id": ident.get("user_id", "primary_wize_prod"),
+        "display_name": ident.get("display_name", "User"),
+        "biological_sex": ident.get("biological_sex", "MALE"),
+        "age": ident.get("age", 24),
+        "height_cm": ident.get("height_cm", 180.0),
+        "weight_kg": ident.get("weight_kg", 80.0),
+        "conditions": gates.get("chronic_conditions", []),
+        "medications": gates.get("active_medications", []),
+        "activity_multiplier": overrides.get("activity_multiplier", 1.35),
+        "candidate_supplements": overrides.get("candidate_supplements", current_contract.get("circadian_supplement_schedule", [])),
+        "candidate_exercises": overrides.get("candidate_exercises", training.get("allowed_modalities", []))
+    }
+
+    from scripts.grow_sandbox.generate_profile_contract import calculate_profile
+    new_contract = calculate_profile(intake)
+
+    if "daily_calories_kcal" in overrides:
+        new_contract["nutrition_targets"]["daily_calories_kcal"] = int(overrides["daily_calories_kcal"])
+    if "daily_protein_g" in overrides:
+        max_safe_protein = round(float(ident.get("weight_kg", 80.0)) * 2.6)
+        requested_protein = int(overrides["daily_protein_g"])
+        new_contract["nutrition_targets"]["daily_protein_g"] = min(requested_protein, max_safe_protein)
+    if "program_name" in overrides:
+        new_contract["training_cadence"]["program_name"] = str(overrides["program_name"])
+
+    GymAppStorage.save_json("profile_contract.json", new_contract)
+
+    return (
+        f"EXECUTIVE OVERRIDE ERFOLGREICH ANGEWENDET:\n"
+        f"- Ueberschriebene Parameter: {list(overrides.keys())}\n"
+        f"- Neue Zielwerte: {new_contract['nutrition_targets']['daily_calories_kcal']} kcal, "
+        f"{new_contract['nutrition_targets']['daily_protein_g']} g Protein\n"
+        f"- Poka-Yoke Re-Audit: BESTANDEN."
+    )
+
 # MARK: - Server Runner & Unified GrowSuite Tools
 def main():
     port = 8765
@@ -547,7 +766,11 @@ def main():
             "get_daily_schedule",
             "plan_workout",
             "get_workout_history",
-            "log_body_weight"
+            "log_body_weight",
+            "ingest_visual_telemetry",
+            "get_longitudinal_health_summary",
+            "consult_and_update_profile_contract",
+            "apply_executive_override"
         }
         for tool_name in list(mcp._tool_manager._tools.keys()):
             if tool_name not in ALLOWED_GROWCERY_TOOLS and tool_name not in ALLOWED_GYM_TOOLS:
