@@ -344,6 +344,11 @@ public struct TodayUnifiedView: View {
                         Text("Fixierte Messung: \(summary)")
                             .font(.system(size: 11, weight: .medium, design: .monospaced))
                             .foregroundColor(GymTheme.sageGreen)
+                    } else if let w = gymStore.latestMeasurement(for: .weight) {
+                        let fat = gymStore.latestMeasurement(for: .bodyFat)
+                        Text(String(format: "Aktuell: %.2f kg%@", w.value, fat.map { String(format: " • %.1f %% KFA", $0.value) } ?? ""))
+                            .font(.system(size: 11, weight: .semibold, design: .monospaced))
+                            .foregroundColor(GymTheme.textPrimary)
                     } else {
                         Text("Tippen fuer Scan & Apple Health Abgleich")
                             .font(.system(size: 10, weight: .regular))

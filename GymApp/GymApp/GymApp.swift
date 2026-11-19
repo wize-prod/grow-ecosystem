@@ -29,6 +29,7 @@ struct GymApp: App {
                 .background(GymTheme.bg.ignoresSafeArea())
                 .environmentObject(store)
                 .onAppear {
+                    healthService.checkAndRequestAuthorization()
                     calService.fetchUpcomingWorkouts()
                     healthService.fetchAllHealthData()
                     growceryService.refreshData()

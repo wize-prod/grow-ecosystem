@@ -239,6 +239,7 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
     public func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         print("[BLE] Verbindung zu Waage getrennt. Bereite naechste Session vor.")
         self.connectedPeripheral = nil
+        resetMeasurementState()
         DispatchQueue.main.async {
             self.status = .scanning
             self.liveWeightKg = nil
@@ -275,12 +276,14 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
                 print("[BLE] Notify aktiviert auf: \(uuid)")
             }
 
-            // 2. Renpho Handshake auf FFE3 / FFE4
-            if uuid.contains("FFE3") || uuid.contains("FFE4") {
-                let handshakeCmd: [UInt8] = [0x13, 0x09, 0x15, 0x01, 0x10, 0x00, 0x00, 0x00, 0x42]
-                let writeType: CBCharacteristicWriteType = char.properties.contains(.writeWithoutResponse) ? .withoutResponse : .withResponse
-                peripheral.writeValue(Data(handshakeCmd), for: char, type: writeType)
-                print("[BLE] Renpho Handshake an \(uuid) gesendet.")
+            // 2. Renpho Handshake auf FFE3 / FFE4 / FFE1
+            if uuid.contains("FFE3") || uuid.contains("FFE4") || uuid.contains("FFE1") {
+                if char.properties.contains(.write) || char.properties.contains(.writeWithoutResponse) {
+                    let handshakeCmd: [UInt8] = [0x13, 0x09, 0x15, 0x01, 0x10, 0x00, 0x00, 0x00, 0x42]
+                    let writeType: CBCharacteristicWriteType = char.properties.contains(.writeWithoutResponse) ? .withoutResponse : .withResponse
+                    peripheral.writeValue(Data(handshakeCmd), for: char, type: writeType)
+                    print("[BLE] Renpho Handshake an \(uuid) gesendet.")
+                }
             }
         }
     }

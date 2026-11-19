@@ -700,6 +700,10 @@ public final class GymStore: ObservableObject {
         if let data = try? Data(contentsOf: measurementsURL),
            let loaded = try? JSONDecoder().decode([BodyMeasurementEntry].self, from: data) {
             self.measurements = loaded
+            if let w = loaded.first(where: { $0.type == .weight })?.value {
+                let bf = loaded.first(where: { $0.type == .bodyFat })?.value
+                DynamicFitnessEngine.shared.recalculate(customWeightKg: w, customFatPct: bf)
+            }
         }
         if let data = try? Data(contentsOf: programsURL),
            let loaded = try? JSONDecoder().decode([TrainingProgram].self, from: data),

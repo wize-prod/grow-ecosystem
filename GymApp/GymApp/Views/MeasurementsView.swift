@@ -84,7 +84,9 @@ public struct MeasurementsView: View {
                         .foregroundColor(GymTheme.textPrimary)
 
                     if let entry = latest {
-                        let formatted = entry.value.truncatingRemainder(dividingBy: 1) == 0 ? "\(Int(entry.value))" : String(format: "%.1f", entry.value).replacingOccurrences(of: ".", with: ",")
+                        let formatted: String = (mType == .weight)
+                            ? String(format: "%.2f", entry.value).replacingOccurrences(of: ".", with: ",")
+                            : (entry.value.truncatingRemainder(dividingBy: 1) == 0 ? "\(Int(entry.value))" : String(format: "%.1f", entry.value).replacingOccurrences(of: ".", with: ","))
                         Text("\(formatted) \(mType.unit)")
                             .font(.caption2)
                             .foregroundColor(GymTheme.textSecondary)
