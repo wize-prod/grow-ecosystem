@@ -76,8 +76,7 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
             delegate: self,
             queue: DispatchQueue(label: "com.grow.core.ble", qos: .userInitiated),
             options: [
-                CBCentralManagerOptionShowPowerAlertKey: true,
-                CBCentralManagerOptionRestoreIdentifierKey: "com.grow.core.ble.restore"
+                CBCentralManagerOptionShowPowerAlertKey: true
             ]
         )
     }
@@ -146,6 +145,17 @@ public final class GrowBLEPeripheralManager: NSObject, ObservableObject, CBCentr
             DispatchQueue.main.async { self.status = .unauthorized }
         default:
             DispatchQueue.main.async { self.status = .scanning }
+        }
+    }
+
+    public func centralManager(_ central: CBCentralManager, willRestoreState dict: [String: Any]) {
+        if let peripherals = dict[CBCentralManagerRestoredStatePeripheralsKey] as? [CBPeripheral], let first = peripherals.first {
+            self.connectedPeripheral = first
+            first.delegate = self
+            DispatchQueue.main.async {
+                self.status = .connected
+                self.connectedDeviceName = first.name ?? "Renpho ES-26M"
+            }
         }
     }
 
