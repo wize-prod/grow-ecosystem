@@ -8,6 +8,7 @@
 .derivedData/
 DerivedData/
 build/
+.build/
 *.xcuserstate
 project.xcworkspace/xcuserdata/
 *.xcuserdatad

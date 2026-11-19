@@ -25,6 +25,16 @@ public:
     static TransactionValidationResult validateExpense(double amount, double currentBalance, double fixedCostsRemaining);
     static double reconcileMonotonicWater(double localMl, double incomingMl);
     static bool canTransitionDose(bool currentlyTaken, bool incomingTaken);
+
+    // Physiological Calculations
+    static double calculateBMR(int sex, int age, double weightKg, double heightCm);
+    static double calculateTDEE(int sex, int age, double weightKg, double heightCm, double activityMultiplier);
+    static double calculateProteinTarget(int age, double weightKg, bool hasSarcopeniaOrOsteopenia);
+    static double calculateHydrationTarget(double weightKg, int workoutMinutes);
+
+    // Poka-Yoke Safety Filters
+    static int screenContraindication(const std::string& medication, const std::string& substance);
+    static bool isExerciseSafe(const std::string& limitation, const std::string& exercise);
 };
 
 } // namespace Grow
@@ -33,11 +43,8 @@ public:
 extern "C" {
 #endif
 
-// C ABI Exports (Accessible via Swift C++ interop and Android JNI)
-bool grow_core_validate_macros(double calories, double protein, double carbs, double fat, double fiber, double* calculated);
-bool grow_core_validate_expense(double amount, double balance, double fixedCosts, int* failedGate);
-double grow_core_reconcile_water(double localMl, double incomingMl);
-bool grow_core_is_dose_terminal(bool currentlyTaken, bool incomingTaken);
+// Include the C declarations
+#include "include/GrowCoreEngine.h"
 
 #ifdef __cplusplus
 }

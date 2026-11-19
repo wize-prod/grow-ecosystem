@@ -145,4 +145,97 @@ final class GrowCoreTests: XCTestCase {
         let approved = ExpenseGateLifecycle.fullyApproved(approvalDate: Date(), safeBalanceRemaining: 85.0)
         XCTAssertTrue(approved.isApproved)
     }
+
+    func testClinicalContraindicationGate() {
+        // 1. Amlodipine (Blood pressure) + Rhodiola / Nitrate must be BLOCKED
+        let codeRhodiola = grow_core_screen_contraindication("Amlodipine", "Rhodiola_Rosea")
+        XCTAssertEqual(codeRhodiola, GROW_BLOCKED_HYPERTENSIVE_INTERACTION)
+
+        let codeNitrate = grow_core_screen_contraindication("Ramipril", "Rote_Bete_Nitrat")
+        XCTAssertEqual(codeNitrate, GROW_BLOCKED_HYPERTENSIVE_INTERACTION)
+
+        // 2. Vitamin D3 + K2 and Magnesium must be CLEARED
+        let codeD3 = grow_core_screen_contraindication("Amlodipine", "Vitamin D3 + K2")
+        XCTAssertEqual(codeD3, GROW_STATUS_CLEARED)
+
+        let codeMag = grow_core_screen_contraindication("Amlodipine", "Magnesium_Bisglycinat")
+        XCTAssertEqual(codeMag, GROW_STATUS_CLEARED)
+
+        // 3. SSRI + St. John's Wort / 5-HTP must trigger Serotonin Syndrome Veto
+        let codeSSRI = grow_core_screen_contraindication("Sertraline", "St_Johns_Wort")
+        XCTAssertEqual(codeSSRI, GROW_BLOCKED_SEROTONIN_SYNDROME)
+
+        let code5HTP = grow_core_screen_contraindication("Escitalopram", "5_HTP")
+        XCTAssertEqual(code5HTP, GROW_BLOCKED_SEROTONIN_SYNDROME)
+
+        // 4. Anticoagulant + Ginkgo must trigger Bleeding Veto
+        let codeGinkgo = grow_core_screen_contraindication("Warfarin", "Ginkgo_Biloba")
+        XCTAssertEqual(codeGinkgo, GROW_BLOCKED_BLEEDING_RISK)
+    }
+
+    func testBiomechanicalExerciseSafetyGate() {
+        // 1. Axial spinal loading filter
+        XCTAssertFalse(grow_core_is_exercise_safe("NO_AXIAL_SPINAL_LOADING", "Barbell_Squat"))
+        XCTAssertFalse(grow_core_is_exercise_safe("NO_AXIAL_SPINAL_LOADING", "Conventional_Deadlift"))
+        XCTAssertTrue(grow_core_is_exercise_safe("NO_AXIAL_SPINAL_LOADING", "Seated_Cable_Row"))
+        XCTAssertTrue(grow_core_is_exercise_safe("NO_AXIAL_SPINAL_LOADING", "Glute_Bridge_Mat"))
+
+        // 2. High impact plyometric filter for Osteopenia
+        XCTAssertFalse(grow_core_is_exercise_safe("OSTEOPENIA", "Box_Jump"))
+        XCTAssertFalse(grow_core_is_exercise_safe("OSTEOPENIA", "Burpee"))
+        XCTAssertTrue(grow_core_is_exercise_safe("OSTEOPENIA", "Controlled_Leg_Press"))
+    }
+
+    func testUserProfileContractAssemblyAndJSONRoundtrip() throws {
+        let identity = UserProfileContract.ContractIdentity(
+            userId: "usr_mama_test",
+            displayName: "Mama",
+            biologicalSex: .female,
+            age: 58,
+            heightCm: 165.0,
+            weightKg: 68.0
+        )
+
+        let candidateSupplements = [
+            ("08:00", "Vitamin D3 + K2", "2000 IE", "Knochendichte"),
+            ("08:00", "Rhodiola_Rosea", "500 mg", "Energie"), // Must be dropped due to Amlodipine
+            ("21:00", "Magnesium_Bisglycinat", "300 mg", "Entspannung")
+        ]
+
+        let candidateExercises = [
+            "Barbell_Squat", // Must be dropped due to Osteopenia
+            "Conventional_Deadlift", // Must be dropped
+            "Seated_Cable_Row",
+            "Glute_Bridge_Mat",
+            "Controlled_Leg_Press"
+        ]
+
+        let contract = UserProfileContractAssembler.assembleProfile(
+            identity: identity,
+            conditions: ["HYPERTENSION", "OSTEOPENIA"],
+            medications: ["AMLODIPINE"],
+            candidateSupplements: candidateSupplements,
+            candidateExercises: candidateExercises,
+            activityMultiplier: 1.30
+        )
+
+        // Verifications
+        XCTAssertTrue(contract.nutritionTargets.dailyCaloriesKcal >= 1500 && contract.nutritionTargets.dailyCaloriesKcal <= 1700)
+        XCTAssertEqual(contract.nutritionTargets.dailyProteinG, 92) // 68 kg * 1.35 g/kg = 91.8 -> 92 g
+        XCTAssertEqual(contract.circadianSupplementSchedule.count, 2, "Rhodiola must be filtered out by Poka-Yoke gate")
+        XCTAssertFalse(contract.circadianSupplementSchedule.contains { $0.substance.contains("Rhodiola") })
+
+        XCTAssertEqual(contract.trainingCadence.allowedModalities.count, 3, "Axial exercises must be filtered out")
+        XCTAssertFalse(contract.trainingCadence.allowedModalities.contains("Barbell_Squat"))
+        XCTAssertFalse(contract.trainingCadence.allowedModalities.contains("Conventional_Deadlift"))
+
+        // JSON Roundtrip verification
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        let jsonData = try encoder.encode(contract)
+        XCTAssertFalse(jsonData.isEmpty)
+
+        let decoded = try JSONDecoder().decode(UserProfileContract.self, from: jsonData)
+        XCTAssertEqual(contract, decoded, "Contract must survive lossless JSON serialization")
+    }
 }
