@@ -36,7 +36,7 @@ public struct ExercisesView: View {
     @State private var showingRenameAlert = false
     @State private var isFavoritesExpanded: Bool = true
 
-    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
+    let alphabet = ["#"] + "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
 
     public var body: some View {
         NavigationStack {
@@ -113,6 +113,7 @@ public struct ExercisesView: View {
                                                     .font(.caption)
                                                     .fontWeight(.bold)
                                                     .foregroundColor(GymTheme.textMuted)
+                                                    .padding(.leading, 4)
                                                     .id(section.title)
                                             }
                                         }
@@ -442,14 +443,20 @@ public struct ExercisesView: View {
             let sorted = filtered.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
             var dict: [String: [Exercise]] = [:]
             for ex in sorted {
-                let initial = String(ex.name.prefix(1)).uppercased()
+                let firstChar = String(ex.name.prefix(1)).uppercased()
+                let initial = firstChar.rangeOfCharacter(from: .letters) != nil ? firstChar : "#"
                 dict[initial, default: []].append(ex)
             }
             var sections: [ExerciseSection] = []
             if !favorites.isEmpty {
                 sections.append(ExerciseSection(title: "Favoriten", exercises: favorites))
             }
-            sections.append(contentsOf: dict.keys.sorted().map { ExerciseSection(title: $0, exercises: dict[$0] ?? []) })
+            let sortedKeys = dict.keys.sorted { k1, k2 in
+                if k1 == "#" { return true }
+                if k2 == "#" { return false }
+                return k1 < k2
+            }
+            sections.append(contentsOf: sortedKeys.map { ExerciseSection(title: $0, exercises: dict[$0] ?? []) })
             return sections
 
         case .nameDescending:
@@ -590,11 +597,19 @@ public struct ExercisesView: View {
     }
 
     private func scrollToLetter(_ letter: String, proxy: ScrollViewProxy) {
+        if letter == "#" {
+            if let first = displaySections.first(where: { $0.title == "#" || $0.title == "Favoriten" }) {
+                withAnimation(.easeInOut(duration: 0.15)) {
+                    proxy.scrollTo(first.title, anchor: .top)
+                }
+            }
+            return
+        }
         if displaySections.contains(where: { $0.title == letter }) {
             withAnimation(.easeInOut(duration: 0.15)) {
                 proxy.scrollTo(letter, anchor: .top)
             }
-        } else if let nextSection = displaySections.first(where: { $0.title > letter }) {
+        } else if let nextSection = displaySections.first(where: { $0.title > letter && $0.title != "#" && $0.title != "Favoriten" }) {
             withAnimation(.easeInOut(duration: 0.15)) {
                 proxy.scrollTo(nextSection.title, anchor: .top)
             }

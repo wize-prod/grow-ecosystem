@@ -121,7 +121,7 @@ public struct TodayUnifiedView: View {
                         // 6. Section 4: Biomechanik, Körpermaße & Messungen (am Seitenende)
                         quickActionButtonsRow
 
-                        Spacer(minLength: 90)
+                        Spacer(minLength: 140)
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 8)
@@ -146,13 +146,10 @@ public struct TodayUnifiedView: View {
                         }
                 )
 
-                // Schwebende Aktions-Buttons unten rechts (+ Button über Wasser-Tracker)
-                VStack(spacing: 12) {
-                    floatingQuickAddMenu
-                    NutriCircularWaterButton()
-                }
-                .padding(.trailing, 20)
-                .padding(.bottom, 24)
+                // Schwebende Primäraktion unten rechts (Ergonomische Daumenzone)
+                floatingQuickAddMenu
+                    .padding(.trailing, 20)
+                    .padding(.bottom, 20)
             }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
@@ -810,10 +807,13 @@ public struct TodayUnifiedView: View {
 
             if isFoodExpanded {
                 VStack(alignment: .leading, spacing: 12) {
-                    // A. Zirkadiane Supplements (Vorschau & Direkt-Check)
+                    // A. Hydration Strip (Poka-Yoke: Direkte Erfassung ohne schwebende UI-Kollision)
+                    hydrationStrip
+
+                    // B. Zirkadiane Supplements (Vorschau & Direkt-Check)
                     circadianSupplementsMiniCard
 
-                    // B. Mahlzeiten-Log
+                    // C. Mahlzeiten-Log
                     let dayLogs = localStore.logs(for: selectedDate)
                     if dayLogs.isEmpty {
                         Text("Noch keine Mahlzeiten für diesen Tag eingetragen.")
@@ -936,6 +936,86 @@ public struct TodayUnifiedView: View {
 
         // If all remaining candidates are taken, show the first candidate
         return candidates.first
+    }
+
+    // Hydration Strip (Poka-Yoke: Direkte Erfassung ohne schwebende UI-Kollision)
+    private var hydrationStrip: some View {
+        let todayWater = localStore.todayWater(date: selectedDate)
+        let targetWater = localStore.targetWaterMl
+        let ratio = min(1.0, max(0.0, todayWater / max(1.0, targetWater)))
+        let percent = Int(ratio * 100.0)
+
+        return VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Label("HYDRATION", systemImage: "drop.fill")
+                    .font(.system(size: 9.5, weight: .bold, design: .monospaced))
+                    .foregroundColor(GymTheme.cyanAccent)
+                Spacer()
+                Text(String(format: "%.1fL / %.1fL (%d%%)", todayWater / 1000.0, targetWater / 1000.0, percent))
+                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                    .foregroundColor(GymTheme.textSecondary)
+            }
+
+            // Progress Bar
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(GymTheme.surfaceElevated)
+                        .frame(height: 6)
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(todayWater >= targetWater ? GymTheme.sageGreen : GymTheme.cyanAccent)
+                        .frame(width: max(0, geo.size.width * CGFloat(ratio)), height: 6)
+                }
+            }
+            .frame(height: 6)
+
+            // Quick Add Pills
+            HStack(spacing: 8) {
+                quickWaterButton(ml: 250, label: "+250 ml")
+                quickWaterButton(ml: 500, label: "+500 ml")
+                quickWaterButton(ml: 750, label: "+750 ml")
+                quickWaterButton(ml: 1000, label: "+1,0 L")
+                Spacer()
+                Menu {
+                    Button(role: .destructive) {
+                        HapticFeedback.mechanicalClick()
+                        localStore.resetWater(date: selectedDate, sourceApp: "Grow")
+                    } label: {
+                        Label("Wasser zurücksetzen", systemImage: "arrow.counterclockwise")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundColor(GymTheme.textMuted)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 4)
+                }
+            }
+            .padding(.top, 2)
+        }
+        .padding(10)
+        .background(GymTheme.surfaceElevated)
+        .cornerRadius(10)
+    }
+
+    private func quickWaterButton(ml: Int, label: String) -> some View {
+        Button {
+            HapticFeedback.light()
+            localStore.logWater(ml: Double(ml), date: selectedDate, sourceApp: "Grow")
+        } label: {
+            Text(label)
+                .font(.system(size: 9.5, weight: .semibold, design: .monospaced))
+                .foregroundColor(GymTheme.textPrimary)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(GymTheme.surface)
+                .cornerRadius(6)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6)
+                        .stroke(GymTheme.borderSubtle, lineWidth: 0.8)
+                )
+        }
+        .buttonStyle(.plain)
     }
 
     // Mini-Card: Zirkadiane Supplements (Fokus auf anstehendes Supplement)

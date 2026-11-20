@@ -11,7 +11,7 @@ public struct InventoryView: View {
     public var body: some View {
         NavigationStack {
             DepotInventorySection()
-                .background(Theme.bg.ignoresSafeArea())
+                .background(Theme.bg)
                 .navigationTitle("Vorratskammer")
                 .navigationBarTitleDisplayMode(store.isPadInstance ? .inline : .large)
         }
@@ -67,9 +67,8 @@ public struct DepotInventorySection: View {
 
     public var body: some View {
         let items = filteredItems
-        return ZStack(alignment: .bottom) {
-            ScrollView {
-                LazyVStack(spacing: 10) {
+        return ScrollView {
+            LazyVStack(spacing: 10) {
                     if items.isEmpty {
                         VStack(spacing: 4) {
                             Text("Keine Artikel im Vorrat")
@@ -109,7 +108,7 @@ public struct DepotInventorySection: View {
                         }
                     }
 
-                    Spacer().frame(height: 75)
+                    Spacer().frame(height: 70)
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 12)
@@ -117,39 +116,36 @@ public struct DepotInventorySection: View {
                 .frame(maxWidth: .infinity)
             }
             .scrollDismissesKeyboard(.interactively)
-
-            InventoryBottomCommandDeck(
-                searchText: $searchText,
-                storeFilter: $storeFilter,
-                storeSources: storeSources,
-                itemCount: { itemCount(for: $0) },
-                localizedStoreName: { localizedStoreName($0) },
-                onScanBarcode: {
-                    HapticFeedbackService.shared.mechanicalClick()
-                    showingScanner = true
-                },
-                onOpenStoreScouter: {
-                    HapticFeedbackService.shared.mechanicalClick()
-                    showingStoreScouter = true
-                }
-            )
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Vorrat durchsuchen...")
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    // Einkaufswagen Button (Store Scouter)
-                    Button(action: {
-                        HapticFeedbackService.shared.lightDetent()
-                        showingStoreScouter = true
-                    }) {
-                        Image(systemName: "cart")
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundColor(Theme.warmSand)
-                            .frame(width: 36, height: 36)
-                            .background(Circle().fill(Theme.surfaceElevated))
-                            .overlay(Circle().stroke(Theme.warmSand.opacity(0.35), lineWidth: 1))
+                    // Store Filter Menue
+                    Menu {
+                        ForEach(storeSources, id: \.self) { source in
+                            Button(action: {
+                                HapticFeedbackService.shared.lightDetent()
+                                storeFilter = source
+                            }) {
+                                HStack {
+                                    Text(localizedStoreName(source))
+                                    if source != "ALLE" {
+                                        Text("(\(itemCount(for: source)))")
+                                    }
+                                    if storeFilter == source {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                        }
+                    } label: {
+                        let isFiltered = storeFilter != "ALLE"
+                        Image(systemName: isFiltered ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(isFiltered ? Theme.sageGreen : Theme.textSecondary)
                     }
-                    .accessibilityLabel("Einkaufswagen")
+                    .accessibilityLabel("Store Filter auswählen")
 
-                    // PDF Export Button direkt daneben
+                    // PDF Export ShareLink
                     ShareLink(
                         item: PDFTransferable(
                             data: store.generateAIRecipeMasterPDFData(),
@@ -160,13 +156,10 @@ public struct DepotInventorySection: View {
                         Image(systemName: "arrow.up.doc")
                             .font(.system(size: 14, weight: .semibold))
                             .foregroundColor(Theme.sageGreen)
-                            .frame(width: 36, height: 36)
-                            .background(Circle().fill(Theme.surfaceElevated))
-                            .overlay(Circle().stroke(Theme.sageGreen.opacity(0.35), lineWidth: 1))
                     }
                     .accessibilityLabel("PDF exportieren")
 
-                    // Kontext-Menü
+                    // Mehr-Menue (Tools & Neuer Vorratsartikel)
                     Menu {
                         ShareLink(
                             item: PDFTransferable(
@@ -220,11 +213,40 @@ public struct DepotInventorySection: View {
                         }
                     } label: {
                         Image(systemName: "ellipsis")
+                            .font(.system(size: 14, weight: .semibold))
                             .foregroundColor(Theme.textSecondary)
-                            .frame(width: 30, height: 36)
                     }
                 }
             }
+
+        .safeAreaInset(edge: .bottom) {
+            Button(action: {
+                HapticFeedbackService.shared.mechanicalClick()
+                showingScanner = true
+            }) {
+                HStack(spacing: 6) {
+                    Image(systemName: "barcode.viewfinder")
+                        .font(.system(size: 14, weight: .bold))
+                    Text("Barcode scannen / erfassen")
+                        .font(.system(size: 12, weight: .bold))
+                }
+                .foregroundColor(Theme.bg)
+                .frame(maxWidth: .infinity)
+                .frame(height: 44)
+                .background(RoundedRectangle(cornerRadius: 12).fill(Theme.sageGreen))
+                .shadow(color: Theme.sageGreen.opacity(0.35), radius: 6, x: 0, y: 3)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .padding(.horizontal, 16)
+            .padding(.top, 4)
+            .padding(.bottom, 64)
+            .background(
+                LinearGradient(
+                    colors: [Theme.bg.opacity(0), Theme.bg.opacity(0.95)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
         }
         .sheet(item: $inspectingItem) { item in
             NutritionDetailSheet(item: item)
@@ -316,117 +338,6 @@ public struct DepotInventorySection: View {
     }
 }
 
-// MARK: - Inventory Bottom Command Deck (Singular Sleek Capsule)
-struct InventoryBottomCommandDeck: View {
-    @Binding var searchText: String
-    @Binding var storeFilter: String
-    let storeSources: [String]
-    let itemCount: (String) -> Int
-    let localizedStoreName: (String) -> String
-    let onScanBarcode: () -> Void
-    let onOpenStoreScouter: () -> Void
-
-    var body: some View {
-        HStack(spacing: 8) {
-            Image(systemName: "magnifyingglass")
-                .font(.system(size: 13, weight: .medium))
-                .foregroundColor(Theme.textSecondary)
-
-            TextField("Suchen...", text: $searchText)
-                .font(.system(size: 13, weight: .regular))
-                .foregroundColor(Theme.textPrimary)
-                .autocorrectionDisabled()
-
-            if !searchText.isEmpty {
-                Button(action: {
-                    HapticFeedbackService.shared.lightDetent()
-                    searchText = ""
-                }) {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 14))
-                        .foregroundColor(Theme.textMuted)
-                }
-                .buttonStyle(PlainButtonStyle())
-            }
-
-            // Singular Filter Button with Menu
-            Menu {
-                ForEach(storeSources, id: \.self) { source in
-                    Button(action: {
-                        HapticFeedbackService.shared.lightDetent()
-                        storeFilter = source
-                    }) {
-                        HStack {
-                            Text(localizedStoreName(source))
-                            if source != "ALLE" {
-                                Text("(\(itemCount(source)))")
-                            }
-                            if storeFilter == source {
-                                Image(systemName: "checkmark")
-                            }
-                        }
-                    }
-                }
-            } label: {
-                let isFiltered = storeFilter != "ALLE"
-                HStack(spacing: 4) {
-                    Image(systemName: isFiltered ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease")
-                        .font(.system(size: 13, weight: .semibold))
-                    if isFiltered {
-                        Text(storeFilter.prefix(6))
-                            .font(.system(size: 10, weight: .bold, design: .monospaced))
-                    }
-                }
-                .foregroundColor(isFiltered ? Theme.sageGreen : Theme.textSecondary)
-                .padding(.horizontal, isFiltered ? 8 : 6)
-                .padding(.vertical, 5)
-                .background(
-                    Capsule()
-                        .fill(isFiltered ? Theme.sageGreen.opacity(0.15) : Color.clear)
-                )
-            }
-            .accessibilityLabel("Store Filter auswählen")
-
-            // Dedicated Store Scouter Action
-            Button(action: onOpenStoreScouter) {
-                Image(systemName: "cart.badge.plus")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(Theme.bg)
-                    .frame(width: 28, height: 28)
-                    .background(Circle().fill(Theme.warmSand))
-            }
-            .buttonStyle(PlainButtonStyle())
-            .accessibilityLabel("Store Scouter öffnen")
-
-            // Barcode Scanner Action
-            Button(action: onScanBarcode) {
-                Image(systemName: "barcode.viewfinder")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundColor(Theme.bg)
-                    .frame(width: 28, height: 28)
-                    .background(Circle().fill(Theme.sageGreen))
-            }
-            .buttonStyle(PlainButtonStyle())
-            .accessibilityLabel("Barcode scannen")
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 7)
-        .background(
-            Theme.surface
-                .opacity(0.95)
-                .background(.ultraThinMaterial)
-                .clipShape(Capsule())
-                .overlay(
-                    Capsule()
-                        .stroke(Theme.border, lineWidth: 0.8)
-                )
-                .shadow(color: Color.black.opacity(0.35), radius: 10, y: 3)
-        )
-        .padding(.horizontal, 16)
-        .padding(.bottom, 6)
-    }
-}
-
 // MARK: - Inventory Item Row View
 struct InventoryItemRowView: View {
     let item: PantryItem
@@ -513,46 +424,34 @@ struct InventoryItemRowView: View {
 
                 Spacer()
 
-                HStack(spacing: 6) {
-                    // Fork and knife symbol (Verzehr loggen)
+                HStack(spacing: 8) {
+                    // 1. Verzehr erfassen (Point-of-Performance)
                     Button(action: onLogConsumption) {
-                        Image(systemName: "fork.knife")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(Theme.sageGreen)
-                            .frame(width: 34, height: 30)
-                            .background(RoundedRectangle(cornerRadius: 8).fill(Theme.surfaceElevated))
-                    }
-
-                    // Bestand button (slider symbol)
-                    Button(action: onEditStock) {
-                        Image(systemName: "slider.horizontal.3")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(Theme.warmSand)
-                            .frame(width: 34, height: 30)
-                            .background(RoundedRectangle(cornerRadius: 8).fill(Theme.surfaceElevated))
-                    }
-
-                    // + Packung button
-                    Button(action: onRestockPack) {
-                        HStack(spacing: 2) {
-                            Image(systemName: "plus")
-                                .font(.system(size: 9, weight: .heavy))
-                            Image(systemName: "shippingbox.fill")
-                                .font(.system(size: 12, weight: .bold))
+                        HStack(spacing: 4) {
+                            Image(systemName: "fork.knife")
+                                .font(.system(size: 11, weight: .bold))
+                            Text("Essen")
+                                .font(.system(size: 11, weight: .bold))
                         }
-                        .foregroundColor(Theme.sageGreen)
-                        .frame(width: 36, height: 30)
-                        .background(RoundedRectangle(cornerRadius: 8).fill(Theme.surfaceElevated))
+                        .foregroundColor(Theme.bg)
+                        .padding(.horizontal, 10)
+                        .frame(height: 32)
+                        .background(RoundedRectangle(cornerRadius: 8).fill(Theme.sageGreen))
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .accessibilityLabel("Verzehr erfassen")
 
-                    // + Liste button
+                    // 2. Auf Einkaufsliste setzen
                     Button(action: onAddShoppingItem) {
                         Image(systemName: "cart.badge.plus")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(Theme.textSecondary)
-                            .frame(width: 34, height: 30)
+                            .font(.system(size: 12, weight: .bold))
+                            .foregroundColor(Theme.warmSand)
+                            .frame(width: 36, height: 32)
                             .background(RoundedRectangle(cornerRadius: 8).fill(Theme.surfaceElevated))
+                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Theme.border, lineWidth: 1))
                     }
+                    .buttonStyle(PlainButtonStyle())
+                    .accessibilityLabel("Auf Einkaufsliste setzen")
                 }
             }
         }
