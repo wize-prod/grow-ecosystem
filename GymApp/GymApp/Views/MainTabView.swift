@@ -74,6 +74,9 @@ public struct MainTabView: View {
                     }
                     .tag(3)
             }
+            .onAppear {
+                selectedTab = 0
+            }
             .accentColor(GymTheme.terracotta)
             .background(GymTheme.bg.ignoresSafeArea())
         }

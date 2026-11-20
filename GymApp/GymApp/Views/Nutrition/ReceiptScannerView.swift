@@ -798,23 +798,71 @@ public struct ReceiptScannerView: View {
 
         store.archiveReceipt(record, updatePantryPrices: updatePantryPrices)
 
-        // Automatically record expense into GrowFinance / Haushaltsbuch ledger
-        let tx = BankTransaction(
-            id: "receipt_\(record.id)",
-            date: record.date,
-            recipientOrPurpose: "\(record.storeName) Kassenbon",
-            amount: -abs(record.totalAmount),
-            category: .groceries,
-            accountIBAN: "DE28300209003201649568",
-            rawBookingText: "Grow Quittung \(record.storeName) - \(record.items.count) Artikel",
-            isManual: true,
-            partnerName: record.storeName.uppercased(),
-            tags: ["Quittung", "Lebensmittel", record.storeName],
-            necessity: .necessary,
-            budgetCategory: .essen,
-            isInternalTransfer: false
-        )
-        FinanceStore.shared.addTransaction(tx)
+        // Automatically record expense into GrowFinance / Haushaltsbuch ledger with Food / Non-Food split (Poka-Yoke)
+        let foodLines = draft.lines.filter { !$0.isNonFood }
+        let nonFoodLines = draft.lines.filter { $0.isNonFood }
+        let foodSum = foodLines.reduce(0.0) { $0 + $1.lineTotalPrice }
+        let nonFoodSum = nonFoodLines.reduce(0.0) { $0 + $1.lineTotalPrice }
+
+        // 1. Food transaction -> budgetCategory: .essen, category: .groceries
+        if foodSum > 0.005 {
+            let foodTx = BankTransaction(
+                id: "receipt_\(record.id)_food",
+                date: record.date,
+                recipientOrPurpose: "\(record.storeName) Lebensmittel",
+                amount: -abs(foodSum),
+                category: .groceries,
+                accountIBAN: "DE28300209003201649568",
+                rawBookingText: "Grow Quittung \(record.storeName) - Lebensmittel (\(foodLines.count) Pos.)",
+                isManual: true,
+                partnerName: record.storeName.uppercased(),
+                tags: ["Quittung", "Lebensmittel", record.storeName],
+                necessity: .necessary,
+                budgetCategory: .essen,
+                isInternalTransfer: false
+            )
+            FinanceStore.shared.addTransaction(foodTx)
+        }
+
+        // 2. Non-Food transaction -> budgetCategory: .privat, category: .discretionary
+        if nonFoodSum > 0.005 {
+            let nonFoodTx = BankTransaction(
+                id: "receipt_\(record.id)_nonfood",
+                date: record.date,
+                recipientOrPurpose: "\(record.storeName) Non-Food / Drogerie",
+                amount: -abs(nonFoodSum),
+                category: .discretionary,
+                accountIBAN: "DE28300209003201649568",
+                rawBookingText: "Grow Quittung \(record.storeName) - Non-Food (\(nonFoodLines.count) Pos.)",
+                isManual: true,
+                partnerName: record.storeName.uppercased(),
+                tags: ["Quittung", "Non-Food", "Haushalt", record.storeName],
+                necessity: .necessary,
+                budgetCategory: .privat,
+                isInternalTransfer: false
+            )
+            FinanceStore.shared.addTransaction(nonFoodTx)
+        }
+
+        // Fallback: If both are 0, record single transaction to prevent dropped bookings
+        if foodSum <= 0.005 && nonFoodSum <= 0.005 && abs(record.totalAmount) > 0.005 {
+            let fallbackTx = BankTransaction(
+                id: "receipt_\(record.id)",
+                date: record.date,
+                recipientOrPurpose: "\(record.storeName) Kassenbon",
+                amount: -abs(record.totalAmount),
+                category: .groceries,
+                accountIBAN: "DE28300209003201649568",
+                rawBookingText: "Grow Quittung \(record.storeName) - \(record.items.count) Artikel",
+                isManual: true,
+                partnerName: record.storeName.uppercased(),
+                tags: ["Quittung", record.storeName],
+                necessity: .necessary,
+                budgetCategory: .essen,
+                isInternalTransfer: false
+            )
+            FinanceStore.shared.addTransaction(fallbackTx)
+        }
 
         onReceiptSaved?(record)
         dismiss()

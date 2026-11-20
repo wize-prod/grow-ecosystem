@@ -393,6 +393,22 @@ public enum NonFoodClassifier {
         "HALSPASTILLEN", "HUSTENBONBONS", "DROPS", "LOLLIS", "SCHLECKER", "DRASTIK"
     ]
 
+    // Food & Beverage Whitelist (taxed at 19% standard VAT in Germany, e.g. mineral water, soda, juice, coffee drinks, plant milks)
+    public static let beverageAndFood19PercentKeywords: Set<String> = [
+        "WASSER", "MINERALWASSER", "MEDIUM", "STILL", "COLA", "COCA", "PEPSI", "FANTA", "SPRITE", "LIMO",
+        "LIMONADE", "SAFT", "O-SAFT", "APFELSAFT", "ORANGENSAFT", "NEKTAR", "TEE", "ICETEA", "EISTEE",
+        "KAFFEE", "ESPRESSO", "CAPPUCCINO", "LATTE", "MILCH", "HAFERDRINK", "HAFERMILCH", "SOJADRINK",
+        "SOJAMILCH", "MANDELDRINK", "ISOCLEAR", "ENERGY", "MONSTER", "RED BULL", "BOOSTER", "PROTEIN",
+        "DRINK", "SHAKE", "SMOOTHIE", "BIER", "WEIN", "RADLER", "PILSNER", "CIDER", "CHAI", "SIRUP"
+    ]
+
+    // Non-Food Exceptions taxed at 7% reduced VAT in Germany (books, magazines, flowers, feminine hygiene)
+    public static let nonFood7PercentExceptions: Set<String> = [
+        "BLUMEN", "BLUME", "PFLANZE", "PFLANZEN", "SCHNITTBLUMEN", "TOPFPFLANZE", "TULPEN", "ROSEN",
+        "ZEITSCHRIFT", "MAGAZIN", "ZEITUNG", "BUCH", "BUECHER", "BÜCHER",
+        "TAMPON", "TAMPONS", "DAMENBINDE", "BINDEN", "SLIPEINLAGE", "SLIPEINLAGEN"
+    ]
+
     public static let nonFoodCategories: Set<String> = [
         "chewing-gums", "chewing gum", "breath-mints", "pastilles", "candies", "bonbons",
         "hygiene", "cosmetics", "cleaning-products", "pet-food", "shampoos", "soaps",
@@ -401,15 +417,44 @@ public enum NonFoodClassifier {
 
     public static func isNonFood(name: String, categories: String = "", taxCode: String? = nil) -> Bool {
         let upperName = name.uppercased()
+
+        // 1. Definite Non-Food Keywords (Household, Cleaners, Hygiene, Chewing Gum, Packaging)
         if nonFoodKeywords.contains(where: { upperName.contains($0) }) {
             return true
         }
+
+        // 2. Special 7% Non-Food Exceptions (Flowers, Books, Magazines, Menstrual hygiene)
+        if nonFood7PercentExceptions.contains(where: { upperName.contains($0) }) {
+            return true
+        }
+
+        // 3. Category inspection
         if !categories.isEmpty {
             let lowerCategories = categories.lowercased()
             if nonFoodCategories.contains(where: { lowerCategories.contains($0) }) {
                 return true
             }
         }
+
+        // 4. German VAT Tax Code Evaluation (Poka-Yoke: Tax rate classification)
+        if let code = taxCode?.uppercased().trimmingCharacters(in: .whitespaces) {
+            // Code B / 2 = 19% standard VAT rate (Standard non-food, plus beverages and alcohol)
+            if code == "B" || code == "2" {
+                // If it's a recognized beverage or liquid nutrition, it counts as Food
+                if beverageAndFood19PercentKeywords.contains(where: { upperName.contains($0) }) {
+                    return false
+                }
+                // Otherwise standard 19% items in a supermarket are Non-Food!
+                return true
+            }
+
+            // Code A / 1 = 7% reduced VAT rate (Basic groceries and food)
+            if code == "A" || code == "1" {
+                // Basic food items at 7% are strictly Food
+                return false
+            }
+        }
+
         return false
     }
 
