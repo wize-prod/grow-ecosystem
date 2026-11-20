@@ -85,6 +85,7 @@
 		BB000000000000000000004B /* MasterDataSeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004B /* MasterDataSeed.swift */; };
 		BB000000000000000000004C /* NutritionLogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004C /* NutritionLogService.swift */; };
 		BB000000000000000000004D /* NutritionalScoringEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004D /* NutritionalScoringEngine.swift */; };
+		BB00000000000000000000E7 /* CloudProductCatalogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E7 /* CloudProductCatalogService.swift */; };
 		BB000000000000000000004E /* OpenFoodFactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004E /* OpenFoodFactsService.swift */; };
 		BB000000000000000000004F /* PantryMatchingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004F /* PantryMatchingEngine.swift */; };
 		BB0000000000000000000050 /* PantryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000050 /* PantryRepository.swift */; };
@@ -316,6 +317,7 @@
 		AA000000000000000000004B /* MasterDataSeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/MasterDataSeed.swift"; sourceTree = "<group>"; };
 		AA000000000000000000004C /* NutritionLogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/NutritionLogService.swift"; sourceTree = "<group>"; };
 		AA000000000000000000004D /* NutritionalScoringEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/NutritionalScoringEngine.swift"; sourceTree = "<group>"; };
+		AA00000000000000000000E7 /* CloudProductCatalogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/CloudProductCatalogService.swift"; sourceTree = "<group>"; };
 		AA000000000000000000004E /* OpenFoodFactsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/OpenFoodFactsService.swift"; sourceTree = "<group>"; };
 		AA000000000000000000004F /* PantryMatchingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/PantryMatchingEngine.swift"; sourceTree = "<group>"; };
 		AA0000000000000000000050 /* PantryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Services/Nutrition/PantryRepository.swift"; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 				AA000000000000000000004B /* MasterDataSeed.swift */,
 				AA000000000000000000004C /* NutritionLogService.swift */,
 				AA000000000000000000004D /* NutritionalScoringEngine.swift */,
+				AA00000000000000000000E7 /* CloudProductCatalogService.swift */,
 				AA000000000000000000004E /* OpenFoodFactsService.swift */,
 				AA000000000000000000004F /* PantryMatchingEngine.swift */,
 				AA0000000000000000000050 /* PantryRepository.swift */,
@@ -956,6 +959,7 @@
 				BB000000000000000000004B /* MasterDataSeed.swift in Sources */,
 				BB000000000000000000004C /* NutritionLogService.swift in Sources */,
 				BB000000000000000000004D /* NutritionalScoringEngine.swift in Sources */,
+				BB00000000000000000000E7 /* CloudProductCatalogService.swift in Sources */,
 				BB000000000000000000004E /* OpenFoodFactsService.swift in Sources */,
 				BB000000000000000000004F /* PantryMatchingEngine.swift in Sources */,
 				BB0000000000000000000050 /* PantryRepository.swift in Sources */,
