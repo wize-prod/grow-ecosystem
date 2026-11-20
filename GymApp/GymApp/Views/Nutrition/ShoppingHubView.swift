@@ -1,13 +1,22 @@
 import SwiftUI
+import GrowCore
 
-// MARK: - ShoppingHubView (Dedicated Einkauf & Quittungen Hub)
+// MARK: - ShoppingHubView (Dedicated Einkauf, Quittungen & Haushaltsbuch Hub)
 public struct ShoppingHubView: View {
     @ObservedObject private var store = LocalStore.shared
     @State private var selectedSegment: ShoppingHubSegment = .shopping
 
+    // Quick Action Sheets from GrowFinance
+    @State private var showingAccountsSheet: Bool = false
+    @State private var showingBudgetsSheet: Bool = false
+    @State private var showingFiveGateSheet: Bool = false
+    @State private var showingReportsSheet: Bool = false
+    @State private var showingTargobankScanSheet: Bool = false
+
     public enum ShoppingHubSegment: String, CaseIterable {
         case shopping = "Einkaufsliste"
         case receipts = "Quittungen"
+        case transactions = "Buchungen"
     }
 
     public init() {}
@@ -15,7 +24,10 @@ public struct ShoppingHubView: View {
     public var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // Segment Switcher Header
+                // 1. Circular Quick Action Bar for Finance Modules
+                circularFinanceActionBar
+
+                // 2. Segment Switcher Header (3 Tabs)
                 VStack(spacing: 0) {
                     HStack(spacing: 6) {
                         ForEach(ShoppingHubSegment.allCases, id: \.self) { seg in
@@ -41,7 +53,7 @@ public struct ShoppingHubView: View {
                     .background(RoundedRectangle(cornerRadius: 12).fill(Theme.surface))
                 }
                 .padding(.horizontal, 16)
-                .padding(.top, 6)
+                .padding(.top, 4)
                 .padding(.bottom, 6)
                 .background(Theme.bg)
 
@@ -55,12 +67,29 @@ public struct ShoppingHubView: View {
                         .tag(ShoppingHubSegment.shopping)
                     DepotReceiptsSection()
                         .tag(ShoppingHubSegment.receipts)
+                    TransactionsListView(embedInNavigationStack: false)
+                        .tag(ShoppingHubSegment.transactions)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
             }
             .background(Theme.bg.ignoresSafeArea())
             .navigationTitle(selectedSegment.rawValue)
             .navigationBarTitleDisplayMode(store.isPadInstance ? .inline : .large)
+            .sheet(isPresented: $showingAccountsSheet) {
+                AccountsAndProfileView()
+            }
+            .sheet(isPresented: $showingBudgetsSheet) {
+                BudgetsDashboardView()
+            }
+            .sheet(isPresented: $showingFiveGateSheet) {
+                FiveGateSimulatorView()
+            }
+            .sheet(isPresented: $showingReportsSheet) {
+                FinanceReportsView()
+            }
+            .sheet(isPresented: $showingTargobankScanSheet) {
+                TargobankScanSheet(store: FinanceStore.shared)
+            }
         }
         .onChange(of: store.targetedDepotSegment) { segment in
             guard let seg = segment?.lowercased() else { return }
@@ -69,10 +98,87 @@ public struct ShoppingHubView: View {
                     selectedSegment = .receipts
                 } else if seg.contains("einkauf") || seg.contains("shopping") {
                     selectedSegment = .shopping
+                } else if seg.contains("buch") || seg.contains("finance") || seg.contains("trans") {
+                    selectedSegment = .transactions
                 }
             }
             store.targetedDepotSegment = nil
         }
+    }
+
+    // MARK: - Circular Finance Action Bar
+    private var circularFinanceActionBar: some View {
+        HStack(spacing: 12) {
+            circularButton(
+                title: "Konten",
+                icon: "creditcard.fill",
+                color: Theme.sageGreen
+            ) {
+                showingAccountsSheet = true
+            }
+
+            circularButton(
+                title: "Budgets",
+                icon: "chart.pie.fill",
+                color: Theme.warmSand
+            ) {
+                showingBudgetsSheet = true
+            }
+
+            circularButton(
+                title: "5-Gate",
+                icon: "shield.checkerboard",
+                color: Theme.accent
+            ) {
+                showingFiveGateSheet = true
+            }
+
+            circularButton(
+                title: "Berichte",
+                icon: "chart.bar.xaxis",
+                color: Theme.textSecondary
+            ) {
+                showingReportsSheet = true
+            }
+
+            circularButton(
+                title: "Targo-Scan",
+                icon: "camera.viewfinder",
+                color: Theme.terracotta
+            ) {
+                showingTargobankScanSheet = true
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 6)
+        .background(Theme.bg)
+    }
+
+    private func circularButton(title: String, icon: String, color: Color, action: @escaping () -> Void) -> some View {
+        Button(action: {
+            HapticFeedbackService.shared.lightDetent()
+            action()
+        }) {
+            VStack(spacing: 4) {
+                ZStack {
+                    Circle()
+                        .fill(Theme.surfaceElevated)
+                        .frame(width: 44, height: 44)
+                        .overlay(Circle().stroke(Theme.border.opacity(0.8), lineWidth: 1))
+
+                    Image(systemName: icon)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(color)
+                }
+
+                Text(title)
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundColor(Theme.textSecondary)
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }
 

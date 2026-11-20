@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import GrowCore
 
 public struct ReceiptScannerView: View {
     @Environment(\.dismiss) private var dismiss
@@ -796,6 +797,25 @@ public struct ReceiptScannerView: View {
         )
 
         store.archiveReceipt(record, updatePantryPrices: updatePantryPrices)
+
+        // Automatically record expense into GrowFinance / Haushaltsbuch ledger
+        let tx = BankTransaction(
+            id: "receipt_\(record.id)",
+            date: record.date,
+            recipientOrPurpose: "\(record.storeName) Kassenbon",
+            amount: -abs(record.totalAmount),
+            category: .groceries,
+            accountIBAN: "DE28300209003201649568",
+            rawBookingText: "Grow Quittung \(record.storeName) - \(record.items.count) Artikel",
+            isManual: true,
+            partnerName: record.storeName.uppercased(),
+            tags: ["Quittung", "Lebensmittel", record.storeName],
+            necessity: .necessary,
+            budgetCategory: .essen,
+            isInternalTransfer: false
+        )
+        FinanceStore.shared.addTransaction(tx)
+
         onReceiptSaved?(record)
         dismiss()
     }
