@@ -114,6 +114,23 @@ public struct ShoppingItem: Identifiable, Codable, Hashable {
         }
         let lower = (name + " " + category + " " + brand).lowercased()
 
+        // Supplements & Performance (Whey, Creatin, Elektrolyte, Vitamine)
+        if lower.contains("whey") || lower.contains("creatin") || lower.contains("kreatin") ||
+           lower.contains("isoclear") || lower.contains("magnesium") || lower.contains("omega") ||
+           lower.contains("rhodiola") || lower.contains("zink") || lower.contains("vitamin") ||
+           lower.contains("eaa") || lower.contains("bcaa") || lower.contains("citrullin") ||
+           lower.contains("booster") || lower.contains("elektrolyt") || lower.contains("protein pulver") {
+            return .supplements
+        }
+
+        // Training & Gym Gear (Zughilfen, Bänder, Gürtel, Chalk, Shaker)
+        if lower.contains("zughilfe") || lower.contains("gürtel") || lower.contains("chalk") ||
+           lower.contains("widerstandsband") || lower.contains("fitnessband") || lower.contains("bänder") ||
+           lower.contains("foam roller") || lower.contains("shaker") || lower.contains("knieschoner") ||
+           lower.contains("springseil") || lower.contains("trinkflasche") {
+            return .trainingEquipment
+        }
+
         // Drogerie & Körperpflege
         if lower.contains("pflege") || lower.contains("hygiene") || lower.contains("creme") ||
            lower.contains("bha") || lower.contains("shampoo") || lower.contains("seife") ||
@@ -185,6 +202,8 @@ public struct ShoppingItem: Identifiable, Codable, Hashable {
 
 // MARK: - In-Store Location Enum
 public enum InStoreLocation: String, CaseIterable, Comparable {
+    case supplements = "Supplements & Performance"
+    case trainingEquipment = "Training & Gym Gear"
     case produce = "Obst & Gemüse"
     case bakery = "Backwaren"
     case dairy = "Kühlregal & Milchprodukte"
@@ -198,16 +217,18 @@ public enum InStoreLocation: String, CaseIterable, Comparable {
 
     public var sortOrder: Int {
         switch self {
-        case .produce: return 1
-        case .bakery: return 2
-        case .dairy: return 3
-        case .meatFish: return 4
-        case .pantry: return 5
-        case .frozen: return 6
-        case .beverages: return 7
-        case .drugstore: return 8
-        case .online: return 9
-        case .other: return 10
+        case .supplements: return 0
+        case .trainingEquipment: return 1
+        case .produce: return 2
+        case .bakery: return 3
+        case .dairy: return 4
+        case .meatFish: return 5
+        case .pantry: return 6
+        case .frozen: return 7
+        case .beverages: return 8
+        case .drugstore: return 9
+        case .online: return 10
+        case .other: return 11
         }
     }
 

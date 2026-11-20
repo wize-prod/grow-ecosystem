@@ -9,7 +9,6 @@ public struct ShoppingHubView: View {
     // Quick Action Sheets from GrowFinance
     @State private var showingAccountsSheet: Bool = false
     @State private var showingBudgetsSheet: Bool = false
-    @State private var showingFiveGateSheet: Bool = false
     @State private var showingReportsSheet: Bool = false
     @State private var showingTargobankScanSheet: Bool = false
 
@@ -67,7 +66,6 @@ public struct ShoppingHubView: View {
                     DepotTransactionsSection(
                         showingAccountsSheet: $showingAccountsSheet,
                         showingBudgetsSheet: $showingBudgetsSheet,
-                        showingFiveGateSheet: $showingFiveGateSheet,
                         showingReportsSheet: $showingReportsSheet,
                         showingTargobankScanSheet: $showingTargobankScanSheet
                     )
@@ -93,7 +91,6 @@ public struct ShoppingHubView: View {
                             Section("Finanz-Werkzeuge") {
                                 Button { showingAccountsSheet = true } label: { Label("Konten & Schulden", systemImage: "creditcard") }
                                 Button { showingBudgetsSheet = true } label: { Label("Monatsbudgets", systemImage: "chart.pie") }
-                                Button { showingFiveGateSheet = true } label: { Label("5-Gate Kaufprüfer", systemImage: "shield.checkerboard") }
                                 Button { showingReportsSheet = true } label: { Label("Finanzberichte", systemImage: "chart.bar.xaxis") }
                                 Button { showingTargobankScanSheet = true } label: { Label("Targobank Scanner", systemImage: "camera.viewfinder") }
                             }
@@ -110,9 +107,6 @@ public struct ShoppingHubView: View {
             }
             .sheet(isPresented: $showingBudgetsSheet) {
                 BudgetsDashboardView()
-            }
-            .sheet(isPresented: $showingFiveGateSheet) {
-                FiveGateSimulatorView()
             }
             .sheet(isPresented: $showingReportsSheet) {
                 FinanceReportsView()
@@ -152,10 +146,14 @@ public struct DepotShoppingSection: View {
     @FocusState private var isQuickAddFocused: Bool
 
     private let quickAddSuggestions: [String] = [
-        "Eier", "Hafermilch", "Magerquark", "Bananen", "Thunfisch", "Hähnchenbrust"
+        "Eier", "Hafermilch", "Magerquark", "Whey Protein", "Creatin", "Magnesium", "Bananen", "Thunfisch", "Hähnchenbrust"
     ]
 
     public init() {}
+
+    private var isWorkoutDay: Bool {
+        !GymStore.shared.plannedWorkouts.filter { Calendar.current.isDateInToday($0.plannedDate) }.isEmpty
+    }
 
     private var filteredShoppingList: [ShoppingItem] {
         var list = store.shoppingList
@@ -278,11 +276,24 @@ public struct DepotShoppingSection: View {
 
             HStack(spacing: 4) {
                 Image(systemName: "bolt.fill")
-                    .font(.system(size: 10))
+                    .font(.system(size: 9))
                     .foregroundColor(Theme.sageGreen)
-                Text("\(Int(store.shoppingTotalProtein)) g Protein")
+                Text("\(Int(store.shoppingTotalProtein))g")
                     .font(.system(size: 11, weight: .bold, design: .monospaced))
                     .foregroundColor(Theme.sageGreen)
+                    .lineLimit(1)
+
+                if isWorkoutDay {
+                    Text("•")
+                        .foregroundColor(Theme.textMuted.opacity(0.6))
+                    Image(systemName: "dumbbell.fill")
+                        .font(.system(size: 8))
+                        .foregroundColor(Theme.terracotta)
+                    Text("Workout")
+                        .font(.system(size: 9, weight: .bold))
+                        .foregroundColor(Theme.terracotta)
+                        .lineLimit(1)
+                }
             }
         }
         .padding(.horizontal, 12)
@@ -403,17 +414,27 @@ public struct DepotShoppingSection: View {
             let newItem = ShoppingItem(item: match, quantity: 1)
             store.shoppingList.append(newItem)
         } else {
+            let lower = trimmed.lowercased()
+            let isSupplementOrGear = lower.contains("whey") || lower.contains("creatin") || lower.contains("kreatin") ||
+                                     lower.contains("magnesium") || lower.contains("omega") || lower.contains("zink") ||
+                                     lower.contains("zughilfe") || lower.contains("chalk") || lower.contains("band") ||
+                                     lower.contains("shaker")
+            let categoryName = isSupplementOrGear ? "Supplements & Training" : "Lebensmittel"
+            let defaultStore = isSupplementOrGear ? "AMAZON" : "SUPERMARKT"
+            let defaultPrice = isSupplementOrGear ? 19.99 : 1.99
+            let defaultUnit = isSupplementOrGear ? "Dose" : "Stk"
+
             let newItem = ShoppingItem(
                 name: trimmed,
                 brand: "",
                 barcode: "",
                 packQty: 1.0,
-                price: 1.99,
-                store: "SUPERMARKT",
+                price: defaultPrice,
+                store: defaultStore,
                 quantity: 1,
                 isChecked: false,
-                unit: "Stk",
-                category: "Lebensmittel"
+                unit: defaultUnit,
+                category: categoryName
             )
             store.shoppingList.append(newItem)
         }
@@ -502,10 +523,20 @@ public struct DepotShoppingSection: View {
                         // In-Store Aisle Groups
                         ForEach(group.aisleGroups, id: \.aisle.rawValue) { aisleGroup in
                             VStack(alignment: .leading, spacing: 6) {
-                                HStack(spacing: 4) {
+                                HStack(spacing: 5) {
+                                    if aisleGroup.aisle == .supplements {
+                                        Image(systemName: "bolt.heart.fill")
+                                            .font(.system(size: 11))
+                                            .foregroundColor(Theme.warmSand)
+                                    } else if aisleGroup.aisle == .trainingEquipment {
+                                        Image(systemName: "dumbbell.fill")
+                                            .font(.system(size: 10))
+                                            .foregroundColor(Theme.terracotta)
+                                    }
+
                                     Text(aisleGroup.aisle.rawValue)
                                         .font(.system(size: 10, weight: .bold))
-                                        .foregroundColor(Theme.sageGreen)
+                                        .foregroundColor(aisleGroup.aisle == .supplements ? Theme.warmSand : (aisleGroup.aisle == .trainingEquipment ? Theme.terracotta : Theme.sageGreen))
                                         .tracking(0.4)
                                     Spacer()
                                     Text("\(aisleGroup.items.count)")
@@ -879,20 +910,17 @@ struct ReceiptRowView: View {
 public struct DepotTransactionsSection: View {
     @Binding var showingAccountsSheet: Bool
     @Binding var showingBudgetsSheet: Bool
-    @Binding var showingFiveGateSheet: Bool
     @Binding var showingReportsSheet: Bool
     @Binding var showingTargobankScanSheet: Bool
 
     public init(
         showingAccountsSheet: Binding<Bool>,
         showingBudgetsSheet: Binding<Bool>,
-        showingFiveGateSheet: Binding<Bool>,
         showingReportsSheet: Binding<Bool>,
         showingTargobankScanSheet: Binding<Bool>
     ) {
         self._showingAccountsSheet = showingAccountsSheet
         self._showingBudgetsSheet = showingBudgetsSheet
-        self._showingFiveGateSheet = showingFiveGateSheet
         self._showingReportsSheet = showingReportsSheet
         self._showingTargobankScanSheet = showingTargobankScanSheet
     }
@@ -907,9 +935,6 @@ public struct DepotTransactionsSection: View {
                     }
                     FinanceCompactPill(title: "Budgets", icon: "chart.pie", color: Theme.sageGreen) {
                         showingBudgetsSheet = true
-                    }
-                    FinanceCompactPill(title: "5-Gate", icon: "shield.checkerboard", color: Theme.terracotta) {
-                        showingFiveGateSheet = true
                     }
                     FinanceCompactPill(title: "Berichte", icon: "chart.bar.xaxis", color: Theme.warmSand) {
                         showingReportsSheet = true
