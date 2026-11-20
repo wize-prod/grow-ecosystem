@@ -587,7 +587,7 @@ public struct DepotShoppingSection: View {
         }
 
         Task {
-            if let fetched = await OpenFoodFactsService.shared.fetchProduct(barcode: barcode) {
+            if let fetched = await CloudProductCatalogService.shared.lookupProduct(barcode: barcode) {
                 if NonFoodClassifier.isNonFood(item: fetched) {
                     await MainActor.run {
                         HapticFeedbackService.shared.lightDetent()

@@ -45,8 +45,9 @@ public struct DepotInventorySection: View {
     }
 
     private func itemCount(for source: String) -> Int {
-        if source == "ALLE" { return store.pantryItems.count }
-        return store.pantryItems.filter { $0.store.caseInsensitiveCompare(source) == .orderedSame }.count
+        let inStock = store.pantryItems.filter { $0.currentStockQty > 0 }
+        if source == "ALLE" { return inStock.count }
+        return inStock.filter { $0.store.caseInsensitiveCompare(source) == .orderedSame }.count
     }
 
     private var filteredItems: [PantryItem] {
@@ -55,6 +56,9 @@ public struct DepotInventorySection: View {
         let upperStore = storeFilter
 
         return store.pantryItems.filter { item in
+            // POKA-YOKE / SHI: Ausschließlich Artikel mit physischem Bestand > 0 anzeigen
+            guard item.currentStockQty > 0 else { return false }
+
             if isFilteredStore && item.store.uppercased() != upperStore {
                 return false
             }
