@@ -663,7 +663,7 @@ public struct DepotReceiptsSection: View {
                         }
                     }
 
-                    Spacer().frame(height: 20)
+                    Spacer().frame(height: 70)
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 16)
@@ -671,7 +671,7 @@ public struct DepotReceiptsSection: View {
             .scrollDismissesKeyboard(.interactively)
             .searchable(text: $receiptSearchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Quittungen durchsuchen...")
             .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Menu {
                         ForEach(storeSources, id: \.self) { source in
                             Button(action: {
@@ -690,20 +690,29 @@ public struct DepotReceiptsSection: View {
                         Image(systemName: "line.3.horizontal.decrease")
                             .foregroundColor(receiptStoreFilter == "ALLE" ? Theme.textSecondary : Theme.sageGreen)
                     }
-
-                    Button(action: {
-                        HapticFeedbackService.shared.mechanicalClick()
-                        showingReceiptScanner = true
-                    }) {
-                        Image(systemName: "camera.fill")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(Theme.bg)
-                            .frame(width: 28, height: 28)
-                            .background(Circle().fill(Theme.sageGreen))
-                    }
-                    .accessibilityLabel("Kassenbon scannen")
                 }
             }
+
+            // Ergonomisches Daumen-Dock fuer Quittungen (Muri-Eliminierung)
+            Button(action: {
+                HapticFeedbackService.shared.mechanicalClick()
+                showingReceiptScanner = true
+            }) {
+                HStack(spacing: 6) {
+                    Image(systemName: "camera.fill")
+                        .font(.system(size: 14, weight: .bold))
+                    Text("Kassenbon scannen")
+                        .font(.system(size: 12, weight: .bold))
+                }
+                .foregroundColor(Theme.bg)
+                .frame(maxWidth: .infinity)
+                .frame(height: 44)
+                .background(RoundedRectangle(cornerRadius: 12).fill(Theme.sageGreen))
+                .shadow(color: Theme.sageGreen.opacity(0.35), radius: 6, x: 0, y: 3)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .padding(.horizontal, 16)
+            .padding(.bottom, 8)
         }
         .sheet(item: $inspectingReceipt) { rec in
             ReceiptDetailSheet(receipt: rec)
@@ -820,8 +829,8 @@ public struct DepotTransactionsSection: View {
 
             Divider().opacity(0.3)
 
-            // Dedicated Transactions List
-            TransactionsListView(embedInNavigationStack: false)
+            // Dedicated Transactions List (Muda/Mura-Eliminierung: Kein redundanter Sub-Picker im Header)
+            TransactionsListView(embedInNavigationStack: false, showSubPicker: false)
         }
     }
 }

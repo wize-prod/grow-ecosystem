@@ -15,9 +15,11 @@ public struct TransactionsListView: View {
     @State private var activeInfoTopic: FinanceInfoTopic = .belegScanner
     
     public let embedInNavigationStack: Bool
+    public let showSubPicker: Bool
 
-    public init(embedInNavigationStack: Bool = true) {
+    public init(embedInNavigationStack: Bool = true, showSubPicker: Bool = true) {
         self.embedInNavigationStack = embedInNavigationStack
+        self.showSubPicker = showSubPicker
     }
 
     private var currentTabTitle: String {
@@ -64,19 +66,20 @@ public struct TransactionsListView: View {
         .frame(maxWidth: 1080)
         .frame(maxWidth: .infinity, alignment: .center)
         .background(FinanceTheme.background.ignoresSafeArea())
-        .navigationTitle(currentTabTitle)
-        .inlineTitleDisplayMode()
+        .modifier(TransactionsTitleModifier(title: currentTabTitle, isEnabled: embedInNavigationStack))
         .searchable(text: $store.searchQuery, prompt: "Empfänger, Datum, Betrag...")
         .toolbar {
-            ToolbarItem(placement: .principal) {
-                Picker("", selection: $selectedTab) {
-                    Text("Buchungen").tag(0)
-                    Text("Budgets").tag(1)
-                    Text("Berichte").tag(2)
-                    Text("Belege").tag(3)
+            if showSubPicker {
+                ToolbarItem(placement: .principal) {
+                    Picker("", selection: $selectedTab) {
+                        Text("Buchungen").tag(0)
+                        Text("Budgets").tag(1)
+                        Text("Berichte").tag(2)
+                        Text("Belege").tag(3)
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(maxWidth: 420)
                 }
-                .pickerStyle(.segmented)
-                .frame(maxWidth: 420)
             }
 
             ToolbarItemGroup(placement: .primaryAction) {
@@ -692,5 +695,21 @@ struct AddAccountSheet: View {
             initialBalance: balance,
             iban: iban.trimmingCharacters(in: .whitespaces)
         )
+    }
+}
+
+struct TransactionsTitleModifier: ViewModifier {
+    let title: String
+    let isEnabled: Bool
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if isEnabled {
+            content
+                .navigationTitle(title)
+                .inlineTitleDisplayMode()
+        } else {
+            content
+        }
     }
 }
