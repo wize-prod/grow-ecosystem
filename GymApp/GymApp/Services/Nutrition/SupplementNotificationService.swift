@@ -57,6 +57,11 @@ public final class SupplementNotificationService: NSObject, ObservableObject, UN
     }
 
     public func requestAuthorizationAndEnable() {
+        #if targetEnvironment(simulator)
+        self.isNotificationsEnabled = true
+        self.authorizationStatus = .authorized
+        return
+        #else
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             Task { @MainActor in
                 if granted {
@@ -71,6 +76,7 @@ public final class SupplementNotificationService: NSObject, ObservableObject, UN
                 }
             }
         }
+        #endif
     }
 
     public func disableNotifications() {

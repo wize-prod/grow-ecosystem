@@ -10,6 +10,9 @@ public final class FinanceNotificationService {
     private init() {}
     
     public func requestAuthorization() {
+        #if targetEnvironment(simulator)
+        return
+        #else
         center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if granted {
                 Task { @MainActor in
@@ -17,6 +20,7 @@ public final class FinanceNotificationService {
                 }
             }
         }
+        #endif
     }
     
     public func scheduleDailyNotifications() {

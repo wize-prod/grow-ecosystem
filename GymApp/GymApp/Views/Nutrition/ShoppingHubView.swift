@@ -24,10 +24,7 @@ public struct ShoppingHubView: View {
     public var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // 1. Circular Quick Action Bar for Finance Modules
-                circularFinanceActionBar
-
-                // 2. Segment Switcher Header (3 Tabs)
+                // Segment Switcher Header (3 Tabs)
                 VStack(spacing: 0) {
                     HStack(spacing: 6) {
                         ForEach(ShoppingHubSegment.allCases, id: \.self) { seg in
@@ -67,14 +64,37 @@ public struct ShoppingHubView: View {
                         .tag(ShoppingHubSegment.shopping)
                     DepotReceiptsSection()
                         .tag(ShoppingHubSegment.receipts)
-                    TransactionsListView(embedInNavigationStack: false)
-                        .tag(ShoppingHubSegment.transactions)
+                    DepotTransactionsSection(
+                        showingAccountsSheet: $showingAccountsSheet,
+                        showingBudgetsSheet: $showingBudgetsSheet,
+                        showingFiveGateSheet: $showingFiveGateSheet,
+                        showingReportsSheet: $showingReportsSheet,
+                        showingTargobankScanSheet: $showingTargobankScanSheet
+                    )
+                    .tag(ShoppingHubSegment.transactions)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
             }
             .background(Theme.bg.ignoresSafeArea())
             .navigationTitle(selectedSegment.rawValue)
             .navigationBarTitleDisplayMode(store.isPadInstance ? .inline : .large)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Section("Finanz-Werkzeuge") {
+                            Button { showingAccountsSheet = true } label: { Label("Konten & Schulden", systemImage: "creditcard") }
+                            Button { showingBudgetsSheet = true } label: { Label("Monatsbudgets", systemImage: "chart.pie") }
+                            Button { showingFiveGateSheet = true } label: { Label("5-Gate Kaufprüfer", systemImage: "shield.checkerboard") }
+                            Button { showingReportsSheet = true } label: { Label("Finanzberichte", systemImage: "chart.bar.xaxis") }
+                            Button { showingTargobankScanSheet = true } label: { Label("Targobank Scanner", systemImage: "camera.viewfinder") }
+                        }
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(Theme.textSecondary)
+                    }
+                }
+            }
             .sheet(isPresented: $showingAccountsSheet) {
                 AccountsAndProfileView()
             }
@@ -104,81 +124,6 @@ public struct ShoppingHubView: View {
             }
             store.targetedDepotSegment = nil
         }
-    }
-
-    // MARK: - Circular Finance Action Bar
-    private var circularFinanceActionBar: some View {
-        HStack(spacing: 12) {
-            circularButton(
-                title: "Konten",
-                icon: "creditcard.fill",
-                color: Theme.sageGreen
-            ) {
-                showingAccountsSheet = true
-            }
-
-            circularButton(
-                title: "Budgets",
-                icon: "chart.pie.fill",
-                color: Theme.warmSand
-            ) {
-                showingBudgetsSheet = true
-            }
-
-            circularButton(
-                title: "5-Gate",
-                icon: "shield.checkerboard",
-                color: Theme.accent
-            ) {
-                showingFiveGateSheet = true
-            }
-
-            circularButton(
-                title: "Berichte",
-                icon: "chart.bar.xaxis",
-                color: Theme.textSecondary
-            ) {
-                showingReportsSheet = true
-            }
-
-            circularButton(
-                title: "Targo-Scan",
-                icon: "camera.viewfinder",
-                color: Theme.terracotta
-            ) {
-                showingTargobankScanSheet = true
-            }
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.horizontal, 16)
-        .padding(.vertical, 6)
-        .background(Theme.bg)
-    }
-
-    private func circularButton(title: String, icon: String, color: Color, action: @escaping () -> Void) -> some View {
-        Button(action: {
-            HapticFeedbackService.shared.lightDetent()
-            action()
-        }) {
-            VStack(spacing: 4) {
-                ZStack {
-                    Circle()
-                        .fill(Theme.surfaceElevated)
-                        .frame(width: 44, height: 44)
-                        .overlay(Circle().stroke(Theme.border.opacity(0.8), lineWidth: 1))
-
-                    Image(systemName: icon)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(color)
-                }
-
-                Text(title)
-                    .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(Theme.textSecondary)
-            }
-            .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(PlainButtonStyle())
     }
 }
 
@@ -233,25 +178,36 @@ public struct DepotShoppingSection: View {
         checkedItems.reduce(0.0) { $0 + $1.totalCost }
     }
 
+    private var currentFoodBudgetRemaining: Double {
+        let statuses = FinanceStore.shared.smartEngine.calculateBudgetStatuses(
+            budgets: FinanceStore.shared.budgets,
+            transactions: FinanceStore.shared.transactions,
+            plusKontoBalance: FinanceStore.shared.plusKontoBalance,
+            pendingFixedCosts: FinanceStore.shared.totalRemainingFixedCosts,
+            accounts: FinanceStore.shared.accounts
+        )
+        if let foodStatus = statuses.first(where: { $0.budget.category == .essen }) {
+            return foodStatus.remainingAmount
+        }
+        return store.remainingCurrentMonthBudget
+    }
+
     public var body: some View {
-        let isOverBudget = store.shoppingTotalCost > store.remainingCurrentMonthBudget
+        let isOverBudget = store.shoppingTotalCost > currentFoodBudgetRemaining
 
         return ZStack(alignment: .bottom) {
             ScrollView {
-                LazyVStack(spacing: 14) {
-                    // 1. GROWFINANCE MONATSBUDGET
-                    financeBudgetCard
+                LazyVStack(spacing: 12) {
+                    // 1. Schlanke Einzeil-Statuspille (Muda-Eliminierung)
+                    unifiedShoppingStatusPill(isOverBudget: isOverBudget)
 
-                    // 2. EINKAUFSLISTE ZUSAMMENFASSUNG
-                    shoppingSummaryCard(isOverBudget: isOverBudget)
-
-                    // 3. EINKAUFSLISTE
+                    // 2. Einkaufsliste gruppiert nach Laden & Gang
                     shoppingListSection
 
-                    Spacer().frame(height: 20)
+                    Spacer().frame(height: 70)
                 }
                 .padding(.horizontal, 16)
-                .padding(.top, 12)
+                .padding(.top, 10)
                 .padding(.bottom, 24)
             }
             .scrollDismissesKeyboard(.interactively)
@@ -270,43 +226,11 @@ public struct DepotShoppingSection: View {
                         Image(systemName: "ellipsis")
                             .foregroundColor(Theme.textSecondary)
                     }
-
-                    Button(action: {
-                        HapticFeedbackService.shared.mechanicalClick()
-                        showingShoppingBarcodeScanner = true
-                    }) {
-                        Image(systemName: "barcode.viewfinder")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(Theme.bg)
-                            .frame(width: 28, height: 28)
-                            .background(Circle().fill(Theme.sageGreen))
-                    }
-                    .accessibilityLabel("Barcode scannen")
                 }
             }
 
-            // Checkout Bar when items are checked
-            if !checkedItems.isEmpty {
-                Button(action: {
-                    HapticFeedbackService.shared.commitSuccess()
-                    store.checkInPurchasedItems()
-                }) {
-                    HStack(spacing: 8) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.system(size: 13, weight: .bold))
-                        Text("Einkauf abschließen & Verbuchen (\(checkedItems.count) Artikel • \(String(format: "%.2f €", checkedTotalCost)))")
-                            .font(.system(size: 11, weight: .bold, design: .monospaced))
-                    }
-                    .foregroundColor(Theme.bg)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 11)
-                    .background(RoundedRectangle(cornerRadius: 12).fill(Theme.sageGreen))
-                    .shadow(color: Theme.sageGreen.opacity(0.35), radius: 6, x: 0, y: 3)
-                }
-                .padding(.horizontal, 16)
-                .padding(.bottom, 8)
-                .buttonStyle(PlainButtonStyle())
-            }
+            // 3. Ergonomisches Daumen-Dock (Muri-Eliminierung)
+            bottomThumbDock
         }
         .sheet(isPresented: $showingShoppingBarcodeScanner) {
             BarcodeScannerView { code in
@@ -322,92 +246,109 @@ public struct DepotShoppingSection: View {
         }
     }
 
-    // MARK: - Finance Budget Card
-    private var financeBudgetCard: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text("GROWFINANCE MONATSRAHMEN")
-                    .font(.system(size: 9, weight: .bold, design: .monospaced))
+    // MARK: - Schlanke Status-Pille (Muda-Eliminierung)
+    private func unifiedShoppingStatusPill(isOverBudget: Bool) -> some View {
+        HStack(spacing: 8) {
+            HStack(spacing: 4) {
+                Text("Rest:")
+                    .font(.system(size: 11, weight: .regular))
                     .foregroundColor(Theme.textMuted)
-                Spacer()
-                Text("\(String(format: "%.2f €", store.foodPurchasedThisMonth)) / \(String(format: "%.2f €", store.monthlyFinanceFoodBudget))")
-                    .font(.system(size: 10, weight: .bold, design: .monospaced))
-                    .foregroundColor(Theme.textSecondary)
+                Text(String(format: "%.2f €", currentFoodBudgetRemaining))
+                    .font(.system(size: 12, weight: .bold, design: .monospaced))
+                    .foregroundColor(currentFoodBudgetRemaining < 25.0 ? Theme.terracotta : Theme.sageGreen)
             }
 
-            let pct = min(1.0, store.foodPurchasedThisMonth / max(1.0, store.monthlyFinanceFoodBudget))
-            ZStack(alignment: .leading) {
-                Capsule().fill(Theme.surfaceElevated)
-                    .frame(height: 6)
-                Capsule()
-                    .fill(pct > 0.9 ? Theme.terracotta : Theme.sageGreen)
-                    .frame(height: 6)
-                    .scaleEffect(x: CGFloat(max(0.01, pct)), y: 1.0, anchor: .leading)
-            }
-            .frame(height: 6)
+            Text("•")
+                .foregroundColor(Theme.textMuted.opacity(0.6))
 
-            HStack {
-                Text("Restbudget lfd. Monat:")
-                    .font(.system(size: 10, weight: .regular))
-                    .foregroundColor(Theme.textMuted)
-                Text(String(format: "%.2f €", store.remainingCurrentMonthBudget))
+            HStack(spacing: 4) {
+                Text("\(store.shoppingList.count) Art.")
                     .font(.system(size: 11, weight: .bold, design: .monospaced))
-                    .foregroundColor(store.remainingCurrentMonthBudget < 25.0 ? Theme.terracotta : Theme.sageGreen)
-                Spacer()
+                    .foregroundColor(Theme.textPrimary)
+                Text("(\(String(format: "%.2f €", store.shoppingTotalCost)))")
+                    .font(.system(size: 11, weight: .medium, design: .monospaced))
+                    .foregroundColor(isOverBudget ? Theme.terracotta : Theme.warmSand)
+            }
+
+            Spacer()
+
+            HStack(spacing: 4) {
+                Image(systemName: "bolt.fill")
+                    .font(.system(size: 10))
+                    .foregroundColor(Theme.sageGreen)
+                Text("\(Int(store.shoppingTotalProtein)) g Protein")
+                    .font(.system(size: 11, weight: .bold, design: .monospaced))
+                    .foregroundColor(Theme.sageGreen)
             }
         }
-        .wellnessCard(borderColor: Theme.border)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Theme.surfaceElevated.opacity(0.8))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(isOverBudget ? Theme.terracotta.opacity(0.6) : Theme.border.opacity(0.6), lineWidth: 1)
+                )
+        )
     }
 
-    // MARK: - Shopping Summary Card
-    private func shoppingSummaryCard(isOverBudget: Bool) -> some View {
-        VStack(spacing: 8) {
-            HStack {
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("SUMME")
-                        .font(.system(size: 9, weight: .bold))
-                        .foregroundColor(Theme.textMuted)
-                        .tracking(0.6)
-                    Text(String(format: "%.2f €", store.shoppingTotalCost))
-                        .font(.system(size: 18, weight: .bold, design: .monospaced))
-                        .foregroundColor(isOverBudget ? Theme.terracotta : Theme.warmSand)
+    // MARK: - Daumen-Dock (Muri-Eliminierung & Poka-Yoke)
+    private var bottomThumbDock: some View {
+        HStack(spacing: 10) {
+            Button(action: {
+                HapticFeedbackService.shared.mechanicalClick()
+                showingShoppingBarcodeScanner = true
+            }) {
+                HStack(spacing: 6) {
+                    Image(systemName: "barcode.viewfinder")
+                        .font(.system(size: 15, weight: .bold))
+                    if checkedItems.isEmpty {
+                        Text("Barcode scannen")
+                            .font(.system(size: 12, weight: .bold))
+                    }
                 }
-                Spacer()
-                VStack(alignment: .center, spacing: 3) {
-                    Text("POSITIONEN")
-                        .font(.system(size: 9, weight: .bold))
-                        .foregroundColor(Theme.textMuted)
-                        .tracking(0.6)
-                    Text("\(store.shoppingList.count)")
-                        .font(.system(size: 16, weight: .bold, design: .monospaced))
-                        .foregroundColor(Theme.textPrimary)
-                }
-                Spacer()
-                VStack(alignment: .trailing, spacing: 3) {
-                    Text("GESAMT-PROTEIN")
-                        .font(.system(size: 9, weight: .bold))
-                        .foregroundColor(Theme.textMuted)
-                        .tracking(0.6)
-                    Text("\(Int(store.shoppingTotalProtein)) g")
-                        .font(.system(size: 18, weight: .bold, design: .monospaced))
-                        .foregroundColor(Theme.sageGreen)
-                }
+                .foregroundColor(checkedItems.isEmpty ? Theme.bg : Theme.textPrimary)
+                .padding(.horizontal, checkedItems.isEmpty ? 16 : 14)
+                .frame(height: 44)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(checkedItems.isEmpty ? Theme.sageGreen : Theme.surfaceElevated)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Theme.border, lineWidth: checkedItems.isEmpty ? 0 : 1)
+                )
             }
+            .accessibilityLabel("Barcode scannen")
 
-            if isOverBudget {
-                HStack(spacing: 8) {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .font(.system(size: 12))
-                        .foregroundColor(Theme.terracotta)
-                    Text("Übersteigt Monatsbudget um \(String(format: "%.2f €", store.shoppingTotalCost - store.remainingCurrentMonthBudget)).")
-                        .font(.system(size: 10, weight: .semibold))
-                        .foregroundColor(Theme.terracotta)
-                    Spacer()
+            if !checkedItems.isEmpty {
+                Button(action: {
+                    HapticFeedbackService.shared.commitSuccess()
+                    store.checkInPurchasedItems()
+                }) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.system(size: 14, weight: .bold))
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text("In Vorrat buchen (\(checkedItems.count) Art. • \(String(format: "%.2f €", checkedTotalCost)))")
+                                .font(.system(size: 11, weight: .bold, design: .monospaced))
+                            Text("Physischer Bestand")
+                                .font(.system(size: 8, weight: .medium))
+                                .opacity(0.8)
+                        }
+                    }
+                    .foregroundColor(Theme.bg)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 44)
+                    .background(RoundedRectangle(cornerRadius: 12).fill(Theme.sageGreen))
+                    .shadow(color: Theme.sageGreen.opacity(0.35), radius: 6, x: 0, y: 3)
                 }
-                .padding(.top, 2)
+                .buttonStyle(PlainButtonStyle())
             }
         }
-        .wellnessCard(borderColor: isOverBudget ? Theme.terracotta.opacity(0.6) : Theme.warmSand.opacity(0.4))
+        .padding(.horizontal, 16)
+        .padding(.bottom, 8)
     }
 
     // MARK: - Shopping List Section
@@ -828,5 +769,90 @@ struct ReceiptRowView: View {
 
     private func formattedDate(_ date: Date) -> String {
         Self.receiptDateFormatter.string(from: date)
+    }
+}
+
+// MARK: - DepotTransactionsSection (Buchungen & Haushaltsbuch)
+public struct DepotTransactionsSection: View {
+    @Binding var showingAccountsSheet: Bool
+    @Binding var showingBudgetsSheet: Bool
+    @Binding var showingFiveGateSheet: Bool
+    @Binding var showingReportsSheet: Bool
+    @Binding var showingTargobankScanSheet: Bool
+
+    public init(
+        showingAccountsSheet: Binding<Bool>,
+        showingBudgetsSheet: Binding<Bool>,
+        showingFiveGateSheet: Binding<Bool>,
+        showingReportsSheet: Binding<Bool>,
+        showingTargobankScanSheet: Binding<Bool>
+    ) {
+        self._showingAccountsSheet = showingAccountsSheet
+        self._showingBudgetsSheet = showingBudgetsSheet
+        self._showingFiveGateSheet = showingFiveGateSheet
+        self._showingReportsSheet = showingReportsSheet
+        self._showingTargobankScanSheet = showingTargobankScanSheet
+    }
+
+    public var body: some View {
+        VStack(spacing: 0) {
+            // Contextual Finance Action Strip (Shi/Xu alignment)
+            HStack(spacing: 12) {
+                FinanceQuickActionButton(title: "Konten", icon: "creditcard", color: Theme.warmSand) {
+                    showingAccountsSheet = true
+                }
+                FinanceQuickActionButton(title: "Budgets", icon: "chart.pie", color: Theme.sageGreen) {
+                    showingBudgetsSheet = true
+                }
+                FinanceQuickActionButton(title: "5-Gate", icon: "shield.checkerboard", color: Theme.terracotta) {
+                    showingFiveGateSheet = true
+                }
+                FinanceQuickActionButton(title: "Berichte", icon: "chart.bar.xaxis", color: Theme.warmSand) {
+                    showingReportsSheet = true
+                }
+                FinanceQuickActionButton(title: "Targo-Scan", icon: "camera.viewfinder", color: Theme.sageGreen) {
+                    showingTargobankScanSheet = true
+                }
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(Theme.surfaceElevated.opacity(0.6))
+
+            Divider().opacity(0.3)
+
+            // Dedicated Transactions List
+            TransactionsListView(embedInNavigationStack: false)
+        }
+    }
+}
+
+struct FinanceQuickActionButton: View {
+    let title: String
+    let icon: String
+    let color: Color
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: {
+            HapticFeedbackService.shared.lightDetent()
+            action()
+        }) {
+            VStack(spacing: 4) {
+                ZStack {
+                    Circle()
+                        .fill(color.opacity(0.18))
+                        .frame(width: 38, height: 38)
+                    Image(systemName: icon)
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundColor(color)
+                }
+                Text(title)
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundColor(Theme.textSecondary)
+                    .lineLimit(1)
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(PlainButtonStyle())
     }
 }

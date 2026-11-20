@@ -26,6 +26,10 @@ public final class GoogleTasksSyncService: ObservableObject {
     }
 
     public func requestAccess() async -> Bool {
+        #if targetEnvironment(simulator)
+        self.isAuthorized = true
+        return true
+        #else
         do {
             let granted: Bool
             if #available(iOS 17.0, *) {
@@ -38,6 +42,7 @@ public final class GoogleTasksSyncService: ObservableObject {
         } catch {
             return false
         }
+        #endif
     }
 
     /// Autonomes Abhaken der verknuepften Google Tasks Aufgabe in der Liste "Gesundheit"

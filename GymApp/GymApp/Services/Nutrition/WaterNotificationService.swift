@@ -119,11 +119,15 @@ public final class WaterNotificationService: NSObject, ObservableObject, UNUserN
     }
 
     public func requestAuthorizationAndSchedule() {
+        #if targetEnvironment(simulator)
+        return
+        #else
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
             Task { @MainActor in
                 self.checkAuthorization()
             }
         }
+        #endif
     }
 
     public func updateNotificationsForCurrentIntake() {

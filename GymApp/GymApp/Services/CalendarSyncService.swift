@@ -89,6 +89,10 @@ public final class CalendarSyncService: ObservableObject {
     }
 
     public func requestAccess() async -> Bool {
+        #if targetEnvironment(simulator)
+        self.isAuthorized = true
+        return true
+        #else
         do {
             let granted: Bool
             if #available(iOS 17.0, *) {
@@ -108,6 +112,7 @@ public final class CalendarSyncService: ObservableObject {
             self.syncMessage = "Fehler: \(error.localizedDescription)"
             return false
         }
+        #endif
     }
 
     public func getAvailableCalendars() -> [GymAvailableCalendarInfo] {

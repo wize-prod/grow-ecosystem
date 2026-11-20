@@ -1699,33 +1699,9 @@ public final class LocalStore: ObservableObject {
         }
         guard !completedItems.isEmpty else { return }
 
-        // Create receipt record for today's purchases
-        let lineItems = completedItems.map { shopItem -> ReceiptLineItem in
-            ReceiptLineItem(
-                rawText: shopItem.name,
-                parsedPrice: shopItem.price,
-                quantity: shopItem.quantity,
-                quantityNote: "\(shopItem.quantity) Stk x \(String(format: "%.2f €", shopItem.price))",
-                matchedPantryItemId: shopItem.pantryItemId,
-                matchedPantryItemName: shopItem.name,
-                previousPrice: nil,
-                confidenceScore: 1.0,
-                isConfirmed: true,
-                isNonFood: false
-            )
-        }
-        let totalSpent = lineItems.reduce(0.0) { $0 + $1.lineTotalPrice }
-        let primaryStore = completedItems.first?.store.isEmpty == false ? completedItems.first!.store : customStoreName
-        let newReceipt = ReceiptRecord(
-            date: Date(),
-            storeName: primaryStore,
-            totalAmount: (totalSpent * 100).rounded() / 100,
-            items: lineItems,
-            notes: "Autonome Einkaufslisten-Buchung (\(completedItems.count) Positionen)"
-        )
-        receipts.insert(newReceipt, at: 0)
-        saveReceipts()
-
+        // Poka-Yoke: Reiner physischer Bestandswechsel.
+        // Keine automatische Phantom-Finanzquittung hier, um Doppelbuchungen mit
+        // dem anschließenden Kassenbon-Scan via ReceiptScannerView auszuschließen.
         let completedIds = Set(completedItems.map { $0.id })
         shoppingList.removeAll(where: { completedIds.contains($0.id) })
 

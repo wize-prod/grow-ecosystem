@@ -70,6 +70,10 @@ public final class HealthKitService: ObservableObject {
     // MARK: - Autorisierung anfordern (Read & Write)
     public func checkAndRequestAuthorization() {
         guard isAvailable else { return }
+        #if targetEnvironment(simulator)
+        self.isAuthorized = true
+        return
+        #else
 
         var readTypes = Set<HKObjectType>()
         readTypes.insert(HKObjectType.workoutType())
@@ -105,6 +109,7 @@ public final class HealthKitService: ObservableObject {
                 }
             }
         }
+        #endif
     }
 
     // MARK: - Datenabruf (Read)
