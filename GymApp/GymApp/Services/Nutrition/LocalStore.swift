@@ -743,9 +743,9 @@ public final class LocalStore: ObservableObject {
         for (_, currentItem) in candidates {
             let cleanBarcode = currentItem.barcode.trimmingCharacters(in: .whitespacesAndNewlines)
 
-            // 2a. Query Open Food Facts API if barcode is present, valid, and not previously failed
+            // 2a. Query Cloud DB (Supabase) + Open Food Facts API if barcode is present, valid, and not previously failed
             if !cleanBarcode.isEmpty && !cleanBarcode.contains("://") && !self.failedLookupBarcodes.contains(cleanBarcode) {
-                if let fetched = await OpenFoodFactsService.shared.fetchProduct(barcode: cleanBarcode) {
+                if let fetched = await CloudProductCatalogService.shared.lookupProduct(barcode: cleanBarcode) {
                     if NonFoodClassifier.isNonFood(item: fetched) {
                         currentItems.removeAll(where: { $0.id == currentItem.id })
                         didModify = true
@@ -1150,9 +1150,9 @@ public final class LocalStore: ObservableObject {
             var updatedFib = item.fiber100g
             var didEnrich = false
 
-            // 1. Live lookup via OpenFoodFacts
+            // 1. Live lookup via Cloud DB + OpenFoodFacts
             if !item.barcode.isEmpty {
-                if let offItem = await OpenFoodFactsService.shared.fetchProduct(barcode: item.barcode) {
+                if let offItem = await CloudProductCatalogService.shared.lookupProduct(barcode: item.barcode) {
                     if offItem.kcal100g > 0 || offItem.protein100g > 0 {
                         updatedKcal = offItem.kcal100g
                         updatedP = offItem.protein100g

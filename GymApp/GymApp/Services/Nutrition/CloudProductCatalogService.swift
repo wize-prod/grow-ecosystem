@@ -78,9 +78,12 @@ public final class CloudProductCatalogService: ObservableObject {
         config.timeoutIntervalForResource = 6.0
         self.session = URLSession(configuration: config)
 
-        // Load configuration from UserDefaults
-        self.supabaseURL = UserDefaults.standard.string(forKey: "grow_supabase_url") ?? ""
-        self.supabaseAnonKey = UserDefaults.standard.string(forKey: "grow_supabase_anon_key") ?? ""
+        // Load configuration from UserDefaults with project defaults
+        let defaultURL = "https://oqhqpkayzkmnbcmbqkmm.supabase.co"
+        let defaultKey = "sb_publishable_Nd7hRD_Fp6no6X-NMnbuPQ_pLxJ-iNR"
+
+        self.supabaseURL = UserDefaults.standard.string(forKey: "grow_supabase_url") ?? defaultURL
+        self.supabaseAnonKey = UserDefaults.standard.string(forKey: "grow_supabase_anon_key") ?? defaultKey
     }
 
     public var isCloudConfigured: Bool {
