@@ -76,21 +76,31 @@ public struct ShoppingHubView: View {
                 .tabViewStyle(.page(indexDisplayMode: .never))
             }
             .background(Theme.bg.ignoresSafeArea())
-            .navigationTitle(selectedSegment.rawValue)
-            .navigationBarTitleDisplayMode(store.isPadInstance ? .inline : .large)
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
-                        Section("Finanz-Werkzeuge") {
-                            Button { showingAccountsSheet = true } label: { Label("Konten & Schulden", systemImage: "creditcard") }
-                            Button { showingBudgetsSheet = true } label: { Label("Monatsbudgets", systemImage: "chart.pie") }
-                            Button { showingFiveGateSheet = true } label: { Label("5-Gate Kaufprüfer", systemImage: "shield.checkerboard") }
-                            Button { showingReportsSheet = true } label: { Label("Finanzberichte", systemImage: "chart.bar.xaxis") }
-                            Button { showingTargobankScanSheet = true } label: { Label("Targobank Scanner", systemImage: "camera.viewfinder") }
+                        if selectedSegment == .shopping {
+                            Button(action: {
+                                HapticFeedbackService.shared.lightDetent()
+                                store.shoppingList.removeAll(where: { $0.isChecked })
+                                store.saveShopping()
+                            }) {
+                                Label("Erledigte entfernen", systemImage: "trash")
+                            }
+                        } else if selectedSegment == .transactions {
+                            Section("Finanz-Werkzeuge") {
+                                Button { showingAccountsSheet = true } label: { Label("Konten & Schulden", systemImage: "creditcard") }
+                                Button { showingBudgetsSheet = true } label: { Label("Monatsbudgets", systemImage: "chart.pie") }
+                                Button { showingFiveGateSheet = true } label: { Label("5-Gate Kaufprüfer", systemImage: "shield.checkerboard") }
+                                Button { showingReportsSheet = true } label: { Label("Finanzberichte", systemImage: "chart.bar.xaxis") }
+                                Button { showingTargobankScanSheet = true } label: { Label("Targobank Scanner", systemImage: "camera.viewfinder") }
+                            }
                         }
                     } label: {
-                        Image(systemName: "slider.horizontal.3")
-                            .font(.system(size: 14, weight: .semibold))
+                        Image(systemName: "ellipsis.circle")
+                            .font(.system(size: 16, weight: .medium))
                             .foregroundColor(Theme.textSecondary)
                     }
                 }
@@ -137,6 +147,13 @@ public struct DepotShoppingSection: View {
     @State private var showingShoppingBarcodeScanner: Bool = false
     @State private var scannedItemForInspection: PantryItem? = nil
     @State private var inspectingItem: PantryItem? = nil
+
+    @State private var quickAddText: String = ""
+    @FocusState private var isQuickAddFocused: Bool
+
+    private let quickAddSuggestions: [String] = [
+        "Eier", "Hafermilch", "Magerquark", "Bananen", "Thunfisch", "Hähnchenbrust"
+    ]
 
     public init() {}
 
@@ -201,7 +218,10 @@ public struct DepotShoppingSection: View {
                     // 1. Schlanke Einzeil-Statuspille (Muda-Eliminierung)
                     unifiedShoppingStatusPill(isOverBudget: isOverBudget)
 
-                    // 2. Einkaufsliste gruppiert nach Laden & Gang
+                    // 2. Schnell-Eingabeleiste (Wu Wei)
+                    quickAddInputBar
+
+                    // 3. Einkaufsliste gruppiert nach Laden & Gang
                     shoppingListSection
 
                     Spacer().frame(height: 70)
@@ -212,24 +232,8 @@ public struct DepotShoppingSection: View {
             }
             .scrollDismissesKeyboard(.interactively)
             .searchable(text: $shoppingSearchText, placement: .navigationBarDrawer(displayMode: .automatic), prompt: "Einkaufsartikel suchen...")
-            .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Menu {
-                        Button(action: {
-                            HapticFeedbackService.shared.lightDetent()
-                            store.shoppingList.removeAll(where: { $0.isChecked })
-                            store.saveShopping()
-                        }) {
-                            Label("Erledigte entfernen", systemImage: "trash")
-                        }
-                    } label: {
-                        Image(systemName: "ellipsis")
-                            .foregroundColor(Theme.textSecondary)
-                    }
-                }
-            }
 
-            // 3. Ergonomisches Daumen-Dock (Muri-Eliminierung)
+            // 4. Ergonomisches Daumen-Dock (Muri-Eliminierung)
             bottomThumbDock
         }
         .sheet(isPresented: $showingShoppingBarcodeScanner) {
@@ -351,35 +355,125 @@ public struct DepotShoppingSection: View {
         .padding(.bottom, 8)
     }
 
+    // MARK: - Schnell-Eingabe (Wu Wei)
+    private var quickAddInputBar: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "plus.circle.fill")
+                .font(.system(size: 16))
+                .foregroundColor(Theme.sageGreen)
+
+            TextField("Artikel schnell hinzufügen (z.B. Eier, Hafermilch)...", text: $quickAddText)
+                .font(.system(size: 13, weight: .medium))
+                .foregroundColor(Theme.textPrimary)
+                .focused($isQuickAddFocused)
+                .submitLabel(.done)
+                .onSubmit {
+                    addQuickItem(quickAddText)
+                }
+
+            if !quickAddText.trimmingCharacters(in: .whitespaces).isEmpty {
+                Button(action: { addQuickItem(quickAddText) }) {
+                    Text("Hinzufügen")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundColor(Theme.bg)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(Capsule().fill(Theme.sageGreen))
+                }
+                .buttonStyle(PlainButtonStyle())
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Theme.surfaceElevated.opacity(0.7))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(isQuickAddFocused ? Theme.sageGreen.opacity(0.8) : Theme.border.opacity(0.5), lineWidth: 1)
+                )
+        )
+    }
+
+    private func addQuickItem(_ rawName: String) {
+        let trimmed = rawName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+
+        if let match = store.pantryItems.first(where: { $0.name.localizedCaseInsensitiveContains(trimmed) }) {
+            let newItem = ShoppingItem(item: match, quantity: 1)
+            store.shoppingList.append(newItem)
+        } else {
+            let newItem = ShoppingItem(
+                name: trimmed,
+                brand: "",
+                barcode: "",
+                packQty: 1.0,
+                price: 1.99,
+                store: "SUPERMARKT",
+                quantity: 1,
+                isChecked: false,
+                unit: "Stk",
+                category: "Lebensmittel"
+            )
+            store.shoppingList.append(newItem)
+        }
+        store.saveShopping()
+        quickAddText = ""
+        isQuickAddFocused = false
+        HapticFeedbackService.shared.mechanicalClick()
+    }
+
     // MARK: - Shopping List Section
     private var shoppingListSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text("EINKAUFSLISTE")
-                    .font(.system(size: 10, weight: .bold, design: .monospaced))
-                    .foregroundColor(Theme.textMuted)
-                    .tracking(0.6)
-                Spacer()
-                Text("\(filteredShoppingList.count) Positionen")
-                    .font(.system(size: 10, weight: .semibold, design: .monospaced))
-                    .foregroundColor(Theme.textSecondary)
+            if !filteredShoppingList.isEmpty {
+                HStack {
+                    Text("POSITIONEN (\(filteredShoppingList.count))")
+                        .font(.system(size: 10, weight: .bold, design: .monospaced))
+                        .foregroundColor(Theme.textMuted)
+                        .tracking(0.6)
+                    Spacer()
+                }
             }
 
             if filteredShoppingList.isEmpty {
-                VStack(spacing: 6) {
+                VStack(spacing: 12) {
                     Image(systemName: "cart")
                         .font(.system(size: 24))
                         .foregroundColor(Theme.textMuted)
-                        .padding(.bottom, 2)
                     Text("Einkaufsliste ist leer")
-                        .font(.system(size: 12, weight: .semibold))
+                        .font(.system(size: 13, weight: .semibold))
                         .foregroundColor(Theme.textPrimary)
-                    Text("Füge Artikel aus Rezepten oder dem Vorrats-Depot hinzu.")
-                        .font(.system(size: 10))
-                        .foregroundColor(Theme.textMuted)
+
+                    Text("Schnell-Auswahl mit einem Tipp:")
+                        .font(.system(size: 11))
+                        .foregroundColor(Theme.textSecondary)
+
+                    FlowLayout(spacing: 6) {
+                        ForEach(quickAddSuggestions, id: \.self) { suggestion in
+                            Button(action: {
+                                addQuickItem(suggestion)
+                            }) {
+                                HStack(spacing: 4) {
+                                    Image(systemName: "plus")
+                                        .font(.system(size: 9, weight: .bold))
+                                    Text(suggestion)
+                                        .font(.system(size: 11, weight: .medium))
+                                }
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 6)
+                                .background(Capsule().fill(Theme.surfaceElevated))
+                                .overlay(Capsule().stroke(Theme.border.opacity(0.6), lineWidth: 1))
+                                .foregroundColor(Theme.textPrimary)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
+                    .padding(.top, 4)
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 24)
+                .padding(.vertical, 20)
+                .padding(.horizontal, 14)
                 .background(RoundedRectangle(cornerRadius: 12).fill(Theme.surface))
                 .overlay(RoundedRectangle(cornerRadius: 12).stroke(Theme.border.opacity(0.5), lineWidth: 1))
             } else {
@@ -805,37 +899,39 @@ public struct DepotTransactionsSection: View {
 
     public var body: some View {
         VStack(spacing: 0) {
-            // Contextual Finance Action Strip (Shi/Xu alignment)
-            HStack(spacing: 12) {
-                FinanceQuickActionButton(title: "Konten", icon: "creditcard", color: Theme.warmSand) {
-                    showingAccountsSheet = true
+            // Contextual Finance Action Strip (Compact Horizontal Pills)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    FinanceCompactPill(title: "Konten", icon: "creditcard", color: Theme.warmSand) {
+                        showingAccountsSheet = true
+                    }
+                    FinanceCompactPill(title: "Budgets", icon: "chart.pie", color: Theme.sageGreen) {
+                        showingBudgetsSheet = true
+                    }
+                    FinanceCompactPill(title: "5-Gate", icon: "shield.checkerboard", color: Theme.terracotta) {
+                        showingFiveGateSheet = true
+                    }
+                    FinanceCompactPill(title: "Berichte", icon: "chart.bar.xaxis", color: Theme.warmSand) {
+                        showingReportsSheet = true
+                    }
+                    FinanceCompactPill(title: "Targo-Scan", icon: "camera.viewfinder", color: Theme.sageGreen) {
+                        showingTargobankScanSheet = true
+                    }
                 }
-                FinanceQuickActionButton(title: "Budgets", icon: "chart.pie", color: Theme.sageGreen) {
-                    showingBudgetsSheet = true
-                }
-                FinanceQuickActionButton(title: "5-Gate", icon: "shield.checkerboard", color: Theme.terracotta) {
-                    showingFiveGateSheet = true
-                }
-                FinanceQuickActionButton(title: "Berichte", icon: "chart.bar.xaxis", color: Theme.warmSand) {
-                    showingReportsSheet = true
-                }
-                FinanceQuickActionButton(title: "Targo-Scan", icon: "camera.viewfinder", color: Theme.sageGreen) {
-                    showingTargobankScanSheet = true
-                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
-            .background(Theme.surfaceElevated.opacity(0.6))
+            .background(Theme.surfaceElevated.opacity(0.35))
 
             Divider().opacity(0.3)
 
-            // Dedicated Transactions List (Muda/Mura-Eliminierung: Kein redundanter Sub-Picker im Header)
-            TransactionsListView(embedInNavigationStack: false, showSubPicker: false)
+            // Dedicated Transactions List (Muda/Mura-Eliminierung: Kein redundanter Sub-Picker & Toolbar)
+            TransactionsListView(embedInNavigationStack: false, showSubPicker: false, showToolbarActions: false)
         }
     }
 }
 
-struct FinanceQuickActionButton: View {
+struct FinanceCompactPill: View {
     let title: String
     let icon: String
     let color: Color
@@ -846,21 +942,21 @@ struct FinanceQuickActionButton: View {
             HapticFeedbackService.shared.lightDetent()
             action()
         }) {
-            VStack(spacing: 4) {
-                ZStack {
-                    Circle()
-                        .fill(color.opacity(0.18))
-                        .frame(width: 38, height: 38)
-                    Image(systemName: icon)
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(color)
-                }
+            HStack(spacing: 5) {
+                Image(systemName: icon)
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundColor(color)
                 Text(title)
-                    .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(Theme.textSecondary)
-                    .lineLimit(1)
+                    .font(.system(size: 11, weight: .medium))
+                    .foregroundColor(Theme.textPrimary)
             }
-            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
+            .background(
+                Capsule()
+                    .fill(Theme.surfaceElevated)
+                    .overlay(Capsule().stroke(color.opacity(0.25), lineWidth: 1))
+            )
         }
         .buttonStyle(PlainButtonStyle())
     }

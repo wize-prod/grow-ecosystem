@@ -16,10 +16,12 @@ public struct TransactionsListView: View {
     
     public let embedInNavigationStack: Bool
     public let showSubPicker: Bool
+    public let showToolbarActions: Bool
 
-    public init(embedInNavigationStack: Bool = true, showSubPicker: Bool = true) {
+    public init(embedInNavigationStack: Bool = true, showSubPicker: Bool = true, showToolbarActions: Bool = true) {
         self.embedInNavigationStack = embedInNavigationStack
         self.showSubPicker = showSubPicker
+        self.showToolbarActions = showToolbarActions
     }
 
     private var currentTabTitle: String {
@@ -82,77 +84,79 @@ public struct TransactionsListView: View {
                 }
             }
 
-            ToolbarItemGroup(placement: .primaryAction) {
-                // Filter (only relevant for transactions)
-                if selectedTab == 0 {
-                    unifiedFilterMenuButton
-                }
+            if showToolbarActions {
+                ToolbarItemGroup(placement: .primaryAction) {
+                    // Filter (only relevant for transactions)
+                    if selectedTab == 0 {
+                        unifiedFilterMenuButton
+                    }
 
-                // More Menu
-                Menu {
-                    Section("Daten & Tools") {
+                    // More Menu
+                    Menu {
+                        Section("Daten & Tools") {
+                            Button {
+                                showingFileImporter = true
+                                HapticFeedback.light()
+                            } label: {
+                                Label("CSV importieren", systemImage: "doc.badge.plus")
+                            }
+
+                            Button {
+                                showingDateRangeSheet = true
+                                HapticFeedback.light()
+                            } label: {
+                                Label("Zeitraum anpassen", systemImage: "calendar")
+                            }
+
+                            Button {
+                                activeInfoTopic = .belegScanner
+                                showingInfoSheet = true
+                                HapticFeedback.light()
+                            } label: {
+                                Label("Info zu Belegen", systemImage: "info.circle")
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundColor(FinanceTheme.textSecondary)
+                    }
+
+                    // Primary Prominent Action: Beleg Scanner / Neue Buchung
+                    Menu {
+                        Button {
+                            showingUniversalScanner = true
+                            HapticFeedback.light()
+                        } label: {
+                            Label("Quittung / Beleg scannen", systemImage: "doc.text.viewfinder")
+                        }
+
+                        Button {
+                            showingScreenshotScanner = true
+                            HapticFeedback.light()
+                        } label: {
+                            Label("Targobank Screenshot scannen", systemImage: "camera.viewfinder")
+                        }
+
                         Button {
                             showingFileImporter = true
                             HapticFeedback.light()
                         } label: {
-                            Label("CSV importieren", systemImage: "doc.badge.plus")
+                            Label("Haushaltsbuch CSV importieren", systemImage: "doc.badge.plus")
                         }
+                    } label: {
+                        ZStack {
+                            Circle()
+                                .fill(FinanceTheme.accent)
+                                .frame(width: 28, height: 28)
 
-                        Button {
-                            showingDateRangeSheet = true
-                            HapticFeedback.light()
-                        } label: {
-                            Label("Zeitraum anpassen", systemImage: "calendar")
-                        }
-
-                        Button {
-                            activeInfoTopic = .belegScanner
-                            showingInfoSheet = true
-                            HapticFeedback.light()
-                        } label: {
-                            Label("Info zu Belegen", systemImage: "info.circle")
+                            Image(systemName: "camera.fill")
+                                .font(.system(size: 13, weight: .bold))
+                                .foregroundColor(FinanceTheme.background)
                         }
                     }
-                } label: {
-                    Image(systemName: "ellipsis")
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(FinanceTheme.textSecondary)
+                    .accessibilityLabel("Scanner & Belege")
                 }
-
-                // Primary Prominent Action: Beleg Scanner / Neue Buchung
-                Menu {
-                    Button {
-                        showingUniversalScanner = true
-                        HapticFeedback.light()
-                    } label: {
-                        Label("Quittung / Beleg scannen", systemImage: "doc.text.viewfinder")
-                    }
-
-                    Button {
-                        showingScreenshotScanner = true
-                        HapticFeedback.light()
-                    } label: {
-                        Label("Targobank Screenshot scannen", systemImage: "camera.viewfinder")
-                    }
-
-                    Button {
-                        showingFileImporter = true
-                        HapticFeedback.light()
-                    } label: {
-                        Label("Haushaltsbuch CSV importieren", systemImage: "doc.badge.plus")
-                    }
-                } label: {
-                    ZStack {
-                        Circle()
-                            .fill(FinanceTheme.accent)
-                            .frame(width: 28, height: 28)
-
-                        Image(systemName: "camera.fill")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundColor(FinanceTheme.background)
-                    }
-                }
-                .accessibilityLabel("Scanner & Belege")
             }
         }
         #if canImport(UIKit)
@@ -355,15 +359,18 @@ public struct TransactionsListView: View {
                 }
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(tx.partnerName)
+                    Text(cleanPartnerName(tx))
                         .font(.system(size: 13, weight: .bold))
                         .foregroundColor(FinanceTheme.textPrimary)
                         .lineLimit(1)
                     
-                    Text(tx.purpose)
-                        .font(.system(size: 11))
-                        .foregroundColor(FinanceTheme.textSecondary)
-                        .lineLimit(1)
+                    let cleanPurpose = cleanPurposeText(tx)
+                    if !cleanPurpose.isEmpty {
+                        Text(cleanPurpose)
+                            .font(.system(size: 11))
+                            .foregroundColor(FinanceTheme.textSecondary)
+                            .lineLimit(1)
+                    }
                 }
                 
                 Spacer()
@@ -391,7 +398,7 @@ public struct TransactionsListView: View {
                 Spacer()
                 
                 if !tx.iban.isEmpty {
-                    Text(tx.iban)
+                    Text(shortenedIBAN(tx.iban))
                         .font(.system(size: 9, design: .monospaced))
                         .foregroundColor(FinanceTheme.textTertiary)
                 }
@@ -399,6 +406,29 @@ public struct TransactionsListView: View {
         }
         .padding(12)
         .financeCardStyle()
+    }
+
+    private func cleanPartnerName(_ tx: BankTransaction) -> String {
+        let name = tx.partnerName.trimmingCharacters(in: .whitespaces)
+        if name.isEmpty { return tx.purpose }
+        return name
+    }
+
+    private func cleanPurposeText(_ tx: BankTransaction) -> String {
+        let purpose = tx.purpose.trimmingCharacters(in: .whitespaces)
+        let partner = tx.partnerName.trimmingCharacters(in: .whitespaces)
+        if purpose.isEmpty || purpose.lowercased() == partner.lowercased() {
+            return ""
+        }
+        return purpose
+    }
+
+    private func shortenedIBAN(_ iban: String) -> String {
+        let clean = iban.trimmingCharacters(in: .whitespaces)
+        if clean.count >= 8 {
+            return "•••• " + clean.suffix(4)
+        }
+        return clean
     }
     
 
