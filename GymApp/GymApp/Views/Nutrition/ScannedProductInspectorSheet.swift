@@ -56,9 +56,15 @@ public struct ScannedProductInspectorSheet: View {
                                     .foregroundColor(Theme.warmSand)
                                     .tracking(0.8)
                                 Spacer()
-                                Text(String(format: "%.2f €", item.defaultPrice))
-                                    .font(.system(size: 13, weight: .bold, design: .monospaced))
-                                    .foregroundColor(Theme.warmSand)
+                                if item.defaultPrice > 0 {
+                                    Text(String(format: "%.2f €", item.defaultPrice))
+                                        .font(.system(size: 13, weight: .bold, design: .monospaced))
+                                        .foregroundColor(Theme.warmSand)
+                                } else {
+                                    Text("Preis offen")
+                                        .font(.system(size: 11, weight: .medium, design: .monospaced))
+                                        .foregroundColor(Theme.textMuted)
+                                }
                             }
 
                             Text(item.name)

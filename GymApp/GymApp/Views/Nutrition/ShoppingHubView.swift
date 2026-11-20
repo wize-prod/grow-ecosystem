@@ -421,7 +421,7 @@ public struct DepotShoppingSection: View {
                                      lower.contains("shaker")
             let categoryName = isSupplementOrGear ? "Supplements & Training" : "Lebensmittel"
             let defaultStore = isSupplementOrGear ? "AMAZON" : "SUPERMARKT"
-            let defaultPrice = isSupplementOrGear ? 19.99 : 1.99
+            let defaultPrice = 0.0
             let defaultUnit = isSupplementOrGear ? "Dose" : "Stk"
 
             let newItem = ShoppingItem(
@@ -606,7 +606,7 @@ public struct DepotShoppingSection: View {
                     brand: "Unbekannt",
                     barcode: barcode,
                     defaultPackQty: 500.0,
-                    defaultPrice: 1.99,
+                    defaultPrice: 0.0,
                     currentStockQty: 0.0,
                     unit: "g",
                     kcal100g: 0.0,
