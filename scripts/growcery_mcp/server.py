@@ -74,14 +74,67 @@ ICLOUD_GROW_DIR.mkdir(parents=True, exist_ok=True)
 TELEMETRY_NUTRI_DIR.mkdir(parents=True, exist_ok=True)
 ICLOUD_NUTRI_DIR.mkdir(parents=True, exist_ok=True)
 
-# MARK: - Google Cloud Firestore Integration (Native Free Tier)
-FIRESTORE_PROJECT_ID = "antigravity-sync-505016"
+# MARK: - Single Source of Truth: Supabase REST Cloud Database
+SUPABASE_URL = "https://oqhqpkayzkmnbcmbqkmm.supabase.co"
+SUPABASE_ANON_KEY = "sb_publishable_Nd7hRD_Fp6no6X-NMnbuPQ_pLxJ-iNR"
+
+# Firestore is permanently deprecated (Muda Elimination)
+FIRESTORE_PROJECT_ID = None
 FIRESTORE_DB = None
-try:
-    from google.cloud import firestore
-    FIRESTORE_DB = firestore.Client(project=FIRESTORE_PROJECT_ID)
-except Exception:
-    pass
+
+def fetch_supabase_products() -> List[Dict[str, Any]]:
+    """Fetch all products and store prices directly from Supabase Cloud."""
+    url = f"{SUPABASE_URL}/rest/v1/products?select=*,store_prices(*)"
+    headers = {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
+        "Accept": "application/json"
+    }
+    req = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(req, timeout=4) as res:
+            if res.status == 200:
+                return json.loads(res.read().decode("utf-8"))
+    except Exception as e:
+        print(f"[Supabase] Error fetching products: {e}", file=sys.stderr)
+    return []
+
+def fetch_supabase_inventory(user_id: str = "primary_wize_prod") -> Dict[str, Dict[str, Any]]:
+    """Fetch stock levels from Supabase user_inventory table."""
+    url = f"{SUPABASE_URL}/rest/v1/user_inventory?user_id=eq.{user_id}&select=*"
+    headers = {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
+        "Accept": "application/json"
+    }
+    req = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(req, timeout=3) as res:
+            if res.status == 200:
+                rows = json.loads(res.read().decode("utf-8"))
+                return {r.get("barcode"): r for r in rows if r.get("barcode")}
+    except Exception:
+        pass
+    return {}
+
+def upsert_supabase_inventory(records: List[Dict[str, Any]]):
+    """Upsert stock levels to Supabase user_inventory table."""
+    if not records:
+        return
+    url = f"{SUPABASE_URL}/rest/v1/user_inventory"
+    headers = {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
+        "Content-Type": "application/json",
+        "Prefer": "resolution=merge-duplicates"
+    }
+    data = json.dumps(records).encode("utf-8")
+    req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=4) as res:
+            pass
+    except Exception:
+        pass
 
 # MARK: - Unified Storage Helper (Grow, Gym, Nutrition, Tasks, Finance)
 class NutriVaultStorage:
@@ -110,6 +163,20 @@ class NutriVaultStorage:
 
     @staticmethod
     def _get_read_path(filename: str) -> Path:
+        # Check booted iOS simulator first for development parity
+        try:
+            sim_out = subprocess.run(["xcrun", "simctl", "list", "devices", "booted"], capture_output=True, text=True, timeout=2).stdout
+            for line in sim_out.splitlines():
+                if "(" in line and ")" in line:
+                    udid = line.split("(")[1].split(")")[0]
+                    res = subprocess.run(["xcrun", "simctl", "get_app_container", udid, "com.nkembi.somagym", "data"], capture_output=True, text=True, timeout=2)
+                    if res.returncode == 0 and res.stdout.strip():
+                        sim_p = Path(res.stdout.strip()) / "Documents" / "userData" / "primary_wize_prod" / filename
+                        if sim_p.exists() and sim_p.stat().st_size > 2:
+                            return sim_p
+        except Exception:
+            pass
+
         for p in [TELEMETRY_GROW_DIR / filename, ICLOUD_GROW_DIR / filename, TELEMETRY_NUTRI_DIR / filename, ICLOUD_NUTRI_DIR / filename]:
             if p.exists() and p.stat().st_size > 2:
                 return p
@@ -117,25 +184,20 @@ class NutriVaultStorage:
 
     @classmethod
     def load_json(cls, filename: str, default: Any = None) -> Any:
-        # 1. Real-time Cloud Firestore query
-        if FIRESTORE_DB and filename in cls.COLLECTION_MAP:
-            try:
-                col_name = cls.COLLECTION_MAP[filename]
-                col = FIRESTORE_DB.collection("users").document("primary_wize_prod").collection(col_name)
-                docs = [doc.to_dict() for doc in col.stream()]
-                if docs:
-                    return docs
-            except Exception as e:
-                print(f"[Firestore] Read fallback for {filename}: {e}", file=sys.stderr)
-
-        # 2. Live pull from connected iPhone container
-        cls.pull_from_iphone_if_connected(filename)
-
-        # 3. Read local / iCloud storage
+        # Native Grow App Data is the SOLE Single Source of Truth.
+        # Direct local read from the device/simulator container. No static cloud injection or overrides.
         path = cls._get_read_path(filename)
         if not path.exists():
             return default if default is not None else []
         try:
+            with open(path, "r", encoding="utf-8") as f:
+                content = f.read().strip()
+                if not content or content == "2":
+                    return default if default is not None else []
+                return json.loads(content)
+        except Exception as e:
+            print(f"[Storage] Error reading {path}: {e}", file=sys.stderr)
+            return default if default is not None else []
             with open(path, "r", encoding="utf-8") as f:
                 content = f.read().strip()
                 if not content or content == "2":
@@ -147,20 +209,7 @@ class NutriVaultStorage:
 
     @classmethod
     def save_json(cls, filename: str, data: Any):
-        # 1. Real-time write to Cloud Firestore
-        if FIRESTORE_DB and filename in cls.COLLECTION_MAP and isinstance(data, list):
-            try:
-                col_name = cls.COLLECTION_MAP[filename]
-                col = FIRESTORE_DB.collection("users").document("primary_wize_prod").collection(col_name)
-                batch = FIRESTORE_DB.batch()
-                for item in data:
-                    item_id = item.get("id") or str(uuid.uuid4()).upper()
-                    batch.set(col.document(item_id), item)
-                batch.commit()
-            except Exception as e:
-                print(f"[Firestore] Write error for {filename}: {e}", file=sys.stderr)
-
-        # 2. Write to local storage and iCloud bridge across both Grow and legacy directories
+        # Write to local storage and iCloud bridge across both Grow and legacy directories
         for dir_path in [TELEMETRY_GROW_DIR, ICLOUD_GROW_DIR, TELEMETRY_NUTRI_DIR, ICLOUD_NUTRI_DIR]:
             try:
                 target_path = dir_path / filename
@@ -169,23 +218,28 @@ class NutriVaultStorage:
             except Exception as e:
                 print(f"[GrowStorage] Error writing {filename} to {dir_path}: {e}", file=sys.stderr)
 
-        # 3. Devicectl push to iPhone
-        cls.push_file_to_iphone(filename)
+        # 2b. Write directly to booted iOS Simulator containers if active
+        try:
+            sim_out = subprocess.run(["xcrun", "simctl", "list", "devices", "booted"], capture_output=True, text=True, timeout=2).stdout
+            for line in sim_out.splitlines():
+                if "(" in line and ")" in line:
+                    udid = line.split("(")[1].split(")")[0]
+                    res = subprocess.run(["xcrun", "simctl", "get_app_container", udid, "com.nkembi.somagym", "data"], capture_output=True, text=True, timeout=2)
+                    if res.returncode == 0 and res.stdout.strip():
+                        sim_dir = Path(res.stdout.strip()) / "Documents" / "userData" / "primary_wize_prod"
+                        sim_dir.mkdir(parents=True, exist_ok=True)
+                        with open(sim_dir / filename, "w", encoding="utf-8") as f:
+                            json.dump(data, f, indent=2, sort_keys=True, ensure_ascii=False)
+        except Exception:
+            pass
 
     @classmethod
     def push_file_to_iphone(cls, filename: str):
-        # Native sync is handled via Cloud Firestore and iCloud.
         pass
 
     @classmethod
     def delete_document(cls, filename: str, doc_id: str):
-        if FIRESTORE_DB and filename in cls.COLLECTION_MAP:
-            try:
-                col_name = cls.COLLECTION_MAP[filename]
-                FIRESTORE_DB.collection("users").document("primary_wize_prod").collection(col_name).document(doc_id).delete()
-                print(f"[Firestore] Deleted document {doc_id} from {col_name}", file=sys.stderr)
-            except Exception as e:
-                print(f"[Firestore] Delete error for {filename} id {doc_id}: {e}", file=sys.stderr)
+        pass
 
 # Backward-compatibility alias
 GrowStorage = NutriVaultStorage
@@ -302,7 +356,7 @@ def get_pantry_catalog(
     in_stock_only: bool = False,
     storage_location: Optional[str] = None
 ) -> str:
-    """[Growcery - Vorrat & Lebensmittelbestand] Durchsucht die Lebensmitteldatenbank und Vorräte. Verwende dies, wenn der Nutzer wissen möchte, was im Vorrat ist, nach Beständen, Preisen, Nährwerten oder Zutaten im Lager fragt.
+    """[Growcery - Vorrat & Lebensmittelbestand] PRIMÄRES LESE-WERKZEUG für Vorratsprüfungen, Zutaten und Mahlzeitenplanung. Rufe IMMER zuerst dieses Werkzeug auf, wenn der Nutzer nach Vorrat, vorhandenen Beständen, Zutaten oder Rezepten fragt.
     
     Liefert Naehrwerte (Protein, kcal, Kohlenhydrate, Fett, Ballaststoffe je 100g/ml),
     den aktuellen physischen Lagerbestand (currentStockQty), Packungsgroesse, Laden und Standardpreis.
@@ -330,6 +384,9 @@ def get_pantry_catalog(
         stock = item.get("currentStockQty", 0)
 
         if in_stock_only and stock <= 0:
+            continue
+        # Filter out bogus <= 1g or <= 1ml scan artifacts from receipt OCR
+        if in_stock_only and stock <= 1 and (item.get("unit") in ["g", "ml"] or not item.get("unit")):
             continue
         if s_filters:
             match_store = any(sf in item_store.upper() or sf in brand.upper() for sf in s_filters)
@@ -524,6 +581,8 @@ def get_recipe_generation_context(
         f"Hardware & Utensilien: {utensils_str}\n"
         f"Zielkorridor: Mindestens {target_protein_min} g Protein | Maximal {target_kcal_max} kcal\n"
         f"BWK Ulm Viszeral-Reha: Mindestens 8 bis 12 g Ballaststoffe in dieser Mahlzeit (Tagesziel: 25-35g).\n"
+        f"Tages-Protein-Soll: 145 bis 170 g (Standard: 160 g). Fehlendes Protein zu den 160 g muss abends (z. B. Whey-Shake/Magerquark) ausgewiesen werden.\n"
+        f"Equipment-Vorgabe (1 Topf, 2 Schüsseln): Der Topf ist ein aktives Kochgerät und darf NIEMALS über Nacht als Lagerbehälter im Kühlschrank blockiert werden, wenn an Folgetagen gekocht wird! Mahlzeiten sofort in Schüssel 1 (Frühstück) und Schüssel 2 (Mittagessen) umfüllen und Topf spülen.\n"
         f"{reflux_clause}\n\n"
         f"VERFUEGBARE ROHSTOFFE IM LAGER (currentStockQty > 0):\n"
         f"1. Protein-Traeger (Haupt-Anker):\n   * " + ("\n   * ".join(protein_anchors) if protein_anchors else "Keine") + "\n\n"
@@ -1270,19 +1329,9 @@ def get_shopping_list(
     regenerate: bool = False,
     max_budget_eur: Optional[float] = None
 ) -> str:
-    """[Growcery - Einkaufsliste & Rezeptdossier] Ruft die Einkaufsliste ab oder generiert ein vollwertiges Nährwert-Dossier (Artikel, Makros, Rezepte >= 60, Budget). Vormerkungen sind UNGEKAUFT und UNVERZEHRT.
+    """[Growcery - Einkaufsliste anzeigen] Liest die aktuell auf der Einkaufsliste vorgemerkten Artikel. Rufe dieses Werkzeug NUR auf, wenn der Nutzer explizit nach seiner Einkaufsliste fragt ('zeige meine Einkaufsliste', 'was steht auf der Einkaufsliste').
     
-    Liefert ein detailliertes Dossier mit:
-    - Artikel-Tabelle, Marken, Laeden, Preisen und exakten Makros (Protein, Ballaststoffe, Kcal, Fett)
-    - Kumulierten Naehrwerten (Gesamtprotein mit Tagesabdeckung, Gesamtballaststoffe mit BWK-Ulm Reha-Abdeckung)
-    - 3 konkreten topf-kompatiblen Rezepten mit Gesundheitsscore >= 60
-    - Finanz- & Budget-Audit gegen haushaltsbuch.db
-    
-    Args:
-        store: Optionaler Geschaeftsfilter ('EDEKA', 'PENNY', 'LIDL', 'EDEKA, PENNY' oder 'egal'). Standard: 'EDEKA'.
-        regenerate: Wenn True, wird die Liste anhand der aktuellen Vorraete und des Geschaefts neu berechnet.
-        max_budget_eur: Optionales Budget-Limit in Euro.
-    """
+    Für Vorratsprüfung, Lebensmittelbestand und Mahlzeitenplanung anhand vorhandener Lebensmittel ist get_pantry_catalog zu verwenden!"""
     items = NutriVaultStorage.load_json("shopping_list.json", default=[])
     
     # Auto-generate if list is currently empty, or if regeneration requested, or if a specific store is requested that differs
@@ -1344,7 +1393,7 @@ def add_to_shopping_list(
     store: Optional[str] = None,
     category: str = "Lebensmittel"
 ) -> str:
-    """[Growcery - Artikel zu Einkaufsliste hinzufügen] Fügt einen Artikel zur Einkaufsliste hinzu (Status: ungekauft)."""
+    """[Growcery - Artikel zu Einkaufsliste hinzufügen] Fügt einen Artikel zur Einkaufsliste hinzu (Status: ungekauft). ACHTUNG: Rufe dieses Werkzeug NUR auf, wenn der Nutzer ausdrücklich und wörtlich befiehlt: 'Füge [Artikel] zur Einkaufsliste hinzu'. Rufe dieses Werkzeug NIEMALS bei allgemeinen Vorratsabfragen, Mahlzeitenplanungen oder Rezeptkalkulationen auf!"""
     pantry = NutriVaultStorage.load_json("pantry_catalog.json", default=[])
     matched = None
     clean = item_name.lower().strip()
@@ -1388,7 +1437,7 @@ def add_to_shopping_list(
 
 @mcp.tool()
 def clear_shopping_list(only_checked: bool = False) -> str:
-    """[Growcery - Einkaufsliste leeren] Leert die Einkaufsliste oder entfernt erledigte Posten."""
+    """[Growcery - Einkaufsliste leeren] Leert die Einkaufsliste oder entfernt erledigte Posten. ACHTUNG: Rufe dieses Werkzeug NIEMALS automatisch auf, es sei denn der Nutzer fordert explizit und wörtlich 'Leere meine Einkaufsliste'. Rufe es NIEMALS für Vorratsprüfung, Mahlzeitenplanung oder Rezeptkalkulation auf!"""
     shopping_list = NutriVaultStorage.load_json("shopping_list.json", default=[])
     if only_checked:
         remaining = [it for it in shopping_list if not it.get("isChecked")]
@@ -1401,8 +1450,9 @@ def clear_shopping_list(only_checked: bool = False) -> str:
 
 
 @mcp.tool()
+@mcp.tool()
 def get_shopping_budget_status() -> str:
-    """[GrowFinance & Growcery - Lebensmittel-Budget] Prüft reale Lebensmittel- und Drogerieausgaben in haushaltsbuch.db in Echtzeit gegen das Monatsbudget."""
+    """[GrowFinance - Einkaufsbudget & Liquiditaets-Check] Ermittelt das aktuelle Monatsbudget fuer Lebensmittel & Drogerie aus haushaltsbuch.db."""
     db_path = None
     for p in HAUSHALTSBUCH_PATHS:
         if p.exists():
@@ -1419,20 +1469,12 @@ def get_shopping_budget_status() -> str:
         cursor = conn.cursor()
 
         cursor.execute(
-            "SELECT category, SUM(amount) FROM transactions "
-            "WHERE substr(booking_date, 1, 7) = ? AND category IN ('Lebensmittel & Drogerie', 'Gastronomie / Lieferdienste') "
-            "GROUP BY category",
+            "SELECT SUM(amount) FROM transactions "
+            "WHERE substr(booking_date, 1, 7) = ? AND category = 'Lebensmittel & Drogerie'",
             (current_month,)
         )
-        rows = cursor.fetchall()
-
-        groceries_spent = 0.0
-        delivery_spent = 0.0
-        for cat, amt in rows:
-            if cat == "Lebensmittel & Drogerie":
-                groceries_spent = abs(amt)
-            elif cat == "Gastronomie / Lieferdienste":
-                delivery_spent = abs(amt)
+        row = cursor.fetchone()
+        groceries_spent = abs(row[0]) if row and row[0] is not None else 0.0
 
         cursor.execute("SELECT SUM(amount) FROM transactions")
         total_balance_row = cursor.fetchone()
@@ -1440,27 +1482,23 @@ def get_shopping_budget_status() -> str:
         conn.close()
 
         target_grocery_budget = 350.0
-        remaining_grocery = target_grocery_budget - groceries_spent
+        remaining_grocery = max(0.0, target_grocery_budget - groceries_spent)
         warning_dispo = balance < 100.0
-        leak_warning = delivery_spent > 50.0
+
+        status_msg = 'WARNUNG: Restbudget aufgebraucht oder Kontopuffer unter 100 EUR!' if (remaining_grocery <= 0.0 or warning_dispo) else 'Freigegeben fuer Folge-Einkauf im Rahmen des Restbudgets.'
 
         return (
-            f"FINANZ- & EINKAUFSBUDGET STATUS ({current_month}) via haushaltsbuch.db:\\n"
-            f"- Lebensmittel & Drogerie (Ist):   {groceries_spent:.2f} EUR (Monatsbudget: {target_grocery_budget:.2f} EUR | Rest: {remaining_grocery:.2f} EUR)\\n"
-            f"- Gastronomie & Lieferdienste:     {delivery_spent:.2f} EUR ({'LEAK ENTDECKT: Lieferdienstkosten minimieren!' if leak_warning else 'Im Rahmen'})\\n"
-            f"- Feste monatliche Schuldentilgung: 1.274,70 EUR (Targobank-Rate 274,70 EUR + 1.000 EUR Sondertilgung)\\n"
-            f"- Berechneter Liquiditaetssaldo:   {balance:.2f} EUR\\n"
-            f"- 5-Gate Kauf-Freigabe:            {'WARNUNG: Dispo-Gefahr! Einkaeufe streng auf Grundnahrungsmittel limitieren.' if warning_dispo else 'Freigegeben fuer Grundnahrungsmittel.'}"
+            f"FINANZ- & EINKAUFSBUDGET STATUS ({current_month}) via haushaltsbuch.db:\n"
+            f"- Lebensmittel & Drogerie (Bisher ausgegeben): {groceries_spent:.2f} EUR (Monatsdeckel: {target_grocery_budget:.2f} EUR)\n"
+            f"- Verbleibendes Restbudget fuer Folge-Einkauf: {remaining_grocery:.2f} EUR\n"
+            f"- Feste monatliche Schuldentilgung:           1.274,70 EUR (Targobank-Rate 274,70 EUR + 1.000,00 EUR Sondertilgung)\n"
+            f"- Berechneter Kontosaldo (Gesamt):           {balance:.2f} EUR\n"
+            f"- Budget-Status:                             {status_msg}"
         )
     except Exception as e:
         return f"Fehler bei Datenbankabfrage von haushaltsbuch.db: {e}"
 
 
-# ==============================================================================
-# 6. GROWCARE INTEGRATION (SKINCARE, PSEUDOFOLLICULITIS & CHORES)
-# ==============================================================================
-
-@mcp.tool()
 def get_care_routines(time_of_day: Optional[str] = None) -> str:
     """[GrowCare - Hautpflege, Bartrasur & Haare] Rufe dies auf, wenn der Nutzer nach Hautpflege (Morgen/Abend), Bartrasur (Pseudofolliculitis Barbae), 4C Haarpflege oder CPAP-Hygiene fragt.
     
@@ -3104,12 +3142,6 @@ def delete_planned_workout(
 
         if match:
             deleted.append(w)
-            w_id = w.get("id")
-            if w_id and FIRESTORE_DB:
-                try:
-                    FIRESTORE_DB.collection("users").document("primary_wize_prod").collection("planned_workouts").document(w_id).delete()
-                except Exception as e:
-                    print(f"[Firestore] Delete error for workout {w_id}: {e}", file=sys.stderr)
         else:
             remaining.append(w)
 

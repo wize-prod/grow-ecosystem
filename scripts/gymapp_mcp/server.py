@@ -26,15 +26,9 @@ from starlette.routing import Route
 from starlette.responses import JSONResponse
 import uvicorn
 
-# MARK: - Google Cloud Firestore Integration (Native Free Tier)
-FIRESTORE_PROJECT_ID = "antigravity-sync-505016"
+# MARK: - Single Source of Truth: Supabase & Simulator Bridge (Firestore Deprecated)
+FIRESTORE_PROJECT_ID = None
 FIRESTORE_DB = None
-try:
-    from google.cloud import firestore
-    FIRESTORE_DB = firestore.Client(project=FIRESTORE_PROJECT_ID)
-    print(f"[Firestore] Connected to Cloud Firestore database on project '{FIRESTORE_PROJECT_ID}'", file=sys.stderr)
-except Exception as e:
-    print(f"[Firestore] Note: Could not initialize Cloud Firestore client ({e}). Falling back to local storage.", file=sys.stderr)
 
 # MARK: - Configuration & Paths
 COCOA_REF_OFFSET = 978307200.0 # Seconds between 1970-01-01 and 2001-01-01
@@ -96,16 +90,6 @@ class GymAppStorage:
 
     @classmethod
     def load_json(cls, filename: str, default: Any = None) -> Any:
-        # Check Firestore first for real-time cloud data
-        if FIRESTORE_DB and filename == "planned_workouts.json":
-            try:
-                col = FIRESTORE_DB.collection("users").document("primary_wize_prod").collection("planned_workouts")
-                docs = [doc.to_dict() for doc in col.stream()]
-                if docs:
-                    return docs
-            except Exception as e:
-                print(f"[Firestore] Read error for {filename}: {e}", file=sys.stderr)
-
         path = cls._get_read_path(filename)
         if not path.exists():
             return default if default is not None else []
@@ -121,21 +105,7 @@ class GymAppStorage:
 
     @classmethod
     def save_json(cls, filename: str, data: Any):
-        # 1. Save to Cloud Firestore
-        if FIRESTORE_DB and filename == "planned_workouts.json" and isinstance(data, list):
-            try:
-                batch = FIRESTORE_DB.batch()
-                col = FIRESTORE_DB.collection("users").document("primary_wize_prod").collection("planned_workouts")
-                for item in data:
-                    item_id = item.get("id")
-                    if item_id:
-                        batch.set(col.document(item_id), item)
-                batch.commit()
-                print(f"[Firestore] Synchronized {len(data)} items to Cloud Firestore", file=sys.stderr)
-            except Exception as e:
-                print(f"[Firestore] Write error for {filename}: {e}", file=sys.stderr)
-
-        # 2. Save to local telemetry and iCloud bridge
+        # Save to local telemetry and iCloud bridge
         for dir_path in [ICLOUD_DATA_DIR, TELEMETRY_DATA_DIR]:
             try:
                 target_path = dir_path / filename
@@ -242,6 +212,12 @@ def plan_workout(
     modality: str = "kraft"
 ) -> str:
     """Erstellt ein neues geplantes Workout im Kalender der GymApp.
+    
+    WICHTIGE AUTONOME VORGABE (MULTIMODAL & POSTURAL):
+    Falls der Nutzer ein Bild/Foto seiner Haltung oder seines Koerpers hochgeladen hat,
+    MUSS vor diesem Aufruf zuerst 'log_physique_and_posture_assessment' aufgerufen werden!
+    Die dort identifizierten defizitaeren Muskelgruppen (z.B. oberer Ruecken, hintere Schulter)
+    muessen zwingend in diesem Workout priorisiert werden!
     
     Args:
         title: Name des Workouts (z. B. 'Calisthenics Push A' oder 'Oberkoerper Kraft').
@@ -462,19 +438,32 @@ def audit_bwk_reha_safety(exercise_names: List[str]) -> str:
             f"Begruendung: Klassische Crunches und Sit-ups belasten die Bandscheiben unnoetig. "
             f"Bitte ersetzen durch funktionelle Alternativen: {', '.join(SAFE_FUNCTIONAL_SUBSTITUTES[:4])}.")
 
+_EXERCISE_CATALOG_CACHE = None
+
+def load_exercise_catalog_cached():
+    global _EXERCISE_CATALOG_CACHE
+    if _EXERCISE_CATALOG_CACHE is not None:
+        return _EXERCISE_CATALOG_CACHE
+    if not CATALOG_PATH.exists():
+        return []
+    try:
+        with open(CATALOG_PATH, "r", encoding="utf-8") as f:
+            _EXERCISE_CATALOG_CACHE = json.load(f)
+        return _EXERCISE_CATALOG_CACHE
+    except Exception:
+        return []
+
 @mcp.tool()
 def search_exercise_catalog(query: str, target_muscle: Optional[str] = None) -> str:
-    """Durchsucht den 1.324-Uebungs-Katalog nach passenden Uebungen und Equipment.
+    """Durchsucht den 1.324-Uebungs-Katalog nach passenden Uebungen und Equipment (In-Memory gecacht fuer Sub-Millisekunden-Antwort).
     
     Args:
         query: Suchbegriff (z.B. 'push-up', 'squat', 'rudern').
         target_muscle: Optionaler Zielmuskel (z.B. 'abs', 'chest', 'back', 'legs').
     """
-    if not CATALOG_PATH.exists():
-        return "Katalog-Datei nicht gefunden."
-
-    with open(CATALOG_PATH, "r", encoding="utf-8") as f:
-        catalog = json.load(f)
+    catalog = load_exercise_catalog_cached()
+    if not catalog:
+        return "Katalog-Datei nicht gefunden oder leer."
 
     q = query.lower()
     matches = []
@@ -536,12 +525,6 @@ def delete_planned_workout(
 
         if match:
             deleted.append(w)
-            w_id = w.get("id")
-            if w_id and FIRESTORE_DB:
-                try:
-                    FIRESTORE_DB.collection("users").document("primary_wize_prod").collection("planned_workouts").document(w_id).delete()
-                except Exception as e:
-                    print(f"[Firestore] Delete error for workout {w_id}: {e}", file=sys.stderr)
         else:
             remaining.append(w)
 
@@ -626,6 +609,77 @@ def ingest_visual_telemetry(
         f"- Gekoppeltes Gewicht: {latest_weight} kg\n"
         f"- Beobachtungen / Befund: {notes or 'Keine'}\n"
         f"- Gesamte gespeicherte visuelle Eintraege: {len(index_data)}"
+    )
+
+@mcp.tool()
+def log_physique_and_posture_assessment(
+    posture_observations: str,
+    lagging_muscle_groups: List[str] = [],
+    dominant_muscle_groups: List[str] = [],
+    corrective_exercise_recommendations: List[str] = [],
+    estimated_bodyfat_pct: Optional[float] = None,
+    view_angle: str = "front",
+    notes: Optional[str] = None,
+    user_id: str = "primary_wize_prod"
+) -> str:
+    """
+    AUTONOMOUS MULTIMODAL HOOK:
+    Use this tool whenever the user attaches or uploads a photo/image of their body, posture, or physique.
+    Even if the user's prompt only asks for a general workout plan, Gemini MUST analyze the visual evidence,
+    extract postural deviations (e.g. protracted shoulders, anterior pelvic tilt), identify lagging vs dominant
+    muscle groups, and log them into the user's permanent medical and athlete dossier for future workout prioritization.
+    """
+    date_str = datetime.datetime.now().strftime("%Y-%m-%d")
+    timestamp = datetime.datetime.now().isoformat()
+
+    dossier = GymAppStorage.load_json("medical_dossier.json", default={"observations": [], "acute_limitations": [], "lab_reports": []})
+    if not isinstance(dossier, dict):
+        dossier = {"observations": [], "acute_limitations": [], "lab_reports": []}
+
+    obs_entry = {
+        "id": str(uuid.uuid4())[:8],
+        "timestamp": timestamp,
+        "date": date_str,
+        "category": "posture_and_physique",
+        "observation": posture_observations,
+        "view_angle": view_angle,
+        "lagging_muscles": lagging_muscle_groups,
+        "dominant_muscles": dominant_muscle_groups,
+        "corrective_exercises": corrective_exercise_recommendations,
+        "estimated_bodyfat_pct": estimated_bodyfat_pct,
+        "notes": notes,
+        "tier": 3
+    }
+    dossier.setdefault("observations", []).append(obs_entry)
+    GymAppStorage.save_json("medical_dossier.json", dossier)
+
+    # Append to GROW_ATHLETE_DOSSIER.md
+    dossier_md_path = WORKSPACE_DIR / "docs" / "GROW_ATHLETE_DOSSIER.md"
+    if not dossier_md_path.exists():
+        dossier_md_path = WORKSPACE_DIR / "telemetry" / "iphone" / "GymApp" / "GROW_ATHLETE_DOSSIER.md"
+
+    try:
+        if dossier_md_path.exists():
+            with open(dossier_md_path, "a", encoding="utf-8") as f:
+                f.write(
+                    f"\n\n### Visueller Haltungs- & Physio-Befund ({date_str} - {view_angle.upper()})\n"
+                    f"- Haltungsanalyse: {posture_observations}\n"
+                    f"- Defizitaere Muskelgruppen (Fokus): {', '.join(lagging_muscle_groups) if lagging_muscle_groups else 'Keine'}\n"
+                    f"- Dominante Muskelgruppen: {', '.join(dominant_muscle_groups) if dominant_muscle_groups else 'Ausgeglichen'}\n"
+                    f"- Korrektive Uebungsempfehlungen: {', '.join(corrective_exercise_recommendations) if corrective_exercise_recommendations else 'Keine'}\n"
+                    f"- KFA-Schaetzung: {estimated_bodyfat_pct if estimated_bodyfat_pct is not None else 'N/A'} %\n"
+                    f"- Quelle: Multimodale Gemini-Bildanalyse (Tier 3 - Aktiv)\n"
+                )
+    except Exception as e:
+        print(f"[VisualTelemetry] Note: Could not append to markdown dossier: {e}", file=sys.stderr)
+
+    return (
+        f"HALTUNGS- & PHYSIO-ANALYSE ERFOLGREICH IM DOSSIER GESICHERT:\n"
+        f"- Datum: {date_str} ({view_angle.upper()})\n"
+        f"- Haltungsbefund: {posture_observations}\n"
+        f"- Defizite / Fokus: {', '.join(lagging_muscle_groups) if lagging_muscle_groups else 'Keine'}\n"
+        f"- Korrektur-Uebungen: {', '.join(corrective_exercise_recommendations) if corrective_exercise_recommendations else 'Standard'}\n"
+        f"- Status: Automatisch verankert fuer alle kuenftigen 'plan_workout' Aufrufe."
     )
 
 @mcp.tool()
@@ -1251,9 +1305,19 @@ def main():
             "get_circadian_supplements_schedule",
             "log_supplement_intake",
             "get_pantry_catalog",
+            "get_item_details",
+            "update_item_stock",
+            "get_recipe_generation_context",
+            "audit_recipe_health_and_reha",
             "get_shopping_list",
+            "generate_smart_shopping_list",
             "add_to_shopping_list",
-            "get_master_ecosystem_schedule"
+            "clear_shopping_list",
+            "delete_shopping_list_item",
+            "get_shopping_budget_status",
+            "get_master_ecosystem_schedule",
+            "log_water_intake",
+            "get_water_intake"
         }
         for tool in growcery_mcp._tool_manager.list_tools():
             if tool.name in ALLOWED_GROWCERY_TOOLS:
@@ -1265,8 +1329,13 @@ def main():
             "get_daily_schedule",
             "plan_workout",
             "get_workout_history",
+            "get_exercise_prs",
             "log_body_weight",
+            "audit_bwk_reha_safety",
+            "search_exercise_catalog",
+            "delete_planned_workout",
             "ingest_visual_telemetry",
+            "log_physique_and_posture_assessment",
             "get_longitudinal_health_summary",
             "consult_and_update_profile_contract",
             "apply_executive_override",
@@ -1287,25 +1356,28 @@ def main():
     except Exception as e:
         print(f"[GrowSuite] Note: Could not merge Growcery tools: {e}", file=sys.stderr)
 
-    print(f"Starte GrowSuite Unified MCP-Server (Streamable HTTP + SSE) auf Port {port} ...", file=sys.stderr)
+    print(f"Starte GrowSuite Unified MCP-Server (Streamable HTTP) auf Port {port} ...", file=sys.stderr)
     sec = TransportSecuritySettings(enable_dns_rebinding_protection=False)
     app = mcp.streamable_http_app(
         streamable_http_path="/mcp",
         transport_security=sec,
         session_idle_timeout=86400,
     )
-    # Also mount standard SSE endpoints (/sse and /messages) for Gemini Developer Mode
-    sse_app = mcp.sse_app(
-        sse_path="/sse",
-        message_path="/messages/",
-        transport_security=sec,
-    )
-    for r in sse_app.routes:
-        app.routes.append(r)
 
-    if app.routes:
-        endpoint = app.routes[0].endpoint
-        app.routes.append(Route("/", endpoint=endpoint))
+    from starlette.middleware.cors import CORSMiddleware
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # Health and root status endpoint
+    async def root_status(request):
+        return JSONResponse({"status": "ok", "service": "GymApp-Controller", "tools": len(mcp._tool_manager._tools)})
+
+    app.routes.append(Route("/", endpoint=root_status, methods=["GET", "HEAD"]))
 
     # REST Endpoints for Mobile Device Over-The-Air Sync (GymApp)
     async def api_workouts_get(request):
