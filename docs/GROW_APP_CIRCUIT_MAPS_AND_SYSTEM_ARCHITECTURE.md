@@ -147,7 +147,9 @@ Aus den Fragen nach dem konkreten Speicherort und der Pflege des Haushaltsbuchs 
 
 ---
 
-## 4. High-Speed MCP-Architektur: Beseitigung des "Verbindungsaufbau... mit GymApp"-Problems
+## 4. High-Speed MCP-Architektur & Multi-Domain Orchestrierung
+
+### 4.1 Beseitigung des "Verbindungsaufbau... mit GymApp"-Problems
 
 In frueheren Testlaeufen blockierte Gemini haeufig mit dem Status *„Verbindungsaufbau... mit GymApp“*. Eine technische Ursachenanalyse ergab vier konkrete Engpaesse, die in dieser Architektur vollstaendig behoben sind:
 
@@ -155,6 +157,79 @@ In frueheren Testlaeufen blockierte Gemini haeufig mit dem Status *„Verbindung
 2. **Beseitigung unindizierter 17-MB-Festplattenzugriffe:** Die fruehere Funktion `search_exercise_catalog` parste bei jeder Suchanfrage eine unindizierte 17-MB-JSON-Datei synchron von der Festplatte. Durch In-Memory-Caching und die Verlagerung nach Supabase antwortet das Werkzeug in unter 1 Millisekunde.
 3. **Tool-Konsolidierung (40 Werkzeuge):** Statt ueber 70 ueberladener Tools wird das Schema beim Handshake kompakt gehalten, was die Initialisierung auf unter 50 ms verkuerzt.
 4. **Stabile Tunnel-Architektur:** Durch saubere Keep-Alive-Header antwortet der Cloudflare-Tunnel sofort auf jede Anfrage.
+
+---
+
+### 4.2 Multi-Domain Orchestrierung: Turn-Level Concurrency (Max 2-3 Tools) vs. Multi-Turn Chaining
+
+Ein zentrales Missverstaendnis in der KI-Orchestrierung besteht in der Verwechslung von **parallelen Tool-Aufrufen in einem einzelnen Inferenz-Turn** und der **Gesamtzahl an Tools ueber einen komplexen Nutzer-Prompt hinweg**.
+
+#### Das Prinzip: Turn vs. Prompt
+
+| Begriff | Definition | Tool-Grenzwert |
+| :--- | :--- | :--- |
+| **Nutzer-Prompt** | Die Gesamtanweisung des Nutzers an Gemini (z. B. 2 Belege buchen, Budget pruefen, Reha checken, Workout planen). | Unbegrenzt (kann 10 bis 15 Tools im Verlauf des Workflows ausloesen). |
+| **Agent-Turn (Schritt)** | Ein einzelner Inferenz-Zyklus von Gemini: Eingabe $\longrightarrow$ LLM erzeugt `tool_calls` $\longrightarrow$ Ausfuehrung $\longrightarrow$ Rueckgabe. | **Maximal 2 bis 3 Tools parallel pro Turn**. |
+| **Agent-Loop** | Die automatische Schleife, in der Gemini nach Erhalt der Tool-Ergebnisse den naechsten Turn startet, bis die Aufgabe geloest ist. | Typischerweise 3 bis 5 sequentielle Turns. |
+
+Die Regel **„Maximal 3 Tool-Calls gleichzeitig“** gilt strikt fuer **einen einzelnen Turn (Turn-Level Concurrency)**, **nicht** fuer den gesamten Prompt.
+
+#### Warum ein gleichzeitiges Feuern von 10 Tools im selben Turn scheitern wuerde
+
+1. **Kausale Datenabhaengigkeiten (Data Dependencies):** 
+   - Tool B benoetigt zwingend den Rueckgabewert von Tool A.
+   - *Beispiel:* Das Tool `generate_smart_shopping_list` kann nicht gleichzeitig mit `ingest_receipt` aufgerufen werden. Gemini muss zunaechst abwarten, wie viel Geld die neuen Belege gekostet haben und wie der berechnete Restsaldo fuer den Monat lautet (`get_shopping_budget_status`), bevor eine Budget-konforme Einkaufsliste generiert werden kann.
+2. **Kontext-Stabilitaet & Fehler-Isolation (Self-Correction):**
+   - Feuert ein Modell 10 Tools auf einmal ab und ein Aufruf wirft einen Parameter- oder Netzwerkfehler, scheitert haeufig der gesamte Inferenz-Schritt.
+   - Bei 2 bis 3 Tools pro Turn kann Gemini Teilergebnisse sofort validieren und bei Rueckfragen oder Fehlern im naechsten Turn adaptiv gegensteuern.
+3. **Datenbank-Konsistenz & Race Conditions:**
+   - Gleichzeitige unkoordinierte Schreib- und Lesezugriffe auf dieselbe lokale SQLite-Tabelle (`haushaltsbuch.db`) oder Supabase-Entitaet koennen zu Locking-Konflikten fuehren. Sequentielle Phasen garantieren ACID-Transaktionssicherheit.
+
+#### Phasen-Kaskadierung im Multi-Domain-Betrieb
+
+Ein komplexer Multi-Domain-Prompt (Finanzen + Vorrat + Reha + Workout) wird von Gemini souveraen in 3 bis 4 sequentielle Phasen zerlegt:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Nutzer
+    participant Gemini as Gemini Agent
+    participant MCP as Grow MCP Server (Port 8765)
+    participant DB as Supabase / haushaltsbuch.db
+
+    User->>Gemini: Multi-Domain-Prompt (2 Belege + Budget + BWK-Reha + Workout)
+    
+    Note over Gemini: Turn 1: Domain Finanzen & Belege (Max 2 Tools)
+    Gemini->>MCP: ingest_receipt(lidl_receipt) & ingest_receipt(rewe_receipt)
+    MCP->>DB: Ausgaben verbuchen & Einzelposten extrahieren
+    DB-->>MCP: Bestaetigung (Lidl 24.50 EUR, Rewe 18.20 EUR verbucht)
+    MCP-->>Gemini: Tool Response Turn 1
+    
+    Note over Gemini: Turn 2: Domain Budget & Reha-Audit (Max 2 Tools)
+    Gemini->>MCP: get_shopping_budget_status() & audit_bwk_reha_safety()
+    MCP->>DB: Monatsausgaben summieren & Rueckenbelastung pruefen
+    DB-->>MCP: Budget: 180 EUR verbleibend | BWK-Status: Akut (Keine Axiallast)
+    MCP-->>Gemini: Tool Response Turn 2
+    
+    Note over Gemini: Turn 3: Domain Uebungs-Lookup & Workout (Max 2 Tools)
+    Gemini->>MCP: search_exercise_catalog("Chest Supported Row") & plan_workout(...)
+    MCP->>DB: Biomechanik laden & Workout-Session eintragen
+    DB-->>MCP: Workout ID #1042 angelegt
+    MCP-->>Gemini: Tool Response Turn 3
+    
+    Note over Gemini: Turn 4: Finale Synthese (0 Tools)
+    Gemini-->>User: Vollstaendige Rueckmeldung: Belege gebucht, Saldo aktualisiert, reha-sicheres Rueckentraining steht bereit.
+```
+
+#### Orchestrierungs-Matrix eines Multi-Domain-Prompts
+
+| Phase / Turn | Domaenen-Fokus | Aufgerufene MCP-Tools | Parallele Tools | Zweck & Kausalitaet |
+| :--- | :--- | :--- | :--- | :--- |
+| **Turn 1** | **Finanzen & Belege** | `ingest_receipt`, `log_expense_transaction` | 2 Tools | Extraktion und Verbuchung der Rohdaten. Basis fuer Kontostand. |
+| **Turn 2** | **Budget & Reha-Safety** | `get_shopping_budget_status`, `audit_bwk_reha_safety` | 2 Tools | Pruefung der Rahmenbedingungen: Wie viel Budget bleibt? Ist die Wirbelsaeule belastbar? |
+| **Turn 3** | **Planung & Persistenz** | `search_exercise_catalog`, `plan_workout` | 2 Tools | Auswahl bio-mechanisch sicherer Uebungen und Eintragung in Supabase. |
+| **Turn 4** | **Ergebnis-Synthese** | *Keine weiteren Tools (Reine Textgenerierung)* | 0 Tools | Zusammenfassende, unmissverstaendliche Antwort an den Nutzer. |
+| **Gesamt** | **4 Domaenen geloest** | **Sequentiell kaskadiert** | **Max 2-3 / Turn** | **6 Tools total, 0 Timeout-Risiko, 100 % Datenkonsistenz** |
 
 ---
 
