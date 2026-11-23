@@ -524,17 +524,10 @@ public final class LocalStore: ObservableObject {
         rebuildKnownStoresIndex()
         isInitializing = false
 
-        if pantryItems.count < 50 {
+        let initialSeedKey = "hasInitialPantryMasterSeed_v1"
+        if !UserDefaults.standard.bool(forKey: initialSeedKey) {
             seedFromMasterData()
-        }
-
-        let resetStockKey = "hasResetStockToZero_Nov2026_v3"
-        if !UserDefaults.standard.bool(forKey: resetStockKey) {
-            for idx in 0..<pantryItems.count {
-                pantryItems[idx].currentStockQty = 0.0
-            }
-            savePantry()
-            UserDefaults.standard.set(true, forKey: resetStockKey)
+            UserDefaults.standard.set(true, forKey: initialSeedKey)
         }
 
         syncTagesbilanzToBridge()
@@ -1589,7 +1582,7 @@ public final class LocalStore: ObservableObject {
                 return sharedFinance.dynamicFoodBudgetMonthly
             }
             let val = UserDefaults.standard.double(forKey: "growcery_monthly_finance_budget")
-            return val > 0 ? val : 255.0
+            return val > 0 ? val : 350.0
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "growcery_monthly_finance_budget")
@@ -1706,7 +1699,7 @@ public final class LocalStore: ObservableObject {
         shoppingList.removeAll(where: { completedIds.contains($0.id) })
 
         savePantry()
-        saveShopping()
+        saveShopping(deletedIds: Array(completedIds))
         HapticFeedbackService.shared.commitSuccess()
     }
 
@@ -1739,7 +1732,7 @@ public final class LocalStore: ObservableObject {
 
         shoppingList.removeAll(where: { $0.id == item.id })
         savePantry()
-        saveShopping()
+        saveShopping(deletedId: item.id)
         HapticFeedbackService.shared.commitSuccess()
     }
 
@@ -1839,31 +1832,40 @@ public final class LocalStore: ObservableObject {
         saveShopping(deletedId: id)
     }
 
-    public func saveShopping(deletedId: String? = nil) {
+    public func saveShopping(deletedId: String? = nil, deletedIds: [String] = []) {
         save(items: shoppingList, to: shoppingURL)
         let existingBridge = GrowSuiteBridge.shared.loadShopping()
         var updatedDeleted = existingBridge.deletedIds
-        if let dId = deletedId, !updatedDeleted.contains(dId) {
-            updatedDeleted.append(dId)
-            if updatedDeleted.count > 100 {
-                updatedDeleted.removeFirst(updatedDeleted.count - 100)
+        var allNewDeleted = deletedIds
+        if let dId = deletedId {
+            allNewDeleted.append(dId)
+        }
+        for dId in allNewDeleted {
+            if !updatedDeleted.contains(dId) {
+                updatedDeleted.append(dId)
             }
         }
-        let bridgeItems = shoppingList.map { item in
-            SharedShoppingItem(
-                id: item.id,
-                name: item.name,
-                price: item.price,
-                store: item.store,
-                quantity: item.quantity,
-                category: item.category,
-                webUrl: item.webUrl,
-                isBought: item.isChecked,
-                isSaved: item.isSaved,
-                recurrenceRule: item.recurrenceRule,
-                lastUpdated: Date()
-            )
+        if updatedDeleted.count > 200 {
+            updatedDeleted.removeFirst(updatedDeleted.count - 200)
         }
+        let deletedSet = Set(updatedDeleted)
+        let bridgeItems = shoppingList
+            .filter { !deletedSet.contains($0.id) }
+            .map { item in
+                SharedShoppingItem(
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    store: item.store,
+                    quantity: item.quantity,
+                    category: item.category,
+                    webUrl: item.webUrl,
+                    isBought: item.isChecked,
+                    isSaved: item.isSaved,
+                    recurrenceRule: item.recurrenceRule,
+                    lastUpdated: Date()
+                )
+            }
         GrowSuiteBridge.shared.saveShopping(SharedShoppingPayload(items: bridgeItems, deletedIds: updatedDeleted))
         DarwinNotificationCenter.post(DarwinNotificationCenter.shoppingUpdated)
     }
@@ -2061,27 +2063,22 @@ public final class LocalStore: ObservableObject {
     }
 
     private func saveObject<T: Encodable>(_ object: T, to url: URL) {
-        pendingWorkItemsLock.lock()
-        pendingSaveWorkItems[url]?.cancel()
-
-        let workItem = DispatchWorkItem { [weak self] in
-            do {
-                let encoder = JSONEncoder()
-                encoder.dateEncodingStrategy = .iso8601
-                let data = try encoder.encode(object)
-                try data.write(to: url, options: [.atomicWrite])
-            } catch {
-                print("LocalStore async save error for \(url.lastPathComponent): \(error)")
-            }
-            self?.pendingWorkItemsLock.lock()
-            self?.pendingSaveWorkItems.removeValue(forKey: url)
-            self?.pendingWorkItemsLock.unlock()
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let data = try encoder.encode(object)
+            try data.write(to: url, options: [.atomicWrite])
+        } catch {
+            print("LocalStore immediate save error for \(url.lastPathComponent): \(error)")
         }
+    }
 
-        pendingSaveWorkItems[url] = workItem
-        pendingWorkItemsLock.unlock()
-
-        storageQueue.asyncAfter(deadline: .now() + 0.15, execute: workItem)
+    public func deletePantryItem(id: String) {
+        objectWillChange.send()
+        pantryItems.removeAll(where: { $0.id == id })
+        savePantry()
+        rebuildKnownStoresIndex()
+        HapticFeedbackService.shared.commitSuccess()
     }
 
     private func loadObject<T: Decodable>(from url: URL) -> T? {
@@ -3377,7 +3374,7 @@ public final class LocalStore: ObservableObject {
         }
 
         for sItem in shared.items {
-            if mockPrefixes.contains(where: { sItem.id.hasPrefix($0) }) {
+            if mockPrefixes.contains(where: { sItem.id.hasPrefix($0) }) || deletedIds.contains(sItem.id) {
                 continue
             }
             if let idx = self.shoppingList.firstIndex(where: { $0.id == sItem.id }) {

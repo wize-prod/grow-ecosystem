@@ -1,4 +1,5 @@
 import SwiftUI
+import GrowCore
 
 public struct MainTabView: View {
     @EnvironmentObject private var store: GymStore
@@ -22,17 +23,17 @@ public struct MainTabView: View {
                 }
                 .tag(1)
 
-            ExercisesView()
-                .tabItem {
-                    Image(systemName: "books.vertical.fill")
-                    Text("Katalog")
-                }
-                .tag(2)
-
             ShoppingHubView()
                 .tabItem {
                     Image(systemName: "cart.fill")
                     Text("Einkauf")
+                }
+                .tag(2)
+
+            TransactionsListView(embedInNavigationStack: true, showSubPicker: true, showToolbarActions: true)
+                .tabItem {
+                    Image(systemName: "creditcard.fill")
+                    Text("Buchungen")
                 }
                 .tag(3)
         }
@@ -57,17 +58,17 @@ public struct MainTabView: View {
                     }
                     .tag(1)
 
-                ExercisesView()
-                    .tabItem {
-                        Image(systemName: "books.vertical.fill")
-                        Text("Katalog")
-                    }
-                    .tag(2)
-
                 ShoppingHubView()
                     .tabItem {
                         Image(systemName: "cart.fill")
                         Text("Einkauf")
+                    }
+                    .tag(2)
+
+                TransactionsListView(embedInNavigationStack: true, showSubPicker: true, showToolbarActions: true)
+                    .tabItem {
+                        Image(systemName: "creditcard.fill")
+                        Text("Buchungen")
                     }
                     .tag(3)
             }
