@@ -7,6 +7,8 @@ public struct GrowUnifiedSearchView: View {
     @State private var selectedFilter: String = "ALL"
     @State private var searchResults: [SearchResultItem] = []
     @State private var isSearching: Bool = false
+    @State private var isSearchingCloud: Bool = false
+    @State private var searchDebounceTask: Task<Void, Never>? = nil
 
     private let engine = GrowUnifiedSearchEngine.shared
     private let filterOptions = [
@@ -33,12 +35,26 @@ public struct GrowUnifiedSearchView: View {
                 // 1. Search Bar & Filter Bar
                 searchHeader
 
-                // 2. Results List
-                if isSearching {
+                // 2. Cloud Search Activity Indicator
+                if isSearchingCloud {
+                    HStack(spacing: 6) {
+                        ProgressView()
+                            .scaleEffect(0.65)
+                        Text("Durchsuche Supabase Cloud-Katalog...")
+                            .font(.system(size: 11, design: .monospaced))
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.vertical, 4)
+                    .frame(maxWidth: .infinity)
+                    .background(secondaryBg.opacity(0.3))
+                }
+
+                // 3. Results List
+                if isSearching && searchResults.isEmpty {
                     ProgressView()
                         .padding(.top, 40)
                     Spacer()
-                } else if filteredResults.isEmpty && !searchQuery.isEmpty {
+                } else if filteredResults.isEmpty && !searchQuery.isEmpty && !isSearchingCloud {
                     VStack(spacing: 8) {
                         Text("Keine Treffer für '\(searchQuery)'")
                             .font(.system(size: 14, weight: .medium, design: .monospaced))
@@ -49,9 +65,14 @@ public struct GrowUnifiedSearchView: View {
                 } else {
                     List {
                         ForEach(filteredResults) { item in
-                            denseResultRow(item)
-                                .listRowInsets(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 12))
-                                .listRowSeparator(.hidden)
+                            Button(action: {
+                                handleItemSelection(item)
+                            }) {
+                                denseResultRow(item)
+                            }
+                            .buttonStyle(.plain)
+                            .listRowInsets(EdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12))
+                            .listRowSeparator(.hidden)
                         }
                     }
                     .listStyle(.plain)
@@ -69,6 +90,25 @@ public struct GrowUnifiedSearchView: View {
                     .font(.system(size: 14, weight: .medium, design: .monospaced))
                 }
             }
+        }
+    }
+
+    private func handleItemSelection(_ item: SearchResultItem) {
+        #if canImport(UIKit)
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        #endif
+
+        if item.entityType == "EXERCISE" {
+            NotificationCenter.default.post(
+                name: NSNotification.Name("GrowUnifiedSearchSelectExercise"),
+                object: item.title,
+                userInfo: [
+                    "title": item.title,
+                    "entityId": item.entityId,
+                    "metadata": item.metadata
+                ]
+            )
+            dismiss()
         }
     }
 
@@ -140,14 +180,15 @@ public struct GrowUnifiedSearchView: View {
     }
 
     private func denseResultRow(_ item: SearchResultItem) -> some View {
-        HStack(alignment: .top, spacing: 10) {
+        let isCloud = item.categoryBadge == "Kraft (Cloud)"
+        return HStack(alignment: .top, spacing: 10) {
             // Entity Badge
             Text(item.categoryBadge)
                 .font(.system(size: 9, weight: .bold, design: .monospaced))
                 .padding(.horizontal, 6)
                 .padding(.vertical, 3)
-                .background(badgeColor(for: item.entityType).opacity(0.15))
-                .foregroundColor(badgeColor(for: item.entityType))
+                .background(isCloud ? Color.cyan.opacity(0.18) : badgeColor(for: item.entityType).opacity(0.15))
+                .foregroundColor(isCloud ? Color.cyan : badgeColor(for: item.entityType))
                 .cornerRadius(4)
                 .padding(.top, 2)
 
@@ -209,8 +250,38 @@ public struct GrowUnifiedSearchView: View {
         let clean = query.trimmingCharacters(in: .whitespacesAndNewlines)
         if clean.isEmpty {
             searchResults = []
+            isSearchingCloud = false
+            searchDebounceTask?.cancel()
             return
         }
-        searchResults = engine.search(query: clean, limit: 40)
+
+        // 1. Immediate Synchronous Local SQLite Search
+        let localResults = engine.search(query: clean, limit: 40)
+        self.searchResults = localResults
+
+        // 2. Asynchronous Cloud Catalog Search (Supabase)
+        guard clean.count >= 2, (selectedFilter == "ALL" || selectedFilter == "EXERCISE") else {
+            return
+        }
+
+        searchDebounceTask?.cancel()
+        searchDebounceTask = Task {
+            try? await Task.sleep(nanoseconds: 150_000_000)
+            if Task.isCancelled { return }
+
+            await MainActor.run {
+                self.isSearchingCloud = true
+            }
+
+            let cloudResults = await engine.searchCloudExercises(query: clean)
+            if Task.isCancelled { return }
+
+            await MainActor.run {
+                let existingTitles = Set(self.searchResults.map { $0.title.lowercased() })
+                let deduplicatedCloud = cloudResults.filter { !existingTitles.contains($0.title.lowercased()) }
+                self.searchResults = self.searchResults + deduplicatedCloud
+                self.isSearchingCloud = false
+            }
+        }
     }
 }

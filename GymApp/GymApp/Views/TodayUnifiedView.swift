@@ -187,6 +187,31 @@ public struct TodayUnifiedView: View {
             .sheet(isPresented: $showingGlobalSearch) {
                 GrowUnifiedSearchView()
             }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("GrowUnifiedSearchSelectExercise"))) { notif in
+                showingGlobalSearch = false
+                guard let title = notif.userInfo?["title"] as? String else { return }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    if let existing = gymStore.exercises.first(where: { $0.name.lowercased() == title.lowercased() }) {
+                        gymStore.startSingleExerciseWorkout(exercise: existing)
+                    } else if let meta = notif.userInfo?["metadata"] as? [String: String],
+                              let rawName = meta["raw_name"] {
+                        let rowDict: [String: Any] = [
+                            "id": meta["id"] ?? "",
+                            "name": rawName,
+                            "body_part": meta["body_part"] ?? "",
+                            "target": meta["target"] ?? "",
+                            "equipment": meta["equipment"] ?? ""
+                        ]
+                        if let cloudEx = CloudExerciseCatalogService.mapRowToExercise(rowDict) {
+                            if !gymStore.exercises.contains(where: { $0.name.lowercased() == cloudEx.name.lowercased() }) {
+                                gymStore.exercises.append(cloudEx)
+                                gymStore.saveExercises()
+                            }
+                            gymStore.startSingleExerciseWorkout(exercise: cloudEx)
+                        }
+                    }
+                }
+            }
             .sheet(isPresented: $showingProfileAndSettings) {
                 EcosystemProfileAndSettingsSheet()
                     .environmentObject(gymStore)
