@@ -583,6 +583,32 @@ public struct ExerciseAboutUnifiedInstructionsCard: View {
                     .foregroundColor(GymTheme.textPrimary)
             }
 
+            // Direct YouTube Video Demonstration Link
+            Link(destination: exercise.youtubeURL) {
+                HStack(spacing: 10) {
+                    Image(systemName: "play.rectangle.fill")
+                        .font(.system(size: 18))
+                        .foregroundColor(.red)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("YOUTUBE VIDEO-DEMONSTRATION")
+                            .font(.system(size: 10, weight: .bold, design: .monospaced))
+                            .tracking(0.6)
+                            .foregroundColor(GymTheme.textPrimary)
+                        Text("Saubere Technik & Biomechanik ansehen")
+                            .font(.system(size: 11))
+                            .foregroundColor(GymTheme.textSecondary)
+                    }
+                    Spacer()
+                    Image(systemName: "arrow.up.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(GymTheme.textMuted)
+                }
+                .padding(12)
+                .background(Color(red: 0.12, green: 0.14, blue: 0.18))
+                .cornerRadius(12)
+                .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.white.opacity(0.08), lineWidth: 1))
+            }
+
             // A. Setup & Ausgangsposition
             if !exercise.setup.isEmpty {
                 VStack(alignment: .leading, spacing: 6) {

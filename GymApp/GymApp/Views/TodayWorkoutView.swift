@@ -1015,6 +1015,8 @@ struct StartWorkoutQuickSheet: View {
     @EnvironmentObject private var store: GymStore
     @StateObject private var growceryService = GrowcerySyncService.shared
 
+    @State private var exerciseSearchText: String = ""
+    @State private var inspectingExercise: Exercise? = nil
     @State private var selectedLocationMode: TrainingLocationMode = .gymWithWeights
     @State private var selectedDiscipline: TrainingDiscipline = .krafttraining
     @State private var selectedEquipmentMode: EquipmentModeFilter = .all
@@ -1036,6 +1038,9 @@ struct StartWorkoutQuickSheet: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 20) {
+                        // Section 0: Instant Exercise Catalog Search
+                        exerciseSearchSection
+
                         // Section 1: Olympic Coach Daily Recommendation & Location Mode
                         coachRecommendationSection
 
@@ -1058,6 +1063,102 @@ struct StartWorkoutQuickSheet: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Abbrechen") { dismiss() }
                         .foregroundColor(GymTheme.textMuted)
+                }
+            }
+            .sheet(item: $inspectingExercise) { ex in
+                ExerciseDetailSheet(exercise: ex)
+                    .environmentObject(store)
+            }
+        }
+    }
+
+    // MARK: - 0. Exercise Catalog Search Section
+    private var exerciseSearchSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("UEBUNG SUCHEN & STARTEN")
+                .font(.system(size: 9, weight: .bold, design: .monospaced))
+                .tracking(1.0)
+                .foregroundColor(GymTheme.textMuted)
+
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(GymTheme.textMuted)
+                TextField("Uebung im Katalog suchen (z. B. Latziehen, RDL)...", text: $exerciseSearchText)
+                    .font(.system(size: 13))
+                    .foregroundColor(GymTheme.textPrimary)
+                if !exerciseSearchText.isEmpty {
+                    Button {
+                        exerciseSearchText = ""
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(GymTheme.textMuted)
+                    }
+                }
+            }
+            .padding(10)
+            .background(GymTheme.surfaceElevated)
+            .cornerRadius(10)
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(GymTheme.border, lineWidth: 1))
+
+            if !exerciseSearchText.trimmingCharacters(in: .whitespaces).isEmpty {
+                let matches = store.exercises.filter {
+                    $0.name.localizedCaseInsensitiveContains(exerciseSearchText) ||
+                    $0.targetMuscle.rawValue.localizedCaseInsensitiveContains(exerciseSearchText)
+                }.prefix(6)
+
+                if matches.isEmpty {
+                    Text("Keine Uebung gefunden")
+                        .font(.caption)
+                        .foregroundColor(GymTheme.textMuted)
+                        .padding(.vertical, 6)
+                } else {
+                    VStack(spacing: 6) {
+                        ForEach(matches) { ex in
+                            HStack {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(ex.name)
+                                        .font(.system(size: 13, weight: .bold))
+                                        .foregroundColor(GymTheme.textPrimary)
+                                    Text("\(ex.targetMuscle.rawValue) • \(ex.equipment.rawValue)")
+                                        .font(.system(size: 10))
+                                        .foregroundColor(GymTheme.textSecondary)
+                                }
+                                Spacer()
+
+                                Button {
+                                    inspectingExercise = ex
+                                } label: {
+                                    Image(systemName: "info.circle")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(GymTheme.cyanAccent)
+                                        .padding(6)
+                                }
+                                .buttonStyle(.plain)
+
+                                Button {
+                                    store.startSingleExerciseWorkout(exercise: ex)
+                                    HapticFeedback.medium()
+                                    dismiss()
+                                } label: {
+                                    HStack(spacing: 4) {
+                                        Image(systemName: "play.fill")
+                                            .font(.system(size: 10, weight: .bold))
+                                        Text("Start")
+                                            .font(.system(size: 11, weight: .bold))
+                                    }
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 6)
+                                    .background(GymTheme.strongBlue)
+                                    .cornerRadius(6)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            .padding(8)
+                            .background(GymTheme.surfaceElevated)
+                            .cornerRadius(8)
+                        }
+                    }
                 }
             }
         }

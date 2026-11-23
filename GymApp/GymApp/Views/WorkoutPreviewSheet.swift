@@ -426,20 +426,45 @@ public struct WorkoutPreviewSheet: View {
                         .padding(.top, 2)
                     }
 
-                    Button {
-                        selectedExerciseForDetail = entry.exercise
-                        HapticFeedback.light()
-                    } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: "books.vertical.fill")
-                                .font(.system(size: 10))
-                            Text("Uebungsanleitung & Video im Katalog")
-                                .font(.system(size: 11, weight: .bold))
+                    HStack(spacing: 8) {
+                        Link(destination: entry.exercise.youtubeURL) {
+                            HStack(spacing: 4) {
+                                Image(systemName: "play.rectangle.fill")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(.red)
+                                Text("YouTube Video")
+                                    .font(.system(size: 11, weight: .bold))
+                                    .foregroundColor(GymTheme.textPrimary)
+                            }
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 5)
+                            .background(GymTheme.surfaceElevated)
+                            .cornerRadius(6)
+                            .overlay(RoundedRectangle(cornerRadius: 6).stroke(GymTheme.borderSubtle, lineWidth: 0.8))
                         }
-                        .foregroundColor(GymTheme.strongBlue)
-                        .padding(.vertical, 4)
+
+                        Button {
+                            selectedExerciseForDetail = entry.exercise
+                            HapticFeedback.light()
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: "text.book.closed.fill")
+                                    .font(.system(size: 10))
+                                Text("Cues & Details")
+                                    .font(.system(size: 11, weight: .bold))
+                            }
+                            .foregroundColor(GymTheme.strongBlue)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 5)
+                            .background(GymTheme.surfaceElevated)
+                            .cornerRadius(6)
+                            .overlay(RoundedRectangle(cornerRadius: 6).stroke(GymTheme.borderSubtle, lineWidth: 0.8))
+                        }
+                        .buttonStyle(.plain)
+
+                        Spacer()
                     }
-                    .buttonStyle(.plain)
+                    .padding(.top, 4)
                 }
                 .padding(.horizontal, 14)
                 .padding(.top, 10)

@@ -299,6 +299,18 @@ public struct Exercise: Identifiable, Codable, Equatable, Hashable {
     public var programmingGuidance: String
     public var youtubeVideoId: String?
 
+    public var youtubeURL: URL {
+        if let videoId = youtubeVideoId, !videoId.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return URL(string: "https://www.youtube.com/watch?v=\(videoId)") ?? youtubeSearchURL
+        }
+        return youtubeSearchURL
+    }
+
+    public var youtubeSearchURL: URL {
+        let query = "\(name) form demonstration".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? name
+        return URL(string: "https://www.youtube.com/results?search_query=\(query)") ?? URL(string: "https://www.youtube.com")!
+    }
+
     public init(
         id: UUID = UUID(),
         name: String,
