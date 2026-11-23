@@ -3,35 +3,30 @@ import UIKit
 public final class HapticFeedbackService {
     public static let shared = HapticFeedbackService()
 
-    private let rigidFeedback = UIImpactFeedbackGenerator(style: .rigid)
-    private let heavyFeedback = UIImpactFeedbackGenerator(style: .heavy)
-    private let lightFeedback = UIImpactFeedbackGenerator(style: .light)
-    private let notificationFeedback = UINotificationFeedbackGenerator()
-
-    private init() {
-        rigidFeedback.prepare()
-        heavyFeedback.prepare()
-        lightFeedback.prepare()
-        notificationFeedback.prepare()
-    }
+    private init() {}
 
     public func mechanicalClick() {
-        rigidFeedback.impactOccurred(intensity: 0.8)
+        let generator = UIImpactFeedbackGenerator(style: .rigid)
+        generator.impactOccurred(intensity: 0.8)
     }
 
     public func latchEngaged() {
-        heavyFeedback.impactOccurred(intensity: 1.0)
+        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        generator.impactOccurred(intensity: 1.0)
     }
 
     public func lightDetent() {
-        lightFeedback.impactOccurred(intensity: 0.6)
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred(intensity: 0.6)
     }
 
     public func alertWarning() {
-        notificationFeedback.notificationOccurred(.warning)
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.warning)
     }
 
     public func commitSuccess() {
-        notificationFeedback.notificationOccurred(.success)
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
     }
 }

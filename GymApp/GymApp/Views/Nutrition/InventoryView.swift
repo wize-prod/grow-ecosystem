@@ -37,6 +37,9 @@ public struct DepotInventorySection: View {
     @State private var showingStoreScouter: Bool = false
     @State private var showingReceiptScanner: Bool = false
     @State private var scannedItemForInspection: PantryItem? = nil
+    @State private var cloudSearchResults: [PantryItem] = []
+    @State private var isSearchingCloud: Bool = false
+    @State private var searchDebounceTask: Task<Void, Never>? = nil
 
     public init() {}
 
@@ -73,9 +76,9 @@ public struct DepotInventorySection: View {
         let items = filteredItems
         return ScrollView {
             LazyVStack(spacing: 10) {
-                    if items.isEmpty {
+                    if items.isEmpty && cloudSearchResults.isEmpty && !isSearchingCloud {
                         VStack(spacing: 4) {
-                            Text("Keine Artikel im Vorrat")
+                            Text(searchText.isEmpty ? "Keine Artikel im Vorrat" : "Keine Artikel im Vorrat gefunden")
                                 .font(.system(size: 13, weight: .medium))
                                 .foregroundColor(Theme.textMuted)
                         }
@@ -109,6 +112,69 @@ public struct DepotInventorySection: View {
                                     store.addManualShoppingItem(pantryItem: item)
                                 }
                             )
+                        }
+
+                        // Cloud-Datenbank Suchergebnisse
+                        if !cloudSearchResults.isEmpty {
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack(spacing: 6) {
+                                    Image(systemName: "cloud.fill")
+                                        .font(.system(size: 11, weight: .bold))
+                                        .foregroundColor(Theme.warmSand)
+                                    Text("CLOUD-DATENBANK (\(cloudSearchResults.count))")
+                                        .font(.system(size: 10, weight: .bold, design: .monospaced))
+                                        .foregroundColor(Theme.warmSand)
+                                        .tracking(0.6)
+                                    Spacer()
+                                    Text("0 im Bestand • Antippen zum Einlagern")
+                                        .font(.system(size: 9))
+                                        .foregroundColor(Theme.textMuted)
+                                }
+                                .padding(.top, 14)
+                                .padding(.bottom, 2)
+
+                                ForEach(cloudSearchResults) { cloudItem in
+                                    InventoryItemRowView(
+                                        item: cloudItem,
+                                        isSelected: selectedPantryItem?.id == cloudItem.id,
+                                        onTapInspect: {
+                                            HapticFeedbackService.shared.lightDetent()
+                                            inspectingItem = cloudItem
+                                        },
+                                        onLogConsumption: {
+                                            HapticFeedbackService.shared.lightDetent()
+                                            selectedPantryItem = cloudItem
+                                            selectedItemForConsumption = cloudItem
+                                        },
+                                        onEditStock: {
+                                            HapticFeedbackService.shared.lightDetent()
+                                            editingStockItem = cloudItem
+                                        },
+                                        onRestockPack: {
+                                            HapticFeedbackService.shared.lightDetent()
+                                            var updated = cloudItem
+                                            updated.currentStockQty = cloudItem.defaultPackQty
+                                            store.addOrUpdatePantryItem(updated)
+                                        },
+                                        onAddShoppingItem: {
+                                            HapticFeedbackService.shared.lightDetent()
+                                            store.addManualShoppingItem(pantryItem: cloudItem)
+                                        }
+                                    )
+                                }
+                            }
+                        }
+
+                        if isSearchingCloud {
+                            HStack(spacing: 8) {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                                Text("Suche in Cloud-Datenbank...")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(Theme.textMuted)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
                         }
                     }
 
@@ -290,6 +356,28 @@ public struct DepotInventorySection: View {
                 }
             }
         }
+        .onChange(of: searchText) { newQuery in
+            searchDebounceTask?.cancel()
+            let clean = newQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard clean.count >= 2 else {
+                cloudSearchResults = []
+                isSearchingCloud = false
+                return
+            }
+
+            searchDebounceTask = Task {
+                try? await Task.sleep(nanoseconds: 300_000_000)
+                guard !Task.isCancelled else { return }
+                await MainActor.run { isSearchingCloud = true }
+                let results = await CloudProductCatalogService.shared.searchProducts(query: clean)
+                guard !Task.isCancelled else { return }
+                await MainActor.run {
+                    let localBarcodes = Set(self.filteredItems.map { $0.barcode })
+                    self.cloudSearchResults = results.filter { !localBarcodes.contains($0.barcode) }
+                    self.isSearchingCloud = false
+                }
+            }
+        }
     }
 
     private func handleBarcodeScanned(_ barcode: String) {
@@ -304,7 +392,7 @@ public struct DepotInventorySection: View {
         }
 
         Task {
-            if let fetched = await OpenFoodFactsService.shared.fetchProduct(barcode: barcode) {
+            if let fetched = await CloudProductCatalogService.shared.lookupProduct(barcode: barcode) {
                 if NonFoodClassifier.isNonFood(item: fetched) {
                     await MainActor.run {
                         HapticFeedbackService.shared.lightDetent()

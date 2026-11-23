@@ -4,7 +4,7 @@ import GrowCore
 public struct MainTabView: View {
     @EnvironmentObject private var store: GymStore
     @ObservedObject private var userAccount = UserAccountService.shared
-    @State private var selectedTab: Int = 0
+    @AppStorage("main_selected_tab") private var selectedTab: Int = 0
 
     public var body: some View {
         #if targetEnvironment(simulator)
@@ -39,6 +39,11 @@ public struct MainTabView: View {
         }
         .accentColor(GymTheme.terracotta)
         .background(GymTheme.bg.ignoresSafeArea())
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("SwitchMainTab"))) { notif in
+            if let tab = notif.object as? Int {
+                selectedTab = tab
+            }
+        }
         #else
         if !userAccount.isLoggedIn {
             GymLoginView()

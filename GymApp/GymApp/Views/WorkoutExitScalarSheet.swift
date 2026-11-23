@@ -6,20 +6,8 @@ import SwiftUI
 public struct WorkoutExitScalarSheet: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var store: GymStore
-    @State private var showingUnratedAlert = false
 
     public init() {}
-
-    private var unratedSetsCount: Int {
-        guard let session = store.activeSession else { return 0 }
-        let hasAnyCompleted = session.exercises.contains { $0.sets.contains { $0.isCompleted } }
-        return session.exercises.reduce(0) { total, ex in
-            total + ex.sets.filter { s in
-                let qualifies = hasAnyCompleted ? s.isCompleted : true
-                return qualifies && s.rpe == nil && !s.isWarmup
-            }.count
-        }
-    }
 
     public var body: some View {
         NavigationStack {
@@ -28,25 +16,6 @@ public struct WorkoutExitScalarSheet: View {
 
                 ScrollView {
                     VStack(alignment: .leading, spacing: 14) {
-                        if unratedSetsCount > 0 {
-                            HStack(spacing: 10) {
-                                Image(systemName: "exclamationmark.triangle.fill")
-                                    .foregroundColor(GymTheme.warningAmber)
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text("RPE-Einstufung unvollstaendig")
-                                        .font(.system(size: 12, weight: .bold))
-                                        .foregroundColor(GymTheme.warningAmber)
-                                    Text("\(unratedSetsCount) Saetze muessen vor dem Beenden mit einem RPE bewertet werden.")
-                                        .font(.system(size: 11))
-                                        .foregroundColor(GymTheme.textSecondary)
-                                }
-                            }
-                            .padding(12)
-                            .background(GymTheme.surfaceElevated)
-                            .cornerRadius(10)
-                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(GymTheme.warningAmber.opacity(0.4), lineWidth: 1))
-                        }
-
                         // Header
                         VStack(alignment: .leading, spacing: 4) {
                             Text("1-TAP EXIT-SKALAR")
@@ -59,7 +28,7 @@ public struct WorkoutExitScalarSheet: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(GymTheme.textPrimary)
 
-                            Text("Ein einziger Fingertipp beendet die Einheit und kalibriert die physiologischen Modelle (Banister, Israetel, Daempfungsmatrix) deterministisch im Hintergrund.")
+                            Text("Ein einziger Fingertipp beendet die Einheit und kalibriert die physiologischen Modelle deterministisch im Hintergrund.")
                                 .font(.system(size: 11))
                                 .foregroundColor(GymTheme.textSecondary)
                                 .lineSpacing(2)
@@ -139,11 +108,6 @@ public struct WorkoutExitScalarSheet: View {
                         .foregroundColor(GymTheme.textSecondary)
                 }
             }
-            .alert("RPE-Bewertung erforderlich", isPresented: $showingUnratedAlert) {
-                Button("Im Workout bewerten", role: .cancel) { dismiss() }
-            } message: {
-                Text("Es sind noch \(unratedSetsCount) Sätze ohne RPE-Einstufung vorhanden. Bitte bewerte jeden Satz vor dem Abschluss des Workouts.")
-            }
         }
     }
 
@@ -156,11 +120,7 @@ public struct WorkoutExitScalarSheet: View {
         color: Color
     ) -> some View {
         Button {
-            guard unratedSetsCount == 0 else {
-                showingUnratedAlert = true
-                HapticFeedback.warning()
-                return
-            }
+            HapticFeedback.success()
             Task {
                 await store.finishWorkoutWithScalar(exitCode: code)
                 dismiss()

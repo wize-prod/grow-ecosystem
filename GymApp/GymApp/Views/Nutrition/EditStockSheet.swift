@@ -78,7 +78,7 @@ public struct EditStockSheet: View {
         _productBrand = State(initialValue: item.brand)
         _productBarcode = State(initialValue: item.barcode)
         _productStore = State(initialValue: item.store.isEmpty ? "PENNY" : item.store)
-        _priceString = State(initialValue: item.defaultPrice > 0 ? EditStockSheet.formatDecimal(item.defaultPrice, maxDigits: 2) : "1,49")
+        _priceString = State(initialValue: item.defaultPrice > 0 ? EditStockSheet.formatDecimal(item.defaultPrice, maxDigits: 2) : "")
 
         _inputString = State(initialValue: EditStockSheet.formatDecimal(item.currentStockQty, maxDigits: 3))
         let pQty = item.defaultPackQty > 0 ? item.defaultPackQty : 500.0
@@ -511,6 +511,22 @@ public struct EditStockSheet: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
                     .background(RoundedRectangle(cornerRadius: 12).fill(Theme.warmSand))
+                }
+
+                Button(role: .destructive) {
+                    store.deletePantryItem(id: item.id)
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: "trash")
+                            .font(.system(size: 13, weight: .bold))
+                        Text("ARTIKEL AUS VORRAT LÖSCHEN")
+                            .font(.system(size: 11, weight: .bold, design: .monospaced))
+                    }
+                    .foregroundColor(Theme.terracotta)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(RoundedRectangle(cornerRadius: 10).stroke(Theme.terracotta.opacity(0.4), lineWidth: 1))
                 }
             }
             .padding(16)

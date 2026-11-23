@@ -307,7 +307,7 @@ public final class ReceiptMatchingEngine {
                 brand: storeContext ?? "Supermarkt",
                 barcode: "",
                 defaultPackQty: 500.0,
-                defaultPrice: linePrice ?? 1.49,
+                defaultPrice: linePrice ?? 0.0,
                 currentStockQty: 0.0,
                 unit: "g",
                 kcal100g: std.kcal,

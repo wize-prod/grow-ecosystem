@@ -195,7 +195,18 @@ public final class GymStore: ObservableObject {
     @Published public var activeAdaptiveConstraints: [String: String] = [:]
     @Published public var dailyNotes: [String: String] = [:]
     @Published public var tuningMatrix: CoachTuningMatrix = CoachTuningMatrix()
-    @Published public var activeSession: WorkoutSession?
+    @Published public var isPresentingActiveWorkout: Bool = false
+    @Published public var inspectingCompletedSession: WorkoutSession? = nil
+    @Published public var activeSession: WorkoutSession? {
+        didSet {
+            if let session = activeSession {
+                saveAsync(session, to: activeSessionURL)
+            } else {
+                try? FileManager.default.removeItem(at: activeSessionURL)
+                isPresentingActiveWorkout = false
+            }
+        }
+    }
     @Published public var activeSetStartTime: Date? = nil
 
     public func markSetStarted() {
@@ -331,153 +342,8 @@ public final class GymStore: ObservableObject {
             saveExercises()
         }
 
-        let defaultTpls = ExerciseCatalogSeed.defaultTemplates()
-        var currentTplNames = Set(templates.map { $0.name })
-        var templatesUpdated = false
-        for tpl in defaultTpls {
-            if !currentTplNames.contains(tpl.name) {
-                templates.append(tpl)
-                currentTplNames.insert(tpl.name)
-                templatesUpdated = true
-            }
-        }
-        for i in 0..<templates.count {
-            if templates[i].name.contains("MuscleWiki") || templates[i].summary.contains("MuscleWiki") {
-                if let def = defaultTpls.first(where: { $0.category == templates[i].category }) {
-                    templates[i].name = def.name
-                    templates[i].summary = def.summary
-                } else {
-                    templates[i].name = templates[i].name.replacingOccurrences(of: "MuscleWiki", with: "LWS-Reha")
-                    templates[i].summary = templates[i].summary.replacingOccurrences(of: "MuscleWiki", with: "Evidenzbasierte")
-                }
-                templatesUpdated = true
-            }
-        }
-        for i in 0..<templates.count {
-            let correctBlock = templates[i].matchingBlock
-            if templates[i].folderName != correctBlock.fullTitle {
-                templates[i].folderName = correctBlock.fullTitle
-                templatesUpdated = true
-            }
-        }
-        if templates.isEmpty {
-            templates = defaultTpls
-            templatesUpdated = true
-        } else {
-            if let stubenTpl = defaultTpls.first(where: { $0.name.contains("Core & Lumbale Tiefenstabilität") }) ?? defaultTpls.first(where: { $0.name.contains("Stuben-Workout") }) {
-                if let idx = templates.firstIndex(where: { $0.name.contains("Core & Lumbale Tiefenstabilität") }) {
-                    templates[idx] = stubenTpl
-                } else {
-                    templates.insert(stubenTpl, at: 0)
-                }
-                templatesUpdated = true
-            }
-            if let runTpl = defaultTpls.first(where: { $0.name.contains("Aerobe Grundlagenausdauer") }) {
-                if let idx = templates.firstIndex(where: { $0.name.contains("Aerobe Grundlagenausdauer") }) {
-                    templates[idx] = runTpl
-                } else {
-                    templates.insert(runTpl, at: 1)
-                }
-                templatesUpdated = true
-            }
-        }
-        if templatesUpdated {
-            saveTemplates()
-        }
-
-        // Auto-plan "Stuben-Workout: Core & Lumbale Tiefenstabilität" for today (12.11.)
-        // Clean up old stuben workouts for yesterday (11.11.) and today (12.11.)
-        let today = Date()
-        let cal = Calendar.current
-        let yesterday = cal.date(byAdding: .day, value: -1, to: today) ?? today
-
-        // 1. Purge old stuben workouts (Sixpack / Liegestuetze) for yesterday and today
-        plannedWorkouts.removeAll { item in
-            let isTargetDay = cal.isDate(item.plannedDate, inSameDayAs: yesterday) || cal.isDateInToday(item.plannedDate)
-            let isOldStuben = item.title.contains("Sixpack") || item.title.contains("Liegestuetze")
-            return isTargetDay && isOldStuben
-        }
-
-        // 2. Mark yesterday's 25 km run as completed
-        if let runIdx = plannedWorkouts.firstIndex(where: { cal.isDate($0.plannedDate, inSameDayAs: yesterday) && ($0.title.contains("Dauerlauf") || $0.title.contains("Ausdauer") || $0.title.contains("25km")) }) {
-            plannedWorkouts[runIdx].isCompleted = true
-        } else {
-            let runTemplate = templates.first(where: { $0.name.contains("Aerobe Grundlagenausdauer") })
-            var runComp = cal.dateComponents([.year, .month, .day], from: yesterday)
-            runComp.hour = 14
-            runComp.minute = 0
-            let runDate = cal.date(from: runComp) ?? yesterday
-            let completedRun = PlannedWorkoutItem(
-                title: "Aerobe Grundlagenausdauer (25 km Dauerlauf)",
-                plannedDate: runDate,
-                isCompleted: true,
-                modalityRaw: "cardio",
-                templateId: runTemplate?.id,
-                notes: "25 km GA1-Dauerlauf absolviert. Beine und oberer Ruecken beansprucht.",
-                exerciseNames: runTemplate?.items.map { $0.exercise.name } ?? ["GA1-Dauerlauf (Grundlagenausdauer)"]
-            )
-            plannedWorkouts.append(completedRun)
-        }
-
-        // 3. Plan Stuben-Workout: Core & Lumbale Tiefenstabilität for today
-        let coreLwsTemplate = templates.first(where: { $0.name.contains("Core & Lumbale Tiefenstabilität") }) ?? defaultTpls.first(where: { $0.name.contains("Core & Lumbale Tiefenstabilität") })
-
-        if let tpl = coreLwsTemplate {
-            if let existingTodayIdx = plannedWorkouts.firstIndex(where: { cal.isDateInToday($0.plannedDate) && !$0.isCompleted }) {
-                plannedWorkouts[existingTodayIdx].title = tpl.name
-                plannedWorkouts[existingTodayIdx].modalityRaw = "calisthenics"
-                plannedWorkouts[existingTodayIdx].templateId = tpl.id
-                plannedWorkouts[existingTodayIdx].notes = tpl.summary
-                plannedWorkouts[existingTodayIdx].exerciseNames = tpl.items.map { $0.exercise.name }
-                savePlannedWorkouts()
-
-                let currentItem = plannedWorkouts[existingTodayIdx]
-                Task { @MainActor in
-                    _ = await CalendarSyncService.shared.schedulePlannedWorkoutEvent(planned: currentItem, template: tpl)
-                }
-            } else if !plannedWorkouts.contains(where: { cal.isDateInToday($0.plannedDate) && $0.title.contains("Core & Lumbale Tiefenstabilität") }) {
-                let plannedToday = PlannedWorkoutItem(
-                    title: tpl.name,
-                    plannedDate: today,
-                    modalityRaw: "calisthenics",
-                    templateId: tpl.id,
-                    notes: tpl.summary,
-                    exerciseNames: tpl.items.map { $0.exercise.name }
-                )
-                plannedWorkouts.append(plannedToday)
-                savePlannedWorkouts()
-
-                Task { @MainActor in
-                    _ = await CalendarSyncService.shared.schedulePlannedWorkoutEvent(planned: plannedToday, template: tpl)
-                }
-            }
-
-            if let currentActive = activeSession,
-               (currentActive.title.contains("Core & Lumbale") || currentActive.title.contains("Sixpack") || currentActive.title.contains("Liegestuetze")),
-               currentActive.exercises.allSatisfy({ $0.sets.allSatisfy({ !$0.isCompleted }) }) {
-                activeSession = WorkoutSession(
-                    id: currentActive.id,
-                    templateId: tpl.id,
-                    title: tpl.name,
-                    startTime: currentActive.startTime,
-                    exercises: tpl.items.map { item in
-                        let isT = item.exercise.isTimeBased || item.isTimeBased
-                        let dur = item.targetSeconds ?? (isT ? item.targetReps : nil)
-                        let sets = (1...item.targetSets).map { idx in
-                            WorkoutSetRecord(
-                                setNumber: idx,
-                                weightKg: 0,
-                                reps: isT ? (dur ?? 60) : item.targetReps,
-                                durationSeconds: dur,
-                                isTimeBased: isT,
-                                isCompleted: false
-                            )
-                        }
-                        return WorkoutExerciseRecord(exercise: item.exercise, sets: sets)
-                    }
-                )
-            }
-        }
+        // Poka-Yoke & Muda-Eliminierung: Keine automatische Zwangs-Injektion vorgefertigter Templates.
+        // Die Trainingssteuerung erfolgt datengetrieben via MCP und KI basierend auf akuter Ermüdung und Fortschritt.
         savePlannedWorkouts()
 
         syncWaterFromBridge()
@@ -545,7 +411,7 @@ public final class GymStore: ObservableObject {
 
     public func resetToBundeswehrCatalog() {
         self.exercises = ExerciseCatalogSeed.defaultExercises()
-        self.templates = ExerciseCatalogSeed.defaultTemplates()
+        self.templates = []
         self.sessions = []
         saveExercises()
         saveTemplates()
@@ -663,6 +529,10 @@ public final class GymStore: ObservableObject {
         currentUserStorageDirectory.appendingPathComponent("coach_tuning_matrix.json")
     }
 
+    private var activeSessionURL: URL {
+        currentUserStorageDirectory.appendingPathComponent("active_session.json")
+    }
+
     // MARK: - Laden und Speichern
     public func loadData() {
         if let data = try? Data(contentsOf: exercisesURL),
@@ -706,33 +576,11 @@ public final class GymStore: ObservableObject {
             }
         }
         if let data = try? Data(contentsOf: programsURL),
-           let loaded = try? JSONDecoder().decode([TrainingProgram].self, from: data),
-           !loaded.isEmpty {
+           let loaded = try? JSONDecoder().decode([TrainingProgram].self, from: data) {
             self.programs = loaded
         } else {
-            self.programs = ProgramCatalogSeed.defaultPrograms()
-            savePrograms()
+            self.programs = []
         }
-
-        let seedProgs = ProgramCatalogSeed.defaultPrograms()
-        for seed in seedProgs {
-            if let existingIdx = self.programs.firstIndex(where: {
-                $0.id == seed.id ||
-                $0.name == seed.name ||
-                ($0.name.contains("•") && $0.name.starts(with: seed.name)) ||
-                ($0.name.contains("Jack Daniels") && seed.name == "VDOT Threshold") ||
-                ($0.name.contains("80/20 Polarized") && seed.name == "80/20 Endurance") ||
-                ($0.name.contains("MAF-180") && seed.name == "MAF-180 Engine") ||
-                ($0.name.contains("Zimmer-Calisthenics") && seed.name == "Stuben-Athletik")
-            }) {
-                var updated = seed
-                updated.id = self.programs[existingIdx].id
-                self.programs[existingIdx] = updated
-            } else {
-                self.programs.append(seed)
-            }
-        }
-        savePrograms()
 
         if let data = try? Data(contentsOf: dailyNotesURL),
            let loaded = try? JSONDecoder().decode([String: String].self, from: data) {
@@ -745,6 +593,16 @@ public final class GymStore: ObservableObject {
         if let data = try? Data(contentsOf: plannedWorkoutsURL),
            let loaded = try? JSONDecoder().decode([PlannedWorkoutItem].self, from: data) {
             self.plannedWorkouts = loaded
+        }
+        // Poka-Yoke cross-reconciliation: ensure planned workouts with a completed session are marked isCompleted
+        for s in self.sessions {
+            if let pId = s.plannedWorkoutId,
+               let pIdx = self.plannedWorkouts.firstIndex(where: { $0.id == pId }) {
+                if !self.plannedWorkouts[pIdx].isCompleted {
+                    self.plannedWorkouts[pIdx].isCompleted = true
+                    self.plannedWorkouts[pIdx].completedAt = s.endTime
+                }
+            }
         }
         if let data = try? Data(contentsOf: benchmarksURL),
            let loaded = try? JSONDecoder().decode(BenchmarkRegistryState.self, from: data) {
@@ -778,6 +636,24 @@ public final class GymStore: ObservableObject {
         }
         OlympicCoachEngine.shared.tuningMatrix = self.tuningMatrix
 
+        if let data = try? Data(contentsOf: activeSessionURL),
+           let loaded = try? JSONDecoder().decode(WorkoutSession.self, from: data) {
+            let isAlreadyCompletedInSessions = self.sessions.contains(where: { $0.id == loaded.id })
+            let isPlannedAlreadyCompletedInSessions = loaded.plannedWorkoutId.flatMap { pId in
+                self.sessions.contains(where: { $0.plannedWorkoutId == pId })
+            } ?? false
+            let isPlannedAlreadyCompleted = loaded.plannedWorkoutId.flatMap { pId in
+                self.plannedWorkouts.first(where: { $0.id == pId })?.isCompleted
+            } ?? false
+
+            if !isAlreadyCompletedInSessions && !isPlannedAlreadyCompletedInSessions && !isPlannedAlreadyCompleted && loaded.endTime == nil {
+                self.activeSession = loaded
+            } else {
+                try? FileManager.default.removeItem(at: activeSessionURL)
+                self.activeSession = nil
+            }
+        }
+
         refreshEcosystemBridgeCache()
         generateGrowDossierDocument()
         syncCloudWorkoutsOverTheAir()
@@ -806,12 +682,11 @@ public final class GymStore: ObservableObject {
     }
 
     private func saveAsync<T: Encodable>(_ object: T, to url: URL) {
-        storageQueue.async {
-            let enc = JSONEncoder()
-            enc.outputFormatting = [.prettyPrinted, .sortedKeys]
-            if let data = try? enc.encode(object) {
-                try? data.write(to: url, options: .atomic)
-            }
+        // Atomic immediate write to prevent data loss on app termination
+        let enc = JSONEncoder()
+        enc.outputFormatting = [.prettyPrinted, .sortedKeys]
+        if let data = try? enc.encode(object) {
+            try? data.write(to: url, options: .atomic)
         }
     }
 
@@ -1396,6 +1271,7 @@ public final class GymStore: ObservableObject {
                 exercises: []
             )
         }
+        self.isPresentingActiveWorkout = true
         markSetStarted()
         HapticFeedback.medium()
     }
@@ -1435,6 +1311,7 @@ public final class GymStore: ObservableObject {
             exercises: [exerciseRecord],
             somaticNotes: "Einzeluebung: \(exercise.name)"
         )
+        self.isPresentingActiveWorkout = true
         markSetStarted()
         HapticFeedback.medium()
     }
@@ -1442,25 +1319,60 @@ public final class GymStore: ObservableObject {
     public func startWorkout(from planned: PlannedWorkoutItem) {
         if let tmplId = planned.templateId, let template = templates.first(where: { $0.id == tmplId }) {
             startWorkout(from: template)
+            self.activeSession?.plannedWorkoutId = planned.id
             return
         }
         if let template = templates.first(where: { $0.name.caseInsensitiveCompare(planned.title) == .orderedSame }) {
             startWorkout(from: template)
+            self.activeSession?.plannedWorkoutId = planned.id
             return
         }
         if let program = programs.first(where: { $0.id == planned.programId }),
            let session = program.allSessions.first(where: { $0.id == planned.sessionId }) {
             startProgramSession(session, in: program)
+            self.activeSession?.plannedWorkoutId = planned.id
             return
         }
         var records: [WorkoutExerciseRecord] = []
         if !planned.exerciseNames.isEmpty {
             records = planned.exerciseNames.compactMap { name in
-                if let ex = exercises.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
+                let ex: Exercise? = {
+                    if let exact = exercises.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
+                        return exact
+                    }
+                    let norm = ExerciseSearchEngine.normalize(name)
+                    if let normMatch = exercises.first(where: { ExerciseSearchEngine.normalize($0.name) == norm }) {
+                        return normMatch
+                    }
+                    if let searchMatch = ExerciseSearchEngine.shared.search(query: name, in: exercises, store: self).first {
+                        return searchMatch
+                    }
+                    let tokens = name.components(separatedBy: CharacterSet.alphanumerics.inverted)
+                        .filter { $0.count >= 4 }
+                    for token in tokens {
+                        let tokenNorm = ExerciseSearchEngine.normalize(token)
+                        if let tokenMatch = exercises.first(where: { ExerciseSearchEngine.normalize($0.name).contains(tokenNorm) }) {
+                            return tokenMatch
+                        }
+                    }
+                    return nil
+                }()
+
+                if let ex = ex {
                     let setCount = ex.isUnilateral ? 4 : 3
                     let sets = (1...setCount).map { idx in
                         let sideStr: String? = ex.isUnilateral ? (idx % 2 == 1 ? "links" : "rechts") : nil
-                        return WorkoutSetRecord(setNumber: idx, weightKg: 0, reps: 10, isTimeBased: ex.isTimeBased, isCompleted: false, side: sideStr)
+                        let prev = previousPerformance(for: ex.name, setIndex: idx - 1)
+                        let defaultWeight = prev?.weightKg ?? 0.0
+                        let defaultReps = prev?.reps ?? (ex.defaultReps > 0 ? ex.defaultReps : 10)
+                        return WorkoutSetRecord(
+                            setNumber: idx,
+                            weightKg: defaultWeight,
+                            reps: defaultReps,
+                            isTimeBased: ex.isTimeBased,
+                            isCompleted: false,
+                            side: sideStr
+                        )
                     }
                     return WorkoutExerciseRecord(exercise: ex, sets: sets)
                 }
@@ -1468,10 +1380,12 @@ public final class GymStore: ObservableObject {
             }
         }
         self.activeSession = WorkoutSession(
+            plannedWorkoutId: planned.id,
             title: planned.title,
             startTime: Date(),
             exercises: records
         )
+        self.isPresentingActiveWorkout = true
         HapticFeedback.medium()
     }
 
@@ -1892,6 +1806,15 @@ public final class GymStore: ObservableObject {
         let estimatedKcal = max(50.0, (durationMinutes * 5.5) + (tonnageKilo * 20.0))
         session.estimatedCaloriesBurned = estimatedKcal
 
+        // Poka-Yoke: Auto-fill baseline RPE (7.5) for completed sets left unrated to preserve physiological models
+        for exIdx in session.exercises.indices {
+            for setIdx in session.exercises[exIdx].sets.indices {
+                if session.exercises[exIdx].sets[setIdx].isCompleted && session.exercises[exIdx].sets[setIdx].rpe == nil {
+                    session.exercises[exIdx].sets[setIdx].rpe = 7.5
+                }
+            }
+        }
+
         // Archivieren
         self.sessions.insert(session, at: 0)
         self.saveSessions()
@@ -1938,6 +1861,22 @@ public final class GymStore: ObservableObject {
 
         // 3. Automatischer Google Tasks Check-off: Liste "Gesundheit"
         await GoogleTasksSyncService.shared.checkOffWorkoutTask(sessionTitle: session.title)
+
+        // Zugehoerige geplante Einheit als erledigt markieren
+        if let plannedId = session.plannedWorkoutId,
+           let pIdx = self.plannedWorkouts.firstIndex(where: { $0.id == plannedId }) {
+            self.plannedWorkouts[pIdx].isCompleted = true
+            self.plannedWorkouts[pIdx].completedAt = session.endTime
+            self.savePlannedWorkouts()
+        } else if let pIdx = self.plannedWorkouts.firstIndex(where: {
+            Calendar.current.isDate($0.plannedDate, inSameDayAs: session.startTime) &&
+            !$0.isCompleted &&
+            $0.title.caseInsensitiveCompare(session.title) == .orderedSame
+        }) {
+            self.plannedWorkouts[pIdx].isCompleted = true
+            self.plannedWorkouts[pIdx].completedAt = session.endTime
+            self.savePlannedWorkouts()
+        }
 
         // Benchmarks automatisch ableiten und in BenchmarkRegistry eintragen
         for exRecord in session.exercises {
@@ -2006,6 +1945,15 @@ public final class GymStore: ObservableObject {
         let estimatedKcal = max(50.0, (durationMinutes * 5.5) + (tonnageKilo * 20.0))
         session.estimatedCaloriesBurned = estimatedKcal
 
+        // Poka-Yoke: Auto-fill baseline RPE (7.5) for completed sets left unrated
+        for exIdx in session.exercises.indices {
+            for setIdx in session.exercises[exIdx].sets.indices {
+                if session.exercises[exIdx].sets[setIdx].isCompleted && session.exercises[exIdx].sets[setIdx].rpe == nil {
+                    session.exercises[exIdx].sets[setIdx].rpe = 7.5
+                }
+            }
+        }
+
         self.sessions.insert(session, at: 0)
         self.saveSessions()
 
@@ -2054,11 +2002,19 @@ public final class GymStore: ObservableObject {
         await GoogleTasksSyncService.shared.checkOffWorkoutTask(sessionTitle: session.title)
 
         // Zugehoerige geplante Einheit als erledigt markieren
-        let today = session.startTime
-        if let pIdx = plannedWorkouts.firstIndex(where: { Calendar.current.isDate($0.plannedDate, inSameDayAs: today) && !$0.isCompleted }) {
-            plannedWorkouts[pIdx].isCompleted = true
-            plannedWorkouts[pIdx].completedAt = session.endTime
-            savePlannedWorkouts()
+        if let plannedId = session.plannedWorkoutId,
+           let pIdx = self.plannedWorkouts.firstIndex(where: { $0.id == plannedId }) {
+            self.plannedWorkouts[pIdx].isCompleted = true
+            self.plannedWorkouts[pIdx].completedAt = session.endTime
+            self.savePlannedWorkouts()
+        } else if let pIdx = self.plannedWorkouts.firstIndex(where: {
+            Calendar.current.isDate($0.plannedDate, inSameDayAs: session.startTime) &&
+            !$0.isCompleted &&
+            $0.title.caseInsensitiveCompare(session.title) == .orderedSame
+        }) {
+            self.plannedWorkouts[pIdx].isCompleted = true
+            self.plannedWorkouts[pIdx].completedAt = session.endTime
+            self.savePlannedWorkouts()
         }
 
         // Benchmarks ableiten
@@ -2112,15 +2068,20 @@ public final class GymStore: ObservableObject {
             var profile = self.userPreferences
             let omissionMult = tuningMatrix.dampers.omission_damper_multiplier
             let now = session.endTime ?? Date()
+            let durationSeconds = now.timeIntervalSince(session.startTime)
+            let totalCompletedSets = session.exercises.flatMap { $0.sets }.filter { $0.isCompleted }.count
 
-            for item in session.exercises {
-                let plannedSets = item.sets.count
-                let completedSets = item.sets.filter { $0.isCompleted }.count
-                let muscle = item.exercise.targetMuscle.rawValue
+            // Nur Daempfer berechnen, wenn das Workout nicht versehentlich gestartet und direkt verworfen wurde
+            if durationSeconds >= 180 || totalCompletedSets > 0 {
+                for item in session.exercises {
+                    let plannedSets = item.sets.count
+                    let completedSets = item.sets.filter { $0.isCompleted }.count
+                    let muscle = item.exercise.targetMuscle.rawValue
 
-                if plannedSets > 0 && completedSets == 0 {
-                    profile.muscleDistressDampers[muscle] = omissionMult
-                    profile.muscleDistressTimestamps[muscle] = now
+                    if plannedSets > 0 && completedSets == 0 {
+                        profile.muscleDistressDampers[muscle] = omissionMult
+                        profile.muscleDistressTimestamps[muscle] = now
+                    }
                 }
             }
 
@@ -2202,6 +2163,13 @@ public final class GymStore: ObservableObject {
     public func deleteSession(id: UUID) {
         if let s = sessions.first(where: { $0.id == id }) {
             CalendarSyncService.shared.removeCalendarEvent(identifier: s.calendarEventId)
+            // Falls an eine geplante Einheit gekoppelt, deren Status zuruecksetzen
+            if let plannedId = s.plannedWorkoutId,
+               let pIdx = plannedWorkouts.firstIndex(where: { $0.id == plannedId }) {
+                plannedWorkouts[pIdx].isCompleted = false
+                plannedWorkouts[pIdx].completedAt = nil
+                savePlannedWorkouts()
+            }
         }
         sessions.removeAll(where: { $0.id == id })
         saveSessions()
@@ -2552,6 +2520,12 @@ public final class GymStore: ObservableObject {
     public func removePlannedWorkout(id: UUID) {
         if let item = plannedWorkouts.first(where: { $0.id == id }) {
             CalendarSyncService.shared.removeCalendarEvent(identifier: item.calendarEventId)
+            // Gekoppelte Session ebenfalls entfernen, um Zombie-Workouts zu verhindern
+            if let sIdx = sessions.firstIndex(where: { $0.plannedWorkoutId == id }) {
+                let sId = sessions[sIdx].id
+                sessions.removeAll(where: { $0.id == sId })
+                saveSessions()
+            }
         }
         plannedWorkouts.removeAll(where: { $0.id == id })
         savePlannedWorkouts()
@@ -2576,6 +2550,7 @@ public final class GymStore: ObservableObject {
         notes: String = "",
         exerciseNames: [String] = []
     ) {
+        let plannedId = UUID()
         var item = PlannedWorkoutItem(
             programId: UUID(),
             programName: "",
@@ -2590,11 +2565,50 @@ public final class GymStore: ObservableObject {
             notes: notes,
             exerciseNames: exerciseNames
         )
+        item.id = plannedId
         if let tid = templateId, let tmpl = templates.first(where: { $0.id == tid }), exerciseNames.isEmpty {
             item.exerciseNames = tmpl.items.map { $0.exercise.name }
         }
         plannedWorkouts.append(item)
         savePlannedWorkouts()
+
+        // Wenn als bereits absolviert markiert, auch eine entsprechende Session anlegen
+        if isCompleted {
+            var records: [WorkoutExerciseRecord] = []
+            if let tid = templateId, let tmpl = templates.first(where: { $0.id == tid }) {
+                records = tmpl.items.map { tItem in
+                    let setCount = max(1, tItem.targetSets)
+                    let sets = (1...setCount).map { sIdx in
+                        WorkoutSetRecord(setNumber: sIdx, weightKg: tItem.targetWeightKg, reps: tItem.targetReps, isTimeBased: tItem.isTimeBased, isCompleted: true, rpe: 7.5)
+                    }
+                    return WorkoutExerciseRecord(exercise: tItem.exercise, sets: sets)
+                }
+            } else if !item.exerciseNames.isEmpty {
+                records = item.exerciseNames.compactMap { name in
+                    if let ex = exercises.first(where: { $0.name.caseInsensitiveCompare(name) == .orderedSame }) {
+                        let setCount = ex.isUnilateral ? 4 : 3
+                        let sets = (1...setCount).map { idx in
+                            WorkoutSetRecord(setNumber: idx, weightKg: 0, reps: 10, isTimeBased: ex.isTimeBased, isCompleted: true, rpe: 7.5)
+                        }
+                        return WorkoutExerciseRecord(exercise: ex, sets: sets)
+                    }
+                    return nil
+                }
+            }
+            let session = WorkoutSession(
+                templateId: templateId,
+                plannedWorkoutId: plannedId,
+                title: title,
+                startTime: date.addingTimeInterval(-2700),
+                endTime: date,
+                exercises: records,
+                perceivedExertionRPE: 7,
+                somaticNotes: notes
+            )
+            sessions.insert(session, at: 0)
+            saveSessions()
+        }
+
         HapticFeedback.success()
     }
 
@@ -2752,6 +2766,7 @@ public final class GymStore: ObservableObject {
         )
 
         self.activeSession = newActiveSession
+        self.isPresentingActiveWorkout = true
         HapticFeedback.light()
     }
 }

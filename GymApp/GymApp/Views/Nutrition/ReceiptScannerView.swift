@@ -712,7 +712,7 @@ public struct ReceiptScannerView: View {
                         brand: storeName,
                         barcode: code,
                         defaultPackQty: 500.0,
-                        defaultPrice: line.parsedPrice > 0 ? line.parsedPrice : 1.99,
+                        defaultPrice: line.parsedPrice > 0 ? line.parsedPrice : 0.0,
                         currentStockQty: 0.0,
                         unit: "g",
                         kcal100g: 100.0,

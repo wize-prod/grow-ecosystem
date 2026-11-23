@@ -351,12 +351,15 @@ public final class GrowPeerSyncService: NSObject, ObservableObject {
             _ = bridge.saveMacros(incomingMacros)
         }
 
-        // 6. Shopping: Entity Merge by String ID & Timestamp
+        // 6. Shopping: Entity Merge by String ID & Timestamp with Tombstone Enforcement
         if let incomingShopping = bundle.shoppingPayload {
             let localShopping = bridge.loadShopping()
+            let combinedDeleted = Set(localShopping.deletedIds).union(incomingShopping.deletedIds)
             var shopMap = [String: SharedShoppingItem]()
-            for item in localShopping.items { shopMap[item.id] = item }
-            for item in incomingShopping.items {
+            for item in localShopping.items where !combinedDeleted.contains(item.id) {
+                shopMap[item.id] = item
+            }
+            for item in incomingShopping.items where !combinedDeleted.contains(item.id) {
                 if let existing = shopMap[item.id] {
                     if item.lastUpdated >= existing.lastUpdated {
                         shopMap[item.id] = item
@@ -368,6 +371,7 @@ public final class GrowPeerSyncService: NSObject, ObservableObject {
             let mergedItems = Array(shopMap.values).sorted(by: { $0.name < $1.name })
             let mergedPayload = SharedShoppingPayload(
                 items: mergedItems,
+                deletedIds: Array(combinedDeleted),
                 lastUpdated: max(localShopping.lastUpdated, incomingShopping.lastUpdated)
             )
             _ = bridge.saveShopping(mergedPayload)

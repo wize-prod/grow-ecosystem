@@ -134,6 +134,34 @@ public final class CloudProductCatalogService: ObservableObject {
         return nil
     }
 
+    // MARK: - Volltext-/Fuzzy-Suche in der Cloud-Datenbank
+    public func searchProducts(query: String) async -> [PantryItem] {
+        let clean = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard isCloudConfigured, clean.count >= 2 else { return [] }
+
+        guard let encodedTerm = clean.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let endpoint = URL(string: "\(supabaseURL)/rest/v1/products?or=(name.ilike.*\(encodedTerm)*,brand.ilike.*\(encodedTerm)*,barcode.ilike.*\(encodedTerm)*)&select=*,store_prices(*)") else {
+            return []
+        }
+
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(supabaseAnonKey)", forHTTPHeaderField: "Authorization")
+        request.setValue(supabaseAnonKey, forHTTPHeaderField: "apikey")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+
+        do {
+            let (data, response) = try await session.data(for: request)
+            guard let httpRes = response as? HTTPURLResponse, httpRes.statusCode == 200 else {
+                return []
+            }
+            let records = try JSONDecoder().decode([CloudProductRecord].self, from: data)
+            return records.map { $0.asPantryItem() }
+        } catch {
+            return []
+        }
+    }
+
     // MARK: - Supabase Query Operation
     private func querySupabase(barcode: String) async -> PantryItem? {
         guard isCloudConfigured, let endpoint = URL(string: "\(supabaseURL)/rest/v1/products?barcode=eq.\(barcode)&select=*,store_prices(*)") else {

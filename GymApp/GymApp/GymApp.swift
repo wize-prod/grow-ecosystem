@@ -193,8 +193,48 @@ struct GymApp: App {
             }
         }
 
+        if CommandLine.arguments.contains("-PreviewFirstPlanned") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                if let planned = store.plannedWorkouts.first(where: { !$0.isCompleted }) {
+                    NotificationCenter.default.post(name: NSNotification.Name("OpenWorkoutPreview"), object: planned)
+                } else {
+                    let firstTpl = store.templates.first
+                    let item = PlannedWorkoutItem(
+                        id: UUID(),
+                        title: firstTpl?.name ?? "Push & Reha Stabilisation",
+                        plannedDate: Date(),
+                        isCompleted: false,
+                        templateId: firstTpl?.id,
+                        exerciseNames: firstTpl?.items.map { $0.exercise.name } ?? ["Bankdruecken", "Chest Supported Row"]
+                    )
+                    store.plannedWorkouts.append(item)
+                    NotificationCenter.default.post(name: NSNotification.Name("OpenWorkoutPreview"), object: item)
+                }
+            }
+        }
+
         if CommandLine.arguments.contains("-InspectFirstCompleted") {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                if store.sessions.isEmpty {
+                    let sampleEx = store.exercises.first ?? Exercise(name: "Latziehen zur Brust", targetMuscle: .back, equipment: .latPulldownMachine)
+                    let session = WorkoutSession(
+                        id: UUID(),
+                        title: "Oberkoerper Push & Pull",
+                        startTime: Date().addingTimeInterval(-3600),
+                        endTime: Date(),
+                        exercises: [
+                            WorkoutExerciseRecord(
+                                id: UUID(),
+                                exercise: sampleEx,
+                                sets: [
+                                    WorkoutSetRecord(setNumber: 1, weightKg: 65.0, reps: 10, isCompleted: true, rpe: 8.0),
+                                    WorkoutSetRecord(setNumber: 2, weightKg: 70.0, reps: 8, isCompleted: true, rpe: 8.5)
+                                ]
+                            )
+                        ]
+                    )
+                    store.sessions.insert(session, at: 0)
+                }
                 store.inspectingCompletedSession = store.sessions.first
             }
         }

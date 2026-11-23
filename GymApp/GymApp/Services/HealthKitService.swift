@@ -34,12 +34,23 @@ public final class HealthKitService: ObservableObject {
     @Published public var syncedWorkouts: [ExternalWorkoutItem] = []
 
     private let healthStore = HKHealthStore()
+    private let deletedWorkoutsKey = "grow_deleted_external_workouts"
+
+    private var deletedWorkoutIDs: Set<String> {
+        get {
+            Set(UserDefaults.standard.stringArray(forKey: deletedWorkoutsKey) ?? [])
+        }
+        set {
+            UserDefaults.standard.set(Array(newValue), forKey: deletedWorkoutsKey)
+        }
+    }
 
     private init() {
         // Vorab gespeicherte historische Workouts laden fuer sofortige Coach-Verfuegbarkeit (mind. 2 Minuten Dauer)
+        let initialDeleted = Set(UserDefaults.standard.stringArray(forKey: "grow_deleted_external_workouts") ?? [])
         if let data = UserDefaults.standard.data(forKey: "grow_synced_workouts"),
            let cached = try? JSONDecoder().decode([ExternalWorkoutItem].self, from: data) {
-            self.syncedWorkouts = cached.filter { $0.durationSeconds >= 120.0 }
+            self.syncedWorkouts = cached.filter { $0.durationSeconds >= 120.0 && !initialDeleted.contains($0.id.uuidString) }
         }
 
         self.isAvailable = HKHealthStore.isHealthDataAvailable()
@@ -51,6 +62,10 @@ public final class HealthKitService: ObservableObject {
     }
 
     public func removeSyncedWorkout(id: UUID) {
+        var currentDeleted = deletedWorkoutIDs
+        currentDeleted.insert(id.uuidString)
+        deletedWorkoutIDs = currentDeleted
+
         syncedWorkouts.removeAll(where: { $0.id == id })
         if let data = try? JSONEncoder().encode(syncedWorkouts) {
             UserDefaults.standard.set(data, forKey: "grow_synced_workouts")
@@ -277,8 +292,10 @@ public final class HealthKitService: ObservableObject {
             }
 
             Task { @MainActor in
-                self?.syncedWorkouts = mapped
-                if let encoded = try? JSONEncoder().encode(mapped) {
+                let currentDeleted = Set(UserDefaults.standard.stringArray(forKey: "grow_deleted_external_workouts") ?? [])
+                let filtered = mapped.filter { !currentDeleted.contains($0.id.uuidString) }
+                self?.syncedWorkouts = filtered
+                if let encoded = try? JSONEncoder().encode(filtered) {
                     UserDefaults.standard.set(encoded, forKey: "grow_synced_workouts")
                 }
                 completion?()

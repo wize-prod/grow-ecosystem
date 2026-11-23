@@ -82,8 +82,9 @@ public struct ShoppingHubView: View {
                         if selectedSegment == .shopping {
                             Button(action: {
                                 HapticFeedbackService.shared.lightDetent()
+                                let completedIds = store.shoppingList.filter { $0.isChecked }.map { $0.id }
                                 store.shoppingList.removeAll(where: { $0.isChecked })
-                                store.saveShopping()
+                                store.saveShopping(deletedIds: completedIds)
                             }) {
                                 Label("Erledigte entfernen", systemImage: "trash")
                             }
@@ -141,13 +142,6 @@ public struct DepotShoppingSection: View {
     @State private var showingShoppingBarcodeScanner: Bool = false
     @State private var scannedItemForInspection: PantryItem? = nil
     @State private var inspectingItem: PantryItem? = nil
-
-    @State private var quickAddText: String = ""
-    @FocusState private var isQuickAddFocused: Bool
-
-    private let quickAddSuggestions: [String] = [
-        "Eier", "Hafermilch", "Magerquark", "Whey Protein", "Creatin", "Magnesium", "Bananen", "Thunfisch", "Hähnchenbrust"
-    ]
 
     public init() {}
 
@@ -216,10 +210,7 @@ public struct DepotShoppingSection: View {
                     // 1. Schlanke Einzeil-Statuspille (Muda-Eliminierung)
                     unifiedShoppingStatusPill(isOverBudget: isOverBudget)
 
-                    // 2. Schnell-Eingabeleiste (Wu Wei)
-                    quickAddInputBar
-
-                    // 3. Einkaufsliste gruppiert nach Laden & Gang
+                    // 2. Einkaufsliste gruppiert nach Laden & Gang
                     shoppingListSection
 
                     Spacer().frame(height: 70)
@@ -366,84 +357,6 @@ public struct DepotShoppingSection: View {
         .padding(.bottom, 8)
     }
 
-    // MARK: - Schnell-Eingabe (Wu Wei)
-    private var quickAddInputBar: some View {
-        HStack(spacing: 8) {
-            Image(systemName: "plus.circle.fill")
-                .font(.system(size: 16))
-                .foregroundColor(Theme.sageGreen)
-
-            TextField("Artikel schnell hinzufügen (z.B. Eier, Hafermilch)...", text: $quickAddText)
-                .font(.system(size: 13, weight: .medium))
-                .foregroundColor(Theme.textPrimary)
-                .focused($isQuickAddFocused)
-                .submitLabel(.done)
-                .onSubmit {
-                    addQuickItem(quickAddText)
-                }
-
-            if !quickAddText.trimmingCharacters(in: .whitespaces).isEmpty {
-                Button(action: { addQuickItem(quickAddText) }) {
-                    Text("Hinzufügen")
-                        .font(.system(size: 11, weight: .bold))
-                        .foregroundColor(Theme.bg)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 5)
-                        .background(Capsule().fill(Theme.sageGreen))
-                }
-                .buttonStyle(PlainButtonStyle())
-            }
-        }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 8)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Theme.surfaceElevated.opacity(0.7))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(isQuickAddFocused ? Theme.sageGreen.opacity(0.8) : Theme.border.opacity(0.5), lineWidth: 1)
-                )
-        )
-    }
-
-    private func addQuickItem(_ rawName: String) {
-        let trimmed = rawName.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return }
-
-        if let match = store.pantryItems.first(where: { $0.name.localizedCaseInsensitiveContains(trimmed) }) {
-            let newItem = ShoppingItem(item: match, quantity: 1)
-            store.shoppingList.append(newItem)
-        } else {
-            let lower = trimmed.lowercased()
-            let isSupplementOrGear = lower.contains("whey") || lower.contains("creatin") || lower.contains("kreatin") ||
-                                     lower.contains("magnesium") || lower.contains("omega") || lower.contains("zink") ||
-                                     lower.contains("zughilfe") || lower.contains("chalk") || lower.contains("band") ||
-                                     lower.contains("shaker")
-            let categoryName = isSupplementOrGear ? "Supplements & Training" : "Lebensmittel"
-            let defaultStore = isSupplementOrGear ? "AMAZON" : "SUPERMARKT"
-            let defaultPrice = 0.0
-            let defaultUnit = isSupplementOrGear ? "Dose" : "Stk"
-
-            let newItem = ShoppingItem(
-                name: trimmed,
-                brand: "",
-                barcode: "",
-                packQty: 1.0,
-                price: defaultPrice,
-                store: defaultStore,
-                quantity: 1,
-                isChecked: false,
-                unit: defaultUnit,
-                category: categoryName
-            )
-            store.shoppingList.append(newItem)
-        }
-        store.saveShopping()
-        quickAddText = ""
-        isQuickAddFocused = false
-        HapticFeedbackService.shared.mechanicalClick()
-    }
-
     // MARK: - Shopping List Section
     private var shoppingListSection: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -458,43 +371,21 @@ public struct DepotShoppingSection: View {
             }
 
             if filteredShoppingList.isEmpty {
-                VStack(spacing: 12) {
+                VStack(spacing: 8) {
                     Image(systemName: "cart")
-                        .font(.system(size: 24))
-                        .foregroundColor(Theme.textMuted)
+                        .font(.system(size: 26))
+                        .foregroundColor(Theme.textMuted.opacity(0.6))
                     Text("Einkaufsliste ist leer")
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.system(size: 13, weight: .bold))
                         .foregroundColor(Theme.textPrimary)
-
-                    Text("Schnell-Auswahl mit einem Tipp:")
+                    Text("Artikel über Barcode scannen oder aus der Vorrats-/Rezeptplanung vormerken.")
                         .font(.system(size: 11))
-                        .foregroundColor(Theme.textSecondary)
-
-                    FlowLayout(spacing: 6) {
-                        ForEach(quickAddSuggestions, id: \.self) { suggestion in
-                            Button(action: {
-                                addQuickItem(suggestion)
-                            }) {
-                                HStack(spacing: 4) {
-                                    Image(systemName: "plus")
-                                        .font(.system(size: 9, weight: .bold))
-                                    Text(suggestion)
-                                        .font(.system(size: 11, weight: .medium))
-                                }
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 6)
-                                .background(Capsule().fill(Theme.surfaceElevated))
-                                .overlay(Capsule().stroke(Theme.border.opacity(0.6), lineWidth: 1))
-                                .foregroundColor(Theme.textPrimary)
-                            }
-                            .buttonStyle(PlainButtonStyle())
-                        }
-                    }
-                    .padding(.top, 4)
+                        .foregroundColor(Theme.textMuted)
+                        .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 20)
-                .padding(.horizontal, 14)
+                .padding(.vertical, 32)
+                .padding(.horizontal, 16)
                 .background(RoundedRectangle(cornerRadius: 12).fill(Theme.surface))
                 .overlay(RoundedRectangle(cornerRadius: 12).stroke(Theme.border.opacity(0.5), lineWidth: 1))
             } else {

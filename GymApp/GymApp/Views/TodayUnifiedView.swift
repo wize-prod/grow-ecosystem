@@ -264,6 +264,63 @@ public struct TodayUnifiedView: View {
                         showingStartWorkout = true
                     }
                 }
+                if CommandLine.arguments.contains("-PreviewFirstPlanned") {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        let planned: PlannedWorkoutItem
+                        if let first = gymStore.plannedWorkouts.first {
+                            planned = first
+                        } else {
+                            let sampleTpl = gymStore.templates.first
+                            planned = PlannedWorkoutItem(
+                                id: UUID(),
+                                title: sampleTpl?.name ?? "Push & Reha Hypertrophie",
+                                plannedDate: selectedDate,
+                                isCompleted: false,
+                                templateId: sampleTpl?.id,
+                                exerciseNames: sampleTpl?.items.map { $0.exercise.name } ?? ["Bankdruecken", "Incline Dumbbell Press", "Dips am Barren"]
+                            )
+                            gymStore.plannedWorkouts.append(planned)
+                        }
+                        selectedPlannedWorkoutForPreview = planned
+                    }
+                }
+                if CommandLine.arguments.contains("-InspectFirstCompleted") {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        let session: WorkoutSession
+                        if let first = gymStore.sessions.first {
+                            session = first
+                        } else {
+                            let sampleEx = gymStore.exercises.first ?? Exercise(name: "Latziehen zur Brust", targetMuscle: .back, equipment: .latPulldownMachine)
+                            session = WorkoutSession(
+                                id: UUID(),
+                                title: "Oberkoerper Push & Pull",
+                                startTime: Date().addingTimeInterval(-3600),
+                                endTime: Date(),
+                                exercises: [
+                                    WorkoutExerciseRecord(
+                                        id: UUID(),
+                                        exercise: sampleEx,
+                                        sets: [
+                                            WorkoutSetRecord(setNumber: 1, weightKg: 65.0, reps: 10, isCompleted: true, rpe: 8.0),
+                                            WorkoutSetRecord(setNumber: 2, weightKg: 70.0, reps: 8, isCompleted: true, rpe: 8.5)
+                                        ]
+                                    )
+                                ],
+                                perceivedExertionRPE: 8,
+                                somaticNotes: "Starke Rumpfspannung, schmerzfreie Schulter",
+                                estimatedCaloriesBurned: 380,
+                                prCount: 1
+                            )
+                            gymStore.sessions.insert(session, at: 0)
+                        }
+                        gymStore.inspectingCompletedSession = session
+                    }
+                }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("OpenWorkoutPreview"))) { notif in
+                if let planned = notif.object as? PlannedWorkoutItem {
+                    selectedPlannedWorkoutForPreview = planned
+                }
             }
         }
     }

@@ -128,6 +128,7 @@ public struct WorkoutExerciseRecord: Identifiable, Codable, Equatable, Hashable 
 public struct WorkoutSession: Identifiable, Codable, Equatable, Hashable {
     public var id: UUID
     public var templateId: UUID?
+    public var plannedWorkoutId: UUID?
     public var title: String
     public var startTime: Date
     public var endTime: Date?
@@ -149,6 +150,7 @@ public struct WorkoutSession: Identifiable, Codable, Equatable, Hashable {
     public init(
         id: UUID = UUID(),
         templateId: UUID? = nil,
+        plannedWorkoutId: UUID? = nil,
         title: String,
         startTime: Date = Date(),
         endTime: Date? = nil,
@@ -169,6 +171,7 @@ public struct WorkoutSession: Identifiable, Codable, Equatable, Hashable {
     ) {
         self.id = id
         self.templateId = templateId
+        self.plannedWorkoutId = plannedWorkoutId
         self.title = title
         self.startTime = startTime
         self.endTime = endTime
@@ -189,7 +192,7 @@ public struct WorkoutSession: Identifiable, Codable, Equatable, Hashable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, templateId, title, startTime, endTime, exercises, perceivedExertionRPE, somaticNotes
+        case id, templateId, plannedWorkoutId, title, startTime, endTime, exercises, perceivedExertionRPE, somaticNotes
         case estimatedCaloriesBurned, prCount, isSyncedToCalendar, isSyncedToHealthKit, isEarlyTermination
         case terminationReason, debriefRecord, calendarEventId, isPaused, pausedIntervals, lastPauseTime
     }
@@ -198,6 +201,7 @@ public struct WorkoutSession: Identifiable, Codable, Equatable, Hashable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(UUID.self, forKey: .id) ?? UUID()
         templateId = try container.decodeIfPresent(UUID.self, forKey: .templateId)
+        plannedWorkoutId = try container.decodeIfPresent(UUID.self, forKey: .plannedWorkoutId)
         title = try container.decodeIfPresent(String.self, forKey: .title) ?? "Training"
         startTime = try container.decodeIfPresent(Date.self, forKey: .startTime) ?? Date()
         endTime = try container.decodeIfPresent(Date.self, forKey: .endTime)

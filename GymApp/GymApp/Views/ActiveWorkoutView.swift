@@ -1377,16 +1377,6 @@ public struct ActiveWorkoutView: View {
                     if setRec.durationSeconds == nil || setRec.durationSeconds == 0 {
                         store.updateSetDuration(exerciseId: exerciseId, setId: setRec.id, seconds: currentSec)
                     }
-                    if !setRec.isCompleted {
-                        activeTimedSet = TimedSetContext(
-                            exerciseId: exerciseId,
-                            setId: setRec.id,
-                            exerciseName: exName,
-                            setNumber: setRec.setNumber,
-                            targetSeconds: currentSec
-                        )
-                        return
-                    }
                 }
                 store.toggleSet(exerciseId: exerciseId, setId: setRec.id)
             } label: {
@@ -1466,11 +1456,9 @@ public struct ActiveWorkoutView: View {
     // MARK: - RPE Pre-Finish Guard
     private var hasUnratedSets: Bool {
         guard let session = store.activeSession else { return false }
-        let hasAnyCompleted = session.exercises.contains { $0.sets.contains { $0.isCompleted } }
         for ex in session.exercises {
             for setRec in ex.sets {
-                let qualifies = hasAnyCompleted ? setRec.isCompleted : true
-                if qualifies && setRec.rpe == nil && !setRec.isWarmup {
+                if setRec.isCompleted && setRec.rpe == nil && !setRec.isWarmup {
                     return true
                 }
             }
@@ -1479,13 +1467,8 @@ public struct ActiveWorkoutView: View {
     }
 
     private func attemptFinishWorkout() {
-        if !hasUnratedSets {
-            showingFinishSheet = true
-            HapticFeedback.medium()
-        } else {
-            showingMissingRPESheet = true
-            HapticFeedback.warning()
-        }
+        showingFinishSheet = true
+        HapticFeedback.medium()
     }
 
     private func rpeBgColor(_ rpe: Double?) -> Color {
@@ -1883,11 +1866,9 @@ public struct WorkoutMissingRPESheet: View {
     private var currentUnrated: [UnratedEntry] {
         guard let session = store.activeSession else { return [] }
         var result: [UnratedEntry] = []
-        let hasAnyCompleted = session.exercises.contains { $0.sets.contains { $0.isCompleted } }
         for ex in session.exercises {
             for setRec in ex.sets {
-                let qualifies = hasAnyCompleted ? setRec.isCompleted : true
-                if qualifies && setRec.rpe == nil && !setRec.isWarmup {
+                if setRec.isCompleted && setRec.rpe == nil && !setRec.isWarmup {
                     result.append(
                         UnratedEntry(
                             id: setRec.id,
@@ -1930,6 +1911,29 @@ public struct WorkoutMissingRPESheet: View {
                                     .font(.system(size: 11))
                                     .foregroundColor(GymTheme.textSecondary)
                                     .lineSpacing(2)
+
+                                if !currentUnrated.isEmpty {
+                                    Button {
+                                        for item in currentUnrated {
+                                            store.updateSetRPE(exerciseId: item.exerciseId, setId: item.id, rpe: 7.5)
+                                        }
+                                        HapticFeedback.success()
+                                    } label: {
+                                        HStack(spacing: 6) {
+                                            Image(systemName: "bolt.fill")
+                                                .font(.system(size: 11))
+                                            Text("Alle unbewerteten Sätze auf RPE 7.5 setzen")
+                                                .font(.system(size: 11, weight: .bold))
+                                        }
+                                        .foregroundColor(GymTheme.warmAmber)
+                                        .frame(maxWidth: .infinity)
+                                        .padding(.vertical, 8)
+                                        .background(GymTheme.warmAmber.opacity(0.15))
+                                        .cornerRadius(8)
+                                    }
+                                    .buttonStyle(.plain)
+                                    .padding(.top, 4)
+                                }
                             }
                             .padding(14)
                             .background(GymTheme.surfaceElevated)
@@ -2048,6 +2052,22 @@ public struct WorkoutMissingRPESheet: View {
                                 .foregroundColor(GymTheme.warningAmber)
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 6)
+
+                            Button {
+                                for item in currentUnrated {
+                                    store.updateSetRPE(exerciseId: item.exerciseId, setId: item.id, rpe: 7.0)
+                                }
+                                onAllRated()
+                            } label: {
+                                Text("Ohne RPE abschließen (Default @7.0)")
+                                    .font(.system(size: 12, weight: .semibold))
+                                    .foregroundColor(GymTheme.textSecondary)
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 8)
+                                    .background(GymTheme.surfaceElevated)
+                                    .cornerRadius(8)
+                                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(GymTheme.border, lineWidth: 1))
+                            }
                         }
 
                         Button {
