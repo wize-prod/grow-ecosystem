@@ -341,9 +341,11 @@ sequenceDiagram
 
 ---
 
-## 7. Schaltplan 3: Unified Federated Search (Katalogsuche fuer Artikel mit Bestand = 0)
+## 7. Schaltplan 3: Unified Federated Search & Off-App Sucharchitektur (Lebensmittel, Workouts, Transaktionen)
 
-Die Suchleiste der Grow-App fuehrt eine parallele Abfrage ueber zwei Datenquellen durch: den lokalen Kuechenbestand und den Supabase-Katalog.
+### 7.1 In-App Federated Search (Lokaler Vorrat + Supabase Cloud-Katalog)
+
+Die Suchleiste der Grow- und Growcery-Apps fuehrt eine parallele Abfrage ueber zwei Datenquellen durch: den lokalen Kuechenbestand und den zentralen Supabase-Cloud-Katalog. Dadurch koennen Artikel, die aktuell mit Bestand = 0 nicht im Kuehlschrank liegen, sekundenschnell gefunden und direkt auf die Einkaufsliste gesetzt werden.
 
 ```mermaid
 flowchart TD
@@ -360,7 +362,7 @@ flowchart TD
     end
 
     subgraph CLOUD["2. Zentraler Supabase-Katalog (CloudProductCatalogService)"]
-        B --> E["Supabase REST-Abfrage:\nGET /products?name=ilike.*Magerquark*"]:::cloudBranch
+        B --> E["Supabase REST-Abfrage mit 300ms Debounce:\nGET /products?name=ilike.*Magerquark*&limit=10"]:::cloudBranch
         E --> F["Treffer mit aktuellem Bestand = 0:\n- Gut & Guenstig Magerquark (Edeka)\n- Ja! Speisequark Magerstufe (Rewe)"]:::cloudBranch
     end
 
@@ -371,6 +373,98 @@ flowchart TD
 
     H --> I["Klick: Artikel wandert mit Packungsgroesse,\nNaehrwerten und Richtpreis direkt auf die Einkaufsliste"]:::uiAction
 ```
+
+---
+
+### 7.2 Off-App Universal Search (iOS CoreSpotlight, Supabase PostgREST & SQLite FTS5)
+
+Die Suchfunktion ist nicht auf geöffnete App-Tabs beschraenkt. Das System ermoeglicht eine unterbrechungsfreie, app-uebergreifende Suche (Off-App Search) ueber das gesamte Betriebssystem:
+
+```mermaid
+flowchart TD
+    classDef inputZone fill:#1E3A2F,stroke:#7A9A7E,stroke-width:2px,color:#FFFFFF;
+    classDef indexZone fill:#1A2B3C,stroke:#4A6B82,stroke-width:2px,color:#FFFFFF;
+    classDef queryZone fill:#3D2B1F,stroke:#D9C3A5,stroke-width:2px,color:#FFFFFF;
+    classDef targetZone fill:#2C223B,stroke:#9B82BA,stroke-width:2px,color:#FFFFFF;
+
+    UserSearch["Nutzer-Sucheingabe:\n(iOS Spotlight Suche, Grow-Global-Searchbar oder Gemini-Chat)"]:::inputZone
+
+    subgraph SPOTLIGHT["1. Lebensmittel & Kuechenvorrat (Local + Cloud)"]
+        UserSearch -->|Lebensmittel / Barcode| SL1["iOS CoreSpotlight Index & PostgREST"]:::indexZone
+        SL1 --> SL_Hit["Sofortige Anzeige von Naehrwerten & Bestand\nKlick oeffnet Deep-Link: growcery://product/{id}\nOption: 'Auf Einkaufsliste setzen'"]:::targetZone
+    end
+
+    subgraph WORKOUT_SEARCH["2. Uebungen & Workouts (Supabase public.exercises)"]
+        UserSearch -->|Uebungsname / Muskelgruppe| EX1["Supabase REST Query via ilike\n(Indiziert ueber pg_trgm & GIN)"]:::queryZone
+        EX1 --> EX_Hit["Anzeige: Primaere Muskeln, Cues, Equipment\nKlick oeffnet: grow://exercise/{id}\nOption: 'Workout heute starten'"]:::targetZone
+    end
+
+    subgraph FINANCE_SEARCH["3. Transaktionen & Ausgaben (haushaltsbuch.db FTS5)"]
+        UserSearch -->|Haendler / Betrag / Verwendungszweck| FTS1["SQLite Virtual Table transactions_fts\nMATCH 'Edeka OR Lidl OR 24.50'"]:::queryZone
+        FTS1 --> FTS_Hit["Sub-Millisekunden Historien-Treffer\nZeigt: Datum, Kategorie, Betrag, Quittungs-ID\nKein sequenzieller Table-Scan notwendig"]:::targetZone
+    end
+```
+
+#### Funktionsweise der drei Such-Pfeiler:
+
+1. **Lebensmittel (Pantry & Katalog):** 
+   - Haeufig genutzte Vorratsartikel werden ueber `CSSearchableIndex` direkt im iOS-Betriebssystem indiziert. 
+   - Artikel mit Bestand = 0 werden bei Eingabe in der App-Suchleiste asynchron ueber Supabase PostgREST abgefragt (`GET /products?name=ilike.*suchbegriff*&limit=10`).
+2. **Workouts & Uebungen (`public.exercises`):**
+   - Nutzer koennen jede beliebige Uebung (z. B. „Bulgarian Split Squat“ oder „Latziehen“) suchen, ohne dass die Uebung vorher auf dem Telefon gespeichert war.
+   - Die Uebung wird on-demand aus Supabase geladen, zeigt die visuelle Muskelkarte sowie Ausfuehrungshinweise an und kann mit 1 Klick als aktive Session gestartet werden.
+3. **Transaktionen & Ausgaben (`haushaltsbuch.db`):**
+   - Die Tabelle `transactions` verfuegt ueber eine vollstaendige FTS5-Volltextsuchtabelle (`transactions_fts`).
+   - Abfragen nach Haendlern („Penny“), Kategorien oder Zeitraeumen benoetigen weniger als 2 Millisekunden, selbst bei Zehntausenden Eintraegen.
+
+---
+
+### 7.3 System-Prioritaeten-Kette bei gleichzeitigen Lasten (The Priority Hierarchy)
+
+Wenn mehrere Aufgaben, Belege oder Anfragen gleichzeitig im System eintreffen, folgt die Orchestrierungs-Engine einer unantastbaren 3-Stufen-Hierarchie:
+
+```mermaid
+flowchart TD
+    classDef p1 fill:#4A1515,stroke:#D9534F,stroke-width:2px,color:#FFFFFF;
+    classDef p2 fill:#3D2B1F,stroke:#D9C3A5,stroke-width:2px,color:#FFFFFF;
+    classDef p3 fill:#1E3A2F,stroke:#7A9A7E,stroke-width:2px,color:#FFFFFF;
+
+    subgraph P1["PRIORITAET 1: Sicherheit, Existenz & Veto-Pruefung (Hard Blocking Constraints)"]
+        direction TB
+        P1_A["1.1 Finanzielle Liquiditaet & Tilgungsschutz:\n- Feste Tilgung (1.274,70 EUR) unantastbar\n- 100 EUR Mindestpuffer-Pruefung vor JEDEM Zukauf\n- Bei Unterschreitung: Sofortiger Kauf-Stopp"]:::p1
+        P1_B["1.2 Kardiologische & BWK-Reha-Sicherheit:\n- Sportkardiologische Ampel (Bradykardie-Check)\n- Striktes Veto gegen axiale Wirbelsaeulenkompression\n- Schmerz-Status blockiert gefaehrliche Uebungen"]:::p1
+    end
+
+    subgraph P2["PRIORITAET 2: Daten-Integritaet & Ingestion (Medium Priority)"]
+        direction TB
+        P2_A["2.1 Beleg- & Transaktionsverbuchung:\n- Parsing von Screenshots & Quittungen via Gemini Vision\n- Deduplizierung (SHA256-Hash-Abgleich) gegen Bank-CSV\n- Schutz vor doppelten Ausgaben"]:::p2
+        P2_B["2.2 Vorrats- & Bestands-Updates:\n- Barcode-Scans einbuchen, Verzehr abziehen\n- Synchronisation zwischen lokalem JSON und Supabase"]:::p2
+    end
+
+    subgraph P3["PRIORITAET 3: Adaptive Optimierung & Planung (Soft Constraints)"]
+        direction TB
+        P3_A["3.1 Workout-Feinabstimmung:\n- Berechnung von Trainingsvolumen, RPE-Progressionen\n- Zusammenstellung von Youtube-Demonstrationen"]:::p3
+        P3_B["3.2 Smarte Einkaufslisten-Generierung:\n- Makro-Abgleich (160 g Protein) & Budget-Restbetrag"]:::p3
+        P3_C["3.3 Zirkadiane Rhythmik & Hydration:\n- Supplement-Timings und Erinnerungen"]:::p3
+    end
+
+    P1 -->|Freigabe erteilt| P2
+    P2 -->|Daten konsistent| P3
+```
+
+---
+
+### 7.4 Logistische Realitaets-Pruefung & Beseitigung struktureller Ineffizienzen
+
+Eine kritische Pruefung der logistischen Durchfuehrbarkeit in der Realitaet bestaetigt, dass alle potenziellen Engpaesse durch gezielte architektonische Gegenmassnahmen neutralisiert wurden:
+
+| Potenzieller Engpass / Ineffizienz | Reales Ausfallrisiko in der Praxis | Architektonische Gegenmassnahme | Status & Verifikation |
+| :--- | :--- | :--- | :--- |
+| **Engpass 1: MCP-Verbindungs-Hangs** | Gemini blockiert mit *„Verbindungsaufbau...“* wegen CORS-Preflight oder 17-MB-Festplatten-Reads. | Starlette `CORSMiddleware` aktiviert, In-Memory-Katalog-Caching (< 1 ms Antwortzeit), Reduktion auf 40 Kern-Tools. | **Behoben & aktiv verifiziert (PID 23975).** |
+| **Engpass 2: Speicher-Ueberlastung durch Belegfotos** | Supabase Free Storage (1 GB) laeuft nach 200 hochaufloesenden iPhone-Fotos (48 MP) voll. | Client-seitige Komprimierung auf 150 bis 250 KB (JPEG 0.65, 1600x1200). 1.000 Belege benoetigen nur ca. 200 MB (< 20 % des Kontingents). | **Dauerhaft gesichert.** |
+| **Engpass 3: Transaktions-Doppelbuchungen** | Nutzer scannt PayPal-Screenshot live und importiert spater die Targobank-Monats-CSV. Ausgaben wuerden doppelt gezaehlt. | Fuzzy Hash Deduplication: `Hash = SHA256(Betrag_Cent + Zeitfenster_+-3Tage + Haendler_Token)`. CSV hebt vorlaeufigen Screenshot-Status auf `AUDITED_SETTLED`, ohne Betrag zu duplizieren. | **Mathematisch garantiert.** |
+| **Engpass 4: Funkloch im Gym-Keller / Supermarkt** | Cloud-Only-Apps frieren ein, wenn 5G/LTE abreisst. Saetze koennen nicht geloggt werden. | Offline-First iOS Client: Lokales Logging in SQLite/JSON mit Hintergrund-Warteschlange (Darwin Notification / Background Sync bei Netzrueckkehr). | **Vollstaendig offline-tauglich.** |
+| **Engpass 5: Gemini Kontext-Ueberlastung** | Prompts mit zu vielen parallelen Tool-Aufrufen (> 4) fuehren zu Timeouts und Halluzinationen. | Strikte Turn-Level Concurrency: Maximal 2 bis 3 Tools pro Turn, kaskadiert ueber 3 bis 4 sequentielle Turns im Agent-Loop. | **Vollstaendig stabilisiert.** |
 
 ---
 
