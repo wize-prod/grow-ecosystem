@@ -27,8 +27,6 @@ public struct TodayUnifiedView: View {
     @State private var showingStartWorkout: Bool = false
     @State private var showingTagesbilanzDetail: Bool = false
     @State private var selectedPlannedWorkoutForPreview: PlannedWorkoutItem? = nil
-    @State private var selectedCompletedSessionForDetail: WorkoutSession? = nil
-    @State private var showingActiveWorkout: Bool = false
     @State private var inspectingMealLog: MealLogEntry? = nil
 
     // Shopping inline quick add
@@ -212,15 +210,14 @@ public struct TodayUnifiedView: View {
             .sheet(item: $selectedPlannedWorkoutForPreview) { planned in
                 WorkoutPreviewSheet(plannedItem: planned) {
                     gymStore.startWorkout(from: planned)
-                    showingActiveWorkout = true
                 }
                 .environmentObject(gymStore)
             }
-            .sheet(item: $selectedCompletedSessionForDetail) { session in
+            .sheet(item: $gymStore.inspectingCompletedSession) { session in
                 CompletedWorkoutDetailSheet(session: session)
                     .environmentObject(gymStore)
             }
-            .sheet(isPresented: $showingActiveWorkout) {
+            .sheet(isPresented: $gymStore.isPresentingActiveWorkout) {
                 ActiveWorkoutView()
                     .environmentObject(gymStore)
             }
@@ -254,8 +251,19 @@ public struct TodayUnifiedView: View {
                 PlanWorkoutSheet(targetDate: selectedDate)
                     .environmentObject(gymStore)
             }
+            .sheet(isPresented: $showingStartWorkout) {
+                StartWorkoutQuickSheet()
+                    .environmentObject(gymStore)
+            }
             .sheet(item: $inspectingMealLog) { log in
                 EditMealLogSheet(log: log, store: localStore)
+            }
+            .onAppear {
+                if CommandLine.arguments.contains("-OpenStartWorkoutSheet") {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        showingStartWorkout = true
+                    }
+                }
             }
         }
     }
@@ -354,7 +362,7 @@ public struct TodayUnifiedView: View {
     private var activeWorkoutBanner: some View {
         Button(action: {
             HapticFeedback.medium()
-            // Navigate back to live workout session
+            gymStore.isPresentingActiveWorkout = true
         }) {
             HStack(spacing: 12) {
                 Circle()
@@ -559,7 +567,6 @@ public struct TodayUnifiedView: View {
             Button(action: {
                 HapticFeedback.medium()
                 gymStore.startWorkout()
-                showingActiveWorkout = true
             }) {
                 Label("Workout jetzt starten", systemImage: "play.circle.fill")
             }
@@ -671,18 +678,33 @@ public struct TodayUnifiedView: View {
                             .font(.system(size: 12))
                             .foregroundColor(GymTheme.textMuted)
 
-                        Button(action: {
-                            showingPlanWorkout = true
-                        }) {
-                            Label("Workout planen", systemImage: "plus.circle")
-                                .font(.system(size: 11.5, weight: .semibold))
-                                .foregroundColor(GymTheme.terracotta)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(GymTheme.surfaceElevated)
-                                .cornerRadius(8)
+                        HStack(spacing: 8) {
+                            Button(action: {
+                                showingStartWorkout = true
+                            }) {
+                                Label("Workout starten", systemImage: "play.circle.fill")
+                                    .font(.system(size: 11.5, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(GymTheme.strongBlue)
+                                    .cornerRadius(8)
+                            }
+                            .buttonStyle(.plain)
+
+                            Button(action: {
+                                showingPlanWorkout = true
+                            }) {
+                                Label("Planen", systemImage: "calendar.badge.plus")
+                                    .font(.system(size: 11.5, weight: .semibold))
+                                    .foregroundColor(GymTheme.terracotta)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(GymTheme.surfaceElevated)
+                                    .cornerRadius(8)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
@@ -690,26 +712,47 @@ public struct TodayUnifiedView: View {
                     VStack(spacing: 8) {
                         ForEach(items) { item in
                             HStack(spacing: 10) {
+                                Button {
+                                    HapticFeedback.selection()
+                                    if let planned = item.plannedItem {
+                                        gymStore.togglePlannedWorkoutCompletion(id: planned.id)
+                                    }
+                                } label: {
+                                    Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .foregroundColor(item.isCompleted ? GymTheme.sageGreen : GymTheme.textMuted)
+                                        .frame(width: 28, height: 28)
+                                }
+                                .buttonStyle(.plain)
+
                                 Button(action: {
                                     HapticFeedback.light()
-                                    if let planned = item.plannedItem {
+                                    if item.isCompleted, let session = item.session {
+                                        gymStore.inspectingCompletedSession = session
+                                    } else if let planned = item.plannedItem {
                                         selectedPlannedWorkoutForPreview = planned
                                     } else if let session = item.session {
-                                        selectedCompletedSessionForDetail = session
+                                        gymStore.inspectingCompletedSession = session
                                     }
                                 }) {
-                                    HStack(spacing: 10) {
-                                        Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
-                                            .font(.system(size: 15))
-                                            .foregroundColor(item.isCompleted ? GymTheme.sageGreen : GymTheme.textMuted)
-
-                                        VStack(alignment: .leading, spacing: 2) {
-                                            Text(item.title)
-                                                .font(.system(size: 13, weight: .semibold))
-                                                .foregroundColor(GymTheme.textPrimary)
-                                            Text(item.isCompleted ? "Absolviert (Tippen für Details)" : "Geplant (Tippen für Details)")
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(item.title)
+                                            .font(.system(size: 13, weight: .semibold))
+                                            .foregroundColor(GymTheme.textPrimary)
+                                        if item.isCompleted {
+                                            if let s = item.session {
+                                                Text("Absolviert (\(s.durationMinutes) min • \(Int(s.totalTonnageKg)) kg)")
+                                                    .font(.system(size: 10, design: .monospaced))
+                                                    .foregroundColor(GymTheme.sageGreen)
+                                            } else {
+                                                Text("Absolviert (Tippen für Details)")
+                                                    .font(.system(size: 10, design: .monospaced))
+                                                    .foregroundColor(GymTheme.sageGreen)
+                                            }
+                                        } else {
+                                            Text("Geplant (Tippen für Details)")
                                                 .font(.system(size: 10, design: .monospaced))
-                                                .foregroundColor(item.isCompleted ? GymTheme.sageGreen : GymTheme.warmAmber)
+                                                .foregroundColor(GymTheme.warmAmber)
                                         }
                                     }
                                 }
@@ -725,7 +768,6 @@ public struct TodayUnifiedView: View {
                                         } else {
                                             gymStore.startWorkout()
                                         }
-                                        showingActiveWorkout = true
                                     }
                                     .font(.system(size: 11, weight: .bold))
                                     .foregroundColor(GymTheme.bg)
@@ -738,7 +780,8 @@ public struct TodayUnifiedView: View {
                                     HapticFeedback.light()
                                     if let planned = item.plannedItem {
                                         gymStore.removePlannedWorkout(id: planned.id)
-                                    } else if let session = item.session {
+                                    }
+                                    if let session = item.session {
                                         gymStore.deleteSession(id: session.id)
                                     }
                                 }) {
@@ -756,7 +799,8 @@ public struct TodayUnifiedView: View {
                                 Button(role: .destructive) {
                                     if let planned = item.plannedItem {
                                         gymStore.removePlannedWorkout(id: planned.id)
-                                    } else if let session = item.session {
+                                    }
+                                    if let session = item.session {
                                         gymStore.deleteSession(id: session.id)
                                     }
                                 } label: {
@@ -1304,13 +1348,38 @@ public struct TodayUnifiedView: View {
     private func workoutsForDate(_ date: Date) -> [DayWorkoutEntry] {
         var entries: [DayWorkoutEntry] = []
         let dayPlanned = gymStore.plannedWorkouts.filter { Calendar.current.isDate($0.plannedDate, inSameDayAs: date) }
-        for p in dayPlanned {
-            entries.append(DayWorkoutEntry(id: p.id.uuidString, title: p.title, isCompleted: p.isCompleted, plannedItem: p, session: nil))
-        }
         let daySessions = gymStore.sessions.filter { Calendar.current.isDate($0.startTime, inSameDayAs: date) }
+
+        // 1. Geplante Workouts aufnehmen und mit Sessions verknuepfen
+        for p in dayPlanned {
+            let matchedSession = daySessions.first(where: { s in
+                if let pid = s.plannedWorkoutId, pid == p.id { return true }
+                return s.title.caseInsensitiveCompare(p.title) == .orderedSame
+            })
+            entries.append(DayWorkoutEntry(
+                id: p.id.uuidString,
+                title: p.title,
+                isCompleted: p.isCompleted || matchedSession != nil,
+                plannedItem: p,
+                session: matchedSession
+            ))
+        }
+
+        // 2. Spontane Sessions hinzufuegen, die nicht Teil geplanter Workouts waren
         for s in daySessions {
-            if !entries.contains(where: { $0.title == s.title }) {
-                entries.append(DayWorkoutEntry(id: s.id.uuidString, title: s.title, isCompleted: true, plannedItem: nil, session: s))
+            let alreadyRepresented = entries.contains(where: { entry in
+                if let eSession = entry.session, eSession.id == s.id { return true }
+                if let pid = s.plannedWorkoutId, entry.plannedItem?.id == pid { return true }
+                return entry.title.caseInsensitiveCompare(s.title) == .orderedSame
+            })
+            if !alreadyRepresented {
+                entries.append(DayWorkoutEntry(
+                    id: s.id.uuidString,
+                    title: s.title,
+                    isCompleted: true,
+                    plannedItem: nil,
+                    session: s
+                ))
             }
         }
         return entries

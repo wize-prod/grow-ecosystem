@@ -33,6 +33,7 @@ struct GymApp: App {
                     calService.fetchUpcomingWorkouts()
                     healthService.fetchAllHealthData()
                     growceryService.refreshData()
+                    processLaunchArguments()
                 }
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
@@ -41,12 +42,161 @@ struct GymApp: App {
                     }
                 }
                 .onOpenURL { url in
-                    if let templateId = growceryService.handleIncomingURL(url) {
-                        if let template = store.templates.first(where: { $0.id == templateId }) {
-                            store.startWorkout(from: template)
+                    _ = growceryService.handleIncomingURL(url)
+                    handleWorkoutURL(url)
+                }
+        }
+    }
+
+    private func handleWorkoutURL(_ url: URL) {
+        guard url.scheme == "gym" || url.scheme == "grow" else { return }
+        let host = url.host ?? ""
+        let path = url.path
+        let comps = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        let query = comps?.queryItems ?? []
+
+        if host == "workout" || host == "start" || path.contains("workout") {
+            if path.contains("finish") || query.first(where: { $0.name == "action" })?.value == "finish" {
+                let codeStr = query.first(where: { $0.name == "exitCode" })?.value ?? "0"
+                let exitCode = Int(codeStr) ?? 0
+                Task {
+                    await store.finishWorkoutWithScalar(exitCode: exitCode)
+                }
+                return
+            }
+
+            if path.contains("completeSet") || query.first(where: { $0.name == "action" })?.value == "completeSet" {
+                let exIdx = Int(query.first(where: { $0.name == "exerciseIndex" })?.value ?? "0") ?? 0
+                let setIdx = Int(query.first(where: { $0.name == "setIndex" })?.value ?? "0") ?? 0
+                let weight = Double(query.first(where: { $0.name == "weight" })?.value ?? "0") ?? 0.0
+                let reps = Int(query.first(where: { $0.name == "reps" })?.value ?? "10") ?? 10
+
+                if let session = store.activeSession, exIdx < session.exercises.count {
+                    let exId = session.exercises[exIdx].id
+                    if setIdx < session.exercises[exIdx].sets.count {
+                        let setId = session.exercises[exIdx].sets[setIdx].id
+                        store.updateSetWeight(exerciseId: exId, setId: setId, weight: weight)
+                        store.updateSetReps(exerciseId: exId, setId: setId, reps: reps)
+                        store.toggleSet(exerciseId: exId, setId: setId)
+                    }
+                }
+                return
+            }
+
+            // Start workout by plannedId
+            if let plannedIdStr = query.first(where: { $0.name == "plannedId" || $0.name == "id" })?.value,
+               let plannedUUID = UUID(uuidString: plannedIdStr),
+               let planned = store.plannedWorkouts.first(where: { $0.id == plannedUUID }) {
+                store.startWorkout(from: planned)
+                return
+            }
+
+            // Start workout by title
+            if let title = query.first(where: { $0.name == "title" || $0.name == "name" })?.value {
+                if let planned = store.plannedWorkouts.first(where: { $0.title.localizedCaseInsensitiveContains(title) && !$0.isCompleted }) {
+                    store.startWorkout(from: planned)
+                    return
+                }
+            }
+
+            // Fallback: Start first uncompleted planned workout for today, or start free workout
+            let todayPlanned = store.plannedWorkouts.first(where: {
+                Calendar.current.isDateInToday($0.plannedDate) && !$0.isCompleted
+            })
+            if let todayPlanned = todayPlanned {
+                store.startWorkout(from: todayPlanned)
+            } else {
+                store.startWorkout()
+            }
+        }
+    }
+
+    private func processLaunchArguments() {
+        if CommandLine.arguments.contains("-StartTodayWorkout") {
+            let todayPlanned = store.plannedWorkouts.first(where: {
+                Calendar.current.isDateInToday($0.plannedDate) && !$0.isCompleted
+            })
+            if let planned = todayPlanned {
+                store.startWorkout(from: planned)
+            } else {
+                store.startWorkout()
+            }
+        } else if let idx = CommandLine.arguments.firstIndex(of: "-StartWorkoutFromPlanned"), idx + 1 < CommandLine.arguments.count {
+            let query = CommandLine.arguments[idx + 1]
+            if let match = store.plannedWorkouts.first(where: { $0.title.localizedCaseInsensitiveContains(query) && !$0.isCompleted }) {
+                store.startWorkout(from: match)
+            }
+        } else if CommandLine.arguments.contains("-StartFreeWorkout") {
+            store.startWorkout()
+        }
+
+        if let idx = CommandLine.arguments.firstIndex(of: "-AddExercise"), idx + 1 < CommandLine.arguments.count {
+            let exName = CommandLine.arguments[idx + 1]
+            let resolved = store.exercises.first(where: { $0.name.localizedCaseInsensitiveContains(exName) })
+                ?? ExerciseSearchEngine.shared.search(query: exName, in: store.exercises, store: store).first
+            if let resolved = resolved {
+                store.addExerciseToActiveWorkout(resolved)
+            }
+        }
+
+        if CommandLine.arguments.contains("-AddSet") {
+            if let session = store.activeSession, let firstEx = session.exercises.first {
+                store.addSet(to: firstEx.id)
+            }
+        }
+
+        if CommandLine.arguments.contains("-TogglePause") {
+            store.toggleActiveWorkoutPause()
+        }
+
+        if CommandLine.arguments.contains("-OpenActiveWorkout") {
+            store.isPresentingActiveWorkout = true
+        }
+
+        if CommandLine.arguments.contains("-CompleteAllSets") {
+            store.isPresentingActiveWorkout = true
+            if let session = store.activeSession {
+                for ex in session.exercises {
+                    let isCalisthenics = ex.exercise.equipment == .bodyweight || ex.exercise.equipment == .pullUpBar || ex.exercise.equipment == .dipStation || ex.exercise.equipment == .gymRings || ex.exercise.equipment == .matArea || ex.exercise.equipment == .stretchingMat || ex.exercise.categoryTypeEnum == .core || ex.exercise.categoryTypeEnum == .mobility || ex.exercise.targetMuscle == .functionalCore
+                    let defaultWeight = isCalisthenics ? 0.0 : 60.0
+                    for setRec in ex.sets {
+                        let w = setRec.weightKg > 0 ? setRec.weightKg : (store.previousPerformance(for: ex.exercise.name, setIndex: setRec.setNumber - 1)?.weightKg ?? defaultWeight)
+                        let r = setRec.reps > 0 ? setRec.reps : (ex.exercise.defaultReps > 0 ? ex.exercise.defaultReps : 10)
+                        store.updateSetWeight(exerciseId: ex.id, setId: setRec.id, weight: w)
+                        store.updateSetReps(exerciseId: ex.id, setId: setRec.id, reps: r)
+                        if !setRec.isCompleted {
+                            store.toggleSet(exerciseId: ex.id, setId: setRec.id)
                         }
                     }
                 }
+            }
+        }
+
+        if CommandLine.arguments.contains("-CancelWorkout") {
+            store.cancelWorkout()
+        }
+
+        if let idx = CommandLine.arguments.firstIndex(of: "-FinishWithExitCode"), idx + 1 < CommandLine.arguments.count {
+            let code = Int(CommandLine.arguments[idx + 1]) ?? 0
+            Task {
+                await store.finishWorkoutWithScalar(exitCode: code)
+            }
+        } else if CommandLine.arguments.contains("-FinishActiveWorkout") {
+            Task {
+                await store.finishWorkoutWithScalar(exitCode: 0)
+            }
+        }
+        if let idx = CommandLine.arguments.firstIndex(of: "-SelectTab"), idx + 1 < CommandLine.arguments.count {
+            if let tab = Int(CommandLine.arguments[idx + 1]) {
+                UserDefaults.standard.set(tab, forKey: "main_selected_tab")
+                NotificationCenter.default.post(name: NSNotification.Name("SwitchMainTab"), object: tab)
+            }
+        }
+
+        if CommandLine.arguments.contains("-InspectFirstCompleted") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                store.inspectingCompletedSession = store.sessions.first
+            }
         }
     }
 }
