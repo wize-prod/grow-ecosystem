@@ -106,6 +106,45 @@ flowchart TD
 * **Gemini ist die Intake- und Planungs-Zentrale:** Alle Belege, Bank-Screenshots, Haltungsfotos und die Erstellung von Wochenplaenen laufen ueber Gemini. Gemini schreibt ueber MCP direkt in Supabase und `haushaltsbuch.db`.
 * **Die Grow-App ist eine reine Durchfuehrungs-Huelle (Execution Shell):** Die App muss keine schweren OCR-Module oder Uebungsdatenbanken hosten. Sie holt sich geplante Einheiten aus Supabase, fuehrt sie im Gym offline-sicher mit Timer und Haptik aus und uebergibt das Ergebnis zurueck an die Cloud.
 
+### 3.1 Speicherorte fuer Belege & Das All-Time Haushaltsbuch: Wer pflegt was?
+
+Aus den Fragen nach dem konkreten Speicherort und der Pflege des Haushaltsbuchs leitet sich eine transparente Dreiteilung ab:
+
+#### 1. Wo werden Belege & Screenshots physisch und in der Cloud gespeichert?
+* **Die Bilddateien (JPG/PDF):**
+  * *Cloud-Archiv:* Werden ueber das MCP-Tool im Supabase Storage Bucket `receipt_images/YYYY-MM/bon_<hash>.jpg` abgelegt (komprimiert auf 150 bis 250 KB). Dies dient als steuerliches Langzeitarchiv (4 Jahre Aufbewahrungsfrist nach Abgabenordnung fuer WISO & Soldatenpauschalen).
+  * *Lokales Backup:* Auf dem MacBook unter `~/Library/CloudStorage/GoogleDrive-wize.prod6878@gmail.com/.../Finanzen/Belege/`.
+* **Die extrahierten Artikel- und Preiszeilen:**
+  * Werden dauerhaft in Supabase PostgreSQL (`public.store_prices`) gespeichert (EAN, gelesene Zeile, Supermarkt, Preis), um historische Preisvergleiche zu ermoeglichen.
+
+#### 2. Was ist das All-Time Haushaltsbuch und wo liegt es?
+* **Die zentrale Datenbank:** `haushaltsbuch.db` (SQLite im WAL-Modus), synchronisiert ueber Google Drive unter:
+  `/Users/parris-campbellnkembi/Library/CloudStorage/GoogleDrive-wize.prod6878@gmail.com/Meine Ablage/02_Cyber_Security_und_IT/cyber sec/CyberSec_Vault/Finanzen/haushaltsbuch.db`
+* **Inhalt:** Enthaelt die lueckenlose Historie aller Einnahmen, Ausgaben, Tilgungen und Kontostaende seit Juni 2026 (ueber 194 gepruefte Buchungen).
+* **Tabellenstruktur (`transactions`):**
+  * `id`: Eindeutige Transaktions-ID.
+  * `booking_date`: Buchungsdatum (YYYY-MM-DD).
+  * `tx_type`: Buchungsart (`LIVE_SCREENSHOT`, `RECEIPT_SCAN`, `CSV_TARGOBANK`, `FIXKOSTEN`).
+  * `recipient_or_purpose`: Vollstaendige, aussagekraeftige Beschreibung (z. B. *"Edeka - Wocheneinkauf: Magerquark, Haferflocken, Bananen"*).
+  * `amount`: Betrag in EUR (z. B. `-24.50`).
+  * `category`: Feste Budgetkategorie (`Lebensmittel & Drogerie`, `Wohnen & Fixkosten`, `Schuldentilgung`).
+  * `account_iban`: Zugeordnetes Girokonto.
+
+#### 3. Wer pflegt dieses Haushaltsbuch dynamisch und formuliert Beschreibungen?
+* **Google Gemini ist der autonome Buchhalter (Autonomous Scribe / Accountant):**
+  * Der Nutzer muss **keine Excel-Tabellen oeffnen, keinen Text abtippen und keine SQL-Befehle kennen**.
+  * **Workflow:**
+    1. Der Nutzer sendet ein Foto eines Kassenbons oder einen Screenshot (PayPal, Targobank, Apple Wallet) in den Gemini-Chat.
+    2. Gemini analysiert das Bild mit seiner multimodalen Vision Engine, erkennt Datum, Gesamtbetrag, Haendler und Einzelposten.
+    3. Gemini formuliert automatisch eine praezise, verstaendliche Buchungsnotiz (z. B. *"PayPal an Edeka - Einkauf Grundnahrungsmittel"*).
+    4. Gemini ruft das MCP-Tool `log_expense_transaction(...)` auf.
+    5. Das MCP-Tool schreibt den Eintrag per atomarem SQL-Befehl direkt in `haushaltsbuch.db`, aktualisiert den Kontostand und prueft das Restbudget gegen den 350-EUR-Monatsdeckel.
+    6. Gemini bestaetigt die Verbuchung und nennt das verbleibende Restbudget fuer den Monat.
+
+#### 4. Welche Rolle spielt die Grow-App auf dem iPhone?
+* Die Grow-App (Buchungen-Tab) ist ein reines, latenzfreies **Lese- und Kontroll-Dashboard**:
+  * Sie liest `haushaltsbuch.db` (bzw. Supabase REST) aus und zeigt den aktuellen Saldo, den Monatsverlauf und das verbleibende Lebensmittelbudget uebersichtlich auf dem iPhone an.
+
 ---
 
 ## 4. High-Speed MCP-Architektur: Beseitigung des "Verbindungsaufbau... mit GymApp"-Problems
