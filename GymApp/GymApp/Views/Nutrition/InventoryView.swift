@@ -72,11 +72,40 @@ public struct DepotInventorySection: View {
         }
     }
 
+    private var zeroStockLocalMatches: [PantryItem] {
+        let cleanQuery = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard cleanQuery.count >= 2 else { return [] }
+        let isFilteredStore = storeFilter != "ALLE"
+        let upperStore = storeFilter
+
+        return store.pantryItems.filter { item in
+            guard item.currentStockQty <= 0 else { return false }
+            if isFilteredStore && item.store.uppercased() != upperStore {
+                return false
+            }
+            return item.matches(query: cleanQuery)
+        }
+    }
+
+    private var allCatalogMatches: [PantryItem] {
+        var results = zeroStockLocalMatches
+        for cloudItem in cloudSearchResults {
+            if !results.contains(where: {
+                (!$0.barcode.isEmpty && $0.barcode == cloudItem.barcode) ||
+                $0.name.caseInsensitiveCompare(cloudItem.name) == .orderedSame
+            }) {
+                results.append(cloudItem)
+            }
+        }
+        return results
+    }
+
     public var body: some View {
         let items = filteredItems
+        let catalogItems = allCatalogMatches
         return ScrollView {
             LazyVStack(spacing: 10) {
-                    if items.isEmpty && cloudSearchResults.isEmpty && !isSearchingCloud {
+                    if items.isEmpty && catalogItems.isEmpty && !isSearchingCloud {
                         VStack(spacing: 4) {
                             Text(searchText.isEmpty ? "Keine Artikel im Vorrat" : "Keine Artikel im Vorrat gefunden")
                                 .font(.system(size: 13, weight: .medium))
@@ -86,6 +115,17 @@ public struct DepotInventorySection: View {
                         .padding(.vertical, 36)
                         .wellnessCard()
                     } else {
+                        if !searchText.isEmpty && !items.isEmpty {
+                            HStack {
+                                Text("AKTUELL IM VORRAT (\(items.count))")
+                                    .font(.system(size: 10, weight: .bold, design: .monospaced))
+                                    .foregroundColor(Theme.sageGreen)
+                                    .tracking(0.6)
+                                Spacer()
+                            }
+                            .padding(.top, 4)
+                        }
+
                         ForEach(items) { item in
                             InventoryItemRowView(
                                 item: item,
@@ -114,51 +154,51 @@ public struct DepotInventorySection: View {
                             )
                         }
 
-                        // Cloud-Datenbank Suchergebnisse
-                        if !cloudSearchResults.isEmpty {
+                        // Föderierte Katalog-Suchergebnisse (Bestand = 0)
+                        if !catalogItems.isEmpty {
                             VStack(alignment: .leading, spacing: 8) {
                                 HStack(spacing: 6) {
-                                    Image(systemName: "cloud.fill")
+                                    Image(systemName: "cart.badge.plus")
                                         .font(.system(size: 11, weight: .bold))
                                         .foregroundColor(Theme.warmSand)
-                                    Text("CLOUD-DATENBANK (\(cloudSearchResults.count))")
+                                    Text("AUS DEM KATALOG (\(catalogItems.count))")
                                         .font(.system(size: 10, weight: .bold, design: .monospaced))
                                         .foregroundColor(Theme.warmSand)
                                         .tracking(0.6)
                                     Spacer()
-                                    Text("0 im Bestand • Antippen zum Einlagern")
+                                    Text("0 im Bestand • 1-Klick auf Einkaufsliste")
                                         .font(.system(size: 9))
                                         .foregroundColor(Theme.textMuted)
                                 }
                                 .padding(.top, 14)
                                 .padding(.bottom, 2)
 
-                                ForEach(cloudSearchResults) { cloudItem in
+                                ForEach(catalogItems) { catalogItem in
                                     InventoryItemRowView(
-                                        item: cloudItem,
-                                        isSelected: selectedPantryItem?.id == cloudItem.id,
+                                        item: catalogItem,
+                                        isSelected: selectedPantryItem?.id == catalogItem.id,
                                         onTapInspect: {
                                             HapticFeedbackService.shared.lightDetent()
-                                            inspectingItem = cloudItem
+                                            inspectingItem = catalogItem
                                         },
                                         onLogConsumption: {
                                             HapticFeedbackService.shared.lightDetent()
-                                            selectedPantryItem = cloudItem
-                                            selectedItemForConsumption = cloudItem
+                                            selectedPantryItem = catalogItem
+                                            selectedItemForConsumption = catalogItem
                                         },
                                         onEditStock: {
                                             HapticFeedbackService.shared.lightDetent()
-                                            editingStockItem = cloudItem
+                                            editingStockItem = catalogItem
                                         },
                                         onRestockPack: {
                                             HapticFeedbackService.shared.lightDetent()
-                                            var updated = cloudItem
-                                            updated.currentStockQty = cloudItem.defaultPackQty
+                                            var updated = catalogItem
+                                            updated.currentStockQty = catalogItem.defaultPackQty
                                             store.addOrUpdatePantryItem(updated)
                                         },
                                         onAddShoppingItem: {
                                             HapticFeedbackService.shared.lightDetent()
-                                            store.addManualShoppingItem(pantryItem: cloudItem)
+                                            store.addManualShoppingItem(pantryItem: catalogItem)
                                         }
                                     )
                                 }
@@ -341,6 +381,14 @@ public struct DepotInventorySection: View {
         }
         .sheet(item: $scannedItemForInspection) { item in
             ScannedProductInspectorSheet(item: item, store: store)
+        }
+        .onAppear {
+            if let idx = CommandLine.arguments.firstIndex(of: "-SearchVorrat"), idx + 1 < CommandLine.arguments.count {
+                let query = CommandLine.arguments[idx + 1]
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    self.searchText = query
+                }
+            }
         }
         .onChange(of: store.targetedPantrySearchText) { text in
             if let text = text, !text.isEmpty {

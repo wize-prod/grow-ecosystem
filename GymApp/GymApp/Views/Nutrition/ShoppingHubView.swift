@@ -210,6 +210,10 @@ public struct DepotShoppingSection: View {
                     // 1. Schlanke Einzeil-Statuspille (Muda-Eliminierung)
                     unifiedShoppingStatusPill(isOverBudget: isOverBudget)
 
+                    if isOverBudget {
+                        budgetVetoBanner
+                    }
+
                     // 2. Einkaufsliste gruppiert nach Laden & Gang
                     shoppingListSection
 
@@ -236,6 +240,25 @@ public struct DepotShoppingSection: View {
         }
         .sheet(item: $inspectingItem) { item in
             NutritionDetailSheet(item: item)
+        }
+        .onAppear {
+            if CommandLine.arguments.contains("-TestOverBudget") {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    if store.shoppingList.isEmpty {
+                        store.shoppingList.append(ShoppingItem(
+                            id: UUID().uuidString,
+                            name: "Whey Isolat 2.5kg & Rinderfilet",
+                            packQty: 1.0,
+                            price: 360.00,
+                            store: "REWE",
+                            quantity: 1,
+                            isChecked: false,
+                            unit: "Stk",
+                            category: "Fitness & Fleisch"
+                        ))
+                    }
+                }
+            }
         }
     }
 
@@ -296,6 +319,36 @@ public struct DepotShoppingSection: View {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(isOverBudget ? Theme.terracotta.opacity(0.6) : Theme.border.opacity(0.6), lineWidth: 1)
                 )
+        )
+    }
+
+    // MARK: - 5-Gate Budget-Veto Banner
+    private var budgetVetoBanner: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "exclamationmark.octagon.fill")
+                .font(.system(size: 13, weight: .bold))
+                .foregroundColor(Theme.terracotta)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text("BUDGET-WARNUNG: 350 € KONTINGENT")
+                    .font(.system(size: 10, weight: .bold, design: .monospaced))
+                    .foregroundColor(Theme.terracotta)
+                    .tracking(0.6)
+
+                let excess = store.shoppingTotalCost - currentFoodBudgetRemaining
+                Text("Geplante Einkäufe übersteigen das verbleibende Lebensmittelbudget um \(String(format: "%.2f €", max(0, excess))).")
+                    .font(.system(size: 11))
+                    .foregroundColor(Theme.textSecondary)
+            }
+
+            Spacer()
+        }
+        .padding(10)
+        .background(Theme.terracotta.opacity(0.12))
+        .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Theme.terracotta.opacity(0.35), lineWidth: 1)
         )
     }
 
