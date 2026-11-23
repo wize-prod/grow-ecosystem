@@ -1069,6 +1069,20 @@ struct StartWorkoutQuickSheet: View {
                 ExerciseDetailSheet(exercise: ex)
                     .environmentObject(store)
             }
+            .onAppear {
+                if let idx = CommandLine.arguments.firstIndex(of: "-SearchExercise"), idx + 1 < CommandLine.arguments.count {
+                    let q = CommandLine.arguments[idx + 1]
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.exerciseSearchText = q
+                    }
+                }
+                if let idx = CommandLine.arguments.firstIndex(of: "-InspectExercise"), idx + 1 < CommandLine.arguments.count {
+                    let q = CommandLine.arguments[idx + 1]
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        self.inspectingExercise = store.exercises.first(where: { $0.name.localizedCaseInsensitiveContains(q) })
+                    }
+                }
+            }
         }
     }
 
