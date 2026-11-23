@@ -1021,6 +1021,10 @@ struct StartWorkoutQuickSheet: View {
     @State private var selectedDiscipline: TrainingDiscipline = .krafttraining
     @State private var selectedEquipmentMode: EquipmentModeFilter = .all
 
+    @State private var cloudExercises: [Exercise] = []
+    @State private var isSearchingCloud: Bool = false
+    @State private var searchTask: Task<Void, Never>? = nil
+
     private var recommendation: DailyWorkoutRecommendation {
         OlympicCoachEngine.shared.generateDailyRecommendation(
             sessionsHistory: store.allSessionsWithExternal,
@@ -1074,6 +1078,7 @@ struct StartWorkoutQuickSheet: View {
                     let q = CommandLine.arguments[idx + 1]
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.exerciseSearchText = q
+                        triggerCloudSearch(query: q)
                     }
                 }
                 if let idx = CommandLine.arguments.firstIndex(of: "-InspectExercise"), idx + 1 < CommandLine.arguments.count {
@@ -1082,6 +1087,32 @@ struct StartWorkoutQuickSheet: View {
                         self.inspectingExercise = store.exercises.first(where: { $0.name.localizedCaseInsensitiveContains(q) })
                     }
                 }
+            }
+            .onChange(of: exerciseSearchText) { _, newQuery in
+                triggerCloudSearch(query: newQuery)
+            }
+        }
+    }
+
+    private func triggerCloudSearch(query: String) {
+        searchTask?.cancel()
+        let clean = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard clean.count >= 2 else {
+            cloudExercises = []
+            isSearchingCloud = false
+            return
+        }
+
+        searchTask = Task {
+            try? await Task.sleep(nanoseconds: 200_000_000)
+            guard !Task.isCancelled else { return }
+            await MainActor.run { isSearchingCloud = true }
+            let results = await CloudExerciseCatalogService.shared.searchExercises(query: clean)
+            guard !Task.isCancelled else { return }
+            await MainActor.run {
+                let localNames = Set(store.exercises.map { $0.name.lowercased() })
+                self.cloudExercises = results.filter { !localNames.contains($0.name.lowercased()) }
+                self.isSearchingCloud = false
             }
         }
     }
@@ -1103,6 +1134,7 @@ struct StartWorkoutQuickSheet: View {
                 if !exerciseSearchText.isEmpty {
                     Button {
                         exerciseSearchText = ""
+                        cloudExercises = []
                     } label: {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(GymTheme.textMuted)
@@ -1115,67 +1147,128 @@ struct StartWorkoutQuickSheet: View {
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(GymTheme.border, lineWidth: 1))
 
             if !exerciseSearchText.trimmingCharacters(in: .whitespaces).isEmpty {
-                let matches = store.exercises.filter {
+                let localMatches = store.exercises.filter {
                     $0.name.localizedCaseInsensitiveContains(exerciseSearchText) ||
                     $0.targetMuscle.rawValue.localizedCaseInsensitiveContains(exerciseSearchText)
                 }.prefix(6)
 
-                if matches.isEmpty {
-                    Text("Keine Uebung gefunden")
+                if localMatches.isEmpty && cloudExercises.isEmpty && !isSearchingCloud {
+                    Text("Keine Uebung im lokalen oder Supabase-Katalog gefunden")
                         .font(.caption)
                         .foregroundColor(GymTheme.textMuted)
                         .padding(.vertical, 6)
                 } else {
-                    VStack(spacing: 6) {
-                        ForEach(matches) { ex in
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(ex.name)
-                                        .font(.system(size: 13, weight: .bold))
-                                        .foregroundColor(GymTheme.textPrimary)
-                                    Text("\(ex.targetMuscle.rawValue) • \(ex.equipment.rawValue)")
-                                        .font(.system(size: 10))
-                                        .foregroundColor(GymTheme.textSecondary)
-                                }
-                                Spacer()
+                    VStack(alignment: .leading, spacing: 12) {
+                        if !localMatches.isEmpty {
+                            Text("LOKALE UEBUNGEN (\(localMatches.count))")
+                                .font(.system(size: 8, weight: .bold, design: .monospaced))
+                                .tracking(0.8)
+                                .foregroundColor(GymTheme.textMuted)
 
-                                Button {
-                                    inspectingExercise = ex
-                                } label: {
-                                    Image(systemName: "info.circle")
-                                        .font(.system(size: 14))
-                                        .foregroundColor(GymTheme.cyanAccent)
-                                        .padding(6)
+                            VStack(spacing: 6) {
+                                ForEach(localMatches) { ex in
+                                    exerciseItemRow(ex: ex, isCloud: false)
                                 }
-                                .buttonStyle(.plain)
-
-                                Button {
-                                    store.startSingleExerciseWorkout(exercise: ex)
-                                    HapticFeedback.medium()
-                                    dismiss()
-                                } label: {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "play.fill")
-                                            .font(.system(size: 10, weight: .bold))
-                                        Text("Start")
-                                            .font(.system(size: 11, weight: .bold))
-                                    }
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 6)
-                                    .background(GymTheme.strongBlue)
-                                    .cornerRadius(6)
-                                }
-                                .buttonStyle(.plain)
                             }
-                            .padding(8)
-                            .background(GymTheme.surfaceElevated)
-                            .cornerRadius(8)
+                        }
+
+                        if !cloudExercises.isEmpty {
+                            HStack {
+                                Text("SUPABASE CLOUD-KATALOG (\(cloudExercises.count))")
+                                    .font(.system(size: 8, weight: .bold, design: .monospaced))
+                                    .tracking(0.8)
+                                    .foregroundColor(GymTheme.cyanAccent)
+                                Spacer()
+                                if isSearchingCloud {
+                                    ProgressView()
+                                        .scaleEffect(0.6)
+                                }
+                            }
+
+                            VStack(spacing: 6) {
+                                ForEach(cloudExercises) { ex in
+                                    exerciseItemRow(ex: ex, isCloud: true)
+                                }
+                            }
+                        } else if isSearchingCloud {
+                            HStack(spacing: 6) {
+                                ProgressView()
+                                    .scaleEffect(0.7)
+                                Text("Suche in Supabase Cloud...")
+                                    .font(.system(size: 11))
+                                    .foregroundColor(GymTheme.textMuted)
+                            }
+                            .padding(.vertical, 4)
                         }
                     }
                 }
             }
         }
+    }
+
+    private func exerciseItemRow(ex: Exercise, isCloud: Bool) -> some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 5) {
+                    Text(ex.name)
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundColor(GymTheme.textPrimary)
+                    if isCloud {
+                        Text("SUPABASE")
+                            .font(.system(size: 7, weight: .black, design: .monospaced))
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 1)
+                            .background(GymTheme.cyanAccent.opacity(0.18))
+                            .foregroundColor(GymTheme.cyanAccent)
+                            .cornerRadius(3)
+                    }
+                }
+                Text("\(ex.targetMuscle.rawValue) • \(ex.equipment.rawValue)")
+                    .font(.system(size: 10))
+                    .foregroundColor(GymTheme.textSecondary)
+            }
+            Spacer()
+
+            Button {
+                inspectingExercise = ex
+            } label: {
+                Image(systemName: "info.circle")
+                    .font(.system(size: 14))
+                    .foregroundColor(GymTheme.cyanAccent)
+                    .padding(6)
+            }
+            .buttonStyle(.plain)
+
+            Button {
+                if isCloud && !store.exercises.contains(where: { $0.name.lowercased() == ex.name.lowercased() }) {
+                    store.exercises.append(ex)
+                    store.saveExercises()
+                }
+                store.startSingleExerciseWorkout(exercise: ex)
+                HapticFeedback.medium()
+                dismiss()
+            } label: {
+                HStack(spacing: 4) {
+                    Image(systemName: "play.fill")
+                        .font(.system(size: 10, weight: .bold))
+                    Text("Start")
+                        .font(.system(size: 11, weight: .bold))
+                }
+                .foregroundColor(.white)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .background(isCloud ? GymTheme.cyanAccent : GymTheme.strongBlue)
+                .cornerRadius(6)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(8)
+        .background(GymTheme.surfaceElevated)
+        .cornerRadius(8)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(isCloud ? GymTheme.cyanAccent.opacity(0.35) : GymTheme.border, lineWidth: 1)
+        )
     }
 
     // MARK: - 1. Coach Recommendation Section

@@ -110,7 +110,7 @@ def main():
     success = 0
 
     print("Attempting PostgREST upload (requires table public.exercises to exist)...")
-    for i in range(0, min(batch_size, len(cleaned)), batch_size):
+    for i in range(0, len(cleaned), batch_size):
         chunk = cleaned[i:i+batch_size]
         payload = json.dumps(chunk).encode("utf-8")
         req = urllib.request.Request(url, data=payload, headers=headers, method="POST")

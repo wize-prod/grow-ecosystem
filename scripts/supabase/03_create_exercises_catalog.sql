@@ -46,7 +46,7 @@ CREATE INDEX IF NOT EXISTS idx_exercises_equipment ON public.exercises (equipmen
 CREATE INDEX IF NOT EXISTS idx_exercises_primary_muscles ON public.exercises USING gin (primary_muscles);
 CREATE INDEX IF NOT EXISTS idx_exercises_name_trgm ON public.exercises USING gin (name gin_trgm_ops);
 
--- RLS (Row Level Security) - Leserechte fuer anon / authenticated
+-- RLS (Row Level Security) - Leserechte und Schreibrechte fuer anon / authenticated
 ALTER TABLE public.exercises ENABLE ROW LEVEL SECURITY;
 
 DO $$
@@ -55,5 +55,11 @@ BEGIN
         SELECT 1 FROM pg_policies WHERE tablename = 'exercises' AND policyname = 'Public read access for exercises'
     ) THEN
         CREATE POLICY "Public read access for exercises" ON public.exercises FOR SELECT USING (true);
+    END IF;
+
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_policies WHERE tablename = 'exercises' AND policyname = 'Public write access for exercises'
+    ) THEN
+        CREATE POLICY "Public write access for exercises" ON public.exercises FOR ALL USING (true) WITH CHECK (true);
     END IF;
 END $$;

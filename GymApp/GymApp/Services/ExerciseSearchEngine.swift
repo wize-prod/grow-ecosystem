@@ -248,3 +248,142 @@ public struct ExerciseSearchEngine {
         }.map { $0.exercise }
     }
 }
+
+// MARK: - Supabase Cloud Exercise Catalog Service
+public final class CloudExerciseCatalogService: ObservableObject {
+    public static let shared = CloudExerciseCatalogService()
+
+    @Published public var supabaseURL: String = "https://oqhqpkayzkmnbcmbqkmm.supabase.co"
+    @Published public var supabaseAnonKey: String = "sb_publishable_Nd7hRD_Fp6no6X-NMnbuPQ_pLxJ-iNR"
+
+    private let session: URLSession
+
+    private init() {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 4.0
+        config.timeoutIntervalForResource = 6.0
+        self.session = URLSession(configuration: config)
+
+        if let savedURL = UserDefaults.standard.string(forKey: "grow_supabase_url"), !savedURL.isEmpty {
+            self.supabaseURL = savedURL
+        }
+        if let savedKey = UserDefaults.standard.string(forKey: "grow_supabase_anon_key"), !savedKey.isEmpty {
+            self.supabaseAnonKey = savedKey
+        }
+    }
+
+    public func searchExercises(query: String) async -> [Exercise] {
+        let clean = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard clean.count >= 2 else { return [] }
+
+        guard let encodedTerm = clean.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+              let endpoint = URL(string: "\(supabaseURL)/rest/v1/exercises?or=(name.ilike.*\(encodedTerm)*,target.ilike.*\(encodedTerm)*,body_part.ilike.*\(encodedTerm)*,equipment.ilike.*\(encodedTerm)*)&select=*&limit=15") else {
+            return []
+        }
+
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(supabaseAnonKey)", forHTTPHeaderField: "Authorization")
+        request.setValue(supabaseAnonKey, forHTTPHeaderField: "apikey")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+
+        do {
+            let (data, response) = try await session.data(for: request)
+            guard let httpRes = response as? HTTPURLResponse, httpRes.statusCode == 200 else {
+                return []
+            }
+            guard let rows = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] else {
+                return []
+            }
+            return rows.compactMap { Self.mapRowToExercise($0) }
+        } catch {
+            return []
+        }
+    }
+
+    public static func mapRowToExercise(_ dict: [String: Any]) -> Exercise? {
+        guard let name = dict["name"] as? String, !name.isEmpty else { return nil }
+        let rawId = dict["id"] as? String ?? ""
+        let idUUID = UUID(uuidString: "00000000-0000-0000-0000-" + rawId.padding(toLength: 12, withPad: "0", startingAt: 0)) ?? UUID()
+
+        let bodyPart = (dict["body_part"] as? String ?? "").lowercased()
+        let target = (dict["target"] as? String ?? "").lowercased()
+        let equipStr = (dict["equipment"] as? String ?? "").lowercased()
+
+        let targetMuscle: MuscleGroup
+        if target.contains("chest") || bodyPart.contains("chest") {
+            targetMuscle = .chest
+        } else if target.contains("back") || bodyPart.contains("back") || target.contains("lats") {
+            targetMuscle = .back
+        } else if target.contains("abs") || target.contains("waist") || bodyPart.contains("waist") {
+            targetMuscle = .functionalCore
+        } else if target.contains("spine") || target.contains("lower back") {
+            targetMuscle = .lowerBack
+        } else if target.contains("shoulder") || target.contains("delts") || bodyPart.contains("shoulder") {
+            targetMuscle = .shoulders
+        } else if target.contains("glute") || target.contains("hamstring") {
+            targetMuscle = .glutesPosterior
+        } else if target.contains("quad") || target.contains("calf") || target.contains("calves") || bodyPart.contains("upper legs") || bodyPart.contains("lower legs") {
+            targetMuscle = .legs
+        } else if target.contains("bicep") || target.contains("tricep") || bodyPart.contains("upper arms") {
+            targetMuscle = .arms
+        } else if target.contains("cardio") || bodyPart.contains("cardio") {
+            targetMuscle = .cardioConditioning
+        } else {
+            targetMuscle = .functionalCore
+        }
+
+        let equipment: EquipmentType
+        if equipStr.contains("dumbbell") {
+            equipment = .dumbBells
+        } else if equipStr.contains("barbell") {
+            equipment = .flatBenchBarbell
+        } else if equipStr.contains("cable") {
+            equipment = .cableCrossoverTower
+        } else if equipStr.contains("kettlebell") {
+            equipment = .kettlebells
+        } else if equipStr.contains("leverage machine") || equipStr.contains("machine") {
+            equipment = .nineStationTower
+        } else if equipStr.contains("roller") || equipStr.contains("mat") {
+            equipment = .matArea
+        } else if equipStr.contains("band") {
+            equipment = .mobilityStaff
+        } else {
+            equipment = .bodyweight
+        }
+
+        let notes = dict["general_execution_notes"] as? String ?? ""
+        let setup = dict["setup_and_starting_position"] as? String ?? ""
+        let mistakes = dict["common_mistakes"] as? [String] ?? []
+        let cues = dict["mental_cues"] as? [String] ?? []
+        let primary = dict["primary_muscles"] as? [String] ?? []
+        let secondary = dict["secondary_muscles"] as? [String] ?? []
+        let stabilizers = dict["stabilizers"] as? [String] ?? []
+
+        return Exercise(
+            id: idUUID,
+            name: name.capitalized,
+            targetMuscle: targetMuscle,
+            secondaryMuscles: [],
+            equipment: equipment,
+            isBWKRehaSafe: true,
+            executionNotes: notes,
+            defaultSets: 3,
+            defaultReps: 10,
+            defaultRestSeconds: dict["default_rest_seconds"] as? Int ?? 90,
+            difficulty: dict["difficulty_tier"] as? String ?? "Intermediate",
+            categoryType: dict["force_type"] as? String ?? "Pull",
+            mechanics: dict["mechanics_type"] as? String ?? "Compound",
+            movementPattern: dict["movement_pattern"] as? String ?? "Vertical Pull",
+            force: dict["force_type"] as? String ?? "Pull",
+            primaryMusclesDetailed: primary,
+            secondaryMusclesDetailed: secondary,
+            stabilizersDetailed: stabilizers,
+            setup: setup,
+            execution: notes,
+            commonMistakes: mistakes,
+            cues: cues,
+            isCustom: false
+        )
+    }
+}
