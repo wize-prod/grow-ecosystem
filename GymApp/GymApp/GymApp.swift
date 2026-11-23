@@ -238,5 +238,66 @@ struct GymApp: App {
                 store.inspectingCompletedSession = store.sessions.first
             }
         }
+
+        if CommandLine.arguments.contains("-TestIPCSync") {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                runAutomatedIPCTest(store: store)
+            }
+        }
+    }
+
+    private func runAutomatedIPCTest(store: GymStore) {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        var darwinEventCount = 0
+        var coreEventCount = 0
+
+        DarwinNotificationCenter.observe(DarwinNotificationCenter.workoutScheduleLedgerUpdated) {
+            darwinEventCount += 1
+        }
+
+        GrowDarwinEventBus.shared.observe(.workoutStateUpdated) {
+            coreEventCount += 1
+        }
+
+        let testWorkoutId = UUID()
+        let testTitle = "Phase 5 IPC Synchronisations-Testeinheit"
+        let plannedItem = PlannedWorkoutItem(
+            id: testWorkoutId,
+            title: testTitle,
+            plannedDate: Date(),
+            isCompleted: true,
+            completedAt: Date(),
+            notes: "Zero-Latency Dual-Bus Darwin IPC Test Payload",
+            exerciseNames: ["Bankdruecken", "Latziehen zur Brust", "Kniebeugen"]
+        )
+        store.plannedWorkouts.removeAll(where: { $0.title == testTitle })
+        store.plannedWorkouts.insert(plannedItem, at: 0)
+        store.savePlannedWorkouts()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            let elapsedMs = (CFAbsoluteTimeGetCurrent() - startTime) * 1000.0
+            let loadedLedger = GrowSuiteBridge.shared.loadWorkoutScheduleLedger()
+            let foundInBridge = loadedLedger.items.first(where: { $0.title == testTitle }) != nil
+
+            let verificationPayload: [String: Any] = [
+                "timestamp": ISO8601DateFormatter().string(from: Date()),
+                "darwinNotificationReceived": darwinEventCount > 0,
+                "growCoreEventReceived": coreEventCount > 0,
+                "bridgePayloadVerified": foundInBridge,
+                "latencyMs": elapsedMs,
+                "itemsCount": loadedLedger.items.count,
+                "testTitle": testTitle,
+                "status": (foundInBridge && darwinEventCount > 0 && coreEventCount > 0) ? "VERIFIED_SUCCESS" : (foundInBridge ? "VERIFIED_BRIDGE_SUCCESS" : "FAILED")
+            ]
+
+            if let jsonData = try? JSONSerialization.data(withJSONObject: verificationPayload, options: .prettyPrinted) {
+                let jsonString = String(data: jsonData, encoding: .utf8) ?? ""
+                print("[IPC_TEST_RESULT_BEGIN]\n\(jsonString)\n[IPC_TEST_RESULT_END]")
+                if let docDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                    let outURL = docDir.appendingPathComponent("ipc_verification_receipt.json")
+                    try? jsonData.write(to: outURL)
+                }
+            }
+        }
     }
 }

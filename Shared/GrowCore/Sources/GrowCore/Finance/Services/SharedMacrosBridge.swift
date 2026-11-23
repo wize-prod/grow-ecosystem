@@ -666,11 +666,17 @@ public final class GrowSuiteBridge {
         writeKeychain(data: data, accountKey: shoppingAccountKey)
         writeCache(data: data, filename: "shared_shopping.json")
         writePasteboard(data: data, pasteboardName: pasteboardShoppingName)
+        GrowMMKV.shared.set(data, forKey: "shared_shopping")
+        GrowDarwinEventBus.shared.post(.shoppingListUpdated)
         DarwinNotificationCenter.post(DarwinNotificationCenter.shoppingUpdated)
         return true
     }
 
     public func loadShopping() -> SharedShoppingPayload {
+        if let data = GrowMMKV.shared.data(forKey: "shared_shopping"),
+           let p = try? JSONDecoder().decode(SharedShoppingPayload.self, from: data) {
+            return p
+        }
         if let data = readKeychain(accountKey: shoppingAccountKey),
            let p = try? JSONDecoder().decode(SharedShoppingPayload.self, from: data) {
             return p
@@ -770,10 +776,17 @@ public final class GrowSuiteBridge {
         writeKeychain(data: data, accountKey: workoutAccountKey)
         writeCache(data: data, filename: "shared_workout.json")
         writePasteboard(data: data, pasteboardName: pasteboardWorkoutName)
+        GrowMMKV.shared.set(data, forKey: "shared_workout")
+        GrowDarwinEventBus.shared.post(.workoutStateUpdated)
+        DarwinNotificationCenter.post(DarwinNotificationCenter.workoutScheduleLedgerUpdated)
         return true
     }
 
     public func loadLatestWorkout() -> SharedWorkoutPayload? {
+        if let data = GrowMMKV.shared.data(forKey: "shared_workout"),
+           let payload = try? JSONDecoder().decode(SharedWorkoutPayload.self, from: data) {
+            return payload
+        }
         if let data = readKeychain(accountKey: workoutAccountKey),
            let payload = try? JSONDecoder().decode(SharedWorkoutPayload.self, from: data) {
             return payload
@@ -840,12 +853,17 @@ public final class GrowSuiteBridge {
         writeKeychain(data: data, accountKey: mealsLedgerAccountKey)
         writeCache(data: data, filename: "shared_meals_ledger.json")
         writePasteboard(data: data, pasteboardName: pasteboardMealsLedgerName)
+        GrowMMKV.shared.set(data, forKey: "shared_meals_ledger")
+        GrowDarwinEventBus.shared.post(.macroNutritionUpdated)
         DarwinNotificationCenter.post(DarwinNotificationCenter.mealsLedgerUpdated)
         return true
     }
 
     public func loadMealsLedger() -> SharedMealsLedger {
-        if let data = readKeychain(accountKey: mealsLedgerAccountKey),
+        if let data = GrowMMKV.shared.data(forKey: "shared_meals_ledger"),
+           let p = try? JSONDecoder().decode(SharedMealsLedger.self, from: data) {
+            return p
+        } else if let data = readKeychain(accountKey: mealsLedgerAccountKey),
            let p = try? JSONDecoder().decode(SharedMealsLedger.self, from: data) {
             return p
         } else if let data = readCache(filename: "shared_meals_ledger.json"),
@@ -865,12 +883,17 @@ public final class GrowSuiteBridge {
         writeKeychain(data: data, accountKey: workoutScheduleAccountKey)
         writeCache(data: data, filename: "shared_workout_schedule.json")
         writePasteboard(data: data, pasteboardName: pasteboardWorkoutScheduleName)
+        GrowMMKV.shared.set(data, forKey: "shared_workout_schedule")
+        GrowDarwinEventBus.shared.post(.workoutStateUpdated)
         DarwinNotificationCenter.post(DarwinNotificationCenter.workoutScheduleLedgerUpdated)
         return true
     }
 
     public func loadWorkoutScheduleLedger() -> SharedWorkoutScheduleLedger {
-        if let data = readKeychain(accountKey: workoutScheduleAccountKey),
+        if let data = GrowMMKV.shared.data(forKey: "shared_workout_schedule"),
+           let p = try? JSONDecoder().decode(SharedWorkoutScheduleLedger.self, from: data) {
+            return p
+        } else if let data = readKeychain(accountKey: workoutScheduleAccountKey),
            let p = try? JSONDecoder().decode(SharedWorkoutScheduleLedger.self, from: data) {
             return p
         } else if let data = readCache(filename: "shared_workout_schedule.json"),
@@ -890,12 +913,17 @@ public final class GrowSuiteBridge {
         writeKeychain(data: data, accountKey: supplementScheduleAccountKey)
         writeCache(data: data, filename: "shared_supplement_schedule.json")
         writePasteboard(data: data, pasteboardName: pasteboardSupplementScheduleName)
+        GrowMMKV.shared.set(data, forKey: "shared_supplement_schedule")
+        GrowDarwinEventBus.shared.post(.supplementDoseSealed)
         DarwinNotificationCenter.post(DarwinNotificationCenter.supplementScheduleLedgerUpdated)
         return true
     }
 
     public func loadSupplementScheduleLedger() -> SharedSupplementScheduleLedger {
-        if let data = readKeychain(accountKey: supplementScheduleAccountKey),
+        if let data = GrowMMKV.shared.data(forKey: "shared_supplement_schedule"),
+           let p = try? JSONDecoder().decode(SharedSupplementScheduleLedger.self, from: data) {
+            return p
+        } else if let data = readKeychain(accountKey: supplementScheduleAccountKey),
            let p = try? JSONDecoder().decode(SharedSupplementScheduleLedger.self, from: data) {
             return p
         } else if let data = readCache(filename: "shared_supplement_schedule.json"),

@@ -3348,6 +3348,29 @@ public final class LocalStore: ObservableObject {
                 self?.refreshShoppingFromBridge()
             }
         }
+
+        DarwinNotificationCenter.observe(DarwinNotificationCenter.supplementScheduleLedgerUpdated) { [weak self] in
+            Task { @MainActor in
+                self?.refreshSupplementsFromBridge()
+            }
+        }
+    }
+
+    public func refreshSupplementsFromBridge() {
+        let bridgeSupps = GrowSuiteBridge.shared.loadSupplements(for: Date())
+        let todayKey = dateKey(for: Date())
+        var currentSet = supplementLogs[todayKey] ?? Set<String>()
+        var changed = false
+        for (doseId, _) in bridgeSupps.takenDoseIds {
+            if !currentSet.contains(doseId) {
+                currentSet.insert(doseId)
+                changed = true
+            }
+        }
+        if changed {
+            self.supplementLogs[todayKey] = currentSet
+            saveSupplements()
+        }
     }
 
     public func refreshShoppingFromBridge() {

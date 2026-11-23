@@ -354,8 +354,15 @@ public final class GymStore: ObservableObject {
             }
         }
 
+        DarwinNotificationCenter.observe(DarwinNotificationCenter.workoutScheduleLedgerUpdated) { [weak self] in
+            Task { @MainActor in
+                self?.syncWorkoutScheduleFromBridge()
+            }
+        }
+
         NotificationCenter.default.addObserver(forName: UIApplication.significantTimeChangeNotification, object: nil, queue: .main) { [weak self] _ in
             self?.syncWaterFromBridge()
+            self?.syncWorkoutScheduleFromBridge()
         }
     }
 
@@ -910,6 +917,27 @@ public final class GymStore: ObservableObject {
 
         let ledger = SharedWorkoutScheduleLedger(items: items, lastUpdated: Date())
         GrowSuiteBridge.shared.saveWorkoutScheduleLedger(ledger)
+    }
+
+    public func syncWorkoutScheduleFromBridge() {
+        let ledger = GrowSuiteBridge.shared.loadWorkoutScheduleLedger()
+        guard !ledger.items.isEmpty else { return }
+        var modified = false
+        for item in ledger.items {
+            if let uuid = UUID(uuidString: item.id) {
+                if let idx = plannedWorkouts.firstIndex(where: { $0.id == uuid }) {
+                    if plannedWorkouts[idx].isCompleted != item.isCompleted {
+                        plannedWorkouts[idx].isCompleted = item.isCompleted
+                        plannedWorkouts[idx].completedAt = item.completedAt
+                        modified = true
+                    }
+                }
+            }
+        }
+        if modified {
+            savePlannedWorkouts()
+            objectWillChange.send()
+        }
     }
 
     public func resetOverallAppTonnage() {
