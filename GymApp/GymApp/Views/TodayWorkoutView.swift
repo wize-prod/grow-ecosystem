@@ -1013,26 +1013,11 @@ public enum EquipmentModeFilter: String, CaseIterable, Identifiable {
 struct StartWorkoutQuickSheet: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var store: GymStore
-    @StateObject private var growceryService = GrowcerySyncService.shared
 
-    @State private var exerciseSearchText: String = ""
-    @State private var inspectingExercise: Exercise? = nil
-    @State private var selectedLocationMode: TrainingLocationMode = .gymWithWeights
-    @State private var selectedDiscipline: TrainingDiscipline = .krafttraining
-    @State private var selectedEquipmentMode: EquipmentModeFilter = .all
-
-    @State private var cloudExercises: [Exercise] = []
-    @State private var isSearchingCloud: Bool = false
-    @State private var searchTask: Task<Void, Never>? = nil
-
-    private var recommendation: DailyWorkoutRecommendation {
-        OlympicCoachEngine.shared.generateDailyRecommendation(
-            sessionsHistory: store.allSessionsWithExternal,
-            templates: store.templates,
-            growcerySync: growceryService.syncState,
-            locationMode: selectedLocationMode,
-            userPreferences: store.userPreferences
-        )
+    private var todaysPlannedWorkouts: [PlannedWorkoutItem] {
+        store.plannedWorkouts.filter {
+            Calendar.current.isDateInToday($0.plannedDate) && !$0.isCompleted
+        }
     }
 
     var body: some View {
@@ -1040,520 +1025,123 @@ struct StartWorkoutQuickSheet: View {
             ZStack {
                 GymTheme.bg.ignoresSafeArea()
 
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        // Section 0: Instant Exercise Catalog Search
-                        exerciseSearchSection
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: GrowGeometry.sectionSpacing) {
+                        // 1. Geplantes Training für heute (von Gemini / MCP)
+                        VStack(alignment: .leading, spacing: 14) {
+                            GrowSectionHeader(
+                                title: "Geplant für heute",
+                                subtitle: todaysPlannedWorkouts.isEmpty
+                                    ? "Aktuell keine Einheit geplant."
+                                    : "Von deinem Planer vorbereitet."
+                            )
 
-                        // Section 1: Olympic Coach Daily Recommendation & Location Mode
-                        coachRecommendationSection
+                            if todaysPlannedWorkouts.isEmpty {
+                                Text("Starte unten ein freies Workout oder lass dir eine Einheit über Gemini planen.")
+                                    .font(GrowTypography.subheadline)
+                                    .foregroundColor(GymTheme.textSecondary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .padding(GrowGeometry.cardInnerPadding)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(GymTheme.surface)
+                                    .cornerRadius(GrowGeometry.cardCornerRadius)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: GrowGeometry.cardCornerRadius, style: .continuous)
+                                            .stroke(GymTheme.border, lineWidth: 0.75)
+                                    )
+                            } else {
+                                VStack(spacing: 12) {
+                                    ForEach(todaysPlannedWorkouts) { planned in
+                                        Button {
+                                            store.startWorkout(from: planned)
+                                            HapticFeedback.medium()
+                                            dismiss()
+                                        } label: {
+                                            HStack(spacing: 14) {
+                                                VStack(alignment: .leading, spacing: 4) {
+                                                    Text(planned.title)
+                                                        .font(GrowTypography.headline)
+                                                        .foregroundColor(GymTheme.bg)
+                                                    if !planned.notes.isEmpty {
+                                                        Text(planned.notes)
+                                                            .font(GrowTypography.caption)
+                                                            .foregroundColor(GymTheme.bg.opacity(0.82))
+                                                            .lineLimit(2)
+                                                    }
+                                                }
+                                                Spacer()
+                                                Image(systemName: "play.fill")
+                                                    .font(.subheadline.weight(.semibold))
+                                                    .foregroundColor(GymTheme.bg)
+                                            }
+                                            .padding(GrowGeometry.cardInnerPadding)
+                                            .frame(minHeight: 60)
+                                            .background(GymTheme.sageGreen)
+                                            .cornerRadius(GrowGeometry.cardCornerRadius)
+                                        }
+                                        .buttonStyle(GrowTactileButtonStyle())
+                                        .accessibilityLabel("Geplantes Training \(planned.title) starten")
+                                    }
+                                }
+                            }
+                        }
 
-                        // Section 2: Disciplines & Equipment Filtered Templates
-                        disciplineAndEquipmentSection
+                        // 2. Freies Workout (On-Demand Übungen aus Supabase)
+                        VStack(alignment: .leading, spacing: 14) {
+                            GrowSectionHeader(
+                                title: "Freies Training",
+                                subtitle: "Ohne feste Vorlage direkt starten."
+                            )
 
-                        // Section 3: Free Session
-                        freeSessionSection
+                            Button {
+                                store.startWorkout()
+                                HapticFeedback.medium()
+                                dismiss()
+                            } label: {
+                                HStack(spacing: 14) {
+                                    VStack(alignment: .leading, spacing: 3) {
+                                        Text("Leeres Workout starten")
+                                            .font(GrowTypography.headline)
+                                            .foregroundColor(GymTheme.textPrimary)
+                                        Text("Übungen bei Bedarf einzeln hinzufügen")
+                                            .font(GrowTypography.caption)
+                                            .foregroundColor(GymTheme.textSecondary)
+                                    }
+                                    Spacer()
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.title3)
+                                        .foregroundColor(GymTheme.sageGreen)
+                                }
+                                .padding(GrowGeometry.cardInnerPadding)
+                                .frame(minHeight: 60)
+                                .background(GymTheme.surface)
+                                .cornerRadius(GrowGeometry.cardCornerRadius)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: GrowGeometry.cardCornerRadius, style: .continuous)
+                                        .stroke(GymTheme.border, lineWidth: 0.75)
+                                )
+                            }
+                            .buttonStyle(GrowTactileButtonStyle())
+                            .accessibilityLabel("Leeres Workout starten")
+                        }
 
                         Spacer(minLength: 40)
                     }
-                    .padding(16)
+                    .padding(.horizontal, GrowGeometry.horizontalPadding)
+                    .padding(.top, 20)
                 }
-                .scrollDismissesKeyboard(.interactively)
-                .dismissKeyboardOnTap()
             }
             .navigationTitle("Workout starten")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Abbrechen") { dismiss() }
-                        .foregroundColor(GymTheme.textMuted)
-                }
-            }
-            .sheet(item: $inspectingExercise) { ex in
-                ExerciseDetailSheet(exercise: ex)
-                    .environmentObject(store)
-            }
-            .onAppear {
-                if let idx = CommandLine.arguments.firstIndex(of: "-SearchExercise"), idx + 1 < CommandLine.arguments.count {
-                    let q = CommandLine.arguments[idx + 1]
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        self.exerciseSearchText = q
-                        triggerCloudSearch(query: q)
-                    }
-                }
-                if let idx = CommandLine.arguments.firstIndex(of: "-InspectExercise"), idx + 1 < CommandLine.arguments.count {
-                    let q = CommandLine.arguments[idx + 1]
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        self.inspectingExercise = store.exercises.first(where: { $0.name.localizedCaseInsensitiveContains(q) })
-                    }
-                }
-            }
-            .onChange(of: exerciseSearchText) { _, newQuery in
-                triggerCloudSearch(query: newQuery)
-            }
-        }
-    }
-
-    private func triggerCloudSearch(query: String) {
-        searchTask?.cancel()
-        let clean = query.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard clean.count >= 2 else {
-            cloudExercises = []
-            isSearchingCloud = false
-            return
-        }
-
-        searchTask = Task {
-            try? await Task.sleep(nanoseconds: 200_000_000)
-            guard !Task.isCancelled else { return }
-            await MainActor.run { isSearchingCloud = true }
-            let results = await CloudExerciseCatalogService.shared.searchExercises(query: clean)
-            guard !Task.isCancelled else { return }
-            await MainActor.run {
-                let localNames = Set(store.exercises.map { $0.name.lowercased() })
-                self.cloudExercises = results.filter { !localNames.contains($0.name.lowercased()) }
-                self.isSearchingCloud = false
-            }
-        }
-    }
-
-    // MARK: - 0. Exercise Catalog Search Section
-    private var exerciseSearchSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("UEBUNG SUCHEN & STARTEN")
-                .font(.system(size: 9, weight: .bold, design: .monospaced))
-                .tracking(1.0)
-                .foregroundColor(GymTheme.textMuted)
-
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(GymTheme.textMuted)
-                TextField("Uebung im Katalog suchen (z. B. Latziehen, RDL)...", text: $exerciseSearchText)
-                    .font(.system(size: 13))
-                    .foregroundColor(GymTheme.textPrimary)
-                if !exerciseSearchText.isEmpty {
-                    Button {
-                        exerciseSearchText = ""
-                        cloudExercises = []
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(GymTheme.textMuted)
-                    }
-                }
-            }
-            .padding(10)
-            .background(GymTheme.surfaceElevated)
-            .cornerRadius(10)
-            .overlay(RoundedRectangle(cornerRadius: 10).stroke(GymTheme.border, lineWidth: 1))
-
-            if !exerciseSearchText.trimmingCharacters(in: .whitespaces).isEmpty {
-                let localMatches = store.exercises.filter {
-                    $0.name.localizedCaseInsensitiveContains(exerciseSearchText) ||
-                    $0.targetMuscle.rawValue.localizedCaseInsensitiveContains(exerciseSearchText)
-                }.prefix(6)
-
-                if localMatches.isEmpty && cloudExercises.isEmpty && !isSearchingCloud {
-                    Text("Keine Uebung im lokalen oder Supabase-Katalog gefunden")
-                        .font(.caption)
-                        .foregroundColor(GymTheme.textMuted)
-                        .padding(.vertical, 6)
-                } else {
-                    VStack(alignment: .leading, spacing: 12) {
-                        if !localMatches.isEmpty {
-                            Text("LOKALE UEBUNGEN (\(localMatches.count))")
-                                .font(.system(size: 8, weight: .bold, design: .monospaced))
-                                .tracking(0.8)
-                                .foregroundColor(GymTheme.textMuted)
-
-                            VStack(spacing: 6) {
-                                ForEach(localMatches) { ex in
-                                    exerciseItemRow(ex: ex, isCloud: false)
-                                }
-                            }
-                        }
-
-                        if !cloudExercises.isEmpty {
-                            HStack {
-                                Text("SUPABASE CLOUD-KATALOG (\(cloudExercises.count))")
-                                    .font(.system(size: 8, weight: .bold, design: .monospaced))
-                                    .tracking(0.8)
-                                    .foregroundColor(GymTheme.cyanAccent)
-                                Spacer()
-                                if isSearchingCloud {
-                                    ProgressView()
-                                        .scaleEffect(0.6)
-                                }
-                            }
-
-                            VStack(spacing: 6) {
-                                ForEach(cloudExercises) { ex in
-                                    exerciseItemRow(ex: ex, isCloud: true)
-                                }
-                            }
-                        } else if isSearchingCloud {
-                            HStack(spacing: 6) {
-                                ProgressView()
-                                    .scaleEffect(0.7)
-                                Text("Suche in Supabase Cloud...")
-                                    .font(.system(size: 11))
-                                    .foregroundColor(GymTheme.textMuted)
-                            }
-                            .padding(.vertical, 4)
-                        }
-                    }
+                    Button("Schließen") { dismiss() }
+                        .font(GrowTypography.body)
+                        .foregroundColor(GymTheme.textSecondary)
+                        .frame(minHeight: GrowGeometry.minTouchTarget)
                 }
             }
         }
-    }
-
-    private func exerciseItemRow(ex: Exercise, isCloud: Bool) -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 5) {
-                    Text(ex.name)
-                        .font(.system(size: 13, weight: .bold))
-                        .foregroundColor(GymTheme.textPrimary)
-                    if isCloud {
-                        Text("SUPABASE")
-                            .font(.system(size: 7, weight: .black, design: .monospaced))
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 1)
-                            .background(GymTheme.cyanAccent.opacity(0.18))
-                            .foregroundColor(GymTheme.cyanAccent)
-                            .cornerRadius(3)
-                    }
-                }
-                Text("\(ex.targetMuscle.rawValue) • \(ex.equipment.rawValue)")
-                    .font(.system(size: 10))
-                    .foregroundColor(GymTheme.textSecondary)
-            }
-            Spacer()
-
-            Button {
-                inspectingExercise = ex
-            } label: {
-                Image(systemName: "info.circle")
-                    .font(.system(size: 14))
-                    .foregroundColor(GymTheme.cyanAccent)
-                    .padding(6)
-            }
-            .buttonStyle(.plain)
-
-            Button {
-                if isCloud && !store.exercises.contains(where: { $0.name.lowercased() == ex.name.lowercased() }) {
-                    store.exercises.append(ex)
-                    store.saveExercises()
-                }
-                store.startSingleExerciseWorkout(exercise: ex)
-                HapticFeedback.medium()
-                dismiss()
-            } label: {
-                HStack(spacing: 4) {
-                    Image(systemName: "play.fill")
-                        .font(.system(size: 10, weight: .bold))
-                    Text("Start")
-                        .font(.system(size: 11, weight: .bold))
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(isCloud ? GymTheme.cyanAccent : GymTheme.strongBlue)
-                .cornerRadius(6)
-            }
-            .buttonStyle(.plain)
-        }
-        .padding(8)
-        .background(GymTheme.surfaceElevated)
-        .cornerRadius(8)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(isCloud ? GymTheme.cyanAccent.opacity(0.35) : GymTheme.border, lineWidth: 1)
-        )
-    }
-
-    // MARK: - 1. Coach Recommendation Section
-    private var coachRecommendationSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("OLYMPIC COACH EMPFEHLUNG")
-                        .font(.system(size: 10, weight: .bold))
-                        .tracking(1.0)
-                        .foregroundColor(GymTheme.sageGreen)
-                    Text(recommendation.recommendedFocus)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                        .foregroundColor(GymTheme.textPrimary)
-                }
-                Spacer()
-                Text(recommendation.readinessLabel)
-                    .font(.system(size: 10, weight: .bold, design: .monospaced))
-                    .foregroundColor(GymTheme.sageGreen)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(Capsule().fill(GymTheme.surfaceElevated))
-            }
-
-            // Location & Equipment Mode Switcher
-            VStack(alignment: .leading, spacing: 6) {
-                Text("TRAININGS-ORT & EQUIPMENT")
-                    .font(.system(size: 9, weight: .bold))
-                    .tracking(0.8)
-                    .foregroundColor(GymTheme.textMuted)
-
-                HStack(spacing: 6) {
-                    ForEach(TrainingLocationMode.allCases) { mode in
-                        Button {
-                            selectedLocationMode = mode
-                            HapticFeedback.selection()
-                        } label: {
-                            HStack(spacing: 4) {
-                                Image(systemName: mode.icon)
-                                    .font(.system(size: 10))
-                                Text(mode.rawValue)
-                                    .font(.system(size: 10, weight: selectedLocationMode == mode ? .bold : .medium))
-                                    .lineLimit(1)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 4)
-                            .background(selectedLocationMode == mode ? GymTheme.strongBlue : GymTheme.surfaceElevated)
-                            .foregroundColor(selectedLocationMode == mode ? GymTheme.bg : GymTheme.textSecondary)
-                            .cornerRadius(8)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .stroke(selectedLocationMode == mode ? GymTheme.strongBlue : GymTheme.border, lineWidth: 1)
-                            )
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-            }
-
-            // Rationale
-            Text(recommendation.rationale)
-                .font(.system(size: 12))
-                .foregroundColor(GymTheme.textSecondary)
-                .lineSpacing(2)
-
-            // Recommended Exercises List (derived from recommended template)
-            let recommendedTemplate: WorkoutTemplate? = {
-                if let tplId = recommendation.templateId,
-                   let uuid = UUID(uuidString: tplId) {
-                    return store.templates.first(where: { $0.id == uuid })
-                }
-                return nil
-            }()
-
-            if let tpl = recommendedTemplate, !tpl.items.isEmpty {
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack {
-                        Text("EMPFOHLENE UEBUNGEN (\(tpl.name.uppercased()))")
-                            .font(.system(size: 9, weight: .bold))
-                            .tracking(0.8)
-                            .foregroundColor(GymTheme.textMuted)
-                        Spacer()
-                        Text("\(recommendation.targetVolumeSets) Saetze Ziel")
-                            .font(.system(size: 9, weight: .semibold, design: .monospaced))
-                            .foregroundColor(GymTheme.sageGreen)
-                    }
-
-                    ForEach(tpl.items.prefix(4)) { item in
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(item.exercise.name)
-                                    .font(.system(size: 12, weight: .semibold))
-                                    .foregroundColor(GymTheme.textPrimary)
-                                Text("\(item.targetSets) Saetze x \(item.targetReps) Wdh • \(item.exercise.targetMuscle.rawValue)")
-                                    .font(.system(size: 10))
-                                    .foregroundColor(GymTheme.textSecondary)
-                            }
-                            Spacer()
-                        }
-                        .padding(8)
-                        .background(GymTheme.surfaceElevated)
-                        .cornerRadius(6)
-                    }
-                }
-            } else if !recommendation.laggingMuscles.isEmpty {
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("FOKUS-MUSKELGRUPPEN")
-                        .font(.system(size: 9, weight: .bold))
-                        .tracking(0.8)
-                        .foregroundColor(GymTheme.textMuted)
-
-                    Text(recommendation.laggingMuscles.joined(separator: " • "))
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundColor(GymTheme.warmSand)
-                        .padding(8)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(GymTheme.surfaceElevated)
-                        .cornerRadius(6)
-                }
-            }
-
-            // Start Button
-            Button {
-                if let tplId = recommendation.templateId,
-                   let uuid = UUID(uuidString: tplId),
-                   let tpl = store.templates.first(where: { $0.id == uuid }) {
-                    store.startWorkout(from: tpl)
-                } else {
-                    store.startWorkout()
-                }
-                HapticFeedback.medium()
-                dismiss()
-            } label: {
-                HStack(spacing: 6) {
-                    Image(systemName: "play.fill")
-                    Text("Empfohlenes Training starten")
-                }
-                .font(.system(size: 14, weight: .bold))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
-                .background(GymTheme.strongBlue)
-                .foregroundColor(GymTheme.bg)
-                .cornerRadius(10)
-            }
-            .padding(.top, 4)
-        }
-        .somaCard(borderColor: GymTheme.sageGreen.opacity(0.4))
-    }
-
-    // MARK: - 2. Discipline & Equipment Filtered Section
-    private var disciplineAndEquipmentSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("TRAININGS-KATEGORIE & EQUIPMENT")
-                .font(.system(size: 10, weight: .bold))
-                .tracking(1.0)
-                .foregroundColor(GymTheme.textMuted)
-
-            // Discipline Selector
-            HStack(spacing: 6) {
-                ForEach(TrainingDiscipline.allCases) { discipline in
-                    Button {
-                        selectedDiscipline = discipline
-                        HapticFeedback.selection()
-                    } label: {
-                        HStack(spacing: 4) {
-                            Image(systemName: discipline.icon)
-                                .font(.system(size: 10))
-                            Text(discipline.rawValue)
-                                .font(.system(size: 10, weight: selectedDiscipline == discipline ? .bold : .medium))
-                                .lineLimit(1)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
-                        .padding(.horizontal, 4)
-                        .background(selectedDiscipline == discipline ? discipline.accentColor : GymTheme.surfaceElevated)
-                        .foregroundColor(selectedDiscipline == discipline ? .white : GymTheme.textSecondary)
-                        .cornerRadius(8)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(selectedDiscipline == discipline ? discipline.accentColor : GymTheme.border, lineWidth: 1)
-                        )
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-
-            // Equipment Mode Selector
-            HStack(spacing: 6) {
-                ForEach(EquipmentModeFilter.allCases) { eqMode in
-                    Button {
-                        selectedEquipmentMode = eqMode
-                        HapticFeedback.selection()
-                    } label: {
-                        Text(eqMode.rawValue)
-                            .font(.system(size: 10, weight: selectedEquipmentMode == eqMode ? .bold : .medium))
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 6)
-                            .background(selectedEquipmentMode == eqMode ? GymTheme.surfaceSubtle : GymTheme.surfaceElevated)
-                            .foregroundColor(selectedEquipmentMode == eqMode ? GymTheme.textPrimary : GymTheme.textMuted)
-                            .cornerRadius(6)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(selectedEquipmentMode == eqMode ? GymTheme.borderFocused : GymTheme.border, lineWidth: 1)
-                            )
-                    }
-                    .buttonStyle(.plain)
-                }
-            }
-
-            // Filtered Templates List
-            let filteredTemplates = store.templates.filter { tpl in
-                selectedDiscipline.matches(template: tpl) && selectedEquipmentMode.matches(template: tpl)
-            }
-
-            if filteredTemplates.isEmpty {
-                VStack(spacing: 6) {
-                    Text("Keine Vorlagen fuer diese Auswahl")
-                        .font(.caption)
-                        .foregroundColor(GymTheme.textMuted)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .background(GymTheme.surface)
-                .cornerRadius(10)
-            } else {
-                VStack(spacing: 8) {
-                    ForEach(filteredTemplates) { template in
-                        Button {
-                            store.startWorkout(from: template)
-                            HapticFeedback.light()
-                            dismiss()
-                        } label: {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(template.name)
-                                        .font(.system(size: 13, weight: .semibold))
-                                        .foregroundColor(GymTheme.textPrimary)
-                                    Text("\(template.items.count) Uebungen • \(template.category)")
-                                        .font(.system(size: 10))
-                                        .foregroundColor(GymTheme.textSecondary)
-                                }
-                                Spacer()
-                                Image(systemName: "play.fill")
-                                    .font(.caption2)
-                                    .foregroundColor(GymTheme.textMuted)
-                            }
-                            .padding(10)
-                            .background(GymTheme.surfaceElevated)
-                            .cornerRadius(8)
-                        }
-                        .buttonStyle(.plain)
-                    }
-                }
-            }
-        }
-    }
-
-    // MARK: - 4. Free Session Section
-    private var freeSessionSection: some View {
-        Button {
-            store.startWorkout()
-            HapticFeedback.medium()
-            dismiss()
-        } label: {
-            HStack {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("Leeres Workout starten")
-                        .font(.headline)
-                        .foregroundColor(GymTheme.bg)
-                    Text("Freies Satz- & Uebungstracking ohne Schablone")
-                        .font(.caption)
-                        .foregroundColor(GymTheme.bg.opacity(0.85))
-                }
-                Spacer()
-                Image(systemName: "plus.circle.fill")
-                    .font(.title3)
-                    .foregroundColor(GymTheme.bg)
-            }
-            .padding(16)
-            .background(GymTheme.strongBlue)
-            .cornerRadius(12)
-        }
-        .buttonStyle(.plain)
     }
 }
 
