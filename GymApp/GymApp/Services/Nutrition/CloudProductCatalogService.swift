@@ -299,4 +299,65 @@ public final class CloudProductCatalogService: ObservableObject {
             return []
         }
     }
+
+    // MARK: - Beleg-Komprimierung (150-250 KB) & Supabase Storage Upload (receipt_images)
+    #if canImport(UIKit)
+    public func compressReceiptImage(_ image: UIImage, maxDimension: CGFloat = 1600, targetMaxBytes: Int = 250_000) -> Data? {
+        let size = image.size
+        let maxSide = max(size.width, size.height)
+        let scale = maxSide > maxDimension ? (maxDimension / maxSide) : 1.0
+        let targetSize = CGSize(width: floor(size.width * scale), height: floor(size.height * scale))
+
+        let renderer = UIGraphicsImageRenderer(size: targetSize)
+        let resized = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: targetSize))
+        }
+
+        var quality: CGFloat = 0.65
+        var data = resized.jpegData(compressionQuality: quality)
+        while let current = data, current.count > targetMaxBytes, quality > 0.35 {
+            quality -= 0.08
+            data = resized.jpegData(compressionQuality: quality)
+        }
+        return data
+    }
+
+    public func uploadCompressedReceiptImage(_ image: UIImage, receiptId: String, date: Date = Date()) async -> String? {
+        guard isCloudConfigured, let jpegData = compressReceiptImage(image) else {
+            return nil
+        }
+
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM"
+        let monthFolder = df.string(from: date)
+        let cleanId = receiptId.replacingOccurrences(of: " ", with: "_")
+        let objectPath = "\(monthFolder)/bon_\(cleanId).jpg"
+
+        guard let endpoint = URL(string: "\(supabaseURL)/storage/v1/object/receipt_images/\(objectPath)") else {
+            return nil
+        }
+
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(supabaseAnonKey)", forHTTPHeaderField: "Authorization")
+        request.setValue(supabaseAnonKey, forHTTPHeaderField: "apikey")
+        request.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+        request.setValue("true", forHTTPHeaderField: "x-upsert")
+        request.httpBody = jpegData
+
+        do {
+            let (_, response) = try await session.data(for: request)
+            if let httpRes = response as? HTTPURLResponse, (200...299).contains(httpRes.statusCode) {
+                let kb = jpegData.count / 1024
+                await MainActor.run {
+                    self.lastSyncMessage = "Beleg komprimiert (\(kb) KB) in receipt_images/\(objectPath) archiviert"
+                }
+                return "receipt_images/\(objectPath)"
+            }
+        } catch {
+            return nil
+        }
+        return nil
+    }
+    #endif
 }

@@ -163,79 +163,7 @@
 		BB0000000000000000000097 /* WorkoutExitScalarSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000097 /* WorkoutExitScalarSheet.swift */; };
 		BB0000000000000000000098 /* WorkoutPreviewSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000098 /* WorkoutPreviewSheet.swift */; };
 		BB000000000000000000009B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009B /* Assets.xcassets */; };
-		BB000000000000000000009C /* direct_gif_map.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009C /* direct_gif_map.json */; };
-		BB000000000000000000009D /* hasan_matches.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009D /* hasan_matches.json */; };
-		BB000000000000000000009E /* hasaneyldrm_exercises_catalog.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009E /* hasaneyldrm_exercises_catalog.json */; };
 		BB000000000000000000009F /* penny_recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009F /* penny_recipes.json */; };
-		BB00000000000000000000A0 /* barbell_row.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A0 /* barbell_row.gif */; };
-		BB00000000000000000000A1 /* bench_dip.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A1 /* bench_dip.gif */; };
-		BB00000000000000000000A2 /* bench_press.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A2 /* bench_press.gif */; };
-		BB00000000000000000000A3 /* dead_bug.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A3 /* dead_bug.gif */; };
-		BB00000000000000000000A4 /* glute_bridge.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A4 /* glute_bridge.gif */; };
-		BB00000000000000000000A5 /* goblet_squat.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A5 /* goblet_squat.gif */; };
-		BB00000000000000000000A6 /* hasan_0009.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A6 /* hasan_0009.gif */; };
-		BB00000000000000000000A7 /* hasan_0015.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A7 /* hasan_0015.gif */; };
-		BB00000000000000000000A8 /* hasan_0017.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A8 /* hasan_0017.gif */; };
-		BB00000000000000000000A9 /* hasan_0025.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A9 /* hasan_0025.gif */; };
-		BB00000000000000000000AA /* hasan_0030.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AA /* hasan_0030.gif */; };
-		BB00000000000000000000AB /* hasan_0031.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AB /* hasan_0031.gif */; };
-		BB00000000000000000000AC /* hasan_0032.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AC /* hasan_0032.gif */; };
-		BB00000000000000000000AD /* hasan_0043.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AD /* hasan_0043.gif */; };
-		BB00000000000000000000AE /* hasan_0047.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AE /* hasan_0047.gif */; };
-		BB00000000000000000000AF /* hasan_0085.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AF /* hasan_0085.gif */; };
-		BB00000000000000000000B0 /* hasan_0095.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B0 /* hasan_0095.gif */; };
-		BB00000000000000000000B1 /* hasan_0129.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B1 /* hasan_0129.gif */; };
-		BB00000000000000000000B2 /* hasan_0192.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B2 /* hasan_0192.gif */; };
-		BB00000000000000000000B3 /* hasan_0196.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B3 /* hasan_0196.gif */; };
-		BB00000000000000000000B4 /* hasan_0201.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B4 /* hasan_0201.gif */; };
-		BB00000000000000000000B5 /* hasan_0238.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B5 /* hasan_0238.gif */; };
-		BB00000000000000000000B6 /* hasan_0242.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B6 /* hasan_0242.gif */; };
-		BB00000000000000000000B7 /* hasan_0276.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B7 /* hasan_0276.gif */; };
-		BB00000000000000000000B8 /* hasan_0289.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B8 /* hasan_0289.gif */; };
-		BB00000000000000000000B9 /* hasan_0313.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B9 /* hasan_0313.gif */; };
-		BB00000000000000000000BA /* hasan_0314.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BA /* hasan_0314.gif */; };
-		BB00000000000000000000BB /* hasan_0334.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BB /* hasan_0334.gif */; };
-		BB00000000000000000000BC /* hasan_0336.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BC /* hasan_0336.gif */; };
-		BB00000000000000000000BD /* hasan_0372.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BD /* hasan_0372.gif */; };
-		BB00000000000000000000BE /* hasan_0405.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BE /* hasan_0405.gif */; };
-		BB00000000000000000000BF /* hasan_0410.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BF /* hasan_0410.gif */; };
-		BB00000000000000000000C0 /* hasan_0464.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C0 /* hasan_0464.gif */; };
-		BB00000000000000000000C1 /* hasan_0472.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C1 /* hasan_0472.gif */; };
-		BB00000000000000000000C2 /* hasan_0493.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C2 /* hasan_0493.gif */; };
-		BB00000000000000000000C3 /* hasan_0576.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C3 /* hasan_0576.gif */; };
-		BB00000000000000000000C4 /* hasan_0585.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C4 /* hasan_0585.gif */; };
-		BB00000000000000000000C5 /* hasan_0586.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C5 /* hasan_0586.gif */; };
-		BB00000000000000000000C6 /* hasan_0594.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C6 /* hasan_0594.gif */; };
-		BB00000000000000000000C7 /* hasan_0596.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C7 /* hasan_0596.gif */; };
-		BB00000000000000000000C8 /* hasan_0597.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C8 /* hasan_0597.gif */; };
-		BB00000000000000000000C9 /* hasan_0598.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000C9 /* hasan_0598.gif */; };
-		BB00000000000000000000CA /* hasan_0601.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CA /* hasan_0601.gif */; };
-		BB00000000000000000000CB /* hasan_0603.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CB /* hasan_0603.gif */; };
-		BB00000000000000000000CC /* hasan_0662.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CC /* hasan_0662.gif */; };
-		BB00000000000000000000CD /* hasan_0725.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CD /* hasan_0725.gif */; };
-		BB00000000000000000000CE /* hasan_0766.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CE /* hasan_0766.gif */; };
-		BB00000000000000000000CF /* hasan_0861.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000CF /* hasan_0861.gif */; };
-		BB00000000000000000000D0 /* hasan_0868.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D0 /* hasan_0868.gif */; };
-		BB00000000000000000000D1 /* hasan_0972.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D1 /* hasan_0972.gif */; };
-		BB00000000000000000000D2 /* hasan_0975.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D2 /* hasan_0975.gif */; };
-		BB00000000000000000000D3 /* hasan_1012.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D3 /* hasan_1012.gif */; };
-		BB00000000000000000000D4 /* hasan_1372.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D4 /* hasan_1372.gif */; };
-		BB00000000000000000000D5 /* hasan_1425.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D5 /* hasan_1425.gif */; };
-		BB00000000000000000000D6 /* hasan_1431.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D6 /* hasan_1431.gif */; };
-		BB00000000000000000000D7 /* hasan_1463.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D7 /* hasan_1463.gif */; };
-		BB00000000000000000000D8 /* hasan_1651.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D8 /* hasan_1651.gif */; };
-		BB00000000000000000000D9 /* hasan_1760.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000D9 /* hasan_1760.gif */; };
-		BB00000000000000000000DA /* hasan_2330.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DA /* hasan_2330.gif */; };
-		BB00000000000000000000DB /* hasan_3013.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DB /* hasan_3013.gif */; };
-		BB00000000000000000000DC /* hasan_3156.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DC /* hasan_3156.gif */; };
-		BB00000000000000000000DD /* hasan_3281.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DD /* hasan_3281.gif */; };
-		BB00000000000000000000DE /* hasan_3544.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DE /* hasan_3544.gif */; };
-		BB00000000000000000000DF /* incline_bench_press.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000DF /* incline_bench_press.gif */; };
-		BB00000000000000000000E0 /* pull_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E0 /* pull_up.gif */; };
-		BB00000000000000000000E1 /* push_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E1 /* push_up.gif */; };
-		BB00000000000000000000E2 /* romanian_deadlift.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E2 /* romanian_deadlift.gif */; };
-		BB00000000000000000000E3 /* seated_shoulder_press.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E3 /* seated_shoulder_press.gif */; };
-		BB00000000000000000000E4 /* single_arm_push_up.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000E4 /* single_arm_push_up.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -397,79 +325,7 @@
 		AA0000000000000000000099 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info.plist"; sourceTree = "<group>"; };
 		AA000000000000000000009A /* GymApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GymApp.entitlements"; sourceTree = "<group>"; };
 		AA000000000000000000009B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets.xcassets"; sourceTree = "<group>"; };
-		AA000000000000000000009C /* direct_gif_map.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Resources/direct_gif_map.json"; sourceTree = "<group>"; };
-		AA000000000000000000009D /* hasan_matches.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Resources/hasan_matches.json"; sourceTree = "<group>"; };
-		AA000000000000000000009E /* hasaneyldrm_exercises_catalog.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Resources/hasaneyldrm_exercises_catalog.json"; sourceTree = "<group>"; };
 		AA000000000000000000009F /* penny_recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Resources/penny_recipes.json"; sourceTree = "<group>"; };
-		AA00000000000000000000A0 /* barbell_row.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/barbell_row.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000A1 /* bench_dip.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/bench_dip.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000A2 /* bench_press.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/bench_press.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000A3 /* dead_bug.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/dead_bug.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000A4 /* glute_bridge.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/glute_bridge.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000A5 /* goblet_squat.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/goblet_squat.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000A6 /* hasan_0009.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0009.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000A7 /* hasan_0015.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0015.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000A8 /* hasan_0017.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0017.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000A9 /* hasan_0025.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0025.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000AA /* hasan_0030.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0030.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000AB /* hasan_0031.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0031.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000AC /* hasan_0032.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0032.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000AD /* hasan_0043.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0043.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000AE /* hasan_0047.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0047.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000AF /* hasan_0085.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0085.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B0 /* hasan_0095.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0095.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B1 /* hasan_0129.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0129.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B2 /* hasan_0192.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0192.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B3 /* hasan_0196.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0196.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B4 /* hasan_0201.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0201.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B5 /* hasan_0238.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0238.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B6 /* hasan_0242.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0242.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B7 /* hasan_0276.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0276.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B8 /* hasan_0289.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0289.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000B9 /* hasan_0313.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0313.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000BA /* hasan_0314.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0314.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000BB /* hasan_0334.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0334.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000BC /* hasan_0336.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0336.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000BD /* hasan_0372.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0372.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000BE /* hasan_0405.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0405.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000BF /* hasan_0410.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0410.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C0 /* hasan_0464.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0464.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C1 /* hasan_0472.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0472.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C2 /* hasan_0493.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0493.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C3 /* hasan_0576.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0576.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C4 /* hasan_0585.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0585.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C5 /* hasan_0586.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0586.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C6 /* hasan_0594.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0594.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C7 /* hasan_0596.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0596.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C8 /* hasan_0597.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0597.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000C9 /* hasan_0598.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0598.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000CA /* hasan_0601.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0601.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000CB /* hasan_0603.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0603.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000CC /* hasan_0662.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0662.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000CD /* hasan_0725.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0725.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000CE /* hasan_0766.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0766.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000CF /* hasan_0861.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0861.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D0 /* hasan_0868.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0868.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D1 /* hasan_0972.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0972.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D2 /* hasan_0975.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_0975.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D3 /* hasan_1012.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1012.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D4 /* hasan_1372.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1372.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D5 /* hasan_1425.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1425.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D6 /* hasan_1431.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1431.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D7 /* hasan_1463.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1463.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D8 /* hasan_1651.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1651.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000D9 /* hasan_1760.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_1760.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000DA /* hasan_2330.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_2330.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000DB /* hasan_3013.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_3013.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000DC /* hasan_3156.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_3156.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000DD /* hasan_3281.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_3281.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000DE /* hasan_3544.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/hasan_3544.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000DF /* incline_bench_press.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/incline_bench_press.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000E0 /* pull_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/pull_up.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000E1 /* push_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/push_up.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000E2 /* romanian_deadlift.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/romanian_deadlift.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000E3 /* seated_shoulder_press.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/seated_shoulder_press.gif"; sourceTree = "<group>"; };
-		AA00000000000000000000E4 /* single_arm_push_up.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "Resources/ExerciseIllustrations/single_arm_push_up.gif"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -645,79 +501,7 @@
 				AA0000000000000000000099 /* Info.plist */,
 				AA000000000000000000009A /* GymApp.entitlements */,
 				AA000000000000000000009B /* Assets.xcassets */,
-				AA000000000000000000009C /* direct_gif_map.json */,
-				AA000000000000000000009D /* hasan_matches.json */,
-				AA000000000000000000009E /* hasaneyldrm_exercises_catalog.json */,
 				AA000000000000000000009F /* penny_recipes.json */,
-				AA00000000000000000000A0 /* barbell_row.gif */,
-				AA00000000000000000000A1 /* bench_dip.gif */,
-				AA00000000000000000000A2 /* bench_press.gif */,
-				AA00000000000000000000A3 /* dead_bug.gif */,
-				AA00000000000000000000A4 /* glute_bridge.gif */,
-				AA00000000000000000000A5 /* goblet_squat.gif */,
-				AA00000000000000000000A6 /* hasan_0009.gif */,
-				AA00000000000000000000A7 /* hasan_0015.gif */,
-				AA00000000000000000000A8 /* hasan_0017.gif */,
-				AA00000000000000000000A9 /* hasan_0025.gif */,
-				AA00000000000000000000AA /* hasan_0030.gif */,
-				AA00000000000000000000AB /* hasan_0031.gif */,
-				AA00000000000000000000AC /* hasan_0032.gif */,
-				AA00000000000000000000AD /* hasan_0043.gif */,
-				AA00000000000000000000AE /* hasan_0047.gif */,
-				AA00000000000000000000AF /* hasan_0085.gif */,
-				AA00000000000000000000B0 /* hasan_0095.gif */,
-				AA00000000000000000000B1 /* hasan_0129.gif */,
-				AA00000000000000000000B2 /* hasan_0192.gif */,
-				AA00000000000000000000B3 /* hasan_0196.gif */,
-				AA00000000000000000000B4 /* hasan_0201.gif */,
-				AA00000000000000000000B5 /* hasan_0238.gif */,
-				AA00000000000000000000B6 /* hasan_0242.gif */,
-				AA00000000000000000000B7 /* hasan_0276.gif */,
-				AA00000000000000000000B8 /* hasan_0289.gif */,
-				AA00000000000000000000B9 /* hasan_0313.gif */,
-				AA00000000000000000000BA /* hasan_0314.gif */,
-				AA00000000000000000000BB /* hasan_0334.gif */,
-				AA00000000000000000000BC /* hasan_0336.gif */,
-				AA00000000000000000000BD /* hasan_0372.gif */,
-				AA00000000000000000000BE /* hasan_0405.gif */,
-				AA00000000000000000000BF /* hasan_0410.gif */,
-				AA00000000000000000000C0 /* hasan_0464.gif */,
-				AA00000000000000000000C1 /* hasan_0472.gif */,
-				AA00000000000000000000C2 /* hasan_0493.gif */,
-				AA00000000000000000000C3 /* hasan_0576.gif */,
-				AA00000000000000000000C4 /* hasan_0585.gif */,
-				AA00000000000000000000C5 /* hasan_0586.gif */,
-				AA00000000000000000000C6 /* hasan_0594.gif */,
-				AA00000000000000000000C7 /* hasan_0596.gif */,
-				AA00000000000000000000C8 /* hasan_0597.gif */,
-				AA00000000000000000000C9 /* hasan_0598.gif */,
-				AA00000000000000000000CA /* hasan_0601.gif */,
-				AA00000000000000000000CB /* hasan_0603.gif */,
-				AA00000000000000000000CC /* hasan_0662.gif */,
-				AA00000000000000000000CD /* hasan_0725.gif */,
-				AA00000000000000000000CE /* hasan_0766.gif */,
-				AA00000000000000000000CF /* hasan_0861.gif */,
-				AA00000000000000000000D0 /* hasan_0868.gif */,
-				AA00000000000000000000D1 /* hasan_0972.gif */,
-				AA00000000000000000000D2 /* hasan_0975.gif */,
-				AA00000000000000000000D3 /* hasan_1012.gif */,
-				AA00000000000000000000D4 /* hasan_1372.gif */,
-				AA00000000000000000000D5 /* hasan_1425.gif */,
-				AA00000000000000000000D6 /* hasan_1431.gif */,
-				AA00000000000000000000D7 /* hasan_1463.gif */,
-				AA00000000000000000000D8 /* hasan_1651.gif */,
-				AA00000000000000000000D9 /* hasan_1760.gif */,
-				AA00000000000000000000DA /* hasan_2330.gif */,
-				AA00000000000000000000DB /* hasan_3013.gif */,
-				AA00000000000000000000DC /* hasan_3156.gif */,
-				AA00000000000000000000DD /* hasan_3281.gif */,
-				AA00000000000000000000DE /* hasan_3544.gif */,
-				AA00000000000000000000DF /* incline_bench_press.gif */,
-				AA00000000000000000000E0 /* pull_up.gif */,
-				AA00000000000000000000E1 /* push_up.gif */,
-				AA00000000000000000000E2 /* romanian_deadlift.gif */,
-				AA00000000000000000000E3 /* seated_shoulder_press.gif */,
-				AA00000000000000000000E4 /* single_arm_push_up.gif */,
 			);
 			path = GymApp;
 			sourceTree = "<group>";
@@ -799,79 +583,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB000000000000000000009B /* Assets.xcassets in Resources */,
-				BB000000000000000000009C /* direct_gif_map.json in Resources */,
-				BB000000000000000000009D /* hasan_matches.json in Resources */,
-				BB000000000000000000009E /* hasaneyldrm_exercises_catalog.json in Resources */,
 				BB000000000000000000009F /* penny_recipes.json in Resources */,
-				BB00000000000000000000A0 /* barbell_row.gif in Resources */,
-				BB00000000000000000000A1 /* bench_dip.gif in Resources */,
-				BB00000000000000000000A2 /* bench_press.gif in Resources */,
-				BB00000000000000000000A3 /* dead_bug.gif in Resources */,
-				BB00000000000000000000A4 /* glute_bridge.gif in Resources */,
-				BB00000000000000000000A5 /* goblet_squat.gif in Resources */,
-				BB00000000000000000000A6 /* hasan_0009.gif in Resources */,
-				BB00000000000000000000A7 /* hasan_0015.gif in Resources */,
-				BB00000000000000000000A8 /* hasan_0017.gif in Resources */,
-				BB00000000000000000000A9 /* hasan_0025.gif in Resources */,
-				BB00000000000000000000AA /* hasan_0030.gif in Resources */,
-				BB00000000000000000000AB /* hasan_0031.gif in Resources */,
-				BB00000000000000000000AC /* hasan_0032.gif in Resources */,
-				BB00000000000000000000AD /* hasan_0043.gif in Resources */,
-				BB00000000000000000000AE /* hasan_0047.gif in Resources */,
-				BB00000000000000000000AF /* hasan_0085.gif in Resources */,
-				BB00000000000000000000B0 /* hasan_0095.gif in Resources */,
-				BB00000000000000000000B1 /* hasan_0129.gif in Resources */,
-				BB00000000000000000000B2 /* hasan_0192.gif in Resources */,
-				BB00000000000000000000B3 /* hasan_0196.gif in Resources */,
-				BB00000000000000000000B4 /* hasan_0201.gif in Resources */,
-				BB00000000000000000000B5 /* hasan_0238.gif in Resources */,
-				BB00000000000000000000B6 /* hasan_0242.gif in Resources */,
-				BB00000000000000000000B7 /* hasan_0276.gif in Resources */,
-				BB00000000000000000000B8 /* hasan_0289.gif in Resources */,
-				BB00000000000000000000B9 /* hasan_0313.gif in Resources */,
-				BB00000000000000000000BA /* hasan_0314.gif in Resources */,
-				BB00000000000000000000BB /* hasan_0334.gif in Resources */,
-				BB00000000000000000000BC /* hasan_0336.gif in Resources */,
-				BB00000000000000000000BD /* hasan_0372.gif in Resources */,
-				BB00000000000000000000BE /* hasan_0405.gif in Resources */,
-				BB00000000000000000000BF /* hasan_0410.gif in Resources */,
-				BB00000000000000000000C0 /* hasan_0464.gif in Resources */,
-				BB00000000000000000000C1 /* hasan_0472.gif in Resources */,
-				BB00000000000000000000C2 /* hasan_0493.gif in Resources */,
-				BB00000000000000000000C3 /* hasan_0576.gif in Resources */,
-				BB00000000000000000000C4 /* hasan_0585.gif in Resources */,
-				BB00000000000000000000C5 /* hasan_0586.gif in Resources */,
-				BB00000000000000000000C6 /* hasan_0594.gif in Resources */,
-				BB00000000000000000000C7 /* hasan_0596.gif in Resources */,
-				BB00000000000000000000C8 /* hasan_0597.gif in Resources */,
-				BB00000000000000000000C9 /* hasan_0598.gif in Resources */,
-				BB00000000000000000000CA /* hasan_0601.gif in Resources */,
-				BB00000000000000000000CB /* hasan_0603.gif in Resources */,
-				BB00000000000000000000CC /* hasan_0662.gif in Resources */,
-				BB00000000000000000000CD /* hasan_0725.gif in Resources */,
-				BB00000000000000000000CE /* hasan_0766.gif in Resources */,
-				BB00000000000000000000CF /* hasan_0861.gif in Resources */,
-				BB00000000000000000000D0 /* hasan_0868.gif in Resources */,
-				BB00000000000000000000D1 /* hasan_0972.gif in Resources */,
-				BB00000000000000000000D2 /* hasan_0975.gif in Resources */,
-				BB00000000000000000000D3 /* hasan_1012.gif in Resources */,
-				BB00000000000000000000D4 /* hasan_1372.gif in Resources */,
-				BB00000000000000000000D5 /* hasan_1425.gif in Resources */,
-				BB00000000000000000000D6 /* hasan_1431.gif in Resources */,
-				BB00000000000000000000D7 /* hasan_1463.gif in Resources */,
-				BB00000000000000000000D8 /* hasan_1651.gif in Resources */,
-				BB00000000000000000000D9 /* hasan_1760.gif in Resources */,
-				BB00000000000000000000DA /* hasan_2330.gif in Resources */,
-				BB00000000000000000000DB /* hasan_3013.gif in Resources */,
-				BB00000000000000000000DC /* hasan_3156.gif in Resources */,
-				BB00000000000000000000DD /* hasan_3281.gif in Resources */,
-				BB00000000000000000000DE /* hasan_3544.gif in Resources */,
-				BB00000000000000000000DF /* incline_bench_press.gif in Resources */,
-				BB00000000000000000000E0 /* pull_up.gif in Resources */,
-				BB00000000000000000000E1 /* push_up.gif in Resources */,
-				BB00000000000000000000E2 /* romanian_deadlift.gif in Resources */,
-				BB00000000000000000000E3 /* seated_shoulder_press.gif in Resources */,
-				BB00000000000000000000E4 /* single_arm_push_up.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,16 +791,20 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_POSTPROCESSING = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRIP_INSTALLED_PRODUCT = YES;
+				STRIP_STYLE = all;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1128,7 +844,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = X83D9W2G74;
-				ENABLE_PREVIEWS = YES;
+				ENABLE_PREVIEWS = NO;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = GymApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

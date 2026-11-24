@@ -1450,7 +1450,6 @@ def clear_shopping_list(only_checked: bool = False) -> str:
 
 
 @mcp.tool()
-@mcp.tool()
 def get_shopping_budget_status() -> str:
     """[GrowFinance - Einkaufsbudget & Liquiditaets-Check] Ermittelt das aktuelle Monatsbudget fuer Lebensmittel & Drogerie aus haushaltsbuch.db."""
     db_path = None
@@ -1576,7 +1575,6 @@ def log_care_completion(routine_id: str, notes: Optional[str] = None) -> str:
     return f"GrowCare Routine '{routine_id}' erfolgreich fuer den {today_str} ({now_str}) verbucht und an iPhone synchronisiert."
 
 
-@mcp.tool()
 def get_chores_schedule() -> str:
     """[GrowCare - Stubenhygiene & Wäsche] Ruft den Hygieneplan für Kasernenstube, Lüftung, Wäsche und CPAP-Geräte ab."""
     chores_path = WORKSPACE_DIR / "backup_growcery" / "chores_routines.json"
@@ -1600,7 +1598,6 @@ def get_chores_schedule() -> str:
     return "\n".join(lines)
 
 
-@mcp.tool()
 def log_chore_completion(chore_id: str) -> str:
     """[GrowCare - Hygieneaufgabe abschließen] Protokolliert eine erledigte Stuben-, Wäsche- oder CPAP-Hygieneaufgabe."""
     today_str = datetime.date.today().strftime("%Y-%m-%d")
@@ -1911,7 +1908,6 @@ def log_bristol_stool_and_reha(
 # 10. MULTIMODALE BELEG- & QUITTUNGS-VERARBEITUNG (ECOSYSTEM RECEIPT INGESTION)
 # ==============================================================================
 
-@mcp.tool()
 def scan_food_receipt(
     store_name: str,
     total_amount: float,
@@ -1949,6 +1945,59 @@ def scan_food_receipt(
         notes="Gemini Kamera Beleg-Scan"
     )
 
+def compress_and_upload_receipt_image(image_path: str, booking_date: str) -> Dict[str, Any]:
+    """Komprimiert ein Belegbild auf max. 1600px / JPEG 0.65 (Ziel: 150-250 KB) und laedt es in Supabase Storage (receipt_images) hoch."""
+    import hashlib
+    import subprocess
+    import tempfile
+
+    src = Path(image_path).expanduser()
+    if not src.exists():
+        return {"ok": False, "error": f"Bilddatei nicht gefunden: {src}"}
+
+    month_folder = booking_date[:7] if len(booking_date) >= 7 else datetime.date.today().strftime("%Y-%m")
+    file_hash = hashlib.sha256(src.read_bytes()).hexdigest()[:12]
+    object_path = f"{month_folder}/bon_{file_hash}.jpg"
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        out_jpg = Path(tmpdir) / f"bon_{file_hash}.jpg"
+        quality = 65
+        max_dim = 1600
+        for _ in range(4):
+            subprocess.run(
+                ["sips", "-Z", str(max_dim), "-s", "format", "jpeg", "-s", "formatOptions", str(quality), str(src), "--out", str(out_jpg)],
+                capture_output=True,
+                check=False,
+            )
+            if out_jpg.exists() and out_jpg.stat().st_size <= 250_000:
+                break
+            quality = max(35, quality - 10)
+            max_dim = max(1200, max_dim - 200)
+
+        if not out_jpg.exists():
+            return {"ok": False, "error": "Bild-Komprimierung via sips fehlgeschlagen."}
+
+        jpeg_bytes = out_jpg.read_bytes()
+        size_kb = round(len(jpeg_bytes) / 1024.0, 1)
+
+    upload_url = f"{SUPABASE_URL}/storage/v1/object/receipt_images/{object_path}"
+    headers = {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
+        "Content-Type": "image/jpeg",
+        "x-upsert": "true",
+    }
+    req = urllib.request.Request(upload_url, data=jpeg_bytes, headers=headers, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=15) as res:
+            if 200 <= res.status < 300:
+                return {"ok": True, "storage_path": f"receipt_images/{object_path}", "size_kb": size_kb}
+            return {"ok": False, "error": f"HTTP {res.status}", "size_kb": size_kb}
+    except urllib.error.HTTPError as e:
+        return {"ok": False, "error": f"HTTP {e.code}: {e.read().decode(errors='ignore')}", "size_kb": size_kb}
+    except Exception as e:
+        return {"ok": False, "error": str(e), "size_kb": size_kb}
+
 @mcp.tool()
 def ingest_receipt(
     store_name: str,
@@ -1959,7 +2008,8 @@ def ingest_receipt(
     items: Optional[List[Dict[str, Any]]] = None,
     care_items: Optional[List[Dict[str, Any]]] = None,
     fastfood_meal: Optional[Dict[str, Any]] = None,
-    notes: Optional[str] = None
+    notes: Optional[str] = None,
+    receipt_image_path: Optional[str] = None
 ) -> str:
     """[Grow Ecosystem - Multimodaler Beleg- & Quittungs-Scan] Verarbeitet einen fotografierten Beleg/Quittung vollautomatisch über das gesamte Ökosystem (GrowFinance, Growcery, GrowCare).
     
@@ -1978,6 +2028,18 @@ def ingest_receipt(
         booking_date = datetime.date.today().strftime("%Y-%m-%d")
 
     actions_summary = []
+
+    # 0. Beleg-Bild komprimieren (150-250 KB) und in Supabase Storage (receipt_images) archivieren
+    if receipt_image_path:
+        upload_res = compress_and_upload_receipt_image(receipt_image_path, booking_date)
+        if upload_res.get("ok"):
+            actions_summary.append(
+                f"Supabase Storage: Beleg komprimiert ({upload_res['size_kb']} KB) unter '{upload_res['storage_path']}' archiviert."
+            )
+        else:
+            actions_summary.append(
+                f"Supabase Storage Warnung ({upload_res.get('size_kb', '?')} KB): {upload_res.get('error')}"
+            )
 
     # 1. GrowFinance: Insert into haushaltsbuch.db
     db_path = None
@@ -2148,7 +2210,6 @@ def ingest_receipt(
     return "\n".join(lines)
 
 
-@mcp.tool()
 def log_fastfood_meal(
     restaurant_name: str,
     food_items_summary: str,
@@ -2216,7 +2277,6 @@ def log_fastfood_meal(
     )
 
 
-@mcp.tool()
 def add_care_product(
     name: str,
     brand: str,
@@ -3070,38 +3130,55 @@ def audit_bwk_reha_safety(exercise_names: List[str]) -> str:
 
 @mcp.tool()
 def search_exercise_catalog(query: str, target_muscle: Optional[str] = None) -> str:
-    """[Grow - Uebungskatalog durchsuchen] Durchsucht den 1.324-Uebungs-Katalog von Grow nach passenden Uebungen, Zielmuskeln und Equipment.
+    """[Grow - Uebungskatalog durchsuchen] Durchsucht den 1.324-Uebungs-Katalog live in Supabase (public.exercises) ohne lokale 17-MB-Festplatten-Reads.
     
     Args:
-        query: Suchbegriff (z.B. 'push-up', 'squat', 'rudern').
+        query: Suchbegriff (z.B. 'push-up', 'squat', 'plank', 'arnold').
         target_muscle: Optionaler Zielmuskel (z.B. 'abs', 'chest', 'back', 'legs').
     """
-    if not CATALOG_PATH.exists():
-        return "Katalog-Datei nicht gefunden."
+    import urllib.parse
 
-    with open(CATALOG_PATH, "r", encoding="utf-8") as f:
-        catalog = json.load(f)
+    clean = query.strip().lower()
+    if len(clean) < 2:
+        return "Bitte mindestens 2 Zeichen als Suchbegriff angeben."
 
-    q = query.lower()
-    matches = []
-    for item in catalog:
-        name = item.get("name", "").lower()
-        target = item.get("target", "").lower()
-        equipment = item.get("equipment", "").lower()
+    terms = [clean]
+    if clean.endswith("s") and len(clean) > 3:
+        terms.append(clean[:-1])
+    elif clean.endswith("es") and len(clean) > 4:
+        terms.append(clean[:-2])
 
-        if q in name or q in target or q in equipment:
-            if target_muscle and target_muscle.lower() not in target:
-                continue
-            matches.append(item)
-            if len(matches) >= 10:
-                break
+    or_clauses = []
+    for t in terms:
+        enc = urllib.parse.quote(t, safe="")
+        or_clauses.append(f"name.ilike.*{enc}*,target.ilike.*{enc}*,body_part.ilike.*{enc}*,equipment.ilike.*{enc}*")
+
+    url = f"{SUPABASE_URL}/rest/v1/exercises?or=({','.join(or_clauses)})&select=id,name,target,body_part,equipment&limit=15"
+    if target_muscle and target_muscle.strip():
+        tm_enc = urllib.parse.quote(target_muscle.strip().lower(), safe="")
+        url += f"&target=ilike.*{tm_enc}*"
+
+    headers = {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
+        "Accept": "application/json",
+    }
+
+    try:
+        req = urllib.request.Request(url, headers=headers, method="GET")
+        with urllib.request.urlopen(req, timeout=5) as res:
+            matches = json.loads(res.read().decode("utf-8"))
+    except Exception as e:
+        return f"Supabase-Abfrage fehlgeschlagen: {e}"
 
     if not matches:
-        return f"Keine Uebungen fuer '{query}' gefunden."
+        return f"Keine Uebungen fuer '{query}' in Supabase gefunden."
 
-    lines = [f"Gefundene Uebungen ({len(matches)} Treffer):"]
+    lines = [f"Gefundene Uebungen in Supabase ({len(matches)} Treffer):"]
     for m in matches:
-        lines.append(f"- {m.get('name')} | Ziel: {m.get('target')} | Equipment: {m.get('equipment')}")
+        lines.append(
+            f"- {m.get('name')} (ID: {m.get('id')}) | Ziel: {m.get('target')} | Koerperteil: {m.get('body_part')} | Equipment: {m.get('equipment')}"
+        )
 
     return "\n".join(lines)
 
@@ -3176,6 +3253,16 @@ def main():
         print(f"Starte Growcery MCP-Server auf http://127.0.0.1:{args.port}/sse ...", file=sys.stderr)
         sec = TransportSecuritySettings(enable_dns_rebinding_protection=False)
         app = mcp.sse_app(transport_security=sec)
+        try:
+            from starlette.middleware.cors import CORSMiddleware
+            app.add_middleware(
+                CORSMiddleware,
+                allow_origins=["*"],
+                allow_methods=["*"],
+                allow_headers=["*"],
+            )
+        except Exception:
+            pass
         uvicorn.run(app, host="127.0.0.1", port=args.port, log_level="info")
 
 if __name__ == "__main__":
