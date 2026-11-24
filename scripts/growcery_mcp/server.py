@@ -624,8 +624,9 @@ def audit_recipe_health_and_reha(
 
     # 2. LPR Gastric Safety Score (0 - 100)
     lpr_score = 90.0
+    ingredients_text = ", ".join(str(x) for x in ingredients_summary) if isinstance(ingredients_summary, list) else str(ingredients_summary or "")
     contraindicated_triggers = ["kaffee", "coffee", "schokolade", "chocolate", "minze", "mint", "chili", "knoblauch roh", "zwiebel roh"]
-    found_triggers = [t for t in contraindicated_triggers if t in ingredients_summary.lower()]
+    found_triggers = [t for t in contraindicated_triggers if t in ingredients_text.lower()]
 
     if is_evening_meal:
         if fat_grams > 15.0:
@@ -1734,17 +1735,17 @@ def audit_5_gate_purchase(item_name: str, price_eur: float, category: str = "Kon
 def get_debt_repayment_status() -> str:
     """[GrowFinance - Tilgungs-Beschleuniger] Liefert den Status der festen monatlichen 1.274,70 EUR Schuldentilgung und den Avalanche-Fahrplan bis zur Schuldenfreiheit."""
     return (
-        "SCHULDENTILGUNGS- & AVALANCHE-STATUS (Rule 6 Proaktive Entschuldung):\\n"
-        "=" * 70 + "\\n"
-        "- Feste monatliche Tilgungsleistung: 1.274,70 EUR\\n"
-        "  * Targobank regulaere Rate:        274,70 EUR / Monat\\n"
-        "  * Targobank Sondertilgung:         1.000,00 EUR / Monat\\n"
-        "- AOK-Entschuldungs-Horizont:       Juni 2027 (Vollstaendige Tilgung)\\n"
-        "- Avalanche-Tilgungs-Beschleuniger:  Sobald AOK im Juni 2027 getilgt ist, werden die\\n"
-        "                                    freiwerdenden 700 EUR/Monat sofort in die Targobank-\\n"
-        "                                    Sondertilgung umgeleitet (Gesamttilgung 1.974,70 EUR/Monat),\\n"
-        "                                    um die Restschuld vorzeitig auf 0,00 EUR abzubauen.\\n"
-        "- Steuer-Hebel:                     WISO Steuererklaerung mit Soldatenpauschalen generiert\\n"
+        "SCHULDENTILGUNGS- & AVALANCHE-STATUS (Rule 6 Proaktive Entschuldung):\n"
+        + "=" * 70 + "\n"
+        "- Feste monatliche Tilgungsleistung: 1.274,70 EUR\n"
+        "  * Targobank regulaere Rate:        274,70 EUR / Monat\n"
+        "  * Targobank Sondertilgung:         1.000,00 EUR / Monat\n"
+        "- AOK-Entschuldungs-Horizont:       Juni 2027 (Vollstaendige Tilgung)\n"
+        "- Avalanche-Tilgungs-Beschleuniger:  Sobald AOK im Juni 2027 getilgt ist, werden die\n"
+        "                                    freiwerdenden 700 EUR/Monat sofort in die Targobank-\n"
+        "                                    Sondertilgung umgeleitet (Gesamttilgung 1.974,70 EUR/Monat),\n"
+        "                                    um die Restschuld vorzeitig auf 0,00 EUR abzubauen.\n"
+        "- Steuer-Hebel:                     WISO Steuererklaerung mit Soldatenpauschalen generiert\n"
         "                                    800 bis 1.500 EUR zusaetzliches Sondertilgungskapital."
     )
 
@@ -1785,10 +1786,9 @@ def get_master_ecosystem_schedule(date_str: Optional[str] = None) -> str:
     except Exception:
         workout_summary = "Core & Lumbale Tiefenstabilitaet (Stuben-Workout: Planks, Bird-Dog, Glute Bridges)"
 
-    # 2. Fetch Water Intake
+    # 2. Fetch Water Intake (supports both scalar ml and list of entries)
     water_logs = NutriVaultStorage.load_json("water_logs.json", default={})
-    water_entries = water_logs.get(date_str, []) if isinstance(water_logs, dict) else []
-    today_water_ml = sum(float(e.get("amountMl", 0)) for e in water_entries)
+    today_water_ml, _ = _parse_water_day_entry(water_logs.get(date_str) if isinstance(water_logs, dict) else None)
 
     lines = [
         f"MASTER ECOSYSTEM ROADMAP FUER {date_str} (Grow, GrowTasks, GrowFinance):",
@@ -2917,9 +2917,25 @@ def delete_shopping_list_item(
 # 12. HYDRATION ENGINE (GROW WASSER-TRACKER)
 # ==============================================================================
 
+def _parse_water_day_entry(raw_val: Any) -> tuple:
+    """Normalisiert water_logs.json Eintraege (skalare ml-Zahl aus iOS oder Liste von Dicts)."""
+    if raw_val is None:
+        return (0.0, 0)
+    if isinstance(raw_val, (int, float)):
+        return (float(raw_val), 1 if raw_val > 0 else 0)
+    if isinstance(raw_val, list):
+        total = 0.0
+        for e in raw_val:
+            if isinstance(e, dict):
+                total += float(e.get("amountMl", 0) or 0)
+            elif isinstance(e, (int, float)):
+                total += float(e)
+        return (total, len(raw_val))
+    return (0.0, 0)
+
 @mcp.tool()
 def log_water_intake(amount_ml: float, date_str: Optional[str] = None) -> str:
-    """[Grow - Wasseraufnahme erfassen] Verbucht eine getrunkene Wassermenge in ml (z. B. 250, 500) fuer das Zieldatum in Grow und synchronisiert das iPhone sowie Cloud Firestore.
+    """[Grow - Wasseraufnahme erfassen] Verbucht eine getrunkene Wassermenge in ml (z. B. 250, 500) fuer das Zieldatum in Grow und synchronisiert das iPhone.
     
     Args:
         amount_ml: Getrunkene Wassermenge in ml (z. B. 250.0 oder 500.0).
@@ -2932,22 +2948,26 @@ def log_water_intake(amount_ml: float, date_str: Optional[str] = None) -> str:
     if not isinstance(water_logs, dict):
         water_logs = {}
 
-    day_entries = water_logs.get(date_str, [])
-    if not isinstance(day_entries, list):
-        day_entries = []
+    existing = water_logs.get(date_str)
+    if isinstance(existing, (int, float)) or existing is None:
+        total_today = float(existing or 0.0) + float(amount_ml)
+        water_logs[date_str] = round(total_today, 1)
+    elif isinstance(existing, list):
+        existing.append({
+            "id": str(uuid.uuid4()).upper(),
+            "date": date_str,
+            "amountMl": float(amount_ml),
+            "timestamp": time.time(),
+            "sourceApp": "GeminiMCP"
+        })
+        water_logs[date_str] = existing
+        total_today, _ = _parse_water_day_entry(existing)
+    else:
+        total_today = float(amount_ml)
+        water_logs[date_str] = round(total_today, 1)
 
-    new_entry = {
-        "id": str(uuid.uuid4()).upper(),
-        "date": date_str,
-        "amountMl": float(amount_ml),
-        "timestamp": time.time(),
-        "sourceApp": "GeminiMCP"
-    }
-    day_entries.append(new_entry)
-    water_logs[date_str] = day_entries
     NutriVaultStorage.save_json("water_logs.json", water_logs)
 
-    total_today = sum(float(e.get("amountMl", 0)) for e in day_entries)
     target = 2500.0
     pct = min(100.0, (total_today / target) * 100.0)
 
@@ -2956,7 +2976,7 @@ def log_water_intake(amount_ml: float, date_str: Optional[str] = None) -> str:
         f"- Neu gebucht:       +{amount_ml:.0f} ml\n"
         f"- Tagesstand:        {total_today:.0f} / {target:.0f} ml ({pct:.1f}%)\n"
         f"- Datum:             {date_str}\n"
-        f"- Status:            Synchronisiert in Grow & GrowTasks."
+        f"- Status:            Synchronisiert in Grow."
     )
 
 @mcp.tool()
@@ -2970,8 +2990,8 @@ def get_water_intake(date_str: Optional[str] = None) -> str:
         date_str = datetime.date.today().strftime("%Y-%m-%d")
 
     water_logs = NutriVaultStorage.load_json("water_logs.json", default={})
-    day_entries = water_logs.get(date_str, []) if isinstance(water_logs, dict) else []
-    total_today = sum(float(e.get("amountMl", 0)) for e in day_entries)
+    raw_day = water_logs.get(date_str) if isinstance(water_logs, dict) else None
+    total_today, count_entries = _parse_water_day_entry(raw_day)
     target = 2500.0
     pct = min(100.0, (total_today / target) * 100.0)
 
@@ -2980,7 +3000,7 @@ def get_water_intake(date_str: Optional[str] = None) -> str:
         f"- Gesamt getrunken:  {total_today:.0f} ml\n"
         f"- Hydrations-Ziel:   {target:.0f} ml\n"
         f"- Erfuellungsgrad:   {pct:.1f}%\n"
-        f"- Anzahl Eintraege:  {len(day_entries)}"
+        f"- Anzahl Eintraege:  {count_entries}"
     )
 
 
