@@ -1945,6 +1945,76 @@ def scan_food_receipt(
         notes="Gemini Kamera Beleg-Scan"
     )
 
+def is_duplicate_transaction(cursor, booking_date: str, amount: float, store_token: str) -> Optional[Dict[str, Any]]:
+    """Poka-Yoke Fuzzy Deduplication (Schaltplan 5): Verhindert Doppelbuchungen (Betrag +-0.01 EUR, Datum +-3 Tage, gleicher Haendler)."""
+    target_amount = -abs(amount)
+    clean_token = (store_token or "").strip().lower().split()[0] if store_token else ""
+    try:
+        cursor.execute(
+            """
+            SELECT id, booking_date, recipient_or_purpose, amount
+            FROM transactions
+            WHERE ABS(amount - ?) < 0.02
+              AND ABS(julianday(booking_date) - julianday(?)) <= 3
+            ORDER BY booking_date DESC
+            LIMIT 10
+            """,
+            (target_amount, booking_date),
+        )
+        for row_id, r_date, r_purpose, r_amount in cursor.fetchall():
+            if not clean_token or clean_token in (r_purpose or "").lower():
+                return {"id": row_id, "booking_date": r_date, "purpose": r_purpose, "amount": r_amount}
+    except Exception:
+        return None
+    return None
+
+def record_store_prices_to_supabase(store_name: str, grocery_items: List[Dict[str, Any]], pantry: List[Dict[str, Any]]) -> int:
+    """Schreibt extrahierte Kassenbon-Einzelpreise dauerhaft in Supabase public.store_prices (Schaltplan 7)."""
+    if not grocery_items:
+        return 0
+    payload = []
+    chain = (store_name or "STANDARD").strip().upper()[:64]
+    for g_item in grocery_items:
+        g_name = (g_item.get("name") or "").strip()
+        try:
+            g_price = float(g_item.get("price") or 0.0)
+        except Exception:
+            g_price = 0.0
+        if not g_name or g_price <= 0:
+            continue
+        matched_code = None
+        for p_it in pantry:
+            p_name = (p_it.get("name") or "").lower()
+            if g_name.lower() in p_name or p_name in g_name.lower():
+                matched_code = ((p_it.get("barcode") or "").strip() or (p_it.get("id") or "").strip())[:64]
+                break
+        if matched_code:
+            payload.append({
+                "barcode": matched_code,
+                "store_chain": chain,
+                "branch_name": "Kassenbon",
+                "price_eur": round(g_price, 2),
+                "recorded_by": "mcp_ingest_receipt",
+                "receipt_line_raw": g_name[:255],
+            })
+    if not payload:
+        return 0
+    url = f"{SUPABASE_URL}/rest/v1/store_prices"
+    headers = {
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal",
+    }
+    try:
+        req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
+        with urllib.request.urlopen(req, timeout=8) as res:
+            if 200 <= res.status < 300:
+                return len(payload)
+    except Exception:
+        return 0
+    return 0
+
 def compress_and_upload_receipt_image(image_path: str, booking_date: str) -> Dict[str, Any]:
     """Komprimiert ein Belegbild auf max. 1600px / JPEG 0.65 (Ziel: 150-250 KB) und laedt es in Supabase Storage (receipt_images) hoch."""
     import hashlib
@@ -2063,13 +2133,20 @@ def ingest_receipt(
             desc_str = ", ".join(items_desc)[:120] if items_desc else "Beleg-Scan"
             purpose_full = f"{store_name} - Beleg-Scan: {desc_str}"
 
-            c.execute(
-                "INSERT INTO transactions (booking_date, tx_type, recipient_or_purpose, amount, category, account_iban) VALUES (?, ?, ?, ?, ?, ?)",
-                (booking_date, "Beleg-Scan", purpose_full, -abs(total_amount), finance_category, "DE28300209003201649568")
-            )
-            conn.commit()
-            conn.close()
-            actions_summary.append(f"GrowFinance: Ausgabe von {total_amount:.2f} EUR unter '{finance_category}' in haushaltsbuch.db verbucht.")
+            dup = is_duplicate_transaction(c, booking_date, total_amount, store_name)
+            if dup:
+                conn.close()
+                actions_summary.append(
+                    f"GrowFinance Deduplizierung aktiv: Buchung ueber {total_amount:.2f} EUR fuer '{store_name}' existiert bereits (ID {dup['id']}, {dup['booking_date']}) — keine Doppelbuchung."
+                )
+            else:
+                c.execute(
+                    "INSERT INTO transactions (booking_date, tx_type, recipient_or_purpose, amount, category, account_iban) VALUES (?, ?, ?, ?, ?, ?)",
+                    (booking_date, "LIVE_UNSETTLED", purpose_full, -abs(total_amount), finance_category, "DE28300209003201649568")
+                )
+                conn.commit()
+                conn.close()
+                actions_summary.append(f"GrowFinance: Ausgabe von {total_amount:.2f} EUR unter '{finance_category}' (LIVE_UNSETTLED) in haushaltsbuch.db verbucht.")
         except Exception as e:
             actions_summary.append(f"GrowFinance Warnung: Fehler beim Schreiben in haushaltsbuch.db: {e}")
     else:
@@ -2133,6 +2210,9 @@ def ingest_receipt(
             NutriVaultStorage.save_json("pantry_catalog.json", pantry)
         if shopping_modified:
             NutriVaultStorage.save_json("shopping_list.json", shopping_list)
+        sp_logged = record_store_prices_to_supabase(store_name, grocery_items, pantry)
+        if sp_logged > 0:
+            actions_summary.append(f"Supabase store_prices: {sp_logged} Kassenbon-Einzelpreise fuer '{store_name}' archiviert.")
 
         actions_summary.append(f"Growcery: {len(grocery_items)} Lebensmittel im Vorratsbestand aufgestockt ({', '.join(added_names[:4])}).")
 
@@ -2349,6 +2429,15 @@ def log_expense_transaction(
     try:
         conn = sqlite3.connect(db_path)
         c = conn.cursor()
+        dup = is_duplicate_transaction(c, booking_date, total_amount, store_or_payee)
+        if dup:
+            conn.close()
+            return (
+                f"DEDUPLIZIERUNG AKTIV (KEINE DOPPELBUCHUNG):\n"
+                f"- Bestehender Eintrag: ID {dup['id']} am {dup['booking_date']} ({dup['amount']:.2f} EUR)\n"
+                f"- Verwendungszweck:    {dup['purpose']}\n"
+                f"Status: Betrag wurde nicht doppelt verbucht."
+            )
         purpose = f"{store_or_payee} - {notes}" if notes else f"{store_or_payee} Ausgabe"
         c.execute(
             "INSERT INTO transactions (booking_date, tx_type, recipient_or_purpose, amount, category, account_iban) VALUES (?, ?, ?, ?, ?, ?)",

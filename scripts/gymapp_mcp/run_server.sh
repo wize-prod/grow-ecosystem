@@ -1,15 +1,11 @@
 #!/bin/bash
-# GymApp MCP Server Launcher
-# Binds to http://127.0.0.1:8765/sse for Gemini Developer Mode
+# Unified Grow MCP Server Launcher (Port 8765)
+# Delegiert direkt an den konsolidierten 40-Tool-MCP-Server (scripts/growcery_mcp/server.py)
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORKSPACE="/Users/parris-campbellnkembi/Developer/GrowWorkspace"
 VENV="${WORKSPACE}/.venv"
 
-echo "Starte GymApp Unified MCP-Server..."
-echo "Endpunkt fuer Gemini Developer Mode: http://127.0.0.1:8765/sse"
-
+echo "Starte Unified Grow MCP-Server (40 Tools, Supabase, CORS) auf Port 8765..."
 cd "${WORKSPACE}"
 export PYTHONPATH="${WORKSPACE}:${PYTHONPATH}"
-exec "${VENV}/bin/python3" "${DIR}/server.py"
-
+exec "${VENV}/bin/python3" "${WORKSPACE}/scripts/growcery_mcp/server.py" --port 8765 "$@"
