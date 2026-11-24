@@ -98,7 +98,7 @@ public struct TodayUnifiedView: View {
                 GymTheme.bg.ignoresSafeArea()
 
                 ScrollView(.vertical, showsIndicators: false) {
-                    VStack(spacing: 16) {
+                    VStack(spacing: GrowGeometry.sectionSpacing) {
                         // 1. Date Header & Fast Navigation
                         headerDateBar
 
@@ -121,19 +121,19 @@ public struct TodayUnifiedView: View {
 
                         Spacer(minLength: 140)
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
+                    .padding(.horizontal, GrowGeometry.horizontalPadding)
+                    .padding(.top, 12)
                     .frame(maxWidth: 720)
                     .frame(maxWidth: .infinity)
                 }
                 .scrollDismissesKeyboard(.interactively)
                 .simultaneousGesture(
-                    DragGesture(minimumDistance: 25)
+                    DragGesture(minimumDistance: 30)
                         .onEnded { value in
                             let hDiff = value.translation.width
                             let vDiff = value.translation.height
-                            if abs(hDiff) > abs(vDiff) * 1.3 && abs(hDiff) > 35 {
-                                withAnimation(.easeInOut(duration: 0.2)) {
+                            if abs(hDiff) > abs(vDiff) * 1.6 && abs(hDiff) > 48 {
+                                withAnimation(.spring(response: 0.28, dampingFraction: 0.85)) {
                                     if hDiff < 0 {
                                         advanceDate(by: 1)
                                     } else {
@@ -156,18 +156,19 @@ public struct TodayUnifiedView: View {
                     GymCircularProfileButton {
                         showingProfileAndSettings = true
                     }
+                    .accessibilityLabel("Profil und Einstellungen")
                 }
 
                 ToolbarItem(placement: .principal) {
                     VStack(spacing: 1) {
-                        Text("HEUTE")
-                            .font(.system(size: 14, weight: .bold, design: .monospaced))
+                        Text("Heute")
+                            .font(GrowTypography.headline)
                             .foregroundColor(GymTheme.textPrimary)
-                            .tracking(0.8)
                         Text(formatHeaderDate(selectedDate))
-                            .font(.system(size: 10, weight: .medium))
+                            .font(GrowTypography.caption)
                             .foregroundColor(GymTheme.textSecondary)
                     }
+                    .accessibilityElement(children: .combine)
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -176,12 +177,14 @@ public struct TodayUnifiedView: View {
                         showingGlobalSearch = true
                     }) {
                         Image(systemName: "magnifyingglass")
-                            .font(.system(size: 13, weight: .bold))
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundColor(GymTheme.textPrimary)
-                            .padding(8)
+                            .frame(width: 38, height: 38)
                             .background(Circle().fill(GymTheme.surfaceElevated))
+                            .frame(minWidth: GrowGeometry.minTouchTarget, minHeight: GrowGeometry.minTouchTarget)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("Globale Suche öffnen")
                 }
             }
             .sheet(isPresented: $showingGlobalSearch) {
@@ -355,30 +358,35 @@ public struct TodayUnifiedView: View {
         HStack {
             Button(action: { advanceDate(by: -1) }) {
                 Image(systemName: "chevron.left")
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.subheadline.weight(.semibold))
                     .foregroundColor(GymTheme.textSecondary)
-                    .padding(8)
-                    .background(Circle().fill(GymTheme.surfaceElevated))
+                    .frame(width: 36, height: 36)
+                    .background(Circle().fill(GymTheme.surface))
+                    .overlay(Circle().stroke(GymTheme.border, lineWidth: 0.75))
+                    .frame(minWidth: GrowGeometry.minTouchTarget, minHeight: GrowGeometry.minTouchTarget)
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Vorheriger Tag")
 
             Spacer()
 
             if !Calendar.current.isDateInToday(selectedDate) {
-                Button("Zu Heute springen") {
+                Button("Zu Heute") {
                     HapticFeedback.light()
-                    withAnimation(.easeInOut(duration: 0.2)) {
+                    withAnimation(.spring(response: 0.28, dampingFraction: 0.85)) {
                         selectedDate = Date()
                     }
                 }
-                .font(.system(size: 11.5, weight: .bold, design: .monospaced))
+                .font(GrowTypography.subheadline.weight(.semibold))
                 .foregroundColor(GymTheme.sageGreen)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 4)
-                .background(Capsule().fill(GymTheme.surfaceElevated))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(Capsule().fill(GymTheme.surface))
+                .overlay(Capsule().stroke(GymTheme.sageGreen.opacity(0.3), lineWidth: 0.75))
+                .accessibilityLabel("Zurück zu Heute springen")
             } else {
-                Text("Heutiger Fokus")
-                    .font(.system(size: 11, weight: .semibold, design: .monospaced))
+                Text("Wischen für Tagwechsel")
+                    .font(GrowTypography.caption)
                     .foregroundColor(GymTheme.textMuted)
             }
 
@@ -386,57 +394,60 @@ public struct TodayUnifiedView: View {
 
             Button(action: { advanceDate(by: 1) }) {
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.subheadline.weight(.semibold))
                     .foregroundColor(GymTheme.textSecondary)
-                    .padding(8)
-                    .background(Circle().fill(GymTheme.surfaceElevated))
+                    .frame(width: 36, height: 36)
+                    .background(Circle().fill(GymTheme.surface))
+                    .overlay(Circle().stroke(GymTheme.border, lineWidth: 0.75))
+                    .frame(minWidth: GrowGeometry.minTouchTarget, minHeight: GrowGeometry.minTouchTarget)
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Nächster Tag")
         }
     }
 
     // MARK: - 2. Quick Action Buttons Row (Biomechanik & Messungen)
     private var quickActionButtonsRow: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 12) {
             Button(action: {
                 HapticFeedback.light()
                 showingBiomechanikSheet = true
             }) {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Image(systemName: "figure.walk.motion")
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.subheadline.weight(.medium))
                         .foregroundColor(GymTheme.terracotta)
-                    Text("Biomechanik")
-                        .font(.system(size: 11.5, weight: .bold))
+                    Text("Muskelkarte")
+                        .font(GrowTypography.subheadline.weight(.medium))
                         .foregroundColor(GymTheme.textPrimary)
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 10)
-                .background(GymTheme.surfaceElevated)
-                .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(GymTheme.border, lineWidth: 1))
+                .frame(maxWidth: .infinity, minHeight: GrowGeometry.minTouchTarget)
+                .background(GymTheme.surface)
+                .cornerRadius(GrowGeometry.subCardCornerRadius)
+                .overlay(RoundedRectangle(cornerRadius: GrowGeometry.subCardCornerRadius).stroke(GymTheme.border, lineWidth: 0.75))
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Muskelkarte öffnen")
 
             Button(action: {
                 HapticFeedback.light()
                 showingMeasurementsSheet = true
             }) {
-                HStack(spacing: 6) {
+                HStack(spacing: 8) {
                     Image(systemName: "ruler")
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.subheadline.weight(.medium))
                         .foregroundColor(GymTheme.cyanAccent)
-                    Text("Körpermaße & Messungen")
-                        .font(.system(size: 11.5, weight: .bold))
+                    Text("Körpermaße")
+                        .font(GrowTypography.subheadline.weight(.medium))
                         .foregroundColor(GymTheme.textPrimary)
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 10)
-                .background(GymTheme.surfaceElevated)
-                .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(GymTheme.border, lineWidth: 1))
+                .frame(maxWidth: .infinity, minHeight: GrowGeometry.minTouchTarget)
+                .background(GymTheme.surface)
+                .cornerRadius(GrowGeometry.subCardCornerRadius)
+                .overlay(RoundedRectangle(cornerRadius: GrowGeometry.subCardCornerRadius).stroke(GymTheme.border, lineWidth: 0.75))
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Körpermaße und Gewicht öffnen")
         }
     }
 
@@ -446,36 +457,37 @@ public struct TodayUnifiedView: View {
             HapticFeedback.medium()
             gymStore.isPresentingActiveWorkout = true
         }) {
-            HStack(spacing: 12) {
+            HStack(spacing: 14) {
                 Circle()
-                    .fill(Color.red)
-                    .frame(width: 10, height: 10)
-                    .overlay(Circle().stroke(Color.red.opacity(0.4), lineWidth: 4))
+                    .fill(GymTheme.terracotta)
+                    .frame(width: 9, height: 9)
+                    .overlay(Circle().stroke(GymTheme.terracotta.opacity(0.35), lineWidth: 4))
 
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("AKTIVES TRAINING LÄUFT")
-                        .font(.system(size: 10, weight: .bold, design: .monospaced))
-                        .foregroundColor(Color.red)
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Training aktiv")
+                        .font(GrowTypography.captionBold)
+                        .foregroundColor(GymTheme.terracotta)
                     Text(gymStore.activeSession?.title ?? "Einheit läuft")
-                        .font(.system(size: 13, weight: .bold))
+                        .font(GrowTypography.headline)
                         .foregroundColor(GymTheme.textPrimary)
                 }
 
                 Spacer()
 
                 Text("Fortsetzen")
-                    .font(.system(size: 11, weight: .bold))
+                    .font(GrowTypography.subheadline.weight(.semibold))
                     .foregroundColor(GymTheme.bg)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(Capsule().fill(Color.red))
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 8)
+                    .background(Capsule().fill(GymTheme.terracotta))
             }
-            .padding(12)
-            .background(GymTheme.surfaceElevated)
-            .cornerRadius(12)
-            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.red.opacity(0.5), lineWidth: 1.2))
+            .padding(GrowGeometry.cardInnerPadding)
+            .background(GymTheme.surface)
+            .cornerRadius(GrowGeometry.cardCornerRadius)
+            .overlay(RoundedRectangle(cornerRadius: GrowGeometry.cardCornerRadius).stroke(GymTheme.terracotta.opacity(0.35), lineWidth: 1))
         }
         .buttonStyle(.plain)
+        .accessibilityLabel("Aktives Training fortsetzen")
     }
 
     // MARK: - 4. Section 1: Tagesbilanz (Nutrition & Calorie Balance with Concentric Rings)
@@ -484,24 +496,21 @@ public struct TodayUnifiedView: View {
             HapticFeedback.light()
             showingTagesbilanzDetail = true
         }) {
-            VStack(alignment: .leading, spacing: 14) {
-                HStack {
-                    Image(systemName: "flame.circle.fill")
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(GymTheme.terracotta)
-                    Text("TAGESBILANZ")
-                        .font(.system(size: 11, weight: .bold, design: .monospaced))
+            VStack(alignment: .leading, spacing: 18) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text("Tagesbilanz")
+                        .font(GrowTypography.headline)
                         .foregroundColor(GymTheme.textPrimary)
-                        .tracking(0.6)
+                        .accessibilityAddTraits(.isHeader)
 
                     Spacer()
 
                     HStack(spacing: 4) {
-                        Text("Vitamine & Details")
-                            .font(.system(size: 11, weight: .semibold))
+                        Text("Details")
+                            .font(GrowTypography.subheadline.weight(.medium))
                             .foregroundColor(GymTheme.cyanAccent)
                         Image(systemName: "chevron.right")
-                            .font(.system(size: 10, weight: .semibold))
+                            .font(.caption.weight(.semibold))
                             .foregroundColor(GymTheme.cyanAccent)
                     }
                 }

@@ -13,11 +13,11 @@ struct GymApp: App {
 
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
-        appearance.backgroundColor = UIColor(red: 0.109, green: 0.109, blue: 0.118, alpha: 0.95) // #1C1C1E
+        appearance.backgroundColor = UIColor(red: 0.086, green: 0.086, blue: 0.098, alpha: 0.96) // #161619 Muted Surface
         
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
-        UITabBar.appearance().unselectedItemTintColor = UIColor(red: 0.556, green: 0.556, blue: 0.576, alpha: 1.0) // #8E8E93
+        UITabBar.appearance().unselectedItemTintColor = UIColor(red: 0.620, green: 0.620, blue: 0.659, alpha: 1.0) // #9E9EA8 Accessible Secondary
     }
 
     @Environment(\.scenePhase) private var scenePhase

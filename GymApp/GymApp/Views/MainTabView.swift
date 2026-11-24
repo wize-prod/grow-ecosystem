@@ -37,7 +37,7 @@ public struct MainTabView: View {
                 }
                 .tag(3)
         }
-        .accentColor(GymTheme.terracotta)
+        .accentColor(GymTheme.sageGreen)
         .background(GymTheme.bg.ignoresSafeArea())
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("SwitchMainTab"))) { notif in
             if let tab = notif.object as? Int {
@@ -77,7 +77,7 @@ public struct MainTabView: View {
                     }
                     .tag(3)
             }
-            .accentColor(GymTheme.terracotta)
+            .accentColor(GymTheme.sageGreen)
             .background(GymTheme.bg.ignoresSafeArea())
         }
         #endif

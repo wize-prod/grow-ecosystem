@@ -42,42 +42,42 @@ public enum GrowDomain: String, CaseIterable, Identifiable {
     }
 }
 
-// MARK: - 2. COLOR PALETTE & TOKENS
+// MARK: - 2. COLOR PALETTE & TOKENS (Muted, Calm, WCAG AA Compliant)
 public struct GrowColor {
-    // Pure OLED & Inset Grouped Palette
-    public static let bg = Color.black // Pure OLED #000000
+    // Deep Charcoal Canvas & Soft Elevated Surfaces (Zero OLED Smear / Zero Harsh Glare)
+    public static let bg = Color(red: 0.051, green: 0.051, blue: 0.059) // #0D0D0F
     public static let background = bg
-    public static let surface = Color(red: 0.109, green: 0.109, blue: 0.118) // Apple secondarySystemGroupedBackground #1C1C1E
-    public static let surfaceElevated = Color(red: 0.172, green: 0.172, blue: 0.180) // Apple tertiarySystemGroupedBackground #2C2C2E
-    public static let surfaceSubtle = Color(red: 0.227, green: 0.227, blue: 0.235) // #3A3A3C
-    
-    // Hairline Specular Borders
-    public static let border = Color.white.opacity(0.08)
+    public static let surface = Color(red: 0.086, green: 0.086, blue: 0.098) // #161619
+    public static let surfaceElevated = Color(red: 0.125, green: 0.125, blue: 0.141) // #202024
+    public static let surfaceSubtle = Color(red: 0.165, green: 0.165, blue: 0.188) // #2A2A30
+
+    // Crisp Hairline Borders
+    public static let border = Color.white.opacity(0.07)
     public static let borderHairline = border
-    public static let borderSubtle = Color.white.opacity(0.05)
-    public static let borderFocused = Color.white.opacity(0.20)
+    public static let borderSubtle = Color.white.opacity(0.045)
+    public static let borderFocused = Color.white.opacity(0.18)
 
-    // Typography Labels
-    public static let textPrimary = Color.white // #FFFFFF
-    public static let textSecondary = Color(red: 0.556, green: 0.556, blue: 0.576) // Apple secondaryLabel #8E8E93
-    public static let textMuted = Color(red: 0.388, green: 0.388, blue: 0.400) // Apple tertiaryLabel #636366
+    // Accessible Typography Labels (WCAG AA >= 4.5:1 on surface)
+    public static let textPrimary = Color(red: 0.953, green: 0.953, blue: 0.965) // #F3F3F6
+    public static let textSecondary = Color(red: 0.620, green: 0.620, blue: 0.659) // #9E9EA8
+    public static let textMuted = Color(red: 0.443, green: 0.443, blue: 0.478) // #71717A
 
-    // Functional Semantic System Accents (Apple HIG Dark Palette)
-    public static let statusSuccess = Color(red: 0.188, green: 0.820, blue: 0.345) // Apple System Green #30D158 (Sage Green)
-    public static let statusDanger = Color(red: 1.000, green: 0.271, blue: 0.227) // Apple System Red #FF453A (Terracotta)
-    public static let statusWarning = Color(red: 0.235, green: 0.827, blue: 0.996) // Apple System Cyan #3CD3FE (Warm Sand / Cyan)
-    public static let statusWarningAmber = Color(red: 1.000, green: 0.624, blue: 0.039) // Apple System Orange #FF9F0A
-    public static let statusInteractive = Color(red: 0.039, green: 0.518, blue: 1.000) // Apple System Blue #0A84FF
+    // Muted Semantic Accents (Japanese Ma / Linear / Things 3 Restraint)
+    public static let statusSuccess = Color(red: 0.365, green: 0.690, blue: 0.498) // Muted Sage #5DB07F
+    public static let statusDanger = Color(red: 0.851, green: 0.420, blue: 0.384) // Muted Terracotta #D96B62
+    public static let statusWarning = Color(red: 0.420, green: 0.651, blue: 0.769) // Mineral Slate Cyan #6BA6C4
+    public static let statusWarningAmber = Color(red: 0.851, green: 0.627, blue: 0.357) // Warm Ochre #D9A05B
+    public static let statusInteractive = Color(red: 0.376, green: 0.557, blue: 0.902) // Calm Slate Blue #608EE6
 
-    // Domain Specific Accents (Growcery Signature Palette)
+    // Domain Specific Accents
     public static let sageGreen = statusSuccess
     public static let terracotta = statusDanger
     public static let electricBlue = statusInteractive
-    public static let careLilac = Color(red: 0.65, green: 0.54, blue: 0.98) // #A68AFA
-    public static let mintAccent = Color(red: 0.000, green: 0.855, blue: 0.765) // #00DAC3
+    public static let careLilac = Color(red: 0.604, green: 0.541, blue: 0.788) // Muted Lavender #9A8AC9
+    public static let mintAccent = Color(red: 0.349, green: 0.710, blue: 0.651) // Mineral Teal #59B5A6
     public static let cyanAccent = statusWarning
-    public static let warmSand = statusWarning // #3CD3FE (Cyan in Growcery!)
-    public static let softRose = Color(red: 1.000, green: 0.216, blue: 0.373)
+    public static let warmSand = statusWarning
+    public static let softRose = Color(red: 0.839, green: 0.427, blue: 0.510) // Muted Rose #D66D82
     public static let alertRed = statusDanger
 }
 
@@ -129,13 +129,13 @@ public struct GymTheme {
     public static let accentRed = terracotta
     public static let accentGreen = sageGreen
 
-    // Apple Fitness Activity Ring Gradients (Exact Growcery values)
-    public static let ringProteinStart = Color(red: 1.000, green: 0.263, blue: 0.271)
-    public static let ringProteinEnd = Color(red: 1.000, green: 0.216, blue: 0.373)
-    public static let ringCarbsStart = Color(red: 0.188, green: 0.820, blue: 0.345)
-    public static let ringCarbsEnd = Color(red: 0.000, green: 0.855, blue: 0.765)
-    public static let ringFatStart = Color(red: 0.235, green: 0.827, blue: 0.996)
-    public static let ringFatEnd = Color(red: 0.000, green: 0.569, blue: 1.000)
+    // Muted Activity Ring Gradients (Zero Neon Glare)
+    public static let ringProteinStart = Color(red: 0.851, green: 0.420, blue: 0.384)
+    public static let ringProteinEnd = Color(red: 0.839, green: 0.427, blue: 0.510)
+    public static let ringCarbsStart = Color(red: 0.365, green: 0.690, blue: 0.498)
+    public static let ringCarbsEnd = Color(red: 0.349, green: 0.710, blue: 0.651)
+    public static let ringFatStart = Color(red: 0.420, green: 0.651, blue: 0.769)
+    public static let ringFatEnd = Color(red: 0.376, green: 0.557, blue: 0.902)
 
     // Standard Semantic Aliases
     public static let primary = sageGreen
@@ -145,23 +145,24 @@ public struct GymTheme {
 
 public typealias Theme = GymTheme
 
-// MARK: - 4. GEOMETRY & CONCENTRIC RADII
+// MARK: - 4. GEOMETRY & GENEROUS WHITESPACE TOKENS
 public struct GrowGeometry {
-    public static let cardCornerRadius: CGFloat = 18.0
-    public static let subCardCornerRadius: CGFloat = 12.0
+    public static let cardCornerRadius: CGFloat = 20.0
+    public static let subCardCornerRadius: CGFloat = 14.0
     public static let badgeCornerRadius: CGFloat = 8.0
-    public static let pillHeight: CGFloat = 34.0
-    public static let buttonHeight: CGFloat = 46.0
+    public static let pillHeight: CGFloat = 38.0
+    public static let buttonHeight: CGFloat = 48.0
+    public static let minTouchTarget: CGFloat = 44.0
 
-    public static let horizontalPadding: CGFloat = 16.0
-    public static let cardInnerPadding: CGFloat = 16.0
-    public static let subCardInnerPadding: CGFloat = 12.0
-    public static let elementSpacing: CGFloat = 12.0
-    public static let sectionSpacing: CGFloat = 20.0
-    public static let bottomContentInset: CGFloat = 88.0
+    public static let horizontalPadding: CGFloat = 20.0
+    public static let cardInnerPadding: CGFloat = 20.0
+    public static let subCardInnerPadding: CGFloat = 14.0
+    public static let elementSpacing: CGFloat = 14.0
+    public static let sectionSpacing: CGFloat = 24.0
+    public static let bottomContentInset: CGFloat = 104.0
 
     public static func concentricRadius(outerRadius: CGFloat, padding: CGFloat) -> CGFloat {
-        max(4.0, outerRadius - padding)
+        max(6.0, outerRadius - padding)
     }
 }
 
@@ -258,7 +259,7 @@ public struct GrowCardModifier: ViewModifier {
         backgroundColor: Color = GrowColor.surface,
         borderColor: Color = GrowColor.border,
         padding: CGFloat = GrowGeometry.cardInnerPadding,
-        hasSpecularGradient: Bool = true
+        hasSpecularGradient: Bool = false
     ) {
         self.cornerRadius = cornerRadius
         self.backgroundColor = backgroundColor
@@ -281,17 +282,16 @@ public struct GrowCardModifier: ViewModifier {
                         AnyShapeStyle(
                             LinearGradient(
                                 colors: [
-                                    Color.white.opacity(0.14),
-                                    Color.white.opacity(0.04)
+                                    Color.white.opacity(0.10),
+                                    Color.white.opacity(0.03)
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
                         ) : AnyShapeStyle(borderColor),
-                        lineWidth: 0.8
+                        lineWidth: 0.75
                     )
             )
-            .shadow(color: Color.black.opacity(0.22), radius: 8, x: 0, y: 4)
     }
 }
 
@@ -490,30 +490,103 @@ public extension View {
     }
 }
 
-// MARK: - 7. UNIFIED ECOSYSTEM TYPOGRAPHY
+// MARK: - 7. UNIFIED ECOSYSTEM TYPOGRAPHY (Apple Dynamic Type + Tabular Digits)
 public struct GrowTypography {
-    public static let largeTitle = Font.system(size: 32, weight: .bold, design: .default)
-    public static let title1 = Font.system(size: 24, weight: .bold, design: .default)
-    public static let title2 = Font.system(size: 20, weight: .bold, design: .default)
-    public static let title3 = Font.system(size: 17, weight: .semibold, design: .default)
-    public static let headline = Font.system(size: 15, weight: .semibold, design: .default)
-    public static let body = Font.system(size: 14, weight: .regular, design: .default)
-    public static let bodyMedium = Font.system(size: 14, weight: .medium, design: .default)
-    public static let bodyBold = Font.system(size: 14, weight: .bold, design: .default)
-    public static let callout = Font.system(size: 13, weight: .medium, design: .default)
-    public static let subheadline = Font.system(size: 12, weight: .medium, design: .default)
-    public static let caption = Font.system(size: 11, weight: .regular, design: .default)
-    public static let captionBold = Font.system(size: 11, weight: .bold, design: .default)
-    public static let micro = Font.system(size: 10, weight: .medium, design: .default)
-    public static let microBold = Font.system(size: 10, weight: .bold, design: .default)
+    public static let largeTitle = Font.largeTitle.weight(.semibold)
+    public static let title1 = Font.title.weight(.semibold)
+    public static let title2 = Font.title2.weight(.semibold)
+    public static let title3 = Font.title3.weight(.semibold)
+    public static let headline = Font.headline
+    public static let body = Font.body
+    public static let bodyMedium = Font.body.weight(.medium)
+    public static let bodyBold = Font.body.weight(.semibold)
+    public static let callout = Font.callout
+    public static let subheadline = Font.subheadline
+    public static let caption = Font.footnote
+    public static let captionBold = Font.footnote.weight(.semibold)
+    public static let micro = Font.caption
+    public static let microBold = Font.caption.weight(.semibold)
 
-    public static let metricHero = Font.system(size: 38, weight: .bold, design: .monospaced)
-    public static let metricLarge = Font.system(size: 28, weight: .bold, design: .monospaced)
-    public static let metricMedium = Font.system(size: 20, weight: .bold, design: .monospaced)
-    public static let metricSmall = Font.system(size: 14, weight: .bold, design: .monospaced)
-    public static let metricMicro = Font.system(size: 11, weight: .bold, design: .monospaced)
-    public static let badgeMono = Font.system(size: 9.5, weight: .bold, design: .monospaced)
-    public static let tagMono = Font.system(size: 8.5, weight: .bold, design: .monospaced)
+    public static let metricHero = Font.system(.largeTitle, design: .rounded).weight(.semibold).monospacedDigit()
+    public static let metricLarge = Font.system(.title, design: .rounded).weight(.semibold).monospacedDigit()
+    public static let metricMedium = Font.system(.title3, design: .rounded).weight(.semibold).monospacedDigit()
+    public static let metricSmall = Font.callout.weight(.semibold).monospacedDigit()
+    public static let metricMicro = Font.caption.weight(.semibold).monospacedDigit()
+    public static let badgeMono = Font.caption2.weight(.semibold)
+    public static let tagMono = Font.caption2.weight(.medium)
+}
+
+// MARK: - 7B. STANDARDIZED ACCESSIBLE COMPONENT PRIMITIVES
+public struct GrowSectionHeader: View {
+    public let title: String
+    public let subtitle: String?
+    public let actionLabel: String?
+    public let action: (() -> Void)?
+
+    public init(
+        title: String,
+        subtitle: String? = nil,
+        actionLabel: String? = nil,
+        action: (() -> Void)? = nil
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.actionLabel = actionLabel
+        self.action = action
+    }
+
+    public var body: some View {
+        HStack(alignment: .firstTextBaseline) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(GrowTypography.headline)
+                    .foregroundColor(GrowColor.textPrimary)
+                    .accessibilityAddTraits(.isHeader)
+                if let subtitle, !subtitle.isEmpty {
+                    Text(subtitle)
+                        .font(GrowTypography.caption)
+                        .foregroundColor(GrowColor.textSecondary)
+                }
+            }
+            Spacer()
+            if let actionLabel, let action {
+                Button(action: action) {
+                    HStack(spacing: 4) {
+                        Text(actionLabel)
+                            .font(GrowTypography.subheadline.weight(.medium))
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.semibold))
+                    }
+                    .foregroundColor(GrowColor.statusInteractive)
+                    .frame(minHeight: GrowGeometry.minTouchTarget)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+}
+
+public struct GrowStepProgressBar: View {
+    public let currentStep: Int
+    public let totalSteps: Int
+
+    public init(currentStep: Int, totalSteps: Int) {
+        self.currentStep = max(1, currentStep)
+        self.totalSteps = max(1, totalSteps)
+    }
+
+    public var body: some View {
+        HStack(spacing: 6) {
+            ForEach(1...totalSteps, id: \.self) { step in
+                Capsule()
+                    .fill(step <= currentStep ? GrowColor.statusSuccess : GrowColor.surfaceElevated)
+                    .frame(height: 4)
+                    .animation(.easeInOut(duration: 0.25), value: currentStep)
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Schritt \(currentStep) von \(totalSteps)")
+    }
 }
 
 public extension Font {

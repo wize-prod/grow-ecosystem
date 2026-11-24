@@ -411,6 +411,7 @@ public struct GymLoginView: View {
     @ObservedObject private var googleAuth = GoogleOAuthWebSessionManager.shared
 
     @State private var showingAddGoogleAccountSheet: Bool = false
+    @State private var showingOtherAccounts: Bool = false
     @State private var newGoogleEmailInput: String = ""
     @State private var newGoogleNameInput: String = ""
     @State private var validationErrorMessage: String = ""
@@ -423,234 +424,195 @@ public struct GymLoginView: View {
             ZStack {
                 GymTheme.bg.ignoresSafeArea()
 
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 22) {
-                        // Branding Header
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("Google-Anmeldung")
-                                .font(.system(size: 30, weight: .bold))
-                                .foregroundColor(GymTheme.textPrimary)
-
-                            Text("Grow Athletics • Autorisierter Google-Zugang")
-                                .font(.system(size: 13, weight: .medium))
-                                .foregroundColor(GymTheme.textSecondary)
-                        }
-                        .padding(.top, 24)
-
-                        // 1. Primary Action: Instant 1-Tap Google Sign In with wize.prod6878@gmail.com
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 32) {
+                        // 1. Calm Hero & Clear Purpose (Zero Visual Noise)
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("GOOGLE HAUPTKONTO (1-TAP ANMELDUNG)")
-                                .font(.system(size: 10, weight: .bold, design: .monospaced))
-                                .foregroundColor(GymTheme.strongBlue)
-                                .tracking(0.6)
+                            Text("Willkommen bei Grow")
+                                .font(GrowTypography.largeTitle)
+                                .foregroundColor(GymTheme.textPrimary)
+                                .accessibilityAddTraits(.isHeader)
 
+                            Text("Training, Ernährung und Monatsbudget an einem ruhigen Ort.")
+                                .font(GrowTypography.body)
+                                .foregroundColor(GymTheme.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                        .padding(.top, 36)
+
+                        // 2. Effortless 3-Point Overview (Low Cognitive Load)
+                        VStack(alignment: .leading, spacing: 18) {
+                            onboardingFeatureRow(
+                                icon: "flame.fill",
+                                tint: GymTheme.sageGreen,
+                                title: "Tagesfokus",
+                                subtitle: "Geplante Workouts, Kalorien und Supplements auf einen Blick."
+                            )
+                            onboardingFeatureRow(
+                                icon: "barcode.viewfinder",
+                                tint: GymTheme.cyanAccent,
+                                title: "Vorrat & Einkauf",
+                                subtitle: "Schneller Barcode-Scan und automatische Einkaufsliste."
+                            )
+                            onboardingFeatureRow(
+                                icon: "creditcard.fill",
+                                tint: GymTheme.strongBlue,
+                                title: "Klares Budget",
+                                subtitle: "Verbleibendes Monatsbudget direkt beim Einkaufen im Blick."
+                            )
+                        }
+                        .padding(GrowGeometry.cardInnerPadding)
+                        .background(GymTheme.surface)
+                        .cornerRadius(GrowGeometry.cardCornerRadius)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: GrowGeometry.cardCornerRadius, style: .continuous)
+                                .stroke(GymTheme.border, lineWidth: 0.75)
+                        )
+
+                        // 3. Single Calm Primary CTA (Zero Dark Patterns)
+                        VStack(alignment: .leading, spacing: 12) {
                             Button {
                                 loginAsWizeProd()
                             } label: {
                                 HStack(spacing: 12) {
-                                    ZStack {
-                                        Circle()
-                                            .fill(Color.white)
-                                            .frame(width: 34, height: 34)
-                                        Text("G")
-                                            .font(.system(size: 18, weight: .bold))
-                                            .foregroundColor(Color(red: 0.26, green: 0.52, blue: 0.96))
-                                    }
-
-                                    VStack(alignment: .leading, spacing: 3) {
-                                        Text("Als wize.prod6878@gmail.com anmelden")
-                                            .font(.system(size: 14, weight: .bold))
-                                        Text("Parris Campbell • Primäres Entwicklerkonto")
-                                            .font(.system(size: 11))
-                                            .opacity(0.85)
-                                    }
-
+                                    Image(systemName: "person.crop.circle.fill")
+                                        .font(.title3)
+                                    Text("Mit Hauptkonto fortfahren")
+                                        .font(GrowTypography.headline)
                                     Spacer()
-
-                                    Image(systemName: "arrow.right.circle.fill")
-                                        .font(.system(size: 18))
+                                    Image(systemName: "arrow.right")
+                                        .font(.subheadline.weight(.semibold))
                                 }
-                                .padding(.horizontal, 16)
-                                .frame(height: 56)
-                                .background(GymTheme.strongBlue)
-                                .foregroundColor(.white)
-                                .cornerRadius(12)
+                                .padding(.horizontal, 20)
+                                .frame(minHeight: 54)
+                                .background(GymTheme.sageGreen)
+                                .foregroundColor(GymTheme.bg)
+                                .cornerRadius(GrowGeometry.subCardCornerRadius)
                             }
+                            .buttonStyle(GrowTactileButtonStyle())
+                            .accessibilityLabel("Mit Hauptkonto anmelden")
 
-                            Text("Verifiziertes Google-Konto auf diesem Gerät. Direkte Anmeldung ohne externe Weiterleitung.")
-                                .font(.system(size: 11))
+                            Text("Deine Daten bleiben getrennt und privat auf deinem Gerät sowie deiner Cloud.")
+                                .font(GrowTypography.caption)
                                 .foregroundColor(GymTheme.textMuted)
-                                .lineSpacing(2)
+                                .fixedSize(horizontal: false, vertical: true)
                         }
-                        .padding(14)
-                        .somaCard()
 
-                        // 2. Saved Google Accounts on this Device
-                        if userAccount.savedAccounts.count > 1 {
+                        // 4. Progressive Disclosure for Additional / Family Accounts
+                        DisclosureGroup(isExpanded: $showingOtherAccounts) {
                             VStack(alignment: .leading, spacing: 12) {
-                                Text("GESPEICHERTE GOOGLE-PROFILE AUF DIESEM GERÄT")
-                                    .font(.system(size: 10, weight: .bold, design: .monospaced))
-                                    .foregroundColor(GymTheme.textSecondary)
-                                    .tracking(0.6)
-
-                                ForEach(userAccount.savedAccounts, id: \.userKey) { acc in
-                                    Button {
-                                        userAccount.switchToSavedAccount(userKey: acc.userKey)
-                                        HapticFeedback.success()
-                                    } label: {
-                                        HStack(spacing: 12) {
-                                            ZStack {
+                                if userAccount.savedAccounts.count > 1 {
+                                    ForEach(userAccount.savedAccounts, id: \.userKey) { acc in
+                                        Button {
+                                            userAccount.switchToSavedAccount(userKey: acc.userKey)
+                                            HapticFeedback.success()
+                                        } label: {
+                                            HStack(spacing: 12) {
                                                 Circle()
-                                                    .fill(acc.isPrimaryAccount ? GymTheme.strongBlue.opacity(0.15) : GymTheme.warmSand.opacity(0.15))
-                                                    .frame(width: 38, height: 38)
-                                                Text(acc.initial)
-                                                    .font(.system(size: 16, weight: .bold))
-                                                    .foregroundColor(acc.isPrimaryAccount ? GymTheme.strongBlue : GymTheme.warmSand)
+                                                    .fill(GymTheme.surfaceElevated)
+                                                    .frame(width: 36, height: 36)
+                                                    .overlay(
+                                                        Text(acc.initial)
+                                                            .font(GrowTypography.subheadline.weight(.semibold))
+                                                            .foregroundColor(GymTheme.textPrimary)
+                                                    )
+
+                                                VStack(alignment: .leading, spacing: 2) {
+                                                    Text(acc.displayName.isEmpty ? acc.username : acc.displayName)
+                                                        .font(GrowTypography.bodyMedium)
+                                                        .foregroundColor(GymTheme.textPrimary)
+                                                    Text(acc.googleAccountEmail.isEmpty ? acc.roleDescription : acc.googleAccountEmail)
+                                                        .font(GrowTypography.caption)
+                                                        .foregroundColor(GymTheme.textSecondary)
+                                                }
+
+                                                Spacer()
+
+                                                Image(systemName: "chevron.right")
+                                                    .font(.caption.weight(.semibold))
+                                                    .foregroundColor(GymTheme.textMuted)
                                             }
-
-                                            VStack(alignment: .leading, spacing: 2) {
-                                                Text(acc.displayName.isEmpty ? acc.username : acc.displayName)
-                                                    .font(.system(size: 14, weight: .bold))
-                                                    .foregroundColor(GymTheme.textPrimary)
-
-                                                Text(acc.googleAccountEmail.isEmpty ? acc.roleDescription : "\(acc.googleAccountEmail) • \(acc.roleDescription)")
-                                                    .font(.system(size: 11, design: .monospaced))
-                                                    .foregroundColor(GymTheme.textSecondary)
-                                            }
-
-                                            Spacer()
-
-                                            Text("Aktivieren")
-                                                .font(.system(size: 11, weight: .bold))
-                                                .foregroundColor(GymTheme.strongBlue)
-                                                .padding(.horizontal, 10)
-                                                .padding(.vertical, 5)
-                                                .background(GymTheme.strongBlue.opacity(0.12))
-                                                .cornerRadius(6)
+                                            .padding(12)
+                                            .frame(minHeight: GrowGeometry.minTouchTarget)
+                                            .background(GymTheme.surfaceElevated)
+                                            .cornerRadius(GrowGeometry.subCardCornerRadius)
                                         }
-                                        .padding(12)
-                                        .background(GymTheme.surfaceElevated)
-                                        .cornerRadius(10)
-                                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(GymTheme.border, lineWidth: 1))
+                                        .buttonStyle(.plain)
                                     }
                                 }
 
-                                Text("Fortschritt und Daten bleiben für jedes Konto strikt getrennt.")
-                                    .font(.system(size: 10, design: .monospaced))
-                                    .foregroundColor(GymTheme.textMuted)
-                            }
-                            .padding(14)
-                            .somaCard()
-                        }
-
-                        // 3. Family / Tester Google Sign-In Section
-                        VStack(alignment: .leading, spacing: 14) {
-                            Text("FAMILIEN- & TESTER-KONTEN (GOOGLE LOGIN)")
-                                .font(.system(size: 10, weight: .bold, design: .monospaced))
-                                .foregroundColor(GymTheme.warmSand)
-                                .tracking(0.6)
-
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("Ausschließlich Google-Authentifizierung:")
-                                    .font(.system(size: 11, weight: .bold, design: .monospaced))
+                                Button {
+                                    loginAsFamilyTester()
+                                } label: {
+                                    HStack {
+                                        Text("Familien- oder Gastprofil nutzen")
+                                            .font(GrowTypography.subheadline.weight(.medium))
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .font(.caption)
+                                    }
                                     .foregroundColor(GymTheme.textPrimary)
+                                    .padding(14)
+                                    .frame(minHeight: GrowGeometry.minTouchTarget)
+                                    .background(GymTheme.surfaceElevated)
+                                    .cornerRadius(GrowGeometry.subCardCornerRadius)
+                                }
+                                .buttonStyle(.plain)
 
-                                Text("Keine Registrierung über E-Mail/Passwort. Nur autorisierte Google-Konten (@gmail.com / @googlemail.com) haben Zugang. Für deine Mutter und Tester ist der vollständige Test-Pass aktiv, ohne dein Hauptkonto wize.prod6878@gmail.com zu überschreiben.")
-                                    .font(.system(size: 11))
+                                Button {
+                                    showingAddGoogleAccountSheet = true
+                                    HapticFeedback.light()
+                                } label: {
+                                    HStack {
+                                        Text("Anderes Google-Konto hinzufügen")
+                                            .font(GrowTypography.subheadline.weight(.medium))
+                                        Spacer()
+                                        Image(systemName: "plus")
+                                            .font(.caption)
+                                    }
                                     .foregroundColor(GymTheme.textSecondary)
-                                    .lineSpacing(2)
-                            }
-
-                            // Preset Option: Mother / Family Tester Google Account
-                            Button {
-                                loginAsFamilyTester()
-                            } label: {
-                                HStack(spacing: 12) {
-                                    ZStack {
-                                        Circle()
-                                            .fill(GymTheme.warmSand.opacity(0.2))
-                                            .frame(width: 36, height: 36)
-                                        Text("G")
-                                            .font(.system(size: 16, weight: .bold))
-                                            .foregroundColor(GymTheme.warmSand)
-                                    }
-
-                                    VStack(alignment: .leading, spacing: 2) {
-                                        Text("Mutter / Familie Google-Testkonto")
-                                            .font(.system(size: 13, weight: .bold))
-                                            .foregroundColor(GymTheme.textPrimary)
-                                        Text("Kostenloser Vollzugriff • Isolierte Sandbox")
-                                            .font(.system(size: 10, design: .monospaced))
-                                            .foregroundColor(GymTheme.textSecondary)
-                                    }
-
-                                    Spacer()
-
-                                    Text("Anmelden")
-                                        .font(.system(size: 12, weight: .bold))
-                                        .foregroundColor(GymTheme.warmSand)
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 6)
-                                        .background(GymTheme.warmSand.opacity(0.12))
-                                        .cornerRadius(6)
+                                    .padding(14)
+                                    .frame(minHeight: GrowGeometry.minTouchTarget)
+                                    .background(GymTheme.surfaceElevated)
+                                    .cornerRadius(GrowGeometry.subCardCornerRadius)
                                 }
-                                .padding(12)
-                                .background(GymTheme.surfaceElevated)
-                                .cornerRadius(10)
-                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(GymTheme.warmSand.opacity(0.3), lineWidth: 1))
-                            }
+                                .buttonStyle(.plain)
 
-                            // Custom Google Account Input Trigger
-                            Button {
-                                showingAddGoogleAccountSheet = true
-                                HapticFeedback.light()
-                            } label: {
-                                HStack(spacing: 8) {
-                                    Image(systemName: "plus.circle")
-                                        .font(.system(size: 14, weight: .bold))
-                                    Text("Weiteres Google-Konto anmelden (@gmail.com)")
-                                        .font(.system(size: 13, weight: .semibold))
-                                }
-                                .foregroundColor(GymTheme.textPrimary)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 12)
-                                .background(GymTheme.surfaceElevated)
-                                .cornerRadius(8)
-                                .overlay(RoundedRectangle(cornerRadius: 8).stroke(GymTheme.border, lineWidth: 1))
-                            }
-
-                            Divider()
-                                .background(GymTheme.border.opacity(0.6))
-                                .padding(.vertical, 2)
-
-                            // Optional Web OAuth Flow
-                            Button {
-                                startGoogleSignInFlow()
-                            } label: {
-                                HStack(spacing: 8) {
-                                    if googleAuth.isAuthenticating {
-                                        ProgressView()
-                                            .progressViewStyle(CircularProgressViewStyle(tint: GymTheme.textSecondary))
-                                    } else {
-                                        Text("G")
-                                            .font(.system(size: 14, weight: .bold))
+                                Button {
+                                    startGoogleSignInFlow()
+                                } label: {
+                                    HStack(spacing: 8) {
+                                        if googleAuth.isAuthenticating {
+                                            ProgressView()
+                                                .progressViewStyle(CircularProgressViewStyle(tint: GymTheme.textSecondary))
+                                        }
+                                        Text(googleAuth.isAuthenticating ? "Verbinde..." : "Über Web-Login anmelden")
+                                            .font(GrowTypography.caption.weight(.medium))
                                     }
-                                    Text(googleAuth.isAuthenticating ? "Verbinde..." : "Über Google Web-Login verbinden")
-                                        .font(.system(size: 12, weight: .semibold))
+                                    .foregroundColor(GymTheme.textMuted)
+                                    .frame(maxWidth: .infinity, minHeight: GrowGeometry.minTouchTarget)
                                 }
+                                .disabled(googleAuth.isAuthenticating)
+                            }
+                            .padding(.top, 12)
+                        } label: {
+                            Text("Weitere Konten oder Gastzugang")
+                                .font(GrowTypography.subheadline.weight(.medium))
                                 .foregroundColor(GymTheme.textSecondary)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 8)
-                            }
-                            .disabled(googleAuth.isAuthenticating)
                         }
-                        .padding(14)
-                        .somaCard()
+                        .tint(GymTheme.textSecondary)
+                        .padding(16)
+                        .background(GymTheme.surface)
+                        .cornerRadius(GrowGeometry.cardCornerRadius)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: GrowGeometry.cardCornerRadius, style: .continuous)
+                                .stroke(GymTheme.border, lineWidth: 0.75)
+                        )
 
                         Spacer(minLength: 40)
                     }
-                    .padding(16)
-                    .frame(maxWidth: 600)
+                    .padding(.horizontal, GrowGeometry.horizontalPadding)
+                    .frame(maxWidth: 560)
                     .frame(maxWidth: .infinity)
                 }
             }
@@ -728,9 +690,31 @@ public struct GymLoginView: View {
                     nsError.code == ASWebAuthenticationSessionError.canceledLogin.rawValue {
                     return
                 }
-                self.validationErrorMessage = "Google Web-Login fehlgeschlagen: \(error.localizedDescription). Du kannst dich direkt oben mit deinem Google-Konto anmelden."
+                self.validationErrorMessage = "Anmeldung fehlgeschlagen: \(error.localizedDescription). Bitte nutze den direkten Zugang oben."
                 self.showValidationErrorAlert = true
             }
         }
+    }
+
+    private func onboardingFeatureRow(icon: String, tint: Color, title: String, subtitle: String) -> some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: icon)
+                .font(.body.weight(.semibold))
+                .foregroundColor(tint)
+                .frame(width: 36, height: 36)
+                .background(tint.opacity(0.14))
+                .cornerRadius(10)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(title)
+                    .font(GrowTypography.headline)
+                    .foregroundColor(GymTheme.textPrimary)
+                Text(subtitle)
+                    .font(GrowTypography.subheadline)
+                    .foregroundColor(GymTheme.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .accessibilityElement(children: .combine)
     }
 }
