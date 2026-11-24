@@ -412,7 +412,6 @@ public final class CalendarSyncService: ObservableObject {
             for s in store.sessions.prefix(3) {
                 _ = await self.syncCompletedSession(session: s)
             }
-            HapticFeedback.success()
         }
     }
 

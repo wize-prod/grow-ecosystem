@@ -983,7 +983,6 @@ public final class GymStore: ObservableObject {
     public func syncExternalData() {
         GrowcerySyncService.shared.refreshData()
         syncWaterFromBridge()
-        HapticFeedback.success()
     }
 
     // MARK: - Exercise Resolver & Catalog Linker

@@ -37,6 +37,8 @@ struct GymApp: App {
                 }
                 .onChange(of: scenePhase) { newPhase in
                     if newPhase == .active {
+                        GrowHaptics.suppressForAppOpen(duration: 1.5)
+                        HapticFeedbackService.shared.suppressForAppOpen(duration: 1.5)
                         growceryService.refreshData()
                         healthService.fetchAllHealthData()
                     }

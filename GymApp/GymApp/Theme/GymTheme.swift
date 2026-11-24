@@ -167,49 +167,67 @@ public struct GrowGeometry {
 
 // MARK: - 5. TACTILE HAPTIC ENGINE
 public enum GrowHaptics {
+    private static var suppressedUntil: Date = Date().addingTimeInterval(1.5)
+
+    public static func suppressForAppOpen(duration: TimeInterval = 1.5) {
+        suppressedUntil = Date().addingTimeInterval(duration)
+    }
+
+    private static var isSuppressed: Bool {
+        Date() < suppressedUntil
+    }
+
     public static func soft() {
+        guard !isSuppressed else { return }
         let generator = UIImpactFeedbackGenerator(style: .soft)
         generator.prepare()
         generator.impactOccurred()
     }
 
     public static func light() {
+        guard !isSuppressed else { return }
         let generator = UIImpactFeedbackGenerator(style: .light)
         generator.prepare()
         generator.impactOccurred()
     }
 
     public static func medium() {
+        guard !isSuppressed else { return }
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.prepare()
         generator.impactOccurred()
     }
 
     public static func heavy() {
+        guard !isSuppressed else { return }
         let generator = UIImpactFeedbackGenerator(style: .heavy)
         generator.prepare()
         generator.impactOccurred()
     }
 
     public static func selection() {
+        guard !isSuppressed else { return }
         let generator = UISelectionFeedbackGenerator()
         generator.prepare()
         generator.selectionChanged()
     }
 
     public static func success() {
+        guard !isSuppressed else { return }
         let generator = UINotificationFeedbackGenerator()
         generator.prepare()
         generator.notificationOccurred(.success)
     }
 
     public static func warning() {
+        guard !isSuppressed else { return }
         let generator = UINotificationFeedbackGenerator()
         generator.prepare()
         generator.notificationOccurred(.warning)
     }
 
     public static func error() {
+        guard !isSuppressed else { return }
         let generator = UINotificationFeedbackGenerator()
         generator.prepare()
         generator.notificationOccurred(.error)
