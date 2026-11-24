@@ -156,7 +156,6 @@
 		BB000000000000000000008F /* PlanWorkoutSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008F /* PlanWorkoutSheet.swift */; };
 		BB0000000000000000000090 /* PlateCalculatorSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000090 /* PlateCalculatorSheet.swift */; };
 		BB0000000000000000000091 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000091 /* ProfileView.swift */; };
-		BB0000000000000000000092 /* StartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000092 /* StartWorkoutView.swift */; };
 		BB0000000000000000000093 /* TimedExerciseCountdownSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000093 /* TimedExerciseCountdownSheet.swift */; };
 		BB0000000000000000000094 /* TodayUnifiedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000094 /* TodayUnifiedView.swift */; };
 		BB0000000000000000000095 /* TodayWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000095 /* TodayWorkoutView.swift */; };
@@ -316,7 +315,6 @@
 		AA000000000000000000008F /* PlanWorkoutSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/PlanWorkoutSheet.swift"; sourceTree = "<group>"; };
 		AA0000000000000000000090 /* PlateCalculatorSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/PlateCalculatorSheet.swift"; sourceTree = "<group>"; };
 		AA0000000000000000000091 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/ProfileView.swift"; sourceTree = "<group>"; };
-		AA0000000000000000000092 /* StartWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/StartWorkoutView.swift"; sourceTree = "<group>"; };
 		AA0000000000000000000093 /* TimedExerciseCountdownSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TimedExerciseCountdownSheet.swift"; sourceTree = "<group>"; };
 		AA0000000000000000000094 /* TodayUnifiedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TodayUnifiedView.swift"; sourceTree = "<group>"; };
 		AA0000000000000000000095 /* TodayWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Views/TodayWorkoutView.swift"; sourceTree = "<group>"; };
@@ -492,7 +490,6 @@
 				AA000000000000000000008F /* PlanWorkoutSheet.swift */,
 				AA0000000000000000000090 /* PlateCalculatorSheet.swift */,
 				AA0000000000000000000091 /* ProfileView.swift */,
-				AA0000000000000000000092 /* StartWorkoutView.swift */,
 				AA0000000000000000000093 /* TimedExerciseCountdownSheet.swift */,
 				AA0000000000000000000094 /* TodayUnifiedView.swift */,
 				AA0000000000000000000095 /* TodayWorkoutView.swift */,
@@ -743,7 +740,6 @@
 				BB000000000000000000008F /* PlanWorkoutSheet.swift in Sources */,
 				BB0000000000000000000090 /* PlateCalculatorSheet.swift in Sources */,
 				BB0000000000000000000091 /* ProfileView.swift in Sources */,
-				BB0000000000000000000092 /* StartWorkoutView.swift in Sources */,
 				BB0000000000000000000093 /* TimedExerciseCountdownSheet.swift in Sources */,
 				BB0000000000000000000094 /* TodayUnifiedView.swift in Sources */,
 				BB0000000000000000000095 /* TodayWorkoutView.swift in Sources */,
