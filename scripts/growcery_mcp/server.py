@@ -3339,17 +3339,27 @@ def main():
         print("Starte Growcery MCP-Server im stdio-Modus...", file=sys.stderr)
         mcp.run()
     else:
-        print(f"Starte Growcery MCP-Server auf http://127.0.0.1:{args.port}/sse ...", file=sys.stderr)
+        print(f"Starte Grow Unified MCP-Server (Streamable HTTP) auf http://127.0.0.1:{args.port}/mcp ...", file=sys.stderr)
         sec = TransportSecuritySettings(enable_dns_rebinding_protection=False)
-        app = mcp.sse_app(transport_security=sec)
+        app = mcp.streamable_http_app(
+            streamable_http_path="/mcp",
+            transport_security=sec,
+            session_idle_timeout=86400,
+        )
         try:
             from starlette.middleware.cors import CORSMiddleware
+            from starlette.routing import Route
+            from starlette.responses import JSONResponse
             app.add_middleware(
                 CORSMiddleware,
                 allow_origins=["*"],
+                allow_credentials=True,
                 allow_methods=["*"],
                 allow_headers=["*"],
             )
+            async def root_status(request):
+                return JSONResponse({"status": "ok", "service": "Grow-Unified-MCP", "tools": len(mcp._tool_manager._tools)})
+            app.routes.append(Route("/", endpoint=root_status, methods=["GET", "HEAD"]))
         except Exception:
             pass
         uvicorn.run(app, host="127.0.0.1", port=args.port, log_level="info")
